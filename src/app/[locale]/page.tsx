@@ -1,0 +1,32 @@
+import type {Metadata} from "next";
+import {hasLocale} from "next-intl";
+import {getTranslations, setRequestLocale} from "next-intl/server";
+import {notFound} from "next/navigation";
+
+import {VectorSpaceExperience} from "@/components/portfolio/VectorSpaceExperience";
+import type {AppLocale} from "@/i18n/routing";
+import {routing} from "@/i18n/routing";
+
+type HomePageProps = {
+  params: Promise<{locale: string}>;
+};
+
+export async function generateMetadata({
+  params,
+}: HomePageProps): Promise<Metadata> {
+  const {locale} = await params;
+  const t = await getTranslations({locale, namespace: "Metadata"});
+
+  return {title: t("title"), description: t("description")};
+}
+
+export default async function HomePage({params}: HomePageProps) {
+  const {locale} = await params;
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
+  setRequestLocale(locale);
+  return <VectorSpaceExperience locale={locale as AppLocale} />;
+}

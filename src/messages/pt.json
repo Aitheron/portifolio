@@ -1,0 +1,56 @@
+{
+  "Metadata": {
+    "title": "Marlon // Vector Space",
+    "description": "Um portfólio semântico explorável do Engenheiro de IA e Engenheiro de Software Marlon de Souza."
+  },
+  "Intro": {
+    "eyebrow": "ESPAÇO VETORIAL PROFISSIONAL / 2026",
+    "name": "MARLON DE SOUZA",
+    "role": "Engenheiro de IA e Engenheiro de Software",
+    "statement": "Transformando dados complexos em sistemas inteligentes para o mundo real.",
+    "enter": "ENTRAR NO ESPAÇO VETORIAL",
+    "status": "Cinco clusters de conhecimento disponíveis"
+  },
+  "Gateway": {
+    "eyebrow": "PORTAL DE IDIOMA",
+    "title": "Escolha um sinal",
+    "description": "O idioma muda a interface, nunca o universo.",
+    "portuguese": "Português",
+    "english": "English",
+    "choosePortuguese": "Continuar em português brasileiro",
+    "chooseEnglish": "Continuar em inglês",
+    "acquired": "SINAL DE IDIOMA IDENTIFICADO",
+    "entering": "ENTRANDO NO ESPAÇO VETORIAL..."
+  },
+  "HUD": {
+    "overview": "Visão geral",
+    "returnOverview": "Voltar à visão geral",
+    "navigationHint": "Arraste para orbitar · Selecione um sinal para viajar",
+    "previousCluster": "Cluster anterior",
+    "nextCluster": "Próximo cluster",
+    "reducedMotion": "Reduzir movimento",
+    "quality": "Qualidade: {quality}",
+    "qualityHigh": "alta",
+    "qualityMedium": "média",
+    "qualityLow": "baixa",
+    "selectLanguage": "Mudar idioma"
+  },
+  "Details": {
+    "close": "Fechar detalhes do projeto",
+    "cluster": "Cluster semântico",
+    "technologies": "Tecnologias",
+    "tags": "Sinais",
+    "links": "Referências",
+    "openLink": "Abrir {label} em uma nova aba"
+  },
+  "Fallback": {
+    "eyebrow": "MAPA VETORIAL ACESSÍVEL",
+    "title": "O mapa semântico continua disponível",
+    "description": "O WebGL não está disponível neste dispositivo. Navegue pelos mesmos clusters e itens do portfólio abaixo.",
+    "openNode": "Inspecionar {title}"
+  },
+  "Canvas": {
+    "label": "Espaço vetorial profissional interativo",
+    "loading": "Mapeando o espaço vetorial..."
+  }
+}
