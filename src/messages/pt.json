@@ -25,7 +25,9 @@
   "HUD": {
     "overview": "Visão geral",
     "returnOverview": "Voltar à visão geral",
-    "navigationHint": "Arraste para orbitar · Selecione um sinal para viajar",
+    "centerView": "Centralizar visão",
+    "location": "Localização no espaço vetorial",
+    "navigationHint": "Arraste para orbitar · Role para aproximar · H para centralizar",
     "previousCluster": "Cluster anterior",
     "nextCluster": "Próximo cluster",
     "reducedMotion": "Reduzir movimento",

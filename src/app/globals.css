@@ -371,13 +371,23 @@ button {
   left: 50%;
   display: flex;
   gap: 0.45rem;
+  max-width: 48vw;
+  overflow: hidden;
   transform: translateX(-50%);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 0.67rem;
   letter-spacing: 0.08em;
 }
 
-.hud-location span { color: var(--text-muted); }
+.hud-location span {
+  display: inline-flex;
+  gap: 0.45rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.hud-location span.is-current { min-width: 0; overflow: hidden; color: var(--text); font-weight: 650; text-overflow: ellipsis; }
+.hud-location i { color: rgba(188, 222, 235, 0.35); font-style: normal; }
 
 .hud-actions {
   top: 1rem;
@@ -703,7 +713,7 @@ button {
   .motion-control { width: 2.25rem; height: 2.25rem; overflow: hidden; color: transparent; }
   .motion-control::before { color: var(--text); content: "≈"; }
   .hud-bottom { display: none; }
-  .mobile-cluster-nav { right: 1rem; bottom: 1rem; left: 1rem; display: grid; grid-template-columns: 2.75rem 1fr 2.75rem; align-items: center; min-height: 3rem; border: 1px solid var(--line); border-radius: 0.25rem; background: var(--surface-strong); text-align: center; }
+  .mobile-cluster-nav { right: 1rem; bottom: 1rem; left: 1rem; display: grid; grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem 2.75rem; align-items: center; min-height: 3rem; border: 1px solid var(--line); border-radius: 0.25rem; background: var(--surface-strong); text-align: center; }
   .mobile-cluster-nav button { height: 100%; border: 0; background: transparent; cursor: pointer; }
   .mobile-cluster-nav span { overflow: hidden; font-size: 0.75rem; text-overflow: ellipsis; white-space: nowrap; }
   .fallback-map { inset: 4.5rem 1rem 4.75rem; }

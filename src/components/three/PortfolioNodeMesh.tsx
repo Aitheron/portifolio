@@ -1,13 +1,8 @@
-import {useEffect, useRef, useState} from "react";
+import {useRef, useState} from "react";
+import type {RefObject} from "react";
 import {Billboard, Html, Line} from "@react-three/drei";
 import {useFrame} from "@react-three/fiber";
-import {
-  Group,
-  MathUtils,
-  SRGBColorSpace,
-  Texture,
-  TextureLoader,
-} from "three";
+import {Group, MathUtils} from "three";
 
 import {clusterById} from "@/content/clusters";
 import {nodeRevealDistance, getRevealState} from "@/lib/performance-quality";
@@ -15,7 +10,14 @@ import {resolveLocalizedText} from "@/lib/portfolio-types";
 import type {NodeRevealState, PortfolioNode, Vector3Tuple} from "@/lib/portfolio-types";
 import {useExperienceStore} from "@/store/experience-store";
 
-type PortfolioNodeMeshProps = {node: PortfolioNode; position: Vector3Tuple};
+import {FragmentedProjectCover} from "./FragmentedProjectCover";
+import {useProjectCoverTexture} from "./useProjectCoverTexture";
+
+type PortfolioNodeMeshProps = {
+  activePreviewIdsRef: RefObject<ReadonlySet<string>>;
+  node: PortfolioNode;
+  position: Vector3Tuple;
+};
 
 function NodeCore({node, color}: {node: PortfolioNode; color: string}) {
   const geometry = node.visual.variant;
@@ -46,72 +48,56 @@ function FallbackGlyph({node, color}: {node: PortfolioNode; color: string}) {
   return <>{nodes.slice(0, -1).map((point, index) => <Line key={point.join(":")} points={[point, nodes[index + 1]]} color={color} transparent opacity={0.5} lineWidth={0.7} />)}{nodes.map((point) => <mesh key={point.join(":")} position={point}><circleGeometry args={[0.08, 12]} /><meshBasicMaterial color={color} /></mesh>)}</>;
 }
 
-function NodePreview({node, color}: {node: PortfolioNode; color: string}) {
-  const groupRef = useRef<Group>(null);
-  const [texture, setTexture] = useState<Texture | null>(null);
+function NodePreview({
+  node,
+  color,
+  distanceRef,
+}: {
+  node: PortfolioNode;
+  color: string;
+  distanceRef: RefObject<number>;
+}) {
+  const locale = useExperienceStore((state) => state.locale);
+  const quality = useExperienceStore((state) => state.quality);
   const reducedMotion = useExperienceStore((state) => state.reducedMotion);
-
-  useEffect(() => {
-    groupRef.current?.scale.setScalar(reducedMotion ? 1 : 0.82);
-  }, [reducedMotion]);
-
-  useFrame((_, delta) => {
-    if (!groupRef.current || reducedMotion) return;
-    groupRef.current.scale.setScalar(
-      MathUtils.damp(groupRef.current.scale.x, 1, 7, delta),
-    );
-  });
-
-  useEffect(() => {
-    if (!node.image?.src) return;
-    let active = true;
-    let loadedTexture: Texture | null = null;
-    const loader = new TextureLoader();
-    loader.setCrossOrigin("anonymous");
-    loader.load(node.image.src, (nextTexture) => {
-      if (!active) { nextTexture.dispose(); return; }
-      const image = nextTexture.image as {width: number; height: number};
-      const imageAspect = image.width / image.height;
-      const targetAspect = 16 / 9;
-      if (imageAspect > targetAspect) {
-        nextTexture.repeat.x = targetAspect / imageAspect;
-        nextTexture.offset.x = (1 - nextTexture.repeat.x) / 2;
-      } else {
-        nextTexture.repeat.y = imageAspect / targetAspect;
-        nextTexture.offset.y = (1 - nextTexture.repeat.y) / 2;
-      }
-      nextTexture.colorSpace = SRGBColorSpace;
-      loadedTexture = nextTexture;
-      setTexture(nextTexture);
-    }, undefined, () => { if (active) setTexture(null); });
-    return () => { active = false; loadedTexture?.dispose(); };
-  }, [node.image?.src]);
+  const cover = useProjectCoverTexture(node, locale, true);
 
   return (
-    <group ref={groupRef}>
-      <Billboard follow position={[0, 0.25, 0]}>
-        <mesh>
-          <planeGeometry args={[5.6, 3.15]} />
-          <meshBasicMaterial color="#06131d" transparent opacity={0.94} />
-        </mesh>
-        {texture ? (
-          <mesh position={[0, 0, 0.025]}>
-            <planeGeometry args={[5.42, 3]} />
-            <meshBasicMaterial map={texture} toneMapped={false} />
+    <Billboard follow position={[0, 0.25, 0]}>
+      {cover ? (
+        <FragmentedProjectCover
+          cover={cover}
+          distanceRef={distanceRef}
+          quality={quality}
+          reducedMotion={reducedMotion}
+          seed={node.id}
+        />
+      ) : (
+        <>
+          <mesh position={[0, 0, -0.02]}>
+            <planeGeometry args={[5.6, 3.15]} />
+            <meshBasicMaterial color="#06131d" transparent opacity={0.18} depthWrite={false} />
           </mesh>
-        ) : <FallbackGlyph node={node} color={color} />}
-        <Line points={[[-2.8, -1.575, 0.04], [2.8, -1.575, 0.04], [2.8, 1.575, 0.04], [-2.8, 1.575, 0.04], [-2.8, -1.575, 0.04]]} color={color} transparent opacity={0.64} lineWidth={0.7} />
-      </Billboard>
-    </group>
+          <FallbackGlyph node={node} color={color} />
+        </>
+      )}
+      <Line points={[[-2.8, -1.575, 0.04], [2.8, -1.575, 0.04], [2.8, 1.575, 0.04], [-2.8, 1.575, 0.04], [-2.8, -1.575, 0.04]]} color={color} transparent opacity={0.48} lineWidth={0.7} />
+    </Billboard>
   );
 }
 
-export function PortfolioNodeMesh({node, position}: PortfolioNodeMeshProps) {
+export function PortfolioNodeMesh({
+  activePreviewIdsRef,
+  node,
+  position,
+}: PortfolioNodeMeshProps) {
   const groupRef = useRef<Group>(null);
   const coreRef = useRef<Group>(null);
   const distanceRef = useRef(Infinity);
   const revealRef = useRef<NodeRevealState>("signal");
   const [reveal, setReveal] = useState<NodeRevealState>("signal");
+  const formationActiveRef = useRef(false);
+  const [formationActive, setFormationActive] = useState(false);
   const [hovered, setHovered] = useState(false);
   const locale = useExperienceStore((state) => state.locale);
   const reducedMotion = useExperienceStore((state) => state.reducedMotion);
@@ -131,6 +117,11 @@ export function PortfolioNodeMesh({node, position}: PortfolioNodeMeshProps) {
     distanceRef.current = camera.position.distanceTo(group.position);
     const nextReveal = getRevealState(distanceRef.current, revealRef.current, selected);
     if (nextReveal !== revealRef.current) { revealRef.current = nextReveal; setReveal(nextReveal); }
+    const nextFormationActive = selected || activePreviewIdsRef.current.has(node.id);
+    if (nextFormationActive !== formationActiveRef.current) {
+      formationActiveRef.current = nextFormationActive;
+      setFormationActive(nextFormationActive);
+    }
     const farScale = distanceRef.current > nodeRevealDistance.signal ? 0.68 : 1;
     const targetScale = (selected ? 1.12 : hovered ? 1.06 : 1) * farScale;
     group.scale.setScalar(MathUtils.damp(group.scale.x, targetScale, 7, delta));
@@ -145,8 +136,12 @@ export function PortfolioNodeMesh({node, position}: PortfolioNodeMeshProps) {
   return (
     <group ref={groupRef} position={position} onClick={(event) => {event.stopPropagation(); activate();}} onPointerEnter={() => setHovered(true)} onPointerLeave={() => setHovered(false)}>
       <group ref={coreRef}><NodeCore node={node} color={cluster.color} /></group>
-      {showsIdentity && !showsPreview && <Billboard follow><Line points={[[-1.4, -0.75, 0], [1.4, -0.75, 0], [1.4, 0.75, 0], [-1.4, 0.75, 0], [-1.4, -0.75, 0]]} color={cluster.color} transparent opacity={0.42} lineWidth={0.6} /></Billboard>}
-      {showsPreview && <NodePreview node={node} color={cluster.color} />}
+      {showsIdentity && formationActive && <NodePreview node={node} color={cluster.color} distanceRef={distanceRef} />}
+      {showsIdentity && !formationActive && (
+        <Billboard follow>
+          <Line points={[[-1.4, -0.75, 0], [1.4, -0.75, 0], [1.4, 0.75, 0], [-1.4, 0.75, 0], [-1.4, -0.75, 0]]} color={cluster.color} transparent opacity={0.3} lineWidth={0.6} />
+        </Billboard>
+      )}
       {showsIdentity && (
         <Html center position={[0, showsPreview ? -1.9 : 1.15, 0]} distanceFactor={showsPreview ? 9 : 12} zIndexRange={[20, 1]}>
           <button className={`node-world-label node-world-label--${reveal}`} type="button" onClick={activate}>

@@ -40,6 +40,7 @@ export function VectorSpaceExperience({locale}: VectorSpaceExperienceProps) {
   const completeEntering = useExperienceStore((state) => state.completeEntering);
   const closeNode = useExperienceStore((state) => state.closeNode);
   const navigateBack = useExperienceStore((state) => state.navigateBack);
+  const returnToOverview = useExperienceStore((state) => state.returnToOverview);
   const setReducedMotion = useExperienceStore((state) => state.setReducedMotion);
   const setQuality = useExperienceStore((state) => state.setQuality);
   const selectedNode = portfolioNodes.find((node) => node.id === selectedNodeId) ?? null;
@@ -68,11 +69,17 @@ export function VectorSpaceExperience({locale}: VectorSpaceExperienceProps) {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      const target = event.target;
+      const isEditing = target instanceof HTMLElement && (
+        target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName)
+      );
+      if (isEditing || event.repeat || event.altKey || event.ctrlKey || event.metaKey) return;
       if (event.key === "Escape") navigateBack();
+      if (event.key.toLowerCase() === "h") returnToOverview();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [navigateBack]);
+  }, [navigateBack, returnToOverview]);
 
   const changeLocale = useCallback((nextLocale: AppLocale) => {
     beginEntering(nextLocale);
