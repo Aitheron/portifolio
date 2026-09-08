@@ -3,7 +3,12 @@
 import {useEffect, useMemo, useRef} from "react";
 import type {RefObject} from "react";
 import {AdaptiveDpr} from "@react-three/drei";
-import {Canvas, useFrame, useThree} from "@react-three/fiber";
+import {
+  Canvas,
+  events as createPointerEvents,
+  useFrame,
+  useThree,
+} from "@react-three/fiber";
 import {useTranslations} from "next-intl";
 import {BufferAttribute, Group, Points, Vector3} from "three";
 
@@ -11,6 +16,7 @@ import {clusters} from "@/content/clusters";
 import {portfolioNodePositions, portfolioNodes} from "@/content/nodes";
 import {qualitySettings} from "@/lib/performance-quality";
 import {imageFormationConfig} from "@/lib/scene-config";
+import {prioritizeWorldIntersections} from "@/lib/world-interaction";
 import {useExperienceStore} from "@/store/experience-store";
 
 import {CameraRig} from "./CameraRig";
@@ -20,6 +26,15 @@ import {SemanticCluster} from "./SemanticCluster";
 
 type UniverseCanvasProps = {onUnavailable: () => void};
 const previewPosition = new Vector3();
+
+function createWorldPointerEvents(
+  state: Parameters<typeof createPointerEvents>[0],
+) {
+  return {
+    ...createPointerEvents(state),
+    filter: prioritizeWorldIntersections,
+  };
+}
 
 function ContextLossListener({onUnavailable}: UniverseCanvasProps) {
   const gl = useThree((state) => state.gl);
@@ -157,6 +172,7 @@ export default function UniverseCanvas({onUnavailable}: UniverseCanvasProps) {
       <Canvas
         camera={{position: [0, 4, 34], fov: 46, near: 0.1, far: 120}}
         dpr={settings.dpr}
+        events={createWorldPointerEvents}
         gl={{antialias: quality !== "low", alpha: false, powerPreference: "high-performance"}}
         performance={{min: 0.55}}
         fallback={null}

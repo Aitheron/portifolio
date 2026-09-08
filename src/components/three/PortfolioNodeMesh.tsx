@@ -8,7 +8,10 @@ import {clusterById} from "@/content/clusters";
 import {nodeRevealDistance, getRevealState} from "@/lib/performance-quality";
 import {resolveLocalizedText} from "@/lib/portfolio-types";
 import type {NodeRevealState, PortfolioNode, Vector3Tuple} from "@/lib/portfolio-types";
-import {activateWorldItem} from "@/lib/world-interaction";
+import {
+  activateWorldItem,
+  worldInteractionPriority,
+} from "@/lib/world-interaction";
 import {useExperienceStore} from "@/store/experience-store";
 
 import {FragmentedProjectCover} from "./FragmentedProjectCover";
@@ -19,6 +22,16 @@ type PortfolioNodeMeshProps = {
   node: PortfolioNode;
   position: Vector3Tuple;
 };
+
+const previewFrameWidth = 5.6;
+const previewFrameHeight = 3.15;
+const previewFramePoints: Vector3Tuple[] = [
+  [-previewFrameWidth / 2, -previewFrameHeight / 2, 0.04],
+  [previewFrameWidth / 2, -previewFrameHeight / 2, 0.04],
+  [previewFrameWidth / 2, previewFrameHeight / 2, 0.04],
+  [-previewFrameWidth / 2, previewFrameHeight / 2, 0.04],
+  [-previewFrameWidth / 2, -previewFrameHeight / 2, 0.04],
+];
 
 function NodeCore({node, color}: {node: PortfolioNode; color: string}) {
   const geometry = node.visual.variant;
@@ -69,7 +82,6 @@ function NodePreview({
     <Billboard
       follow
       position={[0, 0.25, 0]}
-      onClick={(event) => activateWorldItem(event, onActivate)}
     >
       {cover ? (
         <FragmentedProjectCover
@@ -88,7 +100,21 @@ function NodePreview({
           <FallbackGlyph node={node} color={color} />
         </>
       )}
-      <Line points={[[-2.8, -1.575, 0.04], [2.8, -1.575, 0.04], [2.8, 1.575, 0.04], [-2.8, 1.575, 0.04], [-2.8, -1.575, 0.04]]} color={color} transparent opacity={0.48} lineWidth={0.7} />
+      <Line points={previewFramePoints} color={color} transparent opacity={0.48} lineWidth={0.7} />
+      <mesh
+        name={`project-preview-hit-area-${node.id}`}
+        position={[0, 0, 0.08]}
+        userData={{interactionPriority: worldInteractionPriority.projectPreview}}
+        onClick={(event) => activateWorldItem(event, onActivate)}
+      >
+        <planeGeometry args={[previewFrameWidth, previewFrameHeight]} />
+        <meshBasicMaterial
+          colorWrite={false}
+          depthWrite={false}
+          opacity={0}
+          transparent
+        />
+      </mesh>
     </Billboard>
   );
 }
