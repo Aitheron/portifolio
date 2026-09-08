@@ -8,6 +8,7 @@ import {clusterById} from "@/content/clusters";
 import {nodeRevealDistance, getRevealState} from "@/lib/performance-quality";
 import {resolveLocalizedText} from "@/lib/portfolio-types";
 import type {NodeRevealState, PortfolioNode, Vector3Tuple} from "@/lib/portfolio-types";
+import {activateHtmlWorldControl} from "@/lib/world-interaction";
 import {useExperienceStore} from "@/store/experience-store";
 
 import {FragmentedProjectCover} from "./FragmentedProjectCover";
@@ -145,7 +146,12 @@ export function PortfolioNodeMesh({
       )}
       {showsIdentity && (
         <Html center position={[0, showsPreview ? -1.9 : 1.15, 0]} distanceFactor={showsPreview ? 9 : 12} zIndexRange={[20, 1]}>
-          <button className={`node-world-label node-world-label--${reveal}`} type="button" onClick={activate}>
+          <button
+            className={`node-world-label node-world-label--${reveal}`}
+            type="button"
+            onPointerDown={(event) => event.stopPropagation()}
+            onClick={(event) => activateHtmlWorldControl(event, activate)}
+          >
             <strong>{title}</strong>
             {showsPreview && <span className="node-world-label__summary">{summary}</span>}
             {showsPreview && <small>{node.technologies.slice(0, 3).join(" · ")}</small>}

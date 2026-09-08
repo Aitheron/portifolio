@@ -4,6 +4,19 @@ export type ElasticBoundary = {
   softRadius: number;
 };
 
+export const navigationBoundaries = {
+  camera: {
+    softRadius: 48,
+    hardRadius: 58,
+    correctionStrength: 2.8,
+  },
+  target: {
+    softRadius: 22,
+    hardRadius: 28,
+    correctionStrength: 3.4,
+  },
+} satisfies Record<"camera" | "target", ElasticBoundary>;
+
 export function resolveElasticBoundaryRadius(
   distance: number,
   boundary: ElasticBoundary,

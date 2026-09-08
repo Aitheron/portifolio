@@ -14,6 +14,8 @@
   },
   "include": [
     "src/lib/scene-navigation.ts",
-    "src/lib/scene-navigation.test.ts"
+    "src/lib/scene-navigation.test.ts",
+    "src/lib/world-interaction.ts",
+    "src/lib/world-interaction.test.ts"
   ]
 }

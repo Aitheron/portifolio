@@ -11,10 +11,8 @@ import {resolveElasticBoundaryRadius} from "@/lib/scene-navigation";
 import {useExperienceStore} from "@/store/experience-store";
 
 const overviewTarget = new Vector3(0, 0, 0);
-const correctionTarget = new Vector3();
 const previousTarget = new Vector3();
 const targetTranslation = new Vector3();
-const cameraDirection = new Vector3();
 
 export function CameraRig() {
   const controlsRef = useRef<OrbitControlsImpl>(null);
@@ -106,25 +104,6 @@ export function CameraRig() {
       camera.position.add(targetTranslation);
     }
 
-    const targetDistance = camera.position.distanceTo(controls.target);
-    if (targetDistance > profile.softDistance) {
-      cameraDirection.copy(camera.position).sub(controls.target).normalize();
-      correctionTarget
-        .copy(controls.target)
-        .addScaledVector(cameraDirection, profile.softDistance);
-      const excessRatio = Math.min(
-        1,
-        (targetDistance - profile.softDistance) /
-          (profile.maxDistance - profile.softDistance),
-      );
-      camera.position.lerp(
-        correctionTarget,
-        1 - Math.exp(
-          -navigationConfig.worldBoundary.camera.correctionStrength * excessRatio * delta,
-        ),
-      );
-    }
-
     const worldDistance = camera.position.length();
     const boundedCameraDistance = resolveElasticBoundaryRadius(
       worldDistance,
@@ -139,7 +118,6 @@ export function CameraRig() {
 
   return (
     <OrbitControls
-      key={`${stage}:${selectedClusterId ?? "none"}:${selectedNodeId ?? "none"}:${cameraResetRevision}`}
       ref={controlsRef}
       enabled={false}
       enablePan

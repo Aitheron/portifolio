@@ -1,11 +1,11 @@
 import type {ExperienceStage, PerformanceQuality, Vector3Tuple} from "./portfolio-types";
+import {navigationBoundaries} from "./scene-navigation";
 
 export type NavigationContext = "overview" | "cluster" | "node";
 
 type NavigationProfile = {
   cameraOffset: Vector3Tuple;
   minDistance: number;
-  softDistance: number;
   maxDistance: number;
   panSpeed: number;
   rotateSpeed: number;
@@ -22,7 +22,6 @@ export const navigationConfig = {
   overview: {
     cameraOffset: [0, 4, 34],
     minDistance: 4.25,
-    softDistance: 39,
     maxDistance: 46,
     panSpeed: 0.52,
     rotateSpeed: 0.48,
@@ -31,7 +30,6 @@ export const navigationConfig = {
   cluster: {
     cameraOffset: [0, 2.5, 10.5],
     minDistance: 4.25,
-    softDistance: 39,
     maxDistance: 46,
     panSpeed: 0.46,
     rotateSpeed: 0.42,
@@ -40,24 +38,12 @@ export const navigationConfig = {
   node: {
     cameraOffset: [0.5, 1.25, 7.25],
     minDistance: 4.5,
-    softDistance: 9,
     maxDistance: 12,
     panSpeed: 0.36,
     rotateSpeed: 0.34,
     zoomSpeed: 0.48,
   },
-  worldBoundary: {
-    camera: {
-      softRadius: 48,
-      hardRadius: 58,
-      correctionStrength: 2.8,
-    },
-    target: {
-      softRadius: 18,
-      hardRadius: 23,
-      correctionStrength: 3.4,
-    },
-  },
+  worldBoundary: navigationBoundaries,
 } satisfies Record<NavigationContext, NavigationProfile> & {
   transitionDamping: number;
   reducedMotionDamping: number;

@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import {resolveElasticBoundaryRadius} from "./scene-navigation";
+import {
+  navigationBoundaries,
+  resolveElasticBoundaryRadius,
+} from "./scene-navigation";
 
 const boundary = {
   correctionStrength: 3,
@@ -33,4 +36,17 @@ test("uses stronger correction when the frame lasts longer", () => {
   const longFrame = resolveElasticBoundaryRadius(23, boundary, 1 / 20);
 
   assert.ok(longFrame < shortFrame);
+});
+
+test("does not resist movement between the current outer knowledge nodes", () => {
+  const outerNodeRadius = 18.2;
+
+  assert.equal(
+    resolveElasticBoundaryRadius(
+      outerNodeRadius,
+      navigationBoundaries.target,
+      1 / 60,
+    ),
+    outerNodeRadius,
+  );
 });
