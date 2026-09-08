@@ -7,7 +7,7 @@ import type {AppLocale} from "@/i18n/routing";
 import {qualitySettings} from "@/lib/performance-quality";
 import {resolveLocalizedText} from "@/lib/portfolio-types";
 import type {ClusterDefinition} from "@/lib/portfolio-types";
-import {activateHtmlWorldControl} from "@/lib/world-interaction";
+import {activateWorldItem} from "@/lib/world-interaction";
 import {useExperienceStore} from "@/store/experience-store";
 
 type SemanticClusterProps = {
@@ -92,7 +92,7 @@ export function SemanticCluster({cluster, locale}: SemanticClusterProps) {
           className={`cluster-world-label${isSelected ? " is-selected" : ""}`}
           type="button"
           onPointerDown={(event) => event.stopPropagation()}
-          onClick={(event) => activateHtmlWorldControl(
+          onClick={(event) => activateWorldItem(
             event,
             () => focusCluster(cluster.id),
           )}

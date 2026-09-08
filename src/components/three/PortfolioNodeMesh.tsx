@@ -8,7 +8,7 @@ import {clusterById} from "@/content/clusters";
 import {nodeRevealDistance, getRevealState} from "@/lib/performance-quality";
 import {resolveLocalizedText} from "@/lib/portfolio-types";
 import type {NodeRevealState, PortfolioNode, Vector3Tuple} from "@/lib/portfolio-types";
-import {activateHtmlWorldControl} from "@/lib/world-interaction";
+import {activateWorldItem} from "@/lib/world-interaction";
 import {useExperienceStore} from "@/store/experience-store";
 
 import {FragmentedProjectCover} from "./FragmentedProjectCover";
@@ -53,10 +53,12 @@ function NodePreview({
   node,
   color,
   distanceRef,
+  onActivate,
 }: {
   node: PortfolioNode;
   color: string;
   distanceRef: RefObject<number>;
+  onActivate: () => void;
 }) {
   const locale = useExperienceStore((state) => state.locale);
   const quality = useExperienceStore((state) => state.quality);
@@ -64,7 +66,11 @@ function NodePreview({
   const cover = useProjectCoverTexture(node, locale, true);
 
   return (
-    <Billboard follow position={[0, 0.25, 0]}>
+    <Billboard
+      follow
+      position={[0, 0.25, 0]}
+      onClick={(event) => activateWorldItem(event, onActivate)}
+    >
       {cover ? (
         <FragmentedProjectCover
           cover={cover}
@@ -138,7 +144,14 @@ export function PortfolioNodeMesh({
         <meshBasicMaterial colorWrite={false} depthWrite={false} />
       </mesh>
       <group ref={coreRef}><NodeCore node={node} color={cluster.color} /></group>
-      {showsIdentity && formationActive && <NodePreview node={node} color={cluster.color} distanceRef={distanceRef} />}
+      {showsIdentity && formationActive && (
+        <NodePreview
+          node={node}
+          color={cluster.color}
+          distanceRef={distanceRef}
+          onActivate={activate}
+        />
+      )}
       {showsIdentity && !formationActive && (
         <Billboard follow>
           <Line points={[[-1.4, -0.75, 0], [1.4, -0.75, 0], [1.4, 0.75, 0], [-1.4, 0.75, 0], [-1.4, -0.75, 0]]} color={cluster.color} transparent opacity={0.3} lineWidth={0.6} />
@@ -150,7 +163,7 @@ export function PortfolioNodeMesh({
             className={`node-world-label node-world-label--${reveal}`}
             type="button"
             onPointerDown={(event) => event.stopPropagation()}
-            onClick={(event) => activateHtmlWorldControl(event, activate)}
+            onClick={(event) => activateWorldItem(event, activate)}
           >
             <strong>{title}</strong>
             {showsPreview && <span className="node-world-label__summary">{summary}</span>}

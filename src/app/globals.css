@@ -674,7 +674,12 @@ button {
   backdrop-filter: blur(0.25rem);
 }
 
-.node-dialog__inner { min-height: 100%; overflow-y: auto; }
+.node-dialog__inner {
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: var(--line-strong) transparent;
+}
 
 .dialog-close {
   position: fixed;

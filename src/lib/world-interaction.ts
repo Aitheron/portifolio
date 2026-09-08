@@ -2,7 +2,7 @@ type PropagationEvent = {
   stopPropagation: () => void;
 };
 
-export function activateHtmlWorldControl(
+export function activateWorldItem(
   event: PropagationEvent,
   activate: () => void,
 ) {
