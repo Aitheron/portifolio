@@ -7,6 +7,7 @@ type NavigationProfile = {
   minDistance: number;
   softDistance: number;
   maxDistance: number;
+  panSpeed: number;
   rotateSpeed: number;
   zoomSpeed: number;
 };
@@ -20,32 +21,42 @@ export const navigationConfig = {
   polarRange: [Math.PI * 0.2, Math.PI * 0.8] as const,
   overview: {
     cameraOffset: [0, 4, 34],
-    minDistance: 16,
+    minDistance: 4.25,
     softDistance: 39,
     maxDistance: 46,
+    panSpeed: 0.52,
     rotateSpeed: 0.48,
-    zoomSpeed: 0.62,
+    zoomSpeed: 0.78,
   },
   cluster: {
     cameraOffset: [0, 2.5, 10.5],
-    minDistance: 6.5,
-    softDistance: 16,
-    maxDistance: 20,
+    minDistance: 4.25,
+    softDistance: 39,
+    maxDistance: 46,
+    panSpeed: 0.46,
     rotateSpeed: 0.42,
-    zoomSpeed: 0.56,
+    zoomSpeed: 0.72,
   },
   node: {
     cameraOffset: [0.5, 1.25, 7.25],
     minDistance: 4.5,
     softDistance: 9,
     maxDistance: 12,
+    panSpeed: 0.36,
     rotateSpeed: 0.34,
     zoomSpeed: 0.48,
   },
   worldBoundary: {
-    softRadius: 48,
-    hardRadius: 58,
-    correctionStrength: 2.8,
+    camera: {
+      softRadius: 48,
+      hardRadius: 58,
+      correctionStrength: 2.8,
+    },
+    target: {
+      softRadius: 18,
+      hardRadius: 23,
+      correctionStrength: 3.4,
+    },
   },
 } satisfies Record<NavigationContext, NavigationProfile> & {
   transitionDamping: number;
@@ -55,9 +66,16 @@ export const navigationConfig = {
   nodeCompositionOffset: number;
   polarRange: readonly [number, number];
   worldBoundary: {
-    softRadius: number;
-    hardRadius: number;
-    correctionStrength: number;
+    camera: {
+      softRadius: number;
+      hardRadius: number;
+      correctionStrength: number;
+    };
+    target: {
+      softRadius: number;
+      hardRadius: number;
+      correctionStrength: number;
+    };
   };
 };
 

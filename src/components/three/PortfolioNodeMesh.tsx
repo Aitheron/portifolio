@@ -1,6 +1,6 @@
 import {useRef, useState} from "react";
 import type {RefObject} from "react";
-import {Billboard, Html, Line} from "@react-three/drei";
+import {Billboard, Html, Line, useCursor} from "@react-three/drei";
 import {useFrame} from "@react-three/fiber";
 import {Group, MathUtils} from "three";
 
@@ -101,7 +101,6 @@ export function PortfolioNodeMesh({
   const [hovered, setHovered] = useState(false);
   const locale = useExperienceStore((state) => state.locale);
   const reducedMotion = useExperienceStore((state) => state.reducedMotion);
-  const selectedClusterId = useExperienceStore((state) => state.selectedClusterId);
   const selectedNodeId = useExperienceStore((state) => state.selectedNodeId);
   const selectNode = useExperienceStore((state) => state.selectNode);
   const selected = selectedNodeId === node.id;
@@ -110,6 +109,7 @@ export function PortfolioNodeMesh({
   const summary = resolveLocalizedText(node.summary, locale);
   const showsIdentity = reveal !== "signal";
   const showsPreview = reveal === "preview" || reveal === "selected";
+  useCursor(hovered);
 
   useFrame(({camera}, delta) => {
     const group = groupRef.current;
@@ -128,13 +128,14 @@ export function PortfolioNodeMesh({
     if (coreRef.current && !reducedMotion) coreRef.current.rotation.y += delta * 0.42;
   });
 
-  const activate = () => {
-    const canInteract = distanceRef.current <= nodeRevealDistance.interaction || selectedClusterId === node.cluster;
-    if (canInteract) selectNode(node.id, node.cluster);
-  };
+  const activate = () => selectNode(node.id, node.cluster);
 
   return (
     <group ref={groupRef} position={position} onClick={(event) => {event.stopPropagation(); activate();}} onPointerEnter={() => setHovered(true)} onPointerLeave={() => setHovered(false)}>
+      <mesh>
+        <sphereGeometry args={[0.78, 10, 8]} />
+        <meshBasicMaterial colorWrite={false} depthWrite={false} />
+      </mesh>
       <group ref={coreRef}><NodeCore node={node} color={cluster.color} /></group>
       {showsIdentity && formationActive && <NodePreview node={node} color={cluster.color} distanceRef={distanceRef} />}
       {showsIdentity && !formationActive && (

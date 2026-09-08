@@ -7,10 +7,13 @@ import {MathUtils, TOUCH, Vector3} from "three";
 import {clusterById} from "@/content/clusters";
 import {portfolioNodePositions} from "@/content/nodes";
 import {getNavigationContext, navigationConfig} from "@/lib/scene-config";
+import {resolveElasticBoundaryRadius} from "@/lib/scene-navigation";
 import {useExperienceStore} from "@/store/experience-store";
 
 const overviewTarget = new Vector3(0, 0, 0);
 const correctionTarget = new Vector3();
+const previousTarget = new Vector3();
+const targetTranslation = new Vector3();
 const cameraDirection = new Vector3();
 
 export function CameraRig() {
@@ -90,6 +93,19 @@ export function CameraRig() {
     if (!controls || !canExplore) return;
     controls.enabled = true;
 
+    const targetWorldDistance = controls.target.length();
+    const boundedTargetDistance = resolveElasticBoundaryRadius(
+      targetWorldDistance,
+      navigationConfig.worldBoundary.target,
+      delta,
+    );
+    if (boundedTargetDistance < targetWorldDistance) {
+      previousTarget.copy(controls.target);
+      controls.target.setLength(boundedTargetDistance);
+      targetTranslation.copy(controls.target).sub(previousTarget);
+      camera.position.add(targetTranslation);
+    }
+
     const targetDistance = camera.position.distanceTo(controls.target);
     if (targetDistance > profile.softDistance) {
       cameraDirection.copy(camera.position).sub(controls.target).normalize();
@@ -103,20 +119,21 @@ export function CameraRig() {
       );
       camera.position.lerp(
         correctionTarget,
-        1 - Math.exp(-navigationConfig.worldBoundary.correctionStrength * excessRatio * delta),
+        1 - Math.exp(
+          -navigationConfig.worldBoundary.camera.correctionStrength * excessRatio * delta,
+        ),
       );
     }
 
     const worldDistance = camera.position.length();
-    if (worldDistance > navigationConfig.worldBoundary.softRadius) {
-      correctionTarget
-        .copy(camera.position)
-        .normalize()
-        .multiplyScalar(navigationConfig.worldBoundary.softRadius);
-      camera.position.lerp(
-        correctionTarget,
-        1 - Math.exp(-navigationConfig.worldBoundary.correctionStrength * delta),
-      );
+    const boundedCameraDistance = resolveElasticBoundaryRadius(
+      worldDistance,
+      navigationConfig.worldBoundary.camera,
+      delta,
+    );
+    if (boundedCameraDistance < worldDistance) {
+      camera.position.setLength(boundedCameraDistance);
+      camera.lookAt(controls.target);
     }
   });
 
@@ -125,16 +142,22 @@ export function CameraRig() {
       key={`${stage}:${selectedClusterId ?? "none"}:${selectedNodeId ?? "none"}:${cameraResetRevision}`}
       ref={controlsRef}
       enabled={false}
-      enablePan={false}
+      enablePan
       enableDamping
       dampingFactor={0.085}
       minDistance={profile.minDistance}
-      maxDistance={Math.min(profile.maxDistance, navigationConfig.worldBoundary.hardRadius)}
+      maxDistance={Math.min(
+        profile.maxDistance,
+        navigationConfig.worldBoundary.camera.hardRadius,
+      )}
       minPolarAngle={navigationConfig.polarRange[0]}
       maxPolarAngle={navigationConfig.polarRange[1]}
+      panSpeed={profile.panSpeed}
       rotateSpeed={profile.rotateSpeed * (quality === "low" ? 0.82 : 1)}
+      screenSpacePanning
       zoomSpeed={profile.zoomSpeed}
-      touches={{ONE: TOUCH.ROTATE, TWO: TOUCH.DOLLY_ROTATE}}
+      zoomToCursor
+      touches={{ONE: TOUCH.ROTATE, TWO: TOUCH.DOLLY_PAN}}
       regress
     />
   );

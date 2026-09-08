@@ -9,6 +9,7 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
+    "test": "tsc -p tsconfig.navigation-test.json && node .test-dist/lib/scene-navigation.test.js",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

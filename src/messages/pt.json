@@ -27,7 +27,7 @@
     "returnOverview": "Voltar à visão geral",
     "centerView": "Centralizar visão",
     "location": "Localização no espaço vetorial",
-    "navigationHint": "Arraste para orbitar · Role para aproximar · H para centralizar",
+    "navigationHint": "Aponte e role para revelar · Clique para abrir · Shift + arraste para mover",
     "previousCluster": "Cluster anterior",
     "nextCluster": "Próximo cluster",
     "reducedMotion": "Reduzir movimento",

@@ -27,7 +27,7 @@
     "returnOverview": "Return to overview",
     "centerView": "Center view",
     "location": "Location in vector space",
-    "navigationHint": "Drag to orbit · Scroll to zoom · H to center",
+    "navigationHint": "Point and scroll to reveal · Click to open · Shift + drag to move",
     "previousCluster": "Previous cluster",
     "nextCluster": "Next cluster",
     "reducedMotion": "Reduce motion",

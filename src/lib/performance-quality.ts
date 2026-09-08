@@ -4,7 +4,6 @@ export const nodeRevealDistance = {
   signal: 45,
   identity: 25,
   preview: 15,
-  interaction: 16,
   hysteresis: 1.25,
 } as const;
 

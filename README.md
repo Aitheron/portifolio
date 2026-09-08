@@ -32,7 +32,7 @@ npm start
 
 As capas são ativadas somente quando a câmera se aproxima e são reconstruídas por fragmentos reais da textura nos modos `high` e `medium`. O modo `low` usa dissolve. Uma capa procedural baseada no cluster passa pelo mesmo pipeline quando não existe `image` ou quando o carregamento falha.
 
-A câmera orbita sempre um alvo semântico e aplica limites próprios para overview e clusters. Use o botão do HUD ou a tecla `H` para centralizar a visão; `Escape` retorna de projeto para cluster e de cluster para overview.
+A câmera combina órbita, zoom orientado ao cursor e deslocamento lateral com bordas elásticas. Aponte e role para revelar progressivamente o conteúdo de um nó; clique para abrir o projeto. No desktop, arraste para orbitar e use `Shift` + arraste ou o botão direito para mover. O cluster selecionado permanece destacado ao afastar a câmera. Use o botão do HUD ou a tecla `H` para centralizar a visão; `Escape` retorna de projeto para cluster e de cluster para overview.
 
 ## Como adicionar um item ao portfólio
 

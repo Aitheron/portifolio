@@ -145,7 +145,7 @@ function Scene({onUnavailable}: UniverseCanvasProps) {
   const quality = useExperienceStore((state) => state.quality);
   const showGateway = stage === "language-selection" || stage === "entering";
   const showUniverse = stage === "overview" || stage === "cluster-focus" || stage === "node-details";
-  return <><fog attach="fog" args={["#02060a", 24, 68]} /><ambientLight intensity={0.4} /><DataField />{showGateway && <LanguageGalaxies />}{showUniverse && <><PreviewBudgetTracker activeIdsRef={activePreviewIdsRef} />{clusters.map((cluster) => <SemanticCluster key={cluster.id} cluster={cluster} locale={locale} />)}{portfolioNodes.map((node) => <PortfolioNodeMesh activePreviewIdsRef={activePreviewIdsRef} key={node.id} node={node} position={portfolioNodePositions[node.id]} />)}</>} {(stage === "entering" || showUniverse) && <QueryProbe />}<CameraRig /><AdaptiveDpr pixelated={quality === "low"} /><ContextLossListener onUnavailable={onUnavailable} /></>;
+  return <><fog attach="fog" args={["#02060a", 24, 68]} /><ambientLight intensity={0.4} /><DataField />{showGateway && <LanguageGalaxies />}{showUniverse && <><PreviewBudgetTracker activeIdsRef={activePreviewIdsRef} />{clusters.map((cluster) => <SemanticCluster key={cluster.id} cluster={cluster} locale={locale} />)}{portfolioNodes.map((node) => <PortfolioNodeMesh activePreviewIdsRef={activePreviewIdsRef} key={node.id} node={node} position={portfolioNodePositions[node.id]} />)}</>} {stage === "entering" && <QueryProbe />}<CameraRig /><AdaptiveDpr pixelated={quality === "low"} /><ContextLossListener onUnavailable={onUnavailable} /></>;
 }
 
 export default function UniverseCanvas({onUnavailable}: UniverseCanvasProps) {
