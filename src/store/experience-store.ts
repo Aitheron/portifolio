@@ -15,6 +15,7 @@ type ExperienceState = {
   languageSignal: AppLocale | null;
   quality: PerformanceQuality;
   reducedMotion: boolean;
+  cameraResetRevision: number;
   setLocale: (locale: AppLocale) => void;
   openLanguageGateway: () => void;
   beginEntering: (locale: AppLocale) => void;
@@ -36,6 +37,7 @@ export const useExperienceStore = create<ExperienceState>()((set, get) => ({
   languageSignal: null,
   quality: "medium",
   reducedMotion: false,
+  cameraResetRevision: 0,
   setLocale: (locale) => set({locale}),
   openLanguageGateway: () => set({stage: "language-selection"}),
   beginEntering: (locale) => set({stage: "entering", languageSignal: locale}),
@@ -58,7 +60,12 @@ export const useExperienceStore = create<ExperienceState>()((set, get) => ({
       selectedNodeId: null,
     })),
   returnToOverview: () =>
-    set({stage: "overview", selectedClusterId: null, selectedNodeId: null}),
+    set((state) => ({
+      stage: "overview",
+      selectedClusterId: null,
+      selectedNodeId: null,
+      cameraResetRevision: state.cameraResetRevision + 1,
+    })),
   navigateBack: () => {
     const state = get();
     if (state.stage === "node-details") {

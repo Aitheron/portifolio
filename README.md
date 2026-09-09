@@ -25,11 +25,14 @@ npm start
 - `src/content/nodes`: um arquivo de dados serializáveis por item do portfólio.
 - `src/content/nodes/index.ts`: registro explícito que valida todos os itens com Zod.
 - `src/content/clusters.ts`: posições, aparência e layout determinístico dos clusters.
+- `src/lib/scene-config.ts`: limites de navegação e níveis de reconstrução visual.
 - `src/components/three`: renderização genérica do universo, clusters, QUERY e nós.
 - `src/components/portfolio`: interface HTML acessível, HUD, detalhes e fallback WebGL.
 - `src/messages`: textos globais em português e inglês.
 
-As capas são ativadas somente quando a câmera se aproxima. Uma capa procedural baseada no cluster é usada enquanto a imagem carrega, quando não existe `image` ou quando o carregamento falha.
+As capas são ativadas somente quando a câmera se aproxima e são reconstruídas por fragmentos reais da textura nos modos `high` e `medium`. O modo `low` usa dissolve. Uma capa procedural baseada no cluster passa pelo mesmo pipeline quando não existe `image` ou quando o carregamento falha.
+
+A câmera combina órbita, zoom orientado ao cursor e deslocamento lateral com bordas elásticas. Aponte e role para revelar progressivamente o conteúdo de um nó; clique para abrir o projeto. No desktop, arraste para orbitar e use `Shift` + arraste ou o botão direito para mover. O cluster selecionado permanece destacado ao afastar a câmera. Use o botão do HUD ou a tecla `H` para centralizar a visão; `Escape` retorna de projeto para cluster e de cluster para overview.
 
 ## Como adicionar um item ao portfólio
 

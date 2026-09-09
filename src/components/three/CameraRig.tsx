@@ -2,27 +2,36 @@ import {useEffect, useMemo, useRef} from "react";
 import {OrbitControls} from "@react-three/drei";
 import {useFrame, useThree} from "@react-three/fiber";
 import type {OrbitControls as OrbitControlsImpl} from "three-stdlib";
-import {MathUtils, Vector3} from "three";
+import {MathUtils, TOUCH, Vector3} from "three";
 
 import {clusterById} from "@/content/clusters";
 import {portfolioNodePositions} from "@/content/nodes";
+import {getNavigationContext, navigationConfig} from "@/lib/scene-config";
+import {resolveElasticBoundaryRadius} from "@/lib/scene-navigation";
 import {useExperienceStore} from "@/store/experience-store";
 
-const overviewPosition = new Vector3(0, 4, 34);
 const overviewTarget = new Vector3(0, 0, 0);
+const previousTarget = new Vector3();
+const targetTranslation = new Vector3();
 
 export function CameraRig() {
   const controlsRef = useRef<OrbitControlsImpl>(null);
   const navigatingRef = useRef(true);
   const camera = useThree((state) => state.camera);
+  const viewportWidth = useThree((state) => state.size.width);
   const stage = useExperienceStore((state) => state.stage);
   const selectedClusterId = useExperienceStore((state) => state.selectedClusterId);
   const selectedNodeId = useExperienceStore((state) => state.selectedNodeId);
   const languageSignal = useExperienceStore((state) => state.languageSignal);
   const reducedMotion = useExperienceStore((state) => state.reducedMotion);
+  const quality = useExperienceStore((state) => state.quality);
+  const cameraResetRevision = useExperienceStore((state) => state.cameraResetRevision);
+  const context = getNavigationContext(stage);
+  const profile = navigationConfig[context];
+  const canExplore = stage === "overview" || stage === "cluster-focus";
 
   const destinations = useMemo(() => {
-    const position = overviewPosition.clone();
+    const position = new Vector3().fromArray(navigationConfig.overview.cameraOffset);
     const target = overviewTarget.clone();
 
     if (stage === "language-selection") {
@@ -34,24 +43,28 @@ export function CameraRig() {
     } else if (stage === "cluster-focus" && selectedClusterId) {
       const cluster = clusterById[selectedClusterId];
       target.fromArray(cluster.position);
-      position.copy(target).add(new Vector3(0, 2.5, 10.5));
+      position.addVectors(target, new Vector3().fromArray(navigationConfig.cluster.cameraOffset));
     } else if (stage === "node-details" && selectedNodeId) {
       const nodePosition = portfolioNodePositions[selectedNodeId];
       if (nodePosition) {
         target.fromArray(nodePosition);
-        position.copy(target).add(new Vector3(0.5, 1.25, 7.25));
+        if (viewportWidth > 768) target.x += navigationConfig.nodeCompositionOffset;
+        position.addVectors(target, new Vector3().fromArray(navigationConfig.node.cameraOffset));
       }
     }
 
     return {position, target};
-  }, [languageSignal, selectedClusterId, selectedNodeId, stage]);
+  }, [cameraResetRevision, languageSignal, selectedClusterId, selectedNodeId, stage, viewportWidth]);
 
   useEffect(() => {
     navigatingRef.current = true;
+    if (controlsRef.current) controlsRef.current.enabled = false;
   }, [destinations]);
 
   useFrame((_, delta) => {
-    const damping = reducedMotion ? 18 : 4.2;
+    const damping = reducedMotion
+      ? navigationConfig.reducedMotionDamping
+      : navigationConfig.transitionDamping;
     const controls = controlsRef.current;
 
     if (navigatingRef.current) {
@@ -62,27 +75,67 @@ export function CameraRig() {
 
     if (controls && navigatingRef.current) {
       controls.target.lerp(destinations.target, 1 - Math.exp(-damping * delta));
-      controls.update();
+      camera.lookAt(controls.target);
       if (
-        camera.position.distanceTo(destinations.position) < 0.04 &&
-        controls.target.distanceTo(destinations.target) < 0.04
+        camera.position.distanceTo(destinations.position) < navigationConfig.arrivalDistance &&
+        controls.target.distanceTo(destinations.target) < navigationConfig.targetArrivalDistance
       ) {
         navigatingRef.current = false;
+        controls.target.copy(destinations.target);
+        controls.enabled = canExplore;
+        controls.update();
       }
+      return;
+    }
+
+    if (!controls || !canExplore) return;
+    controls.enabled = true;
+
+    const targetWorldDistance = controls.target.length();
+    const boundedTargetDistance = resolveElasticBoundaryRadius(
+      targetWorldDistance,
+      navigationConfig.worldBoundary.target,
+      delta,
+    );
+    if (boundedTargetDistance < targetWorldDistance) {
+      previousTarget.copy(controls.target);
+      controls.target.setLength(boundedTargetDistance);
+      targetTranslation.copy(controls.target).sub(previousTarget);
+      camera.position.add(targetTranslation);
+    }
+
+    const worldDistance = camera.position.length();
+    const boundedCameraDistance = resolveElasticBoundaryRadius(
+      worldDistance,
+      navigationConfig.worldBoundary.camera,
+      delta,
+    );
+    if (boundedCameraDistance < worldDistance) {
+      camera.position.setLength(boundedCameraDistance);
+      camera.lookAt(controls.target);
     }
   });
 
   return (
     <OrbitControls
       ref={controlsRef}
-      enabled={stage === "overview" || stage === "cluster-focus"}
-      enablePan={false}
+      enabled={false}
+      enablePan
       enableDamping
-      dampingFactor={0.08}
-      minDistance={7}
-      maxDistance={44}
-      minPolarAngle={Math.PI * 0.18}
-      maxPolarAngle={Math.PI * 0.82}
+      dampingFactor={0.085}
+      minDistance={profile.minDistance}
+      maxDistance={Math.min(
+        profile.maxDistance,
+        navigationConfig.worldBoundary.camera.hardRadius,
+      )}
+      minPolarAngle={navigationConfig.polarRange[0]}
+      maxPolarAngle={navigationConfig.polarRange[1]}
+      panSpeed={profile.panSpeed}
+      rotateSpeed={profile.rotateSpeed * (quality === "low" ? 0.82 : 1)}
+      screenSpacePanning
+      zoomSpeed={profile.zoomSpeed}
+      zoomToCursor
+      touches={{ONE: TOUCH.ROTATE, TWO: TOUCH.DOLLY_PAN}}
       regress
     />
   );

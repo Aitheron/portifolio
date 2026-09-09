@@ -1,6 +1,7 @@
 import {useTranslations} from "next-intl";
 
 import {clusterById, clusters} from "@/content/clusters";
+import {portfolioNodes} from "@/content/nodes";
 import type {AppLocale} from "@/i18n/routing";
 import {resolveLocalizedText} from "@/lib/portfolio-types";
 import {useExperienceStore} from "@/store/experience-store";
@@ -13,6 +14,7 @@ export function PortfolioHUD({onLocaleChange}: PortfolioHUDProps) {
   const t = useTranslations("HUD");
   const locale = useExperienceStore((state) => state.locale);
   const selectedClusterId = useExperienceStore((state) => state.selectedClusterId);
+  const selectedNodeId = useExperienceStore((state) => state.selectedNodeId);
   const quality = useExperienceStore((state) => state.quality);
   const reducedMotion = useExperienceStore((state) => state.reducedMotion);
   const returnToOverview = useExperienceStore((state) => state.returnToOverview);
@@ -24,6 +26,14 @@ export function PortfolioHUD({onLocaleChange}: PortfolioHUDProps) {
   const currentLabel = selectedClusterId
     ? resolveLocalizedText(clusterById[selectedClusterId].title, locale)
     : t("overview");
+  const selectedNode = selectedNodeId
+    ? portfolioNodes.find((node) => node.id === selectedNodeId)
+    : undefined;
+  const selectedNodeLabel = selectedNode
+    ? resolveLocalizedText(selectedNode.title, locale)
+    : null;
+  const locationParts = ["Vector Space", currentLabel, selectedNodeLabel]
+    .filter((part): part is string => part !== null);
   const qualityLabel = {
     high: t("qualityHigh"),
     medium: t("qualityMedium"),
@@ -44,10 +54,18 @@ export function PortfolioHUD({onLocaleChange}: PortfolioHUDProps) {
         <strong>// Vector Space</strong>
       </div>
 
-      <div className="hud-location" aria-live="polite">
-        <span>QUERY /</span>
-        <strong>{currentLabel}</strong>
-      </div>
+      <nav className="hud-location" aria-live="polite" aria-label={t("location")}>
+        {locationParts.map((part, index) => (
+          <span
+            aria-current={index === locationParts.length - 1 ? "location" : undefined}
+            className={index === locationParts.length - 1 ? "is-current" : ""}
+            key={`${part}-${index}`}
+          >
+            {part}
+            {index < locationParts.length - 1 && <i aria-hidden="true">/</i>}
+          </span>
+        ))}
+      </nav>
 
       <div className="hud-actions">
         <div className="locale-switcher" role="group" aria-label={t("selectLanguage")}>
@@ -76,16 +94,16 @@ export function PortfolioHUD({onLocaleChange}: PortfolioHUDProps) {
       <div className="hud-bottom">
         <span className="navigation-hint">{t("navigationHint")}</span>
         <span className="quality-indicator">{t("quality", {quality: qualityLabel})}</span>
-        {selectedClusterId && (
-          <button type="button" className="overview-action" onClick={returnToOverview}>
-            <span aria-hidden="true">←</span> {t("returnOverview")}
-          </button>
-        )}
+        <button type="button" className="overview-action" onClick={returnToOverview}>
+          <span aria-hidden="true">{selectedClusterId ? "←" : "◎"}</span>{" "}
+          {selectedClusterId ? t("returnOverview") : t("centerView")}
+        </button>
       </div>
 
       <nav className="mobile-cluster-nav" aria-label={currentLabel}>
         <button type="button" aria-label={t("previousCluster")} onClick={() => moveCluster(-1)}>←</button>
         <span>{currentLabel}</span>
+        <button type="button" aria-label={t("centerView")} onClick={returnToOverview}>◎</button>
         <button type="button" aria-label={t("nextCluster")} onClick={() => moveCluster(1)}>→</button>
       </nav>
     </header>

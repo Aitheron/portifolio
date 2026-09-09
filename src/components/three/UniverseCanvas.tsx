@@ -1,14 +1,22 @@
 "use client";
 
 import {useEffect, useMemo, useRef} from "react";
+import type {RefObject} from "react";
 import {AdaptiveDpr} from "@react-three/drei";
-import {Canvas, useFrame, useThree} from "@react-three/fiber";
+import {
+  Canvas,
+  events as createPointerEvents,
+  useFrame,
+  useThree,
+} from "@react-three/fiber";
 import {useTranslations} from "next-intl";
-import {BufferAttribute, Group, Points} from "three";
+import {BufferAttribute, Group, Points, Vector3} from "three";
 
 import {clusters} from "@/content/clusters";
 import {portfolioNodePositions, portfolioNodes} from "@/content/nodes";
 import {qualitySettings} from "@/lib/performance-quality";
+import {imageFormationConfig} from "@/lib/scene-config";
+import {prioritizeWorldIntersections} from "@/lib/world-interaction";
 import {useExperienceStore} from "@/store/experience-store";
 
 import {CameraRig} from "./CameraRig";
@@ -17,6 +25,16 @@ import {QueryProbe} from "./QueryProbe";
 import {SemanticCluster} from "./SemanticCluster";
 
 type UniverseCanvasProps = {onUnavailable: () => void};
+const previewPosition = new Vector3();
+
+function createWorldPointerEvents(
+  state: Parameters<typeof createPointerEvents>[0],
+) {
+  return {
+    ...createPointerEvents(state),
+    filter: prioritizeWorldIntersections,
+  };
+}
 
 function ContextLossListener({onUnavailable}: UniverseCanvasProps) {
   const gl = useThree((state) => state.gl);
@@ -94,13 +112,55 @@ function LanguageGalaxies() {
   );
 }
 
+function sameIds(current: ReadonlySet<string>, next: ReadonlySet<string>) {
+  return current.size === next.size && [...current].every((id) => next.has(id));
+}
+
+function PreviewBudgetTracker({
+  activeIdsRef,
+}: {
+  activeIdsRef: RefObject<ReadonlySet<string>>;
+}) {
+  const quality = useExperienceStore((state) => state.quality);
+  const selectedNodeId = useExperienceStore((state) => state.selectedNodeId);
+  const lastUpdateRef = useRef(-Infinity);
+
+  useFrame(({camera, clock}) => {
+    if (clock.elapsedTime - lastUpdateRef.current < imageFormationConfig.candidateInterval) {
+      return;
+    }
+    lastUpdateRef.current = clock.elapsedTime;
+    const candidates = portfolioNodes
+      .map((node) => ({
+        id: node.id,
+        distance: camera.position.distanceTo(
+          previewPosition.fromArray(portfolioNodePositions[node.id]),
+        ),
+      }))
+      .filter(({id, distance}) => (
+        id === selectedNodeId || distance <= imageFormationConfig.fragmentsDistance + 2
+      ))
+      .sort((left, right) => {
+        if (left.id === selectedNodeId) return -1;
+        if (right.id === selectedNodeId) return 1;
+        return left.distance - right.distance;
+      })
+      .slice(0, imageFormationConfig[quality].activeNodeLimit);
+    const nextIds = new Set(candidates.map(({id}) => id));
+    if (!sameIds(activeIdsRef.current, nextIds)) activeIdsRef.current = nextIds;
+  });
+
+  return null;
+}
+
 function Scene({onUnavailable}: UniverseCanvasProps) {
+  const activePreviewIdsRef = useRef<ReadonlySet<string>>(new Set());
   const stage = useExperienceStore((state) => state.stage);
   const locale = useExperienceStore((state) => state.locale);
   const quality = useExperienceStore((state) => state.quality);
   const showGateway = stage === "language-selection" || stage === "entering";
   const showUniverse = stage === "overview" || stage === "cluster-focus" || stage === "node-details";
-  return <><fog attach="fog" args={["#02060a", 24, 68]} /><ambientLight intensity={0.4} /><DataField />{showGateway && <LanguageGalaxies />}{showUniverse && <>{clusters.map((cluster) => <SemanticCluster key={cluster.id} cluster={cluster} locale={locale} />)}{portfolioNodes.map((node) => <PortfolioNodeMesh key={node.id} node={node} position={portfolioNodePositions[node.id]} />)}</>} {(stage === "entering" || showUniverse) && <QueryProbe />}<CameraRig /><AdaptiveDpr pixelated={quality === "low"} /><ContextLossListener onUnavailable={onUnavailable} /></>;
+  return <><fog attach="fog" args={["#02060a", 24, 68]} /><ambientLight intensity={0.4} /><DataField />{showGateway && <LanguageGalaxies />}{showUniverse && <><PreviewBudgetTracker activeIdsRef={activePreviewIdsRef} />{clusters.map((cluster) => <SemanticCluster key={cluster.id} cluster={cluster} locale={locale} />)}{portfolioNodes.map((node) => <PortfolioNodeMesh activePreviewIdsRef={activePreviewIdsRef} key={node.id} node={node} position={portfolioNodePositions[node.id]} />)}</>} {stage === "entering" && <QueryProbe />}<CameraRig /><AdaptiveDpr pixelated={quality === "low"} /><ContextLossListener onUnavailable={onUnavailable} /></>;
 }
 
 export default function UniverseCanvas({onUnavailable}: UniverseCanvasProps) {
@@ -112,6 +172,7 @@ export default function UniverseCanvas({onUnavailable}: UniverseCanvasProps) {
       <Canvas
         camera={{position: [0, 4, 34], fov: 46, near: 0.1, far: 120}}
         dpr={settings.dpr}
+        events={createWorldPointerEvents}
         gl={{antialias: quality !== "low", alpha: false, powerPreference: "high-performance"}}
         performance={{min: 0.55}}
         fallback={null}

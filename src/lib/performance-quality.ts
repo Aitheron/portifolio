@@ -4,7 +4,6 @@ export const nodeRevealDistance = {
   signal: 45,
   identity: 25,
   preview: 15,
-  interaction: 16,
   hysteresis: 1.25,
 } as const;
 
@@ -25,12 +24,16 @@ export function detectPerformanceQuality(reducedMotion: boolean): PerformanceQua
   const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
   const memory = (navigator as NavigatorWithMemory).deviceMemory;
   const compactViewport = window.innerWidth < 720;
+  const constrainedCpu = navigator.hardwareConcurrency > 0 && navigator.hardwareConcurrency <= 4;
 
-  if (compactViewport || coarsePointer || (memory !== undefined && memory <= 4)) {
+  if (
+    (memory !== undefined && memory <= 4) ||
+    (compactViewport && coarsePointer && constrainedCpu)
+  ) {
     return "low";
   }
 
-  if (window.innerWidth < 1180 || (memory !== undefined && memory <= 8)) {
+  if (coarsePointer || window.innerWidth < 1180 || (memory !== undefined && memory <= 8)) {
     return "medium";
   }
 

@@ -25,7 +25,9 @@
   "HUD": {
     "overview": "Overview",
     "returnOverview": "Return to overview",
-    "navigationHint": "Drag to orbit · Select a signal to travel",
+    "centerView": "Center view",
+    "location": "Location in vector space",
+    "navigationHint": "Point and scroll to reveal · Click to open · Shift + drag to move",
     "previousCluster": "Previous cluster",
     "nextCluster": "Next cluster",
     "reducedMotion": "Reduce motion",
