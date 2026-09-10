@@ -1,19 +1,22 @@
-import intelligentDocumentAutomation from "./applied-ai/intelligent-document-automation";
-import genomicVariantClassifier from "./genomic-intelligence/genomic-variant-classifier";
-import aiWorkshop from "./human-signal/ai-workshop";
-import multiAgentRetrieval from "./rag-agents/multi-agent-retrieval";
-import scalableAiApi from "./systems-engineering/scalable-ai-api";
+import aitheron from "./key-projects/aitheron";
+import multiAgent from "./key-projects/multi-agent-tariff-intelligence";
+import pnExtractor from "./key-projects/pn-extractor";
+import llmInfrastructure from "./key-projects/enterprise-llm-infrastructure";
+import docguard from "./key-projects/docguard";
+import professionalExperience from "./experience-impact/professional-experience";
+import softwareEngineering from "./education-research/software-engineering";
+import workshop from "./talks-community/workshop-placeholder";
+import attendee from "./talks-community/attendee-placeholder";
 
-import {getNodePosition} from "@/content/clusters";
+import {identity} from "@/content/identity";
+import {createPortfolioGraph} from "@/lib/portfolio-graph";
+import {clusters, getNodePosition} from "@/content/clusters";
 import {validatePortfolioNodes} from "@/lib/portfolio-schema";
 import type {Vector3Tuple} from "@/lib/portfolio-types";
 
 const registeredNodes = [
-  intelligentDocumentAutomation,
-  genomicVariantClassifier,
-  multiAgentRetrieval,
-  scalableAiApi,
-  aiWorkshop,
+  aitheron, multiAgent, pnExtractor, llmInfrastructure, docguard,
+  professionalExperience, softwareEngineering, workshop, attendee,
 ] as const;
 
 export const portfolioNodes = validatePortfolioNodes(registeredNodes);
@@ -25,3 +28,5 @@ export const portfolioNodePositions = Object.fromEntries(
     return [node.id, getNodePosition(node, index, clusterNodes.length)];
   }),
 ) as Record<string, Vector3Tuple>;
+
+export const portfolioGraph = createPortfolioGraph(portfolioNodes, clusters, identity);

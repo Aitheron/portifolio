@@ -1,7 +1,8 @@
 import {defineRouting} from "next-intl/routing";
+import {locales} from "../lib/portfolio-types";
 
 export const routing = defineRouting({
-  locales: ["pt", "en"],
+  locales,
   defaultLocale: "pt",
   localePrefix: "always",
 });

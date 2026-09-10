@@ -1,11 +1,8 @@
-import type {AppLocale} from "@/i18n/routing";
+export const locales = ["pt", "en"] as const;
+export type AppLocale = (typeof locales)[number];
 
 export const clusterIds = [
-  "applied-ai",
-  "genomic-intelligence",
-  "rag-agents",
-  "systems-engineering",
-  "human-signal",
+  "key-projects", "experience-impact", "education-research", "talks-community",
 ] as const;
 
 export const nodeKinds = [
@@ -34,6 +31,22 @@ export type LocalizedText = {
   en: string;
 };
 
+export const relationTypes = ["built-at", "uses", "related-to", "produced", "thesis-of", "impact", "presented-at", "research"] as const;
+export const participationRoles = ["speaker", "workshop-host", "mentor", "panelist", "attendee"] as const;
+export type SemanticRelation = {targetId: string; type: (typeof relationTypes)[number]};
+export type SemanticSatellite = {
+  id: string;
+  type: "technology" | "concept" | "metric" | "domain";
+  label: LocalizedText;
+  importance?: number;
+  relationTargetId?: string;
+};
+export type PortfolioImage = {
+  src: string;
+  alt: LocalizedText;
+  category?: "project" | "conceptual" | "event";
+};
+
 export type PortfolioNode = {
   id: string;
   slug: string;
@@ -42,16 +55,28 @@ export type PortfolioNode = {
   title: LocalizedText;
   summary: LocalizedText;
   description: LocalizedText;
-  image?: {
-    src: string;
-    alt: LocalizedText;
-  };
+  image?: PortfolioImage;
+  gallery?: PortfolioImage[];
+  importance?: "flagship" | "primary" | "secondary";
+  participationRole?: (typeof participationRoles)[number];
+  provisional?: boolean;
+  confidential?: boolean;
+  year?: string;
+  status?: LocalizedText;
+  projectType?: LocalizedText;
+  company?: string;
+  problem?: LocalizedText;
+  solution?: LocalizedText;
+  myRole?: LocalizedText;
+  impact?: LocalizedText;
+  relations?: SemanticRelation[];
+  satellites?: SemanticSatellite[];
   technologies: string[];
   tags: string[];
   links?: {
     label: LocalizedText;
     href: string;
-    type: "website" | "github" | "article" | "video";
+    type: "website" | "github" | "article" | "video" | "document";
   }[];
   visual: {
     variant: VisualVariant;
@@ -61,7 +86,6 @@ export type PortfolioNode = {
   position:
     | {mode: "auto"}
     | {mode: "manual"; value: Vector3Tuple};
-  relationships?: string[];
 };
 
 export type ClusterPattern =
@@ -88,10 +112,15 @@ export type ExperienceStage =
   | "entering"
   | "overview"
   | "cluster-focus"
+  | "node-focus"
   | "node-details";
 
 export type NodeRevealState = "signal" | "identity" | "preview" | "selected";
 export type PerformanceQuality = "high" | "medium" | "low";
+
+export function isUniverseStage(stage: ExperienceStage): boolean {
+  return ["overview", "cluster-focus", "node-focus", "node-details"].includes(stage);
+}
 
 export function resolveLocalizedText(
   text: LocalizedText,

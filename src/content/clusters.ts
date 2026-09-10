@@ -6,72 +6,19 @@ import type {
 } from "@/lib/portfolio-types";
 
 export const clusters: readonly ClusterDefinition[] = [
-  {
-    id: "applied-ai",
-    title: {pt: "IA Aplicada", en: "Applied AI"},
-    description: {
-      pt: "Fluxos inteligentes construídos para operar no mundo real.",
-      en: "Intelligent workflows built to operate in the real world.",
-    },
-    position: [-12, 5, -3],
-    radius: 5.4,
-    color: "#5ad7ff",
-    secondaryColor: "#d9f7ff",
-    pattern: "streams",
-  },
-  {
-    id: "genomic-intelligence",
-    title: {pt: "Inteligência Genômica", en: "Genomic Intelligence"},
-    description: {
-      pt: "Aprendizado de máquina aplicado à complexidade dos sinais genômicos.",
-      en: "Machine learning applied to the complexity of genomic signals.",
-    },
-    position: [12, 6, -7],
-    radius: 5.2,
-    color: "#8f8cff",
-    secondaryColor: "#dbd9ff",
-    pattern: "helix",
-  },
-  {
-    id: "rag-agents",
-    title: {pt: "RAG e Agentes", en: "RAG & Agents"},
-    description: {
-      pt: "Redes de recuperação, planejamento e validação de conhecimento.",
-      en: "Networks for knowledge retrieval, planning and validation.",
-    },
-    position: [0, -1, 0],
-    radius: 5.6,
-    color: "#5f86ff",
-    secondaryColor: "#d4deff",
-    pattern: "network",
-  },
-  {
-    id: "systems-engineering",
-    title: {pt: "Engenharia de Sistemas", en: "Systems Engineering"},
-    description: {
-      pt: "Arquiteturas modulares que conectam modelos, APIs e serviços.",
-      en: "Modular architectures connecting models, APIs and services.",
-    },
-    position: [-11, -7, 8],
-    radius: 5.1,
-    color: "#75b7c9",
-    secondaryColor: "#d9f1f5",
-    pattern: "topology",
-  },
-  {
-    id: "human-signal",
-    title: {pt: "Sinal Humano", en: "Human Signal"},
-    description: {
-      pt: "Conhecimento compartilhado em conversas, mentoria e comunidade.",
-      en: "Knowledge shared through talks, mentoring and community.",
-    },
-    position: [12, -6, 8],
-    radius: 5,
-    color: "#ffad66",
-    secondaryColor: "#ffe2bd",
-    pattern: "pulse",
-  },
-] as const;
+  {id: "key-projects", title: {pt: "Projetos-chave", en: "Key Projects"},
+    description: {pt: "Projetos que conectam pesquisa, engenharia e IA aplicada.", en: "Projects connecting research, engineering and applied AI."},
+    position: [20, 1, -4], radius: 8.5, color: "#5ad7ff", secondaryColor: "#d9f7ff", pattern: "network"},
+  {id: "experience-impact", title: {pt: "Experiência & Impacto", en: "Experience & Impact"},
+    description: {pt: "Contexto profissional e impacto de sistemas no mundo real.", en: "Professional context and the impact of real-world systems."},
+    position: [0, -14, 2], radius: 6, color: "#75b7c9", secondaryColor: "#d9f1f5", pattern: "topology"},
+  {id: "education-research", title: {pt: "Formação & Pesquisa", en: "Education & Research"},
+    description: {pt: "Engenharia de Software, pesquisa e suas conexões com projetos.", en: "Software Engineering, research and their connections to projects."},
+    position: [-18, 1, -6], radius: 6, color: "#8f8cff", secondaryColor: "#dbd9ff", pattern: "helix"},
+  {id: "talks-community", title: {pt: "Palestras & Comunidade", en: "Talks & Community"},
+    description: {pt: "Conhecimento compartilhado em palestras, encontros e mentoria.", en: "Knowledge shared through talks, gatherings and mentoring."},
+    position: [-1, 14, -6], radius: 6, color: "#ffad66", secondaryColor: "#ffe2bd", pattern: "pulse"},
+];
 
 export const clusterById = Object.fromEntries(
   clusters.map((cluster) => [cluster.id, cluster]),
@@ -96,16 +43,16 @@ export function getNodePosition(
   const cluster = clusterById[node.cluster];
   const hash = hashId(node.id);
   const safeTotal = Math.max(total, 1);
-  const goldenAngle = Math.PI * (3 - Math.sqrt(5));
-  const angle = index * goldenAngle + ((hash % 360) * Math.PI) / 180;
-  const verticalBand = ((hash % 1000) / 999 - 0.5) * cluster.radius * 0.9;
-  const radialVariation = 0.52 + ((hash >>> 10) % 100) / 250;
-  const radialDistance = cluster.radius * radialVariation;
-  const distributionOffset = (index / safeTotal - 0.5) * 0.5;
+  // Share the angular phase so different ID hashes cannot crowd adjacent nodes.
+  const angle = index * Math.PI * 2 / safeTotal + ((hashId(cluster.id) % 360) * Math.PI) / 180;
+  const depth = ((hash % 1000) / 999 - 0.5) * cluster.radius * 0.65;
+  const radialVariation = 0.84 + ((hash >>> 10) % 100) / 625;
+  const importanceRadius = node.importance === "flagship" ? 0.8 : node.importance === "secondary" ? 1.1 : 1;
+  const radialDistance = cluster.radius * radialVariation * importanceRadius;
 
   return [
     cluster.position[0] + Math.cos(angle) * radialDistance,
-    cluster.position[1] + verticalBand + distributionOffset,
-    cluster.position[2] + Math.sin(angle) * radialDistance,
+    cluster.position[1] + Math.sin(angle) * radialDistance * 0.65,
+    cluster.position[2] + depth,
   ];
 }

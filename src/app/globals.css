@@ -741,3 +741,64 @@ button {
     transition-duration: 0.01ms !important;
   }
 }
+
+.project-focus-actions {
+  position: absolute;
+  bottom: 5rem;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transform: translateX(-50%);
+  pointer-events: auto;
+}
+.project-focus-actions .primary-action { margin: 0; white-space: nowrap; }
+.primary-action:disabled { opacity: 0.55; cursor: progress; }
+.text-action { padding: 0.75rem; border: 0; background: var(--surface-strong); color: var(--text-muted); cursor: pointer; }
+@media (max-width: 48rem) {
+  .project-focus-actions { bottom: 5rem; gap: 0.5rem; width: max-content; max-width: calc(100% - 2rem); }
+  .project-focus-actions .primary-action { padding: 0.75rem 1rem; font-size: 0.75rem; }
+  .text-action { font-size: 0.75rem; }
+}
+
+.identity-world-label { display: grid; gap: 0.5rem; width: max-content; max-width: 15rem; text-align: center; transition: opacity 400ms ease; }
+.identity-world-label strong { font-size: 0.875rem; font-weight: 550; letter-spacing: 0.16em; text-transform: uppercase; }
+.identity-world-label span { color: var(--signal-soft); font-size: 0.75rem; }
+.identity-world-label small { color: var(--text-muted); font-size: 0.625rem; }
+
+.semantic-satellite { display: block; padding: 0.25rem 0.5rem; width: max-content; max-width: 12rem; border-bottom: 1px solid var(--line); background: rgba(2, 6, 10, 0.55); color: var(--text-muted); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 0.625rem; letter-spacing: 0.025em; pointer-events: none; }
+.semantic-satellite--metric { color: var(--signal-soft); }
+@media (max-width: 48rem) {
+  .identity-world-label strong { font-size: 0.75rem; }
+  .identity-world-label span { font-size: 0.625rem; }
+  .semantic-satellite { max-width: 7rem; font-size: 0.5625rem; text-align: center; }
+}
+
+.case-note, .case-metadata, .case-visual-caption { color: var(--text-muted); font-size: 0.75rem; line-height: 1.65; }
+.case-note { margin-top: 1.25rem; padding-left: 0.75rem; border-left: 1px solid var(--line-strong); }
+.case-metadata { color: var(--signal-soft); }
+.case-visual-caption { margin: 0; padding: 0.75rem 1.5rem; border-bottom: 1px solid var(--line); }
+.case-relations { display: grid !important; }
+.case-relations li { padding: 0; }
+.case-relations button { display: grid; gap: 0.5rem; width: 100%; border: 0; padding: 0.75rem; text-align: left; background: transparent; color: var(--text); cursor: pointer; }
+.case-relations small { color: var(--text-muted); }
+.case-gallery figure { margin: 1rem 0; }
+.case-gallery img { width: 100%; height: auto; }
+.case-gallery figcaption { color: var(--text-muted); font-size: 0.75rem; }
+
+.explore-action { min-height: 2.25rem; border: 1px solid var(--line); border-radius: 0.2rem; padding: 0.5rem 0.75rem; background: var(--surface); color: var(--signal-soft); font-size: 0.6875rem; cursor: pointer; }
+.semantic-explorer { width: min(64rem, calc(100vw - 3rem)); max-height: calc(100svh - 3rem); padding: 2rem; border: 1px solid var(--line-strong); background: var(--surface-strong); color: var(--text); overscroll-behavior: contain; }
+.semantic-explorer::backdrop { background: rgba(0, 5, 9, 0.78); backdrop-filter: blur(0.25rem); }
+.semantic-explorer .dialog-close { position: sticky; float: right; top: 0; }
+.semantic-explorer .fallback-map { position: static; }
+.semantic-explorer .fallback-map__header h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); }
+.semantic-explorer .fallback-clusters { display: block; }
+.semantic-explorer .fallback-cluster { min-height: 0; margin-top: 1rem; }
+.semantic-explorer .fallback-nodes { display: none; }
+.semantic-explorer .fallback-cluster.is-selected .fallback-nodes { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); }
+.fallback-node__summary { display: block; padding: 0.75rem; color: var(--text-muted); font-size: 0.75rem; line-height: 1.5; text-align: left; }
+@media (max-width: 48rem) {
+  .hud-actions { gap: 0.375rem; }
+  .explore-action { position: fixed; top: 4rem; right: 1rem; }
+  .semantic-explorer { width: calc(100vw - 1rem); max-height: calc(100svh - 1rem); padding: 1rem; }
+}

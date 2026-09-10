@@ -8,29 +8,41 @@ import type {AppLocale} from "@/i18n/routing";
 import {resolveLocalizedText} from "@/lib/portfolio-types";
 import type {PortfolioNode} from "@/lib/portfolio-types";
 
+import type {GraphTarget} from "@/lib/portfolio-graph";
+import {CaseEvidence} from "./CaseEvidence";
 import {ProceduralCover} from "./ProceduralCover";
 
 type NodeDetailsPanelProps = {
   node: PortfolioNode;
   locale: AppLocale;
   onClose: () => void;
+  onNavigate: (target: GraphTarget) => void;
 };
 
-export function NodeDetailsPanel({node, locale, onClose}: NodeDetailsPanelProps) {
+export function NodeDetailsPanel({node, locale, onClose, onNavigate}: NodeDetailsPanelProps) {
   const t = useTranslations("Details");
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const restoreFocusRef = useRef<HTMLElement | null>(null);
+  const navigatingRef = useRef(false);
   const [imageFailed, setImageFailed] = useState(false);
   const cluster = clusterById[node.cluster];
   const title = resolveLocalizedText(node.title, locale);
 
   useEffect(() => {
     const dialog = dialogRef.current;
-    restoreFocusRef.current = document.activeElement as HTMLElement | null;
+    navigatingRef.current = false;
     setImageFailed(false);
     if (dialog && !dialog.open) dialog.showModal();
 
-    return () => restoreFocusRef.current?.focus();
+    return () => {
+      requestAnimationFrame(() => {
+        // The case action unmounts while the dialog is open, so activeElement
+        // at effect time may already be the body in a production render.
+        const opener = document.getElementById("open-case-action");
+        const destination = navigatingRef.current || !opener || opener.matches(":disabled")
+          ? document.getElementById("career-explorer-action") : opener;
+        destination?.focus();
+      });
+    };
   }, [node.id]);
 
   return (
@@ -39,6 +51,7 @@ export function NodeDetailsPanel({node, locale, onClose}: NodeDetailsPanelProps)
       className="node-dialog"
       aria-labelledby="node-dialog-title"
       onClose={onClose}
+      onCancel={(event) => {event.preventDefault(); event.stopPropagation(); dialogRef.current?.close();}}
     >
       <div className="node-dialog__inner">
         <button
@@ -67,6 +80,7 @@ export function NodeDetailsPanel({node, locale, onClose}: NodeDetailsPanelProps)
           )}
         </div>
 
+        {(!node.image || imageFailed || node.image.category === "conceptual" || node.confidential) && <p className="case-visual-caption">{t("conceptual")}</p>}
         <div className="node-dialog__content">
           <p className="eyebrow">
             {t("cluster")} / {resolveLocalizedText(cluster.title, locale)}
@@ -77,41 +91,10 @@ export function NodeDetailsPanel({node, locale, onClose}: NodeDetailsPanelProps)
             {resolveLocalizedText(node.description, locale)}
           </p>
 
-          <section className="node-taxonomy" aria-labelledby="technology-title">
-            <h3 id="technology-title">{t("technologies")}</h3>
-            <ul>
-              {node.technologies.map((technology) => (
-                <li key={technology}>{technology}</li>
-              ))}
-            </ul>
-          </section>
-
-          <section className="node-taxonomy" aria-labelledby="tags-title">
-            <h3 id="tags-title">{t("tags")}</h3>
-            <ul>
-              {node.tags.map((tag) => <li key={tag}>{tag}</li>)}
-            </ul>
-          </section>
-
-          {node.links && node.links.length > 0 && (
-            <section className="node-links" aria-labelledby="links-title">
-              <h3 id="links-title">{t("links")}</h3>
-              {node.links.map((link) => {
-                const label = resolveLocalizedText(link.label, locale);
-                return (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={t("openLink", {label})}
-                  >
-                    {label} <span aria-hidden="true">↗</span>
-                  </a>
-                );
-              })}
-            </section>
-          )}
+          <CaseEvidence node={node} locale={locale} onNavigate={(target) => {
+            navigatingRef.current = true;
+            onNavigate(target);
+          }} />
         </div>
       </div>
     </dialog>

@@ -9,7 +9,7 @@
     "role": "Engenheiro de IA e Engenheiro de Software",
     "statement": "Transformando dados complexos em sistemas inteligentes para o mundo real.",
     "enter": "ENTRAR NO ESPAÇO VETORIAL",
-    "status": "Cinco clusters de conhecimento disponíveis"
+    "status": "Quatro clusters de carreira para explorar"
   },
   "Gateway": {
     "eyebrow": "PORTAL DE IDIOMA",
@@ -27,7 +27,7 @@
     "returnOverview": "Voltar à visão geral",
     "centerView": "Centralizar visão",
     "location": "Localização no espaço vetorial",
-    "navigationHint": "Aponte e role para revelar · Clique para abrir · Shift + arraste para mover",
+    "navigationHint": "Clique na capa ou resumo para abrir · Role para explorar · H para centralizar",
     "previousCluster": "Cluster anterior",
     "nextCluster": "Próximo cluster",
     "reducedMotion": "Reduzir movimento",
@@ -35,7 +35,12 @@
     "qualityHigh": "alta",
     "qualityMedium": "média",
     "qualityLow": "baixa",
-    "selectLanguage": "Mudar idioma"
+    "selectLanguage": "Mudar idioma",
+    "openCase": "Abrir case",
+    "backCluster": "Voltar ao cluster",
+    "approaching": "Aproximando do projeto…",
+    "explore": "Explorar carreira",
+    "closeExplorer": "Fechar exploração de carreira"
   },
   "Details": {
     "close": "Fechar detalhes do projeto",
@@ -43,13 +48,42 @@
     "technologies": "Tecnologias",
     "tags": "Sinais",
     "links": "Referências",
-    "openLink": "Abrir {label} em uma nova aba"
+    "openLink": "Abrir {label} em uma nova aba",
+    "provisional": "Case em construção. As evidências detalhadas serão adicionadas em uma próxima etapa.",
+    "provisionalMetrics": "Estes são sinais provisórios deste projeto, fornecidos para o protótipo; os resultados e suas evidências serão documentados no case completo.",
+    "conceptual": "Visualização conceitual · não é uma captura do produto",
+    "context": "Contexto do projeto",
+    "related": "Contexto conectado",
+    "gallery": "Evidências visuais",
+    "problem": "Problema",
+    "solution": "Solução",
+    "myRole": "Meu papel",
+    "impact": "Impacto",
+    "roles": {
+      "speaker": "Palestrante",
+      "workshop-host": "Facilitador de workshop",
+      "mentor": "Mentor",
+      "panelist": "Painelista",
+      "attendee": "Participante"
+    },
+    "relations": {
+      "built-at": "Desenvolvido em",
+      "uses": "Utiliza",
+      "related-to": "Relacionado a",
+      "produced": "Produziu",
+      "thesis-of": "Trabalho de conclusão em",
+      "impact": "Impacto em",
+      "presented-at": "Apresentado em",
+      "research": "Contexto de pesquisa"
+    }
   },
   "Fallback": {
     "eyebrow": "MAPA VETORIAL ACESSÍVEL",
     "title": "O mapa semântico continua disponível",
     "description": "O WebGL não está disponível neste dispositivo. Navegue pelos mesmos clusters e itens do portfólio abaixo.",
-    "openNode": "Inspecionar {title}"
+    "openNode": "Inspecionar {title}",
+    "explore": "Explore as conexões da carreira",
+    "empty": "Esta região está pronta para o próximo capítulo."
   },
   "Canvas": {
     "label": "Espaço vetorial profissional interativo",

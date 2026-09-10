@@ -15,10 +15,13 @@ import {BufferAttribute, Group, Points, Vector3} from "three";
 import {clusters} from "@/content/clusters";
 import {portfolioNodePositions, portfolioNodes} from "@/content/nodes";
 import {qualitySettings} from "@/lib/performance-quality";
+import {isSatelliteRelevant} from "@/lib/satellite-layout";
 import {imageFormationConfig} from "@/lib/scene-config";
 import {prioritizeWorldIntersections} from "@/lib/world-interaction";
+import {isUniverseStage} from "@/lib/portfolio-types";
 import {useExperienceStore} from "@/store/experience-store";
 
+import {IdentityNode} from "./IdentityNode";
 import {CameraRig} from "./CameraRig";
 import {PortfolioNodeMesh} from "./PortfolioNodeMesh";
 import {QueryProbe} from "./QueryProbe";
@@ -118,8 +121,10 @@ function sameIds(current: ReadonlySet<string>, next: ReadonlySet<string>) {
 
 function PreviewBudgetTracker({
   activeIdsRef,
+  microUniverseIdRef,
 }: {
   activeIdsRef: RefObject<ReadonlySet<string>>;
+  microUniverseIdRef: RefObject<string | null>;
 }) {
   const quality = useExperienceStore((state) => state.quality);
   const selectedNodeId = useExperienceStore((state) => state.selectedNodeId);
@@ -138,7 +143,7 @@ function PreviewBudgetTracker({
         ),
       }))
       .filter(({id, distance}) => (
-        id === selectedNodeId || distance <= imageFormationConfig.fragmentsDistance + 2
+        selectedNodeId ? id === selectedNodeId : distance <= imageFormationConfig.fragmentsDistance + 2
       ))
       .sort((left, right) => {
         if (left.id === selectedNodeId) return -1;
@@ -148,6 +153,10 @@ function PreviewBudgetTracker({
       .slice(0, imageFormationConfig[quality].activeNodeLimit);
     const nextIds = new Set(candidates.map(({id}) => id));
     if (!sameIds(activeIdsRef.current, nextIds)) activeIdsRef.current = nextIds;
+    const localCandidate = candidates.find(({id, distance}) =>
+      isSatelliteRelevant(distance, microUniverseIdRef.current === id, id === selectedNodeId)
+      && portfolioNodes.some((node) => node.id === id && node.satellites?.length));
+    microUniverseIdRef.current = localCandidate?.id ?? null;
   });
 
   return null;
@@ -155,12 +164,33 @@ function PreviewBudgetTracker({
 
 function Scene({onUnavailable}: UniverseCanvasProps) {
   const activePreviewIdsRef = useRef<ReadonlySet<string>>(new Set());
+  const microUniverseIdRef = useRef<string | null>(null);
   const stage = useExperienceStore((state) => state.stage);
   const locale = useExperienceStore((state) => state.locale);
   const quality = useExperienceStore((state) => state.quality);
   const showGateway = stage === "language-selection" || stage === "entering";
-  const showUniverse = stage === "overview" || stage === "cluster-focus" || stage === "node-details";
-  return <><fog attach="fog" args={["#02060a", 24, 68]} /><ambientLight intensity={0.4} /><DataField />{showGateway && <LanguageGalaxies />}{showUniverse && <><PreviewBudgetTracker activeIdsRef={activePreviewIdsRef} />{clusters.map((cluster) => <SemanticCluster key={cluster.id} cluster={cluster} locale={locale} />)}{portfolioNodes.map((node) => <PortfolioNodeMesh activePreviewIdsRef={activePreviewIdsRef} key={node.id} node={node} position={portfolioNodePositions[node.id]} />)}</>} {stage === "entering" && <QueryProbe />}<CameraRig /><AdaptiveDpr pixelated={quality === "low"} /><ContextLossListener onUnavailable={onUnavailable} /></>;
+  const showUniverse = isUniverseStage(stage);
+  return (
+    <>
+      <fog attach="fog" args={["#02060a", 24, 68]} />
+      <ambientLight intensity={0.4} />
+      <DataField />
+      {showGateway && <LanguageGalaxies />}
+      {showUniverse && <>
+        <IdentityNode />
+        <PreviewBudgetTracker activeIdsRef={activePreviewIdsRef} microUniverseIdRef={microUniverseIdRef} />
+        {clusters.map((cluster) => <SemanticCluster key={cluster.id} cluster={cluster} locale={locale} />)}
+        {portfolioNodes.map((node) => (
+          <PortfolioNodeMesh key={node.id} node={node} position={portfolioNodePositions[node.id]}
+            microUniverseIdRef={microUniverseIdRef} activePreviewIdsRef={activePreviewIdsRef} />
+        ))}
+      </>}
+      {stage === "entering" && <QueryProbe />}
+      <CameraRig />
+      <AdaptiveDpr pixelated={quality === "low"} />
+      <ContextLossListener onUnavailable={onUnavailable} />
+    </>
+  );
 }
 
 export default function UniverseCanvas({onUnavailable}: UniverseCanvasProps) {

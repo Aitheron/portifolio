@@ -1,6 +1,8 @@
 import {useTranslations} from "next-intl";
+import {useId} from "react";
 
 import {clusters} from "@/content/clusters";
+import {identity} from "@/content/identity";
 import {portfolioNodes} from "@/content/nodes";
 import type {AppLocale} from "@/i18n/routing";
 import {resolveLocalizedText} from "@/lib/portfolio-types";
@@ -11,26 +13,28 @@ import {ProceduralCover} from "./ProceduralCover";
 type VectorSpaceFallbackProps = {
   locale: AppLocale;
   webglUnavailable?: boolean;
+  onNavigate?: () => void;
 };
 
 export function VectorSpaceFallback({
   locale,
   webglUnavailable = false,
+  onNavigate,
 }: VectorSpaceFallbackProps) {
   const t = useTranslations("Fallback");
+  const titleId = useId();
   const selectedClusterId = useExperienceStore((state) => state.selectedClusterId);
   const focusCluster = useExperienceStore((state) => state.focusCluster);
-  const selectNode = useExperienceStore((state) => state.selectNode);
+  const focusNode = useExperienceStore((state) => state.focusNode);
 
   return (
-    <section className="fallback-map" aria-labelledby="fallback-title">
-      {webglUnavailable && (
+    <section className="fallback-map" aria-labelledby={titleId}>
         <header className="fallback-map__header">
           <p className="eyebrow">{t("eyebrow")}</p>
-          <h2 id="fallback-title">{t("title")}</h2>
-          <p>{t("description")}</p>
+          <h2 id={titleId}>{webglUnavailable ? t("title") : t("explore")}</h2>
+          <p>{resolveLocalizedText(identity.title, locale)} · {resolveLocalizedText(identity.primaryRole, locale)} · {resolveLocalizedText(identity.secondaryRole, locale)}</p>
+          {webglUnavailable && <p>{t("description")}</p>}
         </header>
-      )}
 
       <div className="fallback-clusters">
         {clusters.map((cluster) => {
@@ -61,6 +65,7 @@ export function VectorSpaceFallback({
               </h3>
 
               <div className="fallback-nodes">
+                {nodes.length === 0 && <p className="case-note">{t("empty")}</p>}
                 {nodes.map((node) => {
                   const title = resolveLocalizedText(node.title, locale);
                   return (
@@ -68,10 +73,11 @@ export function VectorSpaceFallback({
                       type="button"
                       className="fallback-node"
                       key={node.id}
-                      onClick={() => selectNode(node.id, node.cluster)}
+                      onClick={() => {focusNode(node.id, node.cluster, webglUnavailable); onNavigate?.();}}
                       aria-label={t("openNode", {title})}
                     >
                       <ProceduralCover node={node} locale={locale} compact />
+                      <span className="fallback-node__summary">{resolveLocalizedText(node.summary, locale)}</span>
                     </button>
                   );
                 })}

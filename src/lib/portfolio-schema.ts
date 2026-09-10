@@ -1,6 +1,6 @@
 import {z} from "zod";
 
-import {clusterIds, nodeKinds, visualVariants} from "./portfolio-types";
+import {clusterIds, nodeKinds, participationRoles, relationTypes, visualVariants} from "./portfolio-types";
 import type {PortfolioNode} from "./portfolio-types";
 
 const localizedTextSchema = z
@@ -19,6 +19,11 @@ const secureUrlSchema = z
   .url()
   .refine((value) => new URL(value).protocol === "https:", "Expected an HTTPS URL");
 
+const portfolioImageSchema = z.object({
+  src: imageSourceSchema, alt: localizedTextSchema,
+  category: z.enum(["project", "conceptual", "event"]).optional(),
+}).strict();
+
 export const portfolioNodeSchema = z
   .object({
     id: z.string().trim().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
@@ -28,19 +33,37 @@ export const portfolioNodeSchema = z
     title: localizedTextSchema,
     summary: localizedTextSchema,
     description: localizedTextSchema,
-    image: z
-      .object({src: imageSourceSchema, alt: localizedTextSchema})
-      .strict()
-      .optional(),
-    technologies: z.array(z.string().trim().min(1)).min(1),
-    tags: z.array(z.string().trim().min(1)),
+    image: portfolioImageSchema.optional(),
+    gallery: z.array(portfolioImageSchema).max(8).optional(),
+    importance: z.enum(["flagship", "primary", "secondary"]).default("primary"),
+    participationRole: z.enum(participationRoles).optional(),
+    provisional: z.boolean().optional(),
+    confidential: z.boolean().optional(),
+    year: z.string().trim().min(1).optional(),
+    status: localizedTextSchema.optional(),
+    projectType: localizedTextSchema.optional(),
+    company: z.string().trim().min(1).optional(),
+    problem: localizedTextSchema.optional(),
+    solution: localizedTextSchema.optional(),
+    myRole: localizedTextSchema.optional(),
+    impact: localizedTextSchema.optional(),
+    relations: z.array(z.object({targetId: z.string().min(1), type: z.enum(relationTypes)}).strict()).default([]),
+    satellites: z.array(z.object({
+      id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+      type: z.enum(["technology", "concept", "metric", "domain"]),
+      label: localizedTextSchema,
+      importance: z.number().min(0).max(1).optional(),
+      relationTargetId: z.string().min(1).optional(),
+    }).strict()).max(7).default([]),
+    technologies: z.array(z.string().trim().min(1)).default([]),
+    tags: z.array(z.string().trim().min(1)).default([]),
     links: z
       .array(
         z
           .object({
             label: localizedTextSchema,
             href: secureUrlSchema,
-            type: z.enum(["website", "github", "article", "video"]),
+            type: z.enum(["website", "github", "article", "video", "document"]),
           })
           .strict(),
       )
@@ -61,7 +84,6 @@ export const portfolioNodeSchema = z
         })
         .strict(),
     ]),
-    relationships: z.array(z.string().trim().min(1)).optional(),
   })
   .strict();
 
@@ -90,7 +112,7 @@ export function validatePortfolioNodes(input: readonly unknown[]): PortfolioNode
     }
   });
 
-  const ids = new Set<string>();
+  const ids = new Set<string>(["marlon", ...clusterIds]);
   const slugs = new Set<string>();
 
   for (const node of validNodes) {
@@ -101,10 +123,23 @@ export function validatePortfolioNodes(input: readonly unknown[]): PortfolioNode
   }
 
   for (const node of validNodes) {
-    for (const relationship of node.relationships ?? []) {
-      if (!ids.has(relationship)) {
-        errors.push(`${node.id}: relationship target ${relationship} does not exist`);
-      }
+    const relationKeys = new Set<string>();
+    for (const {targetId, type} of node.relations ?? []) {
+      const key = `${type}:${targetId}`;
+      if (relationKeys.has(key)) errors.push(`${node.id}: duplicate relation ${key}`);
+      relationKeys.add(key);
+    }
+    const satelliteIds = new Set<string>();
+    for (const satellite of node.satellites ?? []) {
+      if (satelliteIds.has(satellite.id)) errors.push(`${node.id}: duplicate satellite ${satellite.id}`);
+      satelliteIds.add(satellite.id);
+    }
+    const targets = [
+      ...(node.relations ?? []).map(({targetId}) => targetId),
+      ...(node.satellites ?? []).flatMap(({relationTargetId}) => relationTargetId ? [relationTargetId] : []),
+    ];
+    for (const target of targets) {
+      if (!ids.has(target)) errors.push(`${node.id}: relationship target ${target} does not exist`);
     }
   }
 

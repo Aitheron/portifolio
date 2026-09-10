@@ -1,0 +1,106 @@
+import type {PortfolioNode} from "@/lib/portfolio-types";
+
+export default {
+  "id": "aitheron",
+  "slug": "aitheron",
+  "kind": "project",
+  "cluster": "key-projects",
+  "title": {
+    "pt": "Aitheron",
+    "en": "Aitheron"
+  },
+  "summary": {
+    "pt": "IA aplicada à classificação de patogenicidade de BRCA1 / BRCA2.",
+    "en": "AI-assisted BRCA1 / BRCA2 pathogenicity classification."
+  },
+  "description": {
+    "pt": "Descrição provisória. O case detalhado e suas evidências serão adicionados em uma próxima etapa.",
+    "en": "Provisional description. The detailed case and its evidence will be added in a later content pass."
+  },
+  "projectType": {
+    "pt": "Flagship acadêmico / pessoal",
+    "en": "Academic / personal flagship"
+  },
+  "importance": "flagship",
+  "provisional": true,
+  "confidential": false,
+  "technologies": [
+    "PyTorch",
+    "FastAPI"
+  ],
+  "tags": [],
+  "satellites": [
+    {
+      "id": "brca",
+      "type": "domain",
+      "label": {
+        "pt": "BRCA1 / BRCA2",
+        "en": "BRCA1 / BRCA2"
+      },
+      "importance": 1
+    },
+    {
+      "id": "pytorch",
+      "type": "technology",
+      "label": {
+        "pt": "PyTorch",
+        "en": "PyTorch"
+      },
+      "importance": 0.95
+    },
+    {
+      "id": "genomic-ai",
+      "type": "domain",
+      "label": {
+        "pt": "IA Genômica",
+        "en": "Genomic AI"
+      },
+      "importance": 0.9
+    },
+    {
+      "id": "research",
+      "type": "concept",
+      "label": {
+        "pt": "Pesquisa",
+        "en": "Research"
+      },
+      "importance": 0.85
+    },
+    {
+      "id": "auroc",
+      "type": "metric",
+      "label": {
+        "pt": "AUROC 0.99+",
+        "en": "AUROC 0.99+"
+      },
+      "importance": 0.8
+    },
+    {
+      "id": "fastapi",
+      "type": "technology",
+      "label": {
+        "pt": "FastAPI",
+        "en": "FastAPI"
+      },
+      "importance": 0.7
+    }
+  ],
+  "relations": [
+    {
+      "targetId": "software-engineering",
+      "type": "thesis-of"
+    },
+    {
+      "targetId": "education-research",
+      "type": "research"
+    }
+  ],
+  "visual": {
+    "variant": "genomic-nebula",
+    "size": 1.12,
+    "intensity": 1
+  },
+  "position": {
+    "mode": "auto"
+  }
+} satisfies PortfolioNode;

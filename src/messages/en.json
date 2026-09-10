@@ -9,7 +9,7 @@
     "role": "AI Engineer & Software Engineer",
     "statement": "Turning complex data into intelligent real-world systems.",
     "enter": "ENTER VECTOR SPACE",
-    "status": "Five knowledge clusters available"
+    "status": "Four career clusters to explore"
   },
   "Gateway": {
     "eyebrow": "LANGUAGE GATEWAY",
@@ -27,7 +27,7 @@
     "returnOverview": "Return to overview",
     "centerView": "Center view",
     "location": "Location in vector space",
-    "navigationHint": "Point and scroll to reveal · Click to open · Shift + drag to move",
+    "navigationHint": "Click a cover or summary to open · Scroll to explore · H to center",
     "previousCluster": "Previous cluster",
     "nextCluster": "Next cluster",
     "reducedMotion": "Reduce motion",
@@ -35,7 +35,12 @@
     "qualityHigh": "high",
     "qualityMedium": "medium",
     "qualityLow": "low",
-    "selectLanguage": "Change language"
+    "selectLanguage": "Change language",
+    "openCase": "Open case",
+    "backCluster": "Back to cluster",
+    "approaching": "Approaching project…",
+    "explore": "Explore career",
+    "closeExplorer": "Close career explorer"
   },
   "Details": {
     "close": "Close project details",
@@ -43,13 +48,42 @@
     "technologies": "Technologies",
     "tags": "Signals",
     "links": "References",
-    "openLink": "Open {label} in a new tab"
+    "openLink": "Open {label} in a new tab",
+    "provisional": "Case in progress. Detailed evidence will be added in a later content pass.",
+    "provisionalMetrics": "These are provisional, project-specific signals supplied for this prototype; the supporting results will be documented in the full case.",
+    "conceptual": "Conceptual visualization · not a product screenshot",
+    "context": "Project context",
+    "related": "Connected context",
+    "gallery": "Visual evidence",
+    "problem": "Problem",
+    "solution": "Solution",
+    "myRole": "My role",
+    "impact": "Impact",
+    "roles": {
+      "speaker": "Speaker",
+      "workshop-host": "Workshop host",
+      "mentor": "Mentor",
+      "panelist": "Panelist",
+      "attendee": "Attendee"
+    },
+    "relations": {
+      "built-at": "Built at",
+      "uses": "Uses",
+      "related-to": "Related to",
+      "produced": "Produced",
+      "thesis-of": "Thesis in",
+      "impact": "Impact in",
+      "presented-at": "Presented at",
+      "research": "Research context"
+    }
   },
   "Fallback": {
     "eyebrow": "ACCESSIBLE VECTOR MAP",
     "title": "The semantic map remains available",
     "description": "WebGL is unavailable on this device. Navigate the same clusters and portfolio nodes below.",
-    "openNode": "Inspect {title}"
+    "openNode": "Inspect {title}",
+    "explore": "Explore the career graph",
+    "empty": "This region is ready for the next chapter."
   },
   "Canvas": {
     "label": "Interactive professional vector space",

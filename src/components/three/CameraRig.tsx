@@ -7,7 +7,7 @@ import {MathUtils, TOUCH, Vector3} from "three";
 import {clusterById} from "@/content/clusters";
 import {portfolioNodePositions} from "@/content/nodes";
 import {getNavigationContext, navigationConfig} from "@/lib/scene-config";
-import {resolveElasticBoundaryRadius} from "@/lib/scene-navigation";
+import {resolveElasticBoundaryRadius, shouldReleaseFocus} from "@/lib/scene-navigation";
 import {useExperienceStore} from "@/store/experience-store";
 
 const overviewTarget = new Vector3(0, 0, 0);
@@ -18,6 +18,9 @@ export function CameraRig() {
   const controlsRef = useRef<OrbitControlsImpl>(null);
   const navigatingRef = useRef(true);
   const camera = useThree((state) => state.camera);
+  const gl = useThree((state) => state.gl);
+  const outwardInputRef = useRef(0);
+  const pinchDistanceRef = useRef(0);
   const viewportWidth = useThree((state) => state.size.width);
   const stage = useExperienceStore((state) => state.stage);
   const selectedClusterId = useExperienceStore((state) => state.selectedClusterId);
@@ -28,7 +31,7 @@ export function CameraRig() {
   const cameraResetRevision = useExperienceStore((state) => state.cameraResetRevision);
   const context = getNavigationContext(stage);
   const profile = navigationConfig[context];
-  const canExplore = stage === "overview" || stage === "cluster-focus";
+  const canExplore = stage === "overview" || stage === "cluster-focus" || stage === "node-focus";
 
   const destinations = useMemo(() => {
     const position = new Vector3().fromArray(navigationConfig.overview.cameraOffset);
@@ -44,12 +47,12 @@ export function CameraRig() {
       const cluster = clusterById[selectedClusterId];
       target.fromArray(cluster.position);
       position.addVectors(target, new Vector3().fromArray(navigationConfig.cluster.cameraOffset));
-    } else if (stage === "node-details" && selectedNodeId) {
+    } else if ((stage === "node-details" || stage === "node-focus") && selectedNodeId) {
       const nodePosition = portfolioNodePositions[selectedNodeId];
       if (nodePosition) {
         target.fromArray(nodePosition);
-        if (viewportWidth > 768) target.x += navigationConfig.nodeCompositionOffset;
-        position.addVectors(target, new Vector3().fromArray(navigationConfig.node.cameraOffset));
+        if (stage === "node-details" && viewportWidth > 768) target.x += navigationConfig.nodeCompositionOffset;
+        position.addVectors(target, new Vector3().fromArray(stage === "node-focus" ? navigationConfig.nodeFocusOffset : navigationConfig.node.cameraOffset));
       }
     }
 
@@ -58,8 +61,35 @@ export function CameraRig() {
 
   useEffect(() => {
     navigatingRef.current = true;
+    outwardInputRef.current = 0;
     if (controlsRef.current) controlsRef.current.enabled = false;
   }, [destinations]);
+
+  useEffect(() => {
+    const canvas = gl.domElement;
+    const wheel = (event: WheelEvent) => {
+      outwardInputRef.current = event.deltaY > 0 ? performance.now() + 180 : 0;
+    };
+    const touch = (event: TouchEvent) => {
+      if (event.touches.length !== 2) {pinchDistanceRef.current = 0; return;}
+      const [a, b] = event.touches;
+      const distance = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+      if (pinchDistanceRef.current && distance < pinchDistanceRef.current - 1) {
+        outwardInputRef.current = performance.now() + 180;
+      }
+      pinchDistanceRef.current = distance;
+    };
+    canvas.addEventListener("wheel", wheel, {passive: true});
+    canvas.addEventListener("touchstart", touch, {passive: true});
+    canvas.addEventListener("touchmove", touch, {passive: true});
+    canvas.addEventListener("touchend", touch, {passive: true});
+    return () => {
+      canvas.removeEventListener("wheel", wheel);
+      canvas.removeEventListener("touchstart", touch);
+      canvas.removeEventListener("touchmove", touch);
+      canvas.removeEventListener("touchend", touch);
+    };
+  }, [gl]);
 
   useFrame((_, delta) => {
     const damping = reducedMotion
@@ -84,12 +114,22 @@ export function CameraRig() {
         controls.target.copy(destinations.target);
         controls.enabled = canExplore;
         controls.update();
+        if (stage === "node-focus" && selectedNodeId) {
+          useExperienceStore.getState().completeNodeFocus(selectedNodeId);
+        }
       }
       return;
     }
 
     if (!controls || !canExplore) return;
     controls.enabled = true;
+
+    if (shouldReleaseFocus(stage, camera.position.distanceTo(controls.target),
+      performance.now() < outwardInputRef.current, navigatingRef.current)) {
+      outwardInputRef.current = 0;
+      useExperienceStore.getState().navigateBack();
+      return;
+    }
 
     const targetWorldDistance = controls.target.length();
     const boundedTargetDistance = resolveElasticBoundaryRadius(

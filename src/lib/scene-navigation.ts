@@ -4,15 +4,26 @@ export type ElasticBoundary = {
   softRadius: number;
 };
 
+export const focusReleaseDistance = {node: 14, cluster: 24} as const;
+
+export function shouldReleaseFocus(
+  stage: string, distance: number, zoomingOut: boolean, arriving: boolean,
+): boolean {
+  if (!zoomingOut || arriving) return false;
+  if (stage === "node-focus") return distance >= focusReleaseDistance.node;
+  if (stage === "cluster-focus") return distance >= focusReleaseDistance.cluster;
+  return false;
+}
+
 export const navigationBoundaries = {
   camera: {
-    softRadius: 48,
-    hardRadius: 58,
+    softRadius: 64,
+    hardRadius: 78,
     correctionStrength: 2.8,
   },
   target: {
-    softRadius: 22,
-    hardRadius: 28,
+    softRadius: 32,
+    hardRadius: 40,
     correctionStrength: 3.4,
   },
 } satisfies Record<"camera" | "target", ElasticBoundary>;
