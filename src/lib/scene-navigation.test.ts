@@ -8,6 +8,9 @@ import {
 } from "./scene-navigation";
 
 test("releases only during outward user zoom beyond a reachable focus boundary", () => {
+  assert.equal(shouldReleaseFocus("identity-focus", 15, true, false), true);
+  assert.equal(shouldReleaseFocus("identity-focus", 11, true, false), false);
+  assert.equal(shouldReleaseFocus("identity-focus", 15, true, true), false);
   assert.equal(shouldReleaseFocus("node-focus", 15, true, false), true);
   assert.equal(shouldReleaseFocus("node-focus", 9, true, false), false);
   assert.equal(shouldReleaseFocus("cluster-focus", 25, true, false), true);

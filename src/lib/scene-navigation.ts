@@ -10,7 +10,7 @@ export function shouldReleaseFocus(
   stage: string, distance: number, zoomingOut: boolean, arriving: boolean,
 ): boolean {
   if (!zoomingOut || arriving) return false;
-  if (stage === "node-focus") return distance >= focusReleaseDistance.node;
+  if (stage === "node-focus" || stage === "identity-focus") return distance >= focusReleaseDistance.node;
   if (stage === "cluster-focus") return distance >= focusReleaseDistance.cluster;
   return false;
 }

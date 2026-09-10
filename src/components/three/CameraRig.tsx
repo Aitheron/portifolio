@@ -5,6 +5,7 @@ import type {OrbitControls as OrbitControlsImpl} from "three-stdlib";
 import {MathUtils, TOUCH, Vector3} from "three";
 
 import {clusterById} from "@/content/clusters";
+import {identity} from "@/content/identity";
 import {portfolioNodePositions} from "@/content/nodes";
 import {getNavigationContext, navigationConfig} from "@/lib/scene-config";
 import {resolveElasticBoundaryRadius, shouldReleaseFocus} from "@/lib/scene-navigation";
@@ -34,7 +35,7 @@ export function CameraRig() {
   const cameraResetRevision = useExperienceStore((state) => state.cameraResetRevision);
   const context = getNavigationContext(stage);
   const profile = navigationConfig[context];
-  const canExplore = stage === "overview" || stage === "cluster-focus" || stage === "node-focus";
+  const canExplore = stage === "overview" || stage === "cluster-focus" || stage === "node-focus" || stage === "identity-focus";
   useAutomaticProjectFocus(navigatingRef, inwardInputUntilRef);
 
   const destinations = useMemo(() => {
@@ -47,6 +48,9 @@ export function CameraRig() {
       const direction = languageSignal === "pt" ? -1 : 1;
       position.set(direction * 5.5, 1.5, 15);
       target.set(direction * 8, 0, 0);
+    } else if (stage === "identity-focus") {
+      target.fromArray(identity.position);
+      position.addVectors(target, new Vector3().fromArray(navigationConfig.nodeFocusOffset));
     } else if (stage === "cluster-focus" && selectedClusterId) {
       const cluster = clusterById[selectedClusterId];
       target.fromArray(cluster.position);

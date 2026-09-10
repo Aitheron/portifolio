@@ -111,7 +111,7 @@ export function VectorSpaceExperience({locale}: VectorSpaceExperienceProps) {
 
   const navigateToTarget = (target: GraphTarget) => {
     const state = useExperienceStore.getState();
-    if (target.kind === "identity") state.returnToOverview();
+    if (target.kind === "identity") state.focusIdentity();
     else if (target.kind === "cluster" && target.cluster) state.focusCluster(target.cluster);
     else if (target.cluster) state.focusNode(target.id, target.cluster, webglStatus === "unavailable");
   };

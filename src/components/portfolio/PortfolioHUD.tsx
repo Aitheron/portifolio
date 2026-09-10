@@ -31,7 +31,7 @@ export function PortfolioHUD({onLocaleChange, onExplore}: PortfolioHUDProps) {
     : -1;
   const currentLabel = selectedClusterId
     ? resolveLocalizedText(clusterById[selectedClusterId].title, locale)
-    : t("overview");
+    : stage === "identity-focus" ? resolveLocalizedText(identity.title, locale) : t("overview");
   const selectedNode = selectedNodeId
     ? portfolioNodes.find((node) => node.id === selectedNodeId)
     : undefined;

@@ -802,3 +802,36 @@ button {
   .explore-action { position: fixed; top: 4rem; right: 1rem; }
   .semantic-explorer { width: calc(100vw - 1rem); max-height: calc(100svh - 1rem); padding: 1rem; }
 }
+
+.identity-world-label { position: relative; }
+.identity-world-label--near { width: min(22rem, calc(100vw - 2rem)); max-width: none; }
+.identity-focus-trigger { display: grid; gap: 0.5rem; padding: 0.5rem; border: 0; background: transparent; color: var(--text); text-align: center; cursor: pointer; pointer-events: auto; }
+.identity-focus-trigger:hover strong { color: var(--signal); }
+.identity-summary { margin: 0; max-height: 0; overflow: hidden; opacity: 0; color: var(--text-muted); font-size: 0.75rem; line-height: 1.6; transition: opacity 400ms ease, max-height 400ms ease; }
+.identity-summary.is-visible { max-height: 6rem; opacity: 1; }
+.identity-actions { display: flex; flex-wrap: wrap; gap: 1rem; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 400ms ease, visibility 400ms; }
+.identity-actions.is-visible { opacity: 1; visibility: visible; }
+.identity-action { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.5rem; min-width: 5.5rem; min-height: 2.75rem; padding: 0.5rem; border: 1px solid transparent; border-radius: 0.25rem; color: var(--signal-soft); font-size: 0.75rem; text-decoration: none; touch-action: none; }
+.identity-actions.is-visible .identity-action { pointer-events: auto; }
+.identity-action:hover, .identity-action:focus-visible { border-color: var(--line-strong); background: var(--surface); }
+.identity-action .identity-action__indicator { display: grid; place-items: center; width: 1.75rem; height: 1.75rem; border: 1px solid var(--line-strong); border-radius: 50%; color: var(--signal); font: 0.75rem ui-monospace, monospace; }
+.identity-action--unavailable { cursor: default; }
+.identity-action--unavailable small { flex-basis: 100%; color: var(--text-muted); font-size: 0.625rem; text-align: center; }
+.identity-action--unavailable:hover { border-color: transparent; background: transparent; }
+.identity-actions--spatial { position: absolute; left: 50%; top: 0; width: min(42rem, calc(100vw - 2rem)); transform: translateX(-50%); }
+.identity-actions--spatial .identity-action { position: absolute; width: 7rem; }
+.identity-actions--spatial .identity-action:nth-child(1) { left: 0; top: -10rem; }
+.identity-actions--spatial .identity-action:nth-child(2) { right: 0; top: -10rem; }
+.identity-actions--spatial .identity-action:nth-child(3) { left: 12%; top: 10rem; }
+.identity-actions--spatial .identity-action:nth-child(4) { right: 12%; top: 10rem; }
+@media (max-width: 48rem) {
+  .identity-world-label--near .identity-focus-trigger strong { font-size: 0.875rem; }
+  .identity-world-label--near .identity-focus-trigger span { font-size: 0.75rem; }
+  .identity-actions--spatial .identity-action:nth-child(1),
+  .identity-actions--spatial .identity-action:nth-child(2) { top: -15rem; }
+  .identity-actions--spatial .identity-action:nth-child(3) { left: 5%; top: 10rem; }
+  .identity-actions--spatial .identity-action:nth-child(4) { right: 5%; top: 10rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .identity-summary, .identity-actions, .identity-world-label { transition: none; }
+}

@@ -9,6 +9,7 @@ import {resolveLocalizedText} from "@/lib/portfolio-types";
 import {useExperienceStore} from "@/store/experience-store";
 
 import {ProceduralCover} from "./ProceduralCover";
+import {IdentityActions} from "./IdentityActions";
 
 type VectorSpaceFallbackProps = {
   locale: AppLocale;
@@ -22,10 +23,13 @@ export function VectorSpaceFallback({
   onNavigate,
 }: VectorSpaceFallbackProps) {
   const t = useTranslations("Fallback");
+  const identityText = useTranslations("Identity");
   const titleId = useId();
   const selectedClusterId = useExperienceStore((state) => state.selectedClusterId);
   const focusCluster = useExperienceStore((state) => state.focusCluster);
   const focusNode = useExperienceStore((state) => state.focusNode);
+  const focusIdentity = useExperienceStore((state) => state.focusIdentity);
+  const stage = useExperienceStore((state) => state.stage);
 
   return (
     <section className="fallback-map" aria-labelledby={titleId}>
@@ -33,6 +37,11 @@ export function VectorSpaceFallback({
           <p className="eyebrow">{t("eyebrow")}</p>
           <h2 id={titleId}>{webglUnavailable ? t("title") : t("explore")}</h2>
           <p>{resolveLocalizedText(identity.title, locale)} · {resolveLocalizedText(identity.primaryRole, locale)} · {resolveLocalizedText(identity.secondaryRole, locale)}</p>
+          <button type="button" className="text-action" onClick={() => {focusIdentity(); onNavigate?.();}}>{identityText("focus")}</button>
+          {webglUnavailable && stage === "identity-focus" && <>
+            <p>{resolveLocalizedText(identity.summary, locale)}</p>
+            <IdentityActions locale={locale} visible labels={{contactActions: identityText("contactActions"), unavailable: identityText("unavailable")}} />
+          </>}
           {webglUnavailable && <p>{t("description")}</p>}
         </header>
 

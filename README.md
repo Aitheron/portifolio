@@ -24,7 +24,7 @@ npm start
 
 - `src/content/nodes`: um arquivo de dados serializáveis por item do portfólio.
 - `src/content/nodes/index.ts`: registro explícito que valida todos os itens com Zod.
-- `src/content/identity.ts`: identidade central e seus sinais semânticos.
+- `src/content/identity.ts`: identidade central, resumo, imagem opcional, sinais semânticos e ações de contato.
 - `src/content/clusters.ts`: posições, aparência e layout determinístico dos clusters.
 - `src/lib/portfolio-graph.ts`: índice derivado das entidades existentes, sem duplicar conteúdo.
 - `src/lib/satellite-layout.ts`: distribuição determinística, relevância e limites dos satélites.
@@ -60,6 +60,10 @@ Aitheron existe uma vez, mesmo quando acessado pela formação acadêmica. A exp
 Eventos usam `participationRole`: `speaker`, `workshop-host`, `mentor`, `panelist` ou `attendee`. Os exemplos de facilitador e ouvinte têm pesos diferentes; a presença em um evento não implica uma palestra.
 
 ## Conteúdo provisório
+
+O núcleo Marlon revela a imagem progressivamente usando o mesmo pipeline de fragmentação das capas. Clique no núcleo/nome ou use **Explorar carreira → Focar em Marlon** para aproximar; o resumo e as quatro ações aparecem perto do núcleo. `Escape`, zoom para fora e centralização retornam à visão geral. Os satélites semânticos permanecem ambientais desde a entrada.
+
+Configure `image: {src, alt: {pt, en}}` em `src/content/identity.ts` para substituir o placeholder procedural por uma foto. Em `actions`, configure `href` com HTTPS para LinkedIn/GitHub, `mailto:ENDERECO?subject=Contact%20from%20Marlon%27s%20Portfolio` para Email, ou um caminho interno (PDF/página) ou HTTPS para Currículo. URLs HTTPS abrem em outra aba por padrão, com `noopener noreferrer`; `external: false` permite abrir na mesma aba. Sem destino válido, a ação mostra **Em breve / Coming soon** e fica desabilitada. Nenhum contato, foto ou currículo fictício é fornecido.
 
 Os cinco nomes de projetos são reais; os textos, sinais e capas desta etapa são provisórios. `provisional` identifica cases ainda em construção. As métricas fornecidas para o protótipo permanecem no contexto do projeto e são identificadas como provisórias no case. Não foram inventados empregadores, instituições, URLs ou resultados adicionais.
 

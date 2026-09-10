@@ -18,6 +18,7 @@ type ExperienceState = {
   beginEntering: (locale: AppLocale) => void;
   completeEntering: () => void;
   focusCluster: (clusterId: ClusterId) => void;
+  focusIdentity: () => void;
   focusNode: (nodeId: string, clusterId: ClusterId, ready?: boolean) => void;
   completeNodeFocus: (nodeId: string) => void;
   openCase: () => void;
@@ -42,6 +43,9 @@ export const useExperienceStore = create<ExperienceState>()((set, get) => ({
       : state.stage === "intro" || state.stage === "language-selection" ? "overview" : state.stage,
   })),
   completeEntering: () => set((state) => ({stage: state.resumeStage, languageSignal: null})),
+  focusIdentity: () => set({
+    stage: "identity-focus", selectedClusterId: null, selectedNodeId: null, focusReady: false,
+  }),
   focusCluster: (selectedClusterId) => set({
     stage: "cluster-focus", selectedClusterId, selectedNodeId: null, focusReady: false,
   }),
@@ -75,7 +79,7 @@ export const useExperienceStore = create<ExperienceState>()((set, get) => ({
     const state = get();
     if (state.stage === "node-details") state.closeCase();
     else if (state.stage === "node-focus") state.closeNode();
-    else if (state.stage === "cluster-focus") state.returnToOverview();
+    else if (state.stage === "cluster-focus" || state.stage === "identity-focus") state.returnToOverview();
     else if (state.stage === "language-selection") set({stage: "intro"});
   },
   setQuality: (quality) => set({quality}),

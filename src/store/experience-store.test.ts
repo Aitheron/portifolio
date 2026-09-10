@@ -6,6 +6,21 @@ import {useExperienceStore} from "./experience-store";
 const state = () => useExperienceStore.getState();
 beforeEach(() => useExperienceStore.setState(useExperienceStore.getInitialState(), true));
 
+test("identity focus clears project selection, never opens a case, and returns to overview", () => {
+  state().focusNode("aitheron", "key-projects", true);
+  state().focusIdentity();
+  assert.equal(state().stage, "identity-focus");
+  assert.equal(state().selectedNodeId, null);
+  assert.equal(state().selectedClusterId, null);
+  state().openCase();
+  assert.equal(state().stage, "identity-focus");
+  state().beginEntering("en");
+  state().completeEntering();
+  assert.equal(state().stage, "identity-focus");
+  state().navigateBack();
+  assert.equal(state().stage, "overview");
+});
+
 test("opens a preview's own case immediately without selecting its cluster first", () => {
   state().returnToOverview();
   state().openNodeCase("aitheron", "key-projects");

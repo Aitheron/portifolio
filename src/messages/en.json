@@ -88,5 +88,10 @@
   "Canvas": {
     "label": "Interactive professional vector space",
     "loading": "Mapping vector space..."
+  },
+  "Identity": {
+    "focus": "Focus on Marlon",
+    "contactActions": "Contact Marlon",
+    "unavailable": "Coming soon"
   }
 }

@@ -128,6 +128,7 @@ function PreviewBudgetTracker({
   microUniverseRef: RefObject<ProjectSatelliteContext>;
 }) {
   const quality = useExperienceStore((state) => state.quality);
+  const stage = useExperienceStore((state) => state.stage);
   const selectedNodeId = useExperienceStore((state) => state.selectedNodeId);
   const selectedClusterId = useExperienceStore((state) => state.selectedClusterId);
   const viewDirection = useMemo(() => new Vector3(), []);
@@ -138,6 +139,11 @@ function PreviewBudgetTracker({
       return;
     }
     lastUpdateRef.current = clock.elapsedTime;
+    if (stage === "identity-focus") {
+      if (activeIdsRef.current.size) activeIdsRef.current = new Set();
+      microUniverseRef.current = {nodeId: null, mode: "none"};
+      return;
+    }
     camera.getWorldDirection(viewDirection);
     const spatialCandidates = portfolioNodes.map((node) => {
       previewPosition.fromArray(portfolioNodePositions[node.id]).sub(camera.position);

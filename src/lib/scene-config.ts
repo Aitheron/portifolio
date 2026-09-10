@@ -115,7 +115,7 @@ export const imageFormationConfig = {
 };
 
 export function getNavigationContext(stage: ExperienceStage): NavigationContext {
-  if (stage === "node-details" || stage === "node-focus") return "node";
+  if (stage === "node-details" || stage === "node-focus" || stage === "identity-focus") return "node";
   if (stage === "cluster-focus") return "cluster";
   return "overview";
 }

@@ -7,7 +7,7 @@ import {
 } from "three";
 
 import type {AppLocale} from "@/i18n/routing";
-import type {PortfolioNode} from "@/lib/portfolio-types";
+import type {CoreIdentity, PortfolioNode} from "@/lib/portfolio-types";
 
 import {createProjectFallbackTexture} from "./createProjectFallbackTexture";
 
@@ -89,7 +89,7 @@ function loadImageTexture(src: string): Promise<ProjectCoverTexture> {
 }
 
 export function useProjectCoverTexture(
-  node: PortfolioNode,
+  node: PortfolioNode | CoreIdentity,
   locale: AppLocale,
   active: boolean,
 ) {

@@ -88,6 +88,27 @@ export type PortfolioNode = {
     | {mode: "manual"; value: Vector3Tuple};
 };
 
+export type IdentityAction = {
+  id: string;
+  type: "linkedin" | "github" | "email" | "resume";
+  label: LocalizedText;
+  href?: string;
+  external?: boolean;
+};
+
+export type CoreIdentity = {
+  id: string;
+  title: LocalizedText;
+  primaryRole: LocalizedText;
+  secondaryRole: LocalizedText;
+  summary: LocalizedText;
+  image?: PortfolioImage;
+  position: Vector3Tuple;
+  satellites: SemanticSatellite[];
+  actions: IdentityAction[];
+  visual: PortfolioNode["visual"];
+};
+
 export type ClusterPattern =
   | "streams"
   | "helix"
@@ -111,6 +132,7 @@ export type ExperienceStage =
   | "language-selection"
   | "entering"
   | "overview"
+  | "identity-focus"
   | "cluster-focus"
   | "node-focus"
   | "node-details";
@@ -119,7 +141,7 @@ export type NodeRevealState = "signal" | "identity" | "preview" | "selected";
 export type PerformanceQuality = "high" | "medium" | "low";
 
 export function isUniverseStage(stage: ExperienceStage): boolean {
-  return ["overview", "cluster-focus", "node-focus", "node-details"].includes(stage);
+  return ["overview", "identity-focus", "cluster-focus", "node-focus", "node-details"].includes(stage);
 }
 
 export function resolveLocalizedText(
