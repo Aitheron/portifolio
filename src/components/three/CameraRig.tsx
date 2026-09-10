@@ -8,7 +8,9 @@ import {clusterById} from "@/content/clusters";
 import {portfolioNodePositions} from "@/content/nodes";
 import {getNavigationContext, navigationConfig} from "@/lib/scene-config";
 import {resolveElasticBoundaryRadius, shouldReleaseFocus} from "@/lib/scene-navigation";
+import {automaticFocusConfig} from "@/lib/automatic-project-focus";
 import {useExperienceStore} from "@/store/experience-store";
+import {useAutomaticProjectFocus} from "./useAutomaticProjectFocus";
 
 const overviewTarget = new Vector3(0, 0, 0);
 const previousTarget = new Vector3();
@@ -20,6 +22,7 @@ export function CameraRig() {
   const camera = useThree((state) => state.camera);
   const gl = useThree((state) => state.gl);
   const outwardInputRef = useRef(0);
+  const inwardInputUntilRef = useRef(0);
   const pinchDistanceRef = useRef(0);
   const viewportWidth = useThree((state) => state.size.width);
   const stage = useExperienceStore((state) => state.stage);
@@ -32,6 +35,7 @@ export function CameraRig() {
   const context = getNavigationContext(stage);
   const profile = navigationConfig[context];
   const canExplore = stage === "overview" || stage === "cluster-focus" || stage === "node-focus";
+  useAutomaticProjectFocus(navigatingRef, inwardInputUntilRef);
 
   const destinations = useMemo(() => {
     const position = new Vector3().fromArray(navigationConfig.overview.cameraOffset);
@@ -69,6 +73,8 @@ export function CameraRig() {
     const canvas = gl.domElement;
     const wheel = (event: WheelEvent) => {
       outwardInputRef.current = event.deltaY > 0 ? performance.now() + 180 : 0;
+      inwardInputUntilRef.current = event.deltaY < 0 && controlsRef.current?.enabled
+        ? performance.now() + automaticFocusConfig.zoomIntentDuration : 0;
     };
     const touch = (event: TouchEvent) => {
       if (event.touches.length !== 2) {pinchDistanceRef.current = 0; return;}
@@ -76,6 +82,10 @@ export function CameraRig() {
       const distance = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
       if (pinchDistanceRef.current && distance < pinchDistanceRef.current - 1) {
         outwardInputRef.current = performance.now() + 180;
+        inwardInputUntilRef.current = 0;
+      } else if (pinchDistanceRef.current && distance > pinchDistanceRef.current + 1 && controlsRef.current?.enabled) {
+        outwardInputRef.current = 0;
+        inwardInputUntilRef.current = performance.now() + automaticFocusConfig.zoomIntentDuration;
       }
       pinchDistanceRef.current = distance;
     };

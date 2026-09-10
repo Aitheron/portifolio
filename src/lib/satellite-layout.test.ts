@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import {getSatelliteBudget, getSatellitePosition, selectSatellites, isSatelliteRelevant} from "./satellite-layout";
+import {getSatelliteBudget, getSatellitePosition, selectSatellites, resolveProjectSatelliteContext} from "./satellite-layout";
+import type {ProjectSatelliteCandidate, ProjectSatelliteContext} from "./satellite-layout";
 
 test("satellite density respects the smaller screen and quality budget", () => {
   assert.equal(getSatelliteBudget(1440, "high"), 6);
@@ -53,9 +54,31 @@ test("important context wins without changing or sorting the source data", () =>
   assert.equal(input[0].id, "low");
 });
 
-test("satellite relevance uses hysteresis and selected priority", () => {
-  assert.equal(isSatelliteRelevant(50, false, false), false);
-  assert.equal(isSatelliteRelevant(50, false, true), true);
-  assert.equal(isSatelliteRelevant(21, true, false), true);
-  assert.equal(isSatelliteRelevant(21, false, false), false);
+const inactive: ProjectSatelliteContext = {nodeId: null, mode: "none"};
+const candidate: ProjectSatelliteCandidate = {id: "project-a", cluster: "key-projects", distance: 12, alignment: 1, hasSatellites: true};
+
+test("only a nearby project in the viewing direction gets partial context", () => {
+  for (const values of [{distance: 30}, {distance: 18}, {alignment: 0.5}, {alignment: -1}]) {
+    assert.deepEqual(resolveProjectSatelliteContext([{...candidate, ...values}], inactive, null, null), inactive);
+  }
+  assert.deepEqual(resolveProjectSatelliteContext([candidate], inactive, null, null), {nodeId: candidate.id, mode: "partial"});
+});
+
+test("semantic selection alone grants full context and excludes nearby neighbors", () => {
+  const selected = {...candidate, id: "selected", distance: 50, alignment: -1};
+  assert.deepEqual(resolveProjectSatelliteContext([candidate, selected], inactive, selected.id, null), {nodeId: selected.id, mode: "full"});
+  assert.deepEqual(resolveProjectSatelliteContext([candidate, {...selected, hasSatellites: false}], inactive, selected.id, null), inactive);
+  assert.deepEqual(resolveProjectSatelliteContext([candidate], inactive, null, "education-research"), inactive);
+});
+
+test("candidate context persists across distance and direction boundaries without switching to a closer neighbor", () => {
+  const current: ProjectSatelliteContext = {nodeId: candidate.id, mode: "partial"};
+  const neighbor = {...candidate, id: "neighbor", distance: 11};
+  const boundary = {...candidate, distance: 15, alignment: 0.92};
+  assert.deepEqual(resolveProjectSatelliteContext([boundary], inactive, null, null), inactive);
+  assert.deepEqual(resolveProjectSatelliteContext([neighbor, boundary], current, null, null), current);
+  for (const values of [{distance: 17}, {alignment: 0.89}]) {
+    assert.deepEqual(resolveProjectSatelliteContext([{...boundary, ...values}], current, null, null), inactive);
+  }
+  assert.deepEqual(resolveProjectSatelliteContext([candidate], {nodeId: candidate.id, mode: "full"}, null, null), current);
 });

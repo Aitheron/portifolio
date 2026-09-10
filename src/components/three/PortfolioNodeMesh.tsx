@@ -8,6 +8,7 @@ import {clusterById} from "@/content/clusters";
 import {nodeRevealDistance, getRevealState} from "@/lib/performance-quality";
 import {resolveLocalizedText} from "@/lib/portfolio-types";
 import type {NodeRevealState, PortfolioNode, Vector3Tuple} from "@/lib/portfolio-types";
+import type {ProjectSatelliteContext} from "@/lib/satellite-layout";
 import {
   activateWorldItem,
   worldInteractionPriority,
@@ -20,7 +21,7 @@ import {useProjectCoverTexture} from "./useProjectCoverTexture";
 
 type PortfolioNodeMeshProps = {
   activePreviewIdsRef: RefObject<ReadonlySet<string>>;
-  microUniverseIdRef: RefObject<string | null>;
+  microUniverseRef: RefObject<ProjectSatelliteContext>;
   node: PortfolioNode;
   position: Vector3Tuple;
 };
@@ -123,13 +124,14 @@ function NodePreview({
 
 export function PortfolioNodeMesh({
   activePreviewIdsRef,
-  microUniverseIdRef,
+  microUniverseRef,
   node,
   position,
 }: PortfolioNodeMeshProps) {
   const groupRef = useRef<Group>(null);
-  const microActiveRef = useRef(false);
-  const [microActive, setMicroActive] = useState(false);
+  const microModeRef = useRef<ProjectSatelliteContext["mode"]>("none");
+  const [microMode, setMicroMode] = useState<ProjectSatelliteContext["mode"]>("none");
+  const [microMounted, setMicroMounted] = useState(false);
   const coreRef = useRef<Group>(null);
   const distanceRef = useRef(Infinity);
   const revealRef = useRef<NodeRevealState>("signal");
@@ -164,10 +166,11 @@ export function PortfolioNodeMesh({
       formationActiveRef.current = nextFormationActive;
       setFormationActive(nextFormationActive);
     }
-    const nextMicroActive = microUniverseIdRef.current === node.id;
-    if (nextMicroActive !== microActiveRef.current) {
-      microActiveRef.current = nextMicroActive;
-      setMicroActive(nextMicroActive);
+    const nextMicroMode = microUniverseRef.current.nodeId === node.id ? microUniverseRef.current.mode : "none";
+    if (nextMicroMode !== microModeRef.current) {
+      microModeRef.current = nextMicroMode;
+      setMicroMode(nextMicroMode);
+      if (nextMicroMode !== "none") setMicroMounted(true);
     }
     const farScale = distanceRef.current > nodeRevealDistance.signal ? 0.68 : 1;
     const orbitFit = viewport.width < 720 ? 1.05 : 0.64;
@@ -187,7 +190,10 @@ export function PortfolioNodeMesh({
         <sphereGeometry args={[0.78, 10, 8]} />
         <meshBasicMaterial colorWrite={false} depthWrite={false} />
       </mesh>
-      {microActive && node.satellites?.length ? <MicroUniverse satellites={node.satellites} color={cluster.color} /> : null}
+      {microMounted && node.satellites?.length ? (
+        <MicroUniverse satellites={node.satellites} color={cluster.color} mode={microMode}
+          onHidden={() => {if (microModeRef.current === "none") setMicroMounted(false);}} />
+      ) : null}
       <group ref={coreRef}><NodeCore node={node} color={cluster.color} /></group>
       {showsIdentity && formationActive && (
         <NodePreview

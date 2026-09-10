@@ -4,6 +4,7 @@ import type {
   PortfolioNode,
   Vector3Tuple,
 } from "@/lib/portfolio-types";
+import {getProjectVisualRadius, projectVisualSafetyMargin} from "../lib/satellite-layout";
 
 export const clusters: readonly ClusterDefinition[] = [
   {id: "key-projects", title: {pt: "Projetos-chave", en: "Key Projects"},
@@ -48,7 +49,12 @@ export function getNodePosition(
   const depth = ((hash % 1000) / 999 - 0.5) * cluster.radius * 0.65;
   const radialVariation = 0.84 + ((hash >>> 10) % 100) / 625;
   const importanceRadius = node.importance === "flagship" ? 0.8 : node.importance === "secondary" ? 1.1 : 1;
-  const radialDistance = cluster.radius * radialVariation * importanceRadius;
+  // Reserve the whole micro-universe along the shared elliptical ring. Positions
+  // are computed once by the registry; this adds no per-frame collision work.
+  const visualSpacingRadius = node.kind === "project" && safeTotal > 1
+    ? (2 * getProjectVisualRadius(node) + projectVisualSafetyMargin) / (2 * Math.sin(Math.PI / safeTotal))
+    : 0;
+  const radialDistance = Math.max(cluster.radius * radialVariation * importanceRadius, visualSpacingRadius);
 
   return [
     cluster.position[0] + Math.cos(angle) * radialDistance,

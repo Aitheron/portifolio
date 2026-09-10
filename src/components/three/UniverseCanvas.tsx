@@ -15,7 +15,8 @@ import {BufferAttribute, Group, Points, Vector3} from "three";
 import {clusters} from "@/content/clusters";
 import {portfolioNodePositions, portfolioNodes} from "@/content/nodes";
 import {qualitySettings} from "@/lib/performance-quality";
-import {isSatelliteRelevant} from "@/lib/satellite-layout";
+import {resolveProjectSatelliteContext} from "@/lib/satellite-layout";
+import type {ProjectSatelliteContext} from "@/lib/satellite-layout";
 import {imageFormationConfig} from "@/lib/scene-config";
 import {prioritizeWorldIntersections} from "@/lib/world-interaction";
 import {isUniverseStage} from "@/lib/portfolio-types";
@@ -121,13 +122,15 @@ function sameIds(current: ReadonlySet<string>, next: ReadonlySet<string>) {
 
 function PreviewBudgetTracker({
   activeIdsRef,
-  microUniverseIdRef,
+  microUniverseRef,
 }: {
   activeIdsRef: RefObject<ReadonlySet<string>>;
-  microUniverseIdRef: RefObject<string | null>;
+  microUniverseRef: RefObject<ProjectSatelliteContext>;
 }) {
   const quality = useExperienceStore((state) => state.quality);
   const selectedNodeId = useExperienceStore((state) => state.selectedNodeId);
+  const selectedClusterId = useExperienceStore((state) => state.selectedClusterId);
+  const viewDirection = useMemo(() => new Vector3(), []);
   const lastUpdateRef = useRef(-Infinity);
 
   useFrame(({camera, clock}) => {
@@ -135,13 +138,18 @@ function PreviewBudgetTracker({
       return;
     }
     lastUpdateRef.current = clock.elapsedTime;
-    const candidates = portfolioNodes
-      .map((node) => ({
+    camera.getWorldDirection(viewDirection);
+    const spatialCandidates = portfolioNodes.map((node) => {
+      previewPosition.fromArray(portfolioNodePositions[node.id]).sub(camera.position);
+      return {
         id: node.id,
-        distance: camera.position.distanceTo(
-          previewPosition.fromArray(portfolioNodePositions[node.id]),
-        ),
-      }))
+        cluster: node.cluster,
+        distance: previewPosition.length(),
+        alignment: previewPosition.normalize().dot(viewDirection),
+        hasSatellites: Boolean(node.satellites?.length),
+      };
+    });
+    const candidates = spatialCandidates
       .filter(({id, distance}) => (
         selectedNodeId ? id === selectedNodeId : distance <= imageFormationConfig.fragmentsDistance + 2
       ))
@@ -153,10 +161,9 @@ function PreviewBudgetTracker({
       .slice(0, imageFormationConfig[quality].activeNodeLimit);
     const nextIds = new Set(candidates.map(({id}) => id));
     if (!sameIds(activeIdsRef.current, nextIds)) activeIdsRef.current = nextIds;
-    const localCandidate = candidates.find(({id, distance}) =>
-      isSatelliteRelevant(distance, microUniverseIdRef.current === id, id === selectedNodeId)
-      && portfolioNodes.some((node) => node.id === id && node.satellites?.length));
-    microUniverseIdRef.current = localCandidate?.id ?? null;
+    microUniverseRef.current = resolveProjectSatelliteContext(
+      spatialCandidates, microUniverseRef.current, selectedNodeId, selectedClusterId,
+    );
   });
 
   return null;
@@ -164,7 +171,7 @@ function PreviewBudgetTracker({
 
 function Scene({onUnavailable}: UniverseCanvasProps) {
   const activePreviewIdsRef = useRef<ReadonlySet<string>>(new Set());
-  const microUniverseIdRef = useRef<string | null>(null);
+  const microUniverseRef = useRef<ProjectSatelliteContext>({nodeId: null, mode: "none"});
   const stage = useExperienceStore((state) => state.stage);
   const locale = useExperienceStore((state) => state.locale);
   const quality = useExperienceStore((state) => state.quality);
@@ -178,11 +185,11 @@ function Scene({onUnavailable}: UniverseCanvasProps) {
       {showGateway && <LanguageGalaxies />}
       {showUniverse && <>
         <IdentityNode />
-        <PreviewBudgetTracker activeIdsRef={activePreviewIdsRef} microUniverseIdRef={microUniverseIdRef} />
+        <PreviewBudgetTracker activeIdsRef={activePreviewIdsRef} microUniverseRef={microUniverseRef} />
         {clusters.map((cluster) => <SemanticCluster key={cluster.id} cluster={cluster} locale={locale} />)}
         {portfolioNodes.map((node) => (
           <PortfolioNodeMesh key={node.id} node={node} position={portfolioNodePositions[node.id]}
-            microUniverseIdRef={microUniverseIdRef} activePreviewIdsRef={activePreviewIdsRef} />
+            microUniverseRef={microUniverseRef} activePreviewIdsRef={activePreviewIdsRef} />
         ))}
       </>}
       {stage === "entering" && <QueryProbe />}
