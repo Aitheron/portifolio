@@ -92,8 +92,12 @@ export type IdentityAction = {
   id: string;
   type: "linkedin" | "github" | "email" | "resume";
   label: LocalizedText;
-  href?: string;
+  href?: string | LocalizedText;
   external?: boolean;
+  email?: string;
+  subject?: string;
+  /** Suggested filename for a same-origin resume PDF download. */
+  download?: string;
 };
 
 export type CoreIdentity = {

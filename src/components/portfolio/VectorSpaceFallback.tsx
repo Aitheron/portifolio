@@ -40,7 +40,7 @@ export function VectorSpaceFallback({
           <button type="button" className="text-action" onClick={() => {focusIdentity(); onNavigate?.();}}>{identityText("focus")}</button>
           {webglUnavailable && stage === "identity-focus" && <>
             <p>{resolveLocalizedText(identity.summary, locale)}</p>
-            <IdentityActions locale={locale} visible labels={{contactActions: identityText("contactActions"), unavailable: identityText("unavailable")}} />
+            <IdentityActions locale={locale} visible labels={{contactActions: identityText("contactActions"), unavailable: identityText("unavailable"), downloadPdf: identityText("downloadPdf")}} />
           </>}
           {webglUnavailable && <p>{t("description")}</p>}
         </header>

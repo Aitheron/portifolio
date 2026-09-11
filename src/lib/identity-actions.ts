@@ -1,7 +1,15 @@
-import type {IdentityAction} from "./portfolio-types";
+import type {AppLocale, IdentityAction} from "./portfolio-types";
 
-export function resolveIdentityActionHref(action: Pick<IdentityAction, "type" | "href">): string | null {
-  const href = action.href?.trim();
+export function resolveIdentityActionHref(
+  action: Pick<IdentityAction, "type" | "href" | "email" | "subject">,
+  locale: AppLocale = "pt",
+): string | null {
+  if (action.type === "email" && action.email !== undefined) {
+    const email = action.email.trim();
+    if (!/^[^\s@?&#:\\]+@[^\s@?&#:\\]+\.[^\s@?&#:\\]+$/.test(email)) return null;
+    return `mailto:${email}${action.subject ? `?subject=${encodeURIComponent(action.subject)}` : ""}`;
+  }
+  const href = (typeof action.href === "string" ? action.href : action.href?.[locale])?.trim();
   if (!href || /[\s\\]/.test(href)) return null;
   if (action.type === "email") {
     return /^mailto:[^@?]+@[^@?]+\.[^@?]+(?:\?.*)?$/i.test(href) ? href : null;

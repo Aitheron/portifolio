@@ -90,6 +90,7 @@
     "loading": "Mapeando o espaço vetorial..."
   },
   "Identity": {
+    "downloadPdf": "Baixar PDF",
     "focus": "Focar em Marlon",
     "contactActions": "Contato com Marlon",
     "unavailable": "Em breve"

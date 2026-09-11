@@ -816,7 +816,7 @@ button {
 .identity-action:hover, .identity-action:focus-visible { border-color: var(--line-strong); background: var(--surface); }
 .identity-action .identity-action__indicator { display: grid; place-items: center; width: 1.75rem; height: 1.75rem; border: 1px solid var(--line-strong); border-radius: 50%; color: var(--signal); font: 0.75rem ui-monospace, monospace; }
 .identity-action--unavailable { cursor: default; }
-.identity-action--unavailable small { flex-basis: 100%; color: var(--text-muted); font-size: 0.625rem; text-align: center; }
+.identity-action small { flex-basis: 100%; color: var(--text-muted); font-size: 0.625rem; text-align: center; }
 .identity-action--unavailable:hover { border-color: transparent; background: transparent; }
 .identity-actions--spatial { position: absolute; left: 50%; top: 0; width: min(42rem, calc(100vw - 2rem)); transform: translateX(-50%); }
 .identity-actions--spatial .identity-action { position: absolute; width: 7rem; }

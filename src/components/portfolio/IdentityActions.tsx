@@ -11,7 +11,7 @@ type IdentityActionsProps = {
   locale: AppLocale;
   visible: boolean;
   spatial?: boolean;
-  labels: {contactActions: string; unavailable: string};
+  labels: {contactActions: string; unavailable: string; downloadPdf: string};
 };
 
 export function IdentityActions({locale, visible, spatial = false, labels}: IdentityActionsProps) {
@@ -34,14 +34,17 @@ export function IdentityActions({locale, visible, spatial = false, labels}: Iden
         pointer.current = null;
       }}>
       {identity.actions.map((action) => {
-        const href = resolveIdentityActionHref(action);
+        const href = resolveIdentityActionHref(action, locale);
         const label = resolveLocalizedText(action.label, locale);
         const external = href?.startsWith("https:") && (action.external ?? true);
+        // Browsers honor download for same-origin files; external resumes remain viewable links.
+        const download = action.type === "resume" && href?.startsWith("/") ? action.download : undefined;
         const content = <><span className="identity-action__indicator" aria-hidden="true">{indicators[action.type]}</span><span>{label}</span></>;
         return href ? (
           <a key={action.id} className="identity-action" href={href} target={external ? "_blank" : undefined}
-            rel={external ? "noopener noreferrer" : undefined}>
+            rel={external ? "noopener noreferrer" : undefined} download={download}>
             {content}
+            {download && <small>{labels.downloadPdf}</small>}
           </a>
         ) : (
           <span key={action.id} className="identity-action identity-action--unavailable" role="link" aria-disabled="true"

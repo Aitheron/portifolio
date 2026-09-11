@@ -90,6 +90,7 @@
     "loading": "Mapping vector space..."
   },
   "Identity": {
+    "downloadPdf": "Download PDF",
     "focus": "Focus on Marlon",
     "contactActions": "Contact Marlon",
     "unavailable": "Coming soon"

@@ -69,11 +69,11 @@ export function IdentityNode() {
         <group ref={core} onClick={(event) => activateWorldItem(event, focusIdentity)}>
           <mesh>
             <icosahedronGeometry args={[1.15, 1]} />
-            <meshBasicMaterial ref={coreMaterial} color="#b9eaff" wireframe transparent opacity={0.66} />
+            <meshBasicMaterial ref={coreMaterial} color="#b9eaff" wireframe transparent opacity={0.66} depthWrite={false} />
           </mesh>
           <mesh rotation={[0.7, 0.4, 0]}>
             <torusGeometry args={[1.6, 0.012, 4, 64]} />
-            <meshBasicMaterial ref={ringMaterial} color="#78d7ff" transparent opacity={0.48} />
+            <meshBasicMaterial ref={ringMaterial} color="#78d7ff" transparent opacity={0.48} depthWrite={false} />
           </mesh>
         </group>
         {cover && <Billboard follow position={[0, 0.8, 0]}>
@@ -95,7 +95,7 @@ export function IdentityNode() {
             <p className={`identity-summary${focused ? " is-visible" : ""}`} aria-hidden={!focused}>
               {resolveLocalizedText(identity.summary, locale)}
             </p>
-            <IdentityActions locale={locale} visible={focused} spatial labels={{contactActions: t("contactActions"), unavailable: t("unavailable")}} />
+            <IdentityActions locale={locale} visible={focused} spatial labels={{contactActions: t("contactActions"), unavailable: t("unavailable"), downloadPdf: t("downloadPdf")}} />
           </div>
         </Html>
       </Billboard>

@@ -16,8 +16,16 @@ export const identity: CoreIdentity = {
   actions: [
     {id: "linkedin", type: "linkedin", label: {pt: "LinkedIn", en: "LinkedIn"}, external: true, href: "https://www.linkedin.com/in/marlon-de-souza-software-engineer/"},
     {id: "github", type: "github", label: {pt: "GitHub", en: "GitHub"}, external: true, href: "https://github.com/Marlon-Souza16/"},
-    {id: "email", type: "email", label: {pt: "Email", en: "Email"}, href: "marlondesouzajlle@hotmail.com"},
-    {id: "resume", type: "resume", label: {pt: "Currículo", en: "Resume"}},
+    {id: "email", type: "email", label: {pt: "Email", en: "Email"}, email: "marlondesouzajlle@hotmail.com", subject: "Contact from Marlon's Portfolio"},
+    // Files in public/ are served from the site root.
+    {
+      id: "resume", type: "resume", label: {pt: "Currículo", en: "Resume"},
+      download: "Marlon-de-Souza-CV.pdf",
+      href: {
+        pt: "/curriculo.pdf",
+        en: "", // Set to /resume.pdf after adding the English PDF to public/.
+      },
+    },
   ],
   satellites: [
     {id: "applied-ai", type: "domain", label: {pt: "IA Aplicada", en: "Applied AI"}, importance: 1},
