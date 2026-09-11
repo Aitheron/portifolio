@@ -1,5 +1,7 @@
 # Vector Space — Portfolio Template
 
+Projeto open source sob a [licença MIT](LICENSE). Você pode usar, modificar e distribuir o template, inclusive comercialmente, preservando os avisos de copyright e da licença. As dependências mantêm suas respectivas licenças.
+
 Template de portfólio espacial com identidade genérica, um projeto demonstrativo e uma experiência conectada. Os quatro clusters estão disponíveis; formação e comunidade começam vazios. Usa Next.js, React, TypeScript, Three.js, React Three Fiber, Drei, next-intl, Zustand e Zod. A arquitetura separa conteúdo JSON do motor visual, preservando a experiência V2.
 
 ## Instalação e verificação
