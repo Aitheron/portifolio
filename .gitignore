@@ -13,3 +13,6 @@ dist/
 npm-debug.log*
 public/*
 !public/assets/
+
+# Local personal portfolio guide, snapshots and assets (never commit).
+/.personal/

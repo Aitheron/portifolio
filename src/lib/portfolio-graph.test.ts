@@ -11,7 +11,7 @@ const clusters: ClusterDefinition[] = ["key-projects", "education-research"].map
 }));
 const project = {
   schemaVersion: 1,
-  id: "aitheron", slug: "aitheron", title, summary: title, description: title,
+  id: "project-a", slug: "project-a", title, summary: title, description: title,
   kind: "project", cluster: "key-projects", technologies: [],
   visual: {variant: "data-node"}, position: {mode: "auto"},
 };
@@ -20,11 +20,11 @@ test("multiple career relationships keep one canonical project and spatial ancho
   const nodes = validatePortfolioNodes([
     {...project, relations: [{targetId: "education-research", type: "research"}]},
     {...project, id: "education", slug: "education", kind: "education", cluster: "education-research",
-      relations: [{targetId: "aitheron", type: "produced"}]},
+      relations: [{targetId: "project-a", type: "produced"}]},
   ]);
-  const graph = createPortfolioGraph(nodes, clusters, {id: "marlon", title});
-  assert.equal([...graph.values()].filter(({id}) => id === "aitheron").length, 1);
-  assert.equal(graph.get("aitheron")?.cluster, "key-projects");
+  const graph = createPortfolioGraph(nodes, clusters, {id: "profile", title});
+  assert.equal([...graph.values()].filter(({id}) => id === "project-a").length, 1);
+  assert.equal(graph.get("project-a")?.cluster, "key-projects");
   assert.equal(graph.get("education")?.kind, "education");
 });
 
@@ -32,17 +32,17 @@ test("rejects anchors and relations missing from the actual rendered graph", () 
   const nodes = validatePortfolioNodes([{
     ...project, relations: [{targetId: "education-research", type: "research"}],
   }]);
-  assert.throws(() => createPortfolioGraph(nodes, [], {id: "marlon", title}), /anchor/);
-  assert.throws(() => createPortfolioGraph(nodes, clusters.slice(0, 1), {id: "marlon", title}), /education-research/);
+  assert.throws(() => createPortfolioGraph(nodes, [], {id: "profile", title}), /anchor/);
+  assert.throws(() => createPortfolioGraph(nodes, clusters.slice(0, 1), {id: "profile", title}), /education-research/);
   const satellites = validatePortfolioNodes([{
     ...project, signals: [{id: "research", type: "concept", label: title, relationTargetId: "education-research"}],
   }]);
-  assert.throws(() => createPortfolioGraph(satellites, clusters.slice(0, 1), {id: "marlon", title}), /education-research/);
+  assert.throws(() => createPortfolioGraph(satellites, clusters.slice(0, 1), {id: "profile", title}), /education-research/);
 });
 
 test("graph index rejects a node colliding with the identity", () => {
   const nodes = validatePortfolioNodes([project]);
-  assert.throws(() => createPortfolioGraph(nodes, [], {id: "aitheron", title}), /Duplicate/);
+  assert.throws(() => createPortfolioGraph(nodes, [], {id: "project-a", title}), /Duplicate/);
 });
 
 test("identity signal references must also resolve against the rendered graph", () => {

@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "id": "example-experience",
+  "slug": "example-experience",
+  "kind": "experience",
+  "cluster": "experience-impact",
+  "title": {
+    "pt": "Experiência de exemplo",
+    "en": "Example experience"
+  },
+  "summary": {
+    "pt": "Um espaço para descrever uma atuação profissional e conectá-la aos seus projetos.",
+    "en": "A place to describe professional experience and connect it to your projects."
+  },
+  "description": {
+    "pt": "Informe seu cargo, o contexto de trabalho e suas responsabilidades. Este exemplo não representa uma empresa ou vínculo real.",
+    "en": "Describe your role, work context, and responsibilities. This example does not represent a real company or employment relationship."
+  },
+  "signals": [
+    {
+      "id": "collaboration",
+      "type": "concept",
+      "label": {
+        "pt": "Colaboração",
+        "en": "Collaboration"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    }
+  ],
+  "relations": [
+    {
+      "targetId": "example-project",
+      "type": "produced"
+    }
+  ],
+  "content": [
+    {
+      "type": "text",
+      "title": {
+        "pt": "Sua contribuição",
+        "en": "Your contribution"
+      },
+      "body": {
+        "pt": "Relacione suas responsabilidades às entregas e aos aprendizados que deseja destacar.",
+        "en": "Connect your responsibilities to the work and lessons you want to highlight."
+      }
+    }
+  ],
+  "visual": {
+    "variant": "system-module",
+    "size": 1.05,
+    "intensity": 1
+  },
+  "position": {
+    "mode": "auto"
+  }
+}

@@ -2,20 +2,18 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {clusters, getNodePosition} from "../content/clusters";
-import aitheronData from "../content/projects/aitheron.json";
-import multiAgentData from "../content/projects/multi-agent-tariff-intelligence.json";
-import pnExtractorData from "../content/projects/pn-extractor.json";
-import llmInfrastructureData from "../content/projects/enterprise-llm-infrastructure.json";
-import docguardData from "../content/projects/docguard.json";
+import exampleData from "../content/projects/example-project.json";
 import {navigationBoundaries} from "./scene-navigation";
 import {getProjectVisualRadius, projectVisualSafetyMargin} from "./satellite-layout";
 
 import {portfolioNodeSchema} from "./portfolio-schema";
-const [aitheron, multiAgent, pnExtractor, llmInfrastructure, docguard] = [aitheronData, multiAgentData, pnExtractorData, llmInfrastructureData, docguardData].map(data => portfolioNodeSchema.parse(data));
 
 test("career regions and project anchors leave room for orbiting context within navigable space", () => {
   for (const cluster of clusters) assert.ok(Math.hypot(...cluster.position) >= 14);
-  const projects = [aitheron, multiAgent, pnExtractor, llmInfrastructure, docguard];
+  // Five synthetic entries preserve the crowded-scene regression independently of demo content.
+  const projects = ["project-a", "project-b", "project-c", "project-d", "project-e"].map((id, index) =>
+    portfolioNodeSchema.parse({...exampleData, id, slug: id, importance: index === 0 ? "flagship" : index === 4 ? "secondary" : "primary"}),
+  );
   const positions = projects.map((node, index) => getNodePosition(node, index, projects.length));
   positions.forEach((position, index) => {
     assert.ok(Math.hypot(...position) >= 10, "projects stay clear of the central identity's orbit");

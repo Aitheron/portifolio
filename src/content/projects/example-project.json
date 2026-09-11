@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "id": "example-project",
+  "slug": "example-project",
+  "kind": "project",
+  "cluster": "key-projects",
+  "title": {
+    "pt": "Projeto de exemplo",
+    "en": "Example project"
+  },
+  "summary": {
+    "pt": "Um exemplo de como apresentar um projeto, suas decisões e evidências.",
+    "en": "An example of how to present a project, its decisions, and evidence."
+  },
+  "description": {
+    "pt": "Substitua este conteúdo pelo seu trabalho. As imagens e a métrica são ilustrativas e não representam resultados reais.",
+    "en": "Replace this content with your own work. The images and metric are illustrative and do not represent real results."
+  },
+  "coverImage": {
+    "src": "/assets/projects/example-project/cover.svg",
+    "alt": {
+      "pt": "Capa abstrata do projeto de exemplo",
+      "en": "Abstract cover for the example project"
+    }
+  },
+  "gallery": [
+    {
+      "src": "/assets/projects/example-project/interface.svg",
+      "alt": {
+        "pt": "Estudo ilustrativo de interface",
+        "en": "Illustrative interface study"
+      }
+    },
+    {
+      "src": "/assets/projects/example-project/results.svg",
+      "alt": {
+        "pt": "Visão ilustrativa de resultados",
+        "en": "Illustrative results overview"
+      }
+    }
+  ],
+  "signals": [
+    {
+      "id": "automation",
+      "type": "concept",
+      "label": {
+        "pt": "Automação",
+        "en": "Automation"
+      },
+      "showInOrbit": true,
+      "showInCase": true,
+      "importance": 1
+    },
+    {
+      "id": "design",
+      "type": "concept",
+      "label": {
+        "pt": "Design",
+        "en": "Design"
+      },
+      "showInOrbit": true,
+      "showInCase": true,
+      "importance": 0.9
+    },
+    {
+      "id": "iteration",
+      "type": "concept",
+      "label": {
+        "pt": "Iteração",
+        "en": "Iteration"
+      },
+      "showInOrbit": true,
+      "showInCase": true,
+      "importance": 0.8
+    }
+  ],
+  "relations": [
+    {
+      "targetId": "example-experience",
+      "type": "built-at"
+    }
+  ],
+  "content": [
+    {
+      "type": "text",
+      "title": {
+        "pt": "O problema",
+        "en": "The problem"
+      },
+      "body": {
+        "pt": "Descreva o ponto de partida, para quem o projeto foi criado e quais restrições precisavam ser consideradas.",
+        "en": "Describe the starting point, who the project was for, and the constraints you needed to consider."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/projects/example-project/architecture.svg",
+      "alt": {
+        "pt": "Diagrama ilustrativo da arquitetura",
+        "en": "Illustrative architecture diagram"
+      },
+      "caption": {
+        "pt": "Diagrama conceitual de exemplo. Substitua por uma imagem do seu projeto.",
+        "en": "Example conceptual diagram. Replace it with an image from your project."
+      },
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "A abordagem",
+        "en": "The approach"
+      },
+      "body": {
+        "pt": "Explique suas decisões, sua contribuição e como a solução evoluiu.",
+        "en": "Explain your decisions, your contribution, and how the solution evolved."
+      }
+    },
+    {
+      "type": "metric",
+      "value": "42%",
+      "label": {
+        "pt": "Métrica ilustrativa",
+        "en": "Illustrative metric"
+      },
+      "description": {
+        "pt": "Valor fictício para demonstrar a apresentação. Substitua por um resultado verificável e explique como foi medido.",
+        "en": "Fictional value demonstrating the layout. Replace it with a verifiable result and explain how it was measured."
+      }
+    },
+    {
+      "type": "link",
+      "label": {
+        "pt": "Link de exemplo",
+        "en": "Example link"
+      },
+      "href": "https://example.com"
+    }
+  ],
+  "visual": {
+    "variant": "data-node"
+  },
+  "position": {
+    "mode": "auto"
+  },
+  "projectType": {
+    "pt": "Demonstração do template",
+    "en": "Template demonstration"
+  },
+  "status": {
+    "pt": "Exemplo ilustrativo",
+    "en": "Illustrative example"
+  }
+}

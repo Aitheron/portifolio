@@ -1,6 +1,6 @@
 # File-based content architecture
 
-The content refactor preserves the V2 renderer, spatial anchors, camera behavior, image reconstruction, identity orbit and fixed case shell. Current entries retain their order and visible copy.
+The content refactor preserves the V2 renderer, spatial anchors, camera behavior, image reconstruction, identity orbit and fixed case shell. The default content is a generic profile, one example project and one connected experience; the other two clusters start empty.
 
 ## Authoring boundary
 
@@ -23,15 +23,15 @@ A cover is independent of the optional, unrestricted gallery. Images support loc
 
 `content-assets.server.ts` checks referenced `/assets/` files during page generation and development requests. It never enters the client bundle. Language catalogs are explicitly included in traced deployments, following [Next.js output-file tracing guidance](https://nextjs.org/docs/app/api-reference/config/next-config-js/output).
 
-The unregistered `examples/example-project.json` demonstrates the blocks, two gallery entries, cover, signals and a relation. Its four SVGs were created locally for the repository. Adding it to the registry is optional and changes the scene, so it is kept out of the current personal instance.
+The registered `projects/example-project.json` demonstrates text, image, metric and link blocks, a two-image gallery, cover, signals and a relation to `experience/example-experience.json`. Its four SVGs were created locally for the repository. A gallery block is also supported for positioning images within the editorial flow. Contacts have no destinations and the illustrative metric is explicitly labeled as fictional.
 
 ## Verification
 
 Verification uses the existing npm/TypeScript/node:test stack and an external local Playwright/Chromium harness; no browser-testing dependency was added to the application.
 
-- Existing navigation, zoom boundary, spatial separation, selection, graph and satellite tests remain in place. Fixture edits reflect schema versions and renamed data fields.
+- Existing navigation, zoom boundary, spatial separation, selection, graph and satellite tests remain in place. The spacing test uses five synthetic projects so the two-entry demo does not weaken coverage of crowded scenes.
 - New tests exercise all current JSON, schema versions, multiple/absent galleries, editorial ordering, safe image metadata, custom locales/clusters, locale fallback, signal visibility, invalid relations, missing assets and UI-catalog fallback.
-- An isolated copy builds with `locales: ["es"]`, a corresponding default content fixture and the generic example registered. This checks single-locale routing, not the accuracy of translated copy.
-- Browser checks cover the identity, overview, PN Extractor case/context/orbit, PT/EN switching, keyboard navigation and responsive layout. The example fixture checks all editorial block types and actual image loading on desktop/mobile.
+- An isolated copy builds with `locales: ["es"]`, a corresponding default content fixture and generic content registered. This checks single-locale routing, not the accuracy of translated copy.
+- Browser checks cover the identity, overview, example project case/context/orbit, PT/EN switching, keyboard navigation and responsive layout. The example fixture checks all editorial block types and actual image loading on desktop/mobile.
 
 No second repository, deployment, CMS service, database or new application dependency is introduced.

@@ -11,14 +11,19 @@ import {resolveLocalizedText} from "./portfolio-types";
 import {contentEntries} from "../content/registry";
 import profile from "../content/profile.json";
 import clusters from "../content/clusters.json";
-import example from "../content/examples/example-project.json";
+import example from "../content/projects/example-project.json";
 
 const fixture = {...example, relations: []};
 test("all current files and the teaching example validate, with an optional cover and unrestricted gallery", () => {
   profileSchema.parse(profile); clusterCollectionSchema.parse(clusters);
   const nodes = validatePortfolioNodes(contentEntries.map(e => e.data));
-  assert.equal(nodes.length, 9);
-  assert.equal(nodes.find(n => n.id === "pn-extractor")?.signals?.length, 6);
+  assert.equal(nodes.length, 2);
+  assert.deepEqual(nodes.map(node => node.kind), ["project", "experience"]);
+  assert.equal(nodes[0].relations?.[0].targetId, nodes[1].id);
+  assert.equal(nodes[1].relations?.[0].targetId, nodes[0].id);
+  assert.equal(nodes[0].signals?.length, 3);
+  assert.equal(nodes.filter(node => ["education-research", "talks-community"].includes(node.cluster)).length, 0);
+  assert.ok(profile.actions.every(action => !("href" in action) && !("email" in action)));
   assert.equal(portfolioNodeSchema.parse(example).gallery?.length, 2);
   assert.equal(portfolioNodeSchema.parse({...fixture, gallery: Array(12).fill(example.gallery[0])}).gallery?.length, 12);
   assert.equal(portfolioNodeSchema.parse({...fixture, coverImage: undefined, gallery: undefined}).coverImage, undefined);
@@ -46,7 +51,9 @@ test("signals independently control orbit and case visibility while preserving d
 });
 
 test("editorial order, image presentation and media metadata validate with actionable file errors", () => {
-  assert.deepEqual(portfolioNodeSchema.parse(example).content?.map(b => b.type), ["text", "image", "text", "metric", "gallery", "link"]);
+  assert.deepEqual(portfolioNodeSchema.parse(example).content?.map(b => b.type), ["text", "image", "text", "metric", "link"]);
+  const gallery = portfolioNodeSchema.parse({...fixture, content: [{type: "gallery", images: example.gallery}]});
+  assert.equal(gallery.content?.[0].type, "gallery");
   for (const changes of [{content: [{type: "script"}]}, {content: [{type: "image", src: "/image.svg", presentation: {x: 20}}]}, {coverImage: {src: "javascript:alert(1)"}}, {coverImage: {src: "/%zz"}}, {gallery: [{src: "/image.svg", role: "unknown"}]}, {schemaVersion: 2}]) {
     assert.throws(() => parseContent(portfolioNodeSchema, {...fixture, ...changes}, "src/content/projects/bad.json"), /src\/content\/projects\/bad.json/);
   }

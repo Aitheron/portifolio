@@ -1,20 +1,20 @@
 {
-  "id": "marlon",
+  "id": "profile",
   "title": {
-    "pt": "Marlon de Souza",
-    "en": "Marlon de Souza"
+    "pt": "Seu Nome",
+    "en": "Your Name"
   },
   "primaryRole": {
-    "pt": "Engenheiro de IA Aplicada",
-    "en": "Applied AI Engineer"
+    "pt": "Sua especialidade",
+    "en": "Your specialty"
   },
   "secondaryRole": {
-    "pt": "Engenheiro de Software",
-    "en": "Software Engineer"
+    "pt": "Sua área de atuação",
+    "en": "Your field"
   },
   "summary": {
-    "pt": "Desenvolvo sistemas de IA aplicada que transformam processos e dados complexos em soluções práticas e prontas para produção.",
-    "en": "I build applied AI systems that turn complex processes and data into practical, production-ready solutions."
+    "pt": "Apresente quem você é, os problemas que resolve e o tipo de trabalho que deseja compartilhar.",
+    "en": "Introduce yourself, the problems you solve, and the work you want to share."
   },
   "position": [
     0,
@@ -32,8 +32,7 @@
         "pt": "LinkedIn",
         "en": "LinkedIn"
       },
-      "external": true,
-      "href": "https://www.linkedin.com/in/marlon-de-souza-software-engineer/"
+      "external": true
     },
     {
       "id": "github",
@@ -42,8 +41,7 @@
         "pt": "GitHub",
         "en": "GitHub"
       },
-      "external": true,
-      "href": "https://github.com/Marlon-Souza16/"
+      "external": true
     },
     {
       "id": "email",
@@ -51,9 +49,7 @@
       "label": {
         "pt": "Email",
         "en": "Email"
-      },
-      "email": "marlondesouzajlle@hotmail.com",
-      "subject": "Contact from Marlon's Portfolio"
+      }
     },
     {
       "id": "resume",
@@ -61,98 +57,66 @@
       "label": {
         "pt": "Currículo",
         "en": "Resume"
-      },
-      "download": "Marlon-de-Souza-CV.pdf",
-      "href": {
-        "pt": "/curriculo.pdf",
-        "en": ""
       }
     }
   ],
   "schemaVersion": 1,
-  "shortName": "Marlon",
+  "shortName": "Portfolio",
   "signals": [
     {
-      "id": "applied-ai",
-      "type": "domain",
+      "id": "craft",
+      "type": "concept",
       "label": {
-        "pt": "IA Aplicada",
-        "en": "Applied AI"
+        "pt": "Criação",
+        "en": "Craft"
       },
       "importance": 1
     },
     {
-      "id": "production-ai",
+      "id": "collaboration",
       "type": "concept",
       "label": {
-        "pt": "IA em Produção",
-        "en": "AI in Production"
-      },
-      "importance": 0.95
-    },
-    {
-      "id": "software",
-      "type": "domain",
-      "label": {
-        "pt": "Engenharia de Software",
-        "en": "Software Engineering"
+        "pt": "Colaboração",
+        "en": "Collaboration"
       },
       "importance": 0.9
     },
     {
-      "id": "machine-learning",
+      "id": "learning",
       "type": "concept",
       "label": {
-        "pt": "Machine Learning",
-        "en": "Machine Learning"
+        "pt": "Aprendizado",
+        "en": "Learning"
       },
       "importance": 0.8
-    },
-    {
-      "id": "llm-systems",
-      "type": "concept",
-      "label": {
-        "pt": "Sistemas LLM",
-        "en": "LLM Systems"
-      },
-      "importance": 0.7
-    },
-    {
-      "id": "rag-agents",
-      "type": "concept",
-      "label": {
-        "pt": "RAG & Agentes",
-        "en": "RAG & Agents"
-      },
-      "importance": 0.6
     }
   ],
   "intro": {
     "eyebrow": {
-      "pt": "ESPAÇO VETORIAL PROFISSIONAL / 2026",
-      "en": "PROFESSIONAL VECTOR SPACE / 2026"
+      "pt": "PORTFÓLIO INTERATIVO",
+      "en": "INTERACTIVE PORTFOLIO"
     },
     "role": {
-      "pt": "Engenheiro de IA e Engenheiro de Software",
-      "en": "AI Engineer & Software Engineer"
+      "pt": "Sua especialidade e área de atuação",
+      "en": "Your specialty and field"
     },
     "statement": {
-      "pt": "Transformando dados complexos em sistemas inteligentes para o mundo real.",
-      "en": "Turning complex data into intelligent real-world systems."
+      "pt": "Um espaço para apresentar seus projetos, experiências e ideias.",
+      "en": "A space to share your projects, experience, and ideas."
     },
     "status": {
-      "pt": "Quatro clusters de carreira para explorar",
-      "en": "Four career clusters to explore"
+      "pt": "Um projeto de exemplo e uma experiência para explorar",
+      "en": "One example project and one experience to explore"
     }
   },
   "metadata": {
     "title": {
-      "pt": "Marlon // Vector Space",
-      "en": "Marlon // Vector Space"
+      "pt": "Seu Nome // Vector Space",
+      "en": "Your Name // Vector Space"
     },
     "description": {
-      "pt": "Um portfólio semântico explorável do Engenheiro de IA e Engenheiro de Software Marlon de Souza.",
-      "en": "An explorable semantic portfolio by AI Engineer and Software Engineer Marlon de Souza."
+      "pt": "Um template de portfólio interativo com projetos, experiências e conexões.",
+      "en": "An interactive portfolio template with projects, experience, and connections."
     }
   }
 }

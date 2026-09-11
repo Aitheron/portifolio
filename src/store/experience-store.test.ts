@@ -7,7 +7,7 @@ const state = () => useExperienceStore.getState();
 beforeEach(() => useExperienceStore.setState(useExperienceStore.getInitialState(), true));
 
 test("identity focus clears project selection, never opens a case, and returns to overview", () => {
-  state().focusNode("aitheron", "key-projects", true);
+  state().focusNode("project-a", "key-projects", true);
   state().focusIdentity();
   assert.equal(state().stage, "identity-focus");
   assert.equal(state().selectedNodeId, null);
@@ -23,33 +23,33 @@ test("identity focus clears project selection, never opens a case, and returns t
 
 test("opens a preview's own case immediately without selecting its cluster first", () => {
   state().returnToOverview();
-  state().openNodeCase("aitheron", "key-projects");
+  state().openNodeCase("project-a", "key-projects");
   assert.equal(state().stage, "node-details");
-  assert.equal(state().selectedNodeId, "aitheron");
+  assert.equal(state().selectedNodeId, "project-a");
   assert.equal(state().selectedClusterId, "key-projects");
   state().closeCase();
   assert.equal(state().stage, "node-focus");
   state().openCase();
   assert.equal(state().stage, "node-details");
   state().focusCluster("education-research");
-  state().openNodeCase("pn-extractor", "key-projects");
+  state().openNodeCase("project-b", "key-projects");
   assert.equal(state().stage, "node-details");
-  assert.equal(state().selectedNodeId, "pn-extractor");
+  assert.equal(state().selectedNodeId, "project-b");
   assert.equal(state().selectedClusterId, "key-projects");
 });
 
 test("travels before opening a case and returns outward one level at a time", () => {
   state().focusCluster("key-projects");
-  state().focusNode("aitheron", "key-projects");
+  state().focusNode("project-a", "key-projects");
   assert.equal(state().stage, "node-focus");
   state().openCase();
   assert.equal(state().stage, "node-focus");
-  state().completeNodeFocus("aitheron");
+  state().completeNodeFocus("project-a");
   state().openCase();
   assert.equal(state().stage, "node-details");
   state().navigateBack();
   assert.equal(state().stage, "node-focus");
-  assert.equal(state().selectedNodeId, "aitheron");
+  assert.equal(state().selectedNodeId, "project-a");
   state().navigateBack();
   assert.equal(state().stage, "cluster-focus");
   state().navigateBack();
@@ -58,16 +58,16 @@ test("travels before opening a case and returns outward one level at a time", ()
 });
 
 test("ignores stale arrival and resets readiness on a different project", () => {
-  state().focusNode("aitheron", "key-projects");
-  state().focusNode("pn-extractor", "key-projects");
-  state().completeNodeFocus("aitheron");
+  state().focusNode("project-a", "key-projects");
+  state().focusNode("project-b", "key-projects");
+  state().completeNodeFocus("project-a");
   assert.equal(state().focusReady, false);
-  state().completeNodeFocus("pn-extractor");
+  state().completeNodeFocus("project-b");
   assert.equal(state().focusReady, true);
 });
 
 test("locale transitions preserve case versus exploration context", () => {
-  state().focusNode("aitheron", "key-projects", true);
+  state().focusNode("project-a", "key-projects", true);
   state().beginEntering("en");
   state().completeEntering();
   assert.equal(state().stage, "node-focus");
@@ -78,7 +78,7 @@ test("locale transitions preserve case versus exploration context", () => {
 });
 
 test("fallback needs no camera and repeated case close does not skip a level", () => {
-  state().focusNode("aitheron", "key-projects", true);
+  state().focusNode("project-a", "key-projects", true);
   state().openCase();
   state().closeCase();
   state().closeCase();
@@ -89,7 +89,7 @@ test("fallback needs no camera and repeated case close does not skip a level", (
 });
 
 test("an overview reset during locale entry cannot restore a stale selected stage", () => {
-  state().focusNode("aitheron", "key-projects", true);
+  state().focusNode("project-a", "key-projects", true);
   state().openCase();
   state().beginEntering("en");
   state().returnToOverview();
