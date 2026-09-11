@@ -1,6 +1,4 @@
-import type {PortfolioNode} from "@/lib/portfolio-types";
-
-export default {
+{
   "id": "docguard",
   "slug": "docguard",
   "kind": "project",
@@ -25,63 +23,6 @@ export default {
   "provisional": true,
   "confidential": false,
   "technologies": [],
-  "tags": [],
-  "satellites": [
-    {
-      "id": "pii",
-      "type": "domain",
-      "label": {
-        "pt": "PII",
-        "en": "PII"
-      },
-      "importance": 1.0
-    },
-    {
-      "id": "sanitization",
-      "type": "concept",
-      "label": {
-        "pt": "Sanitização",
-        "en": "Sanitization"
-      },
-      "importance": 0.9
-    },
-    {
-      "id": "privacy",
-      "type": "concept",
-      "label": {
-        "pt": "Privacidade",
-        "en": "Privacy"
-      },
-      "importance": 0.8
-    },
-    {
-      "id": "safe-ai",
-      "type": "concept",
-      "label": {
-        "pt": "IA Segura",
-        "en": "Safe AI"
-      },
-      "importance": 0.7
-    },
-    {
-      "id": "ner",
-      "type": "technology",
-      "label": {
-        "pt": "NER",
-        "en": "NER"
-      },
-      "importance": 0.6
-    },
-    {
-      "id": "security",
-      "type": "domain",
-      "label": {
-        "pt": "Segurança",
-        "en": "Security"
-      },
-      "importance": 0.5
-    }
-  ],
   "relations": [],
   "visual": {
     "variant": "data-node",
@@ -90,5 +31,74 @@ export default {
   },
   "position": {
     "mode": "auto"
-  }
-} satisfies PortfolioNode;
+  },
+  "schemaVersion": 1,
+  "signals": [
+    {
+      "id": "pii",
+      "type": "domain",
+      "label": {
+        "pt": "PII",
+        "en": "PII"
+      },
+      "importance": 1,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "sanitization",
+      "type": "concept",
+      "label": {
+        "pt": "Sanitização",
+        "en": "Sanitization"
+      },
+      "importance": 0.9,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "privacy",
+      "type": "concept",
+      "label": {
+        "pt": "Privacidade",
+        "en": "Privacy"
+      },
+      "importance": 0.8,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "safe-ai",
+      "type": "concept",
+      "label": {
+        "pt": "IA Segura",
+        "en": "Safe AI"
+      },
+      "importance": 0.7,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "ner",
+      "type": "technology",
+      "label": {
+        "pt": "NER",
+        "en": "NER"
+      },
+      "importance": 0.6,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "security",
+      "type": "domain",
+      "label": {
+        "pt": "Segurança",
+        "en": "Security"
+      },
+      "importance": 0.5,
+      "showInOrbit": true,
+      "showInCase": true
+    }
+  ]
+}

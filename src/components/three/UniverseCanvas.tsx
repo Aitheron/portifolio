@@ -19,7 +19,7 @@ import {resolveProjectSatelliteContext} from "@/lib/satellite-layout";
 import type {ProjectSatelliteContext} from "@/lib/satellite-layout";
 import {imageFormationConfig} from "@/lib/scene-config";
 import {prioritizeWorldIntersections} from "@/lib/world-interaction";
-import {isUniverseStage} from "@/lib/portfolio-types";
+import {locales, isUniverseStage} from "@/lib/portfolio-types";
 import {useExperienceStore} from "@/store/experience-store";
 
 import {IdentityNode} from "./IdentityNode";
@@ -93,8 +93,8 @@ function LanguageGalaxies() {
   });
   return (
     <group ref={groupRef}>
-      {([-8, 8] as const).map((x, index) => {
-        const locale = index === 0 ? "pt" : "en";
+      {locales.map((locale, index) => {
+        const x = locales.length === 1 ? 0 : -8 + index * 16 / (locales.length - 1);
         const isAcquired = selectedLocale === locale;
         const isDimmed = selectedLocale !== null && !isAcquired;
         return (
@@ -152,7 +152,7 @@ function PreviewBudgetTracker({
         cluster: node.cluster,
         distance: previewPosition.length(),
         alignment: previewPosition.normalize().dot(viewDirection),
-        hasSatellites: Boolean(node.satellites?.length),
+        hasSatellites: Boolean(node.signals?.some(signal => signal.showInOrbit !== false)),
       };
     });
     const candidates = spatialCandidates

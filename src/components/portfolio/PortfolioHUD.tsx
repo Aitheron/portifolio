@@ -1,3 +1,4 @@
+import {portfolioConfig} from "../../../portfolio.config";
 import {useTranslations} from "next-intl";
 
 import {clusterById, clusters} from "@/content/clusters";
@@ -38,7 +39,7 @@ export function PortfolioHUD({onLocaleChange, onExplore}: PortfolioHUDProps) {
   const selectedNodeLabel = selectedNode
     ? resolveLocalizedText(selectedNode.title, locale)
     : null;
-  const locationParts = ["Vector Space", currentLabel, selectedNodeLabel]
+  const locationParts = [portfolioConfig.branding.spaceName, currentLabel, selectedNodeLabel]
     .filter((part): part is string => part !== null);
   const qualityLabel = {
     high: t("qualityHigh"),
@@ -56,9 +57,9 @@ export function PortfolioHUD({onLocaleChange, onExplore}: PortfolioHUDProps) {
   return (
     <header className="portfolio-hud">
       <div className="hud-brand">
-        <span>Marlon</span>
+        <span>{identity.shortName}</span>
         <span className="sr-only">{resolveLocalizedText(identity.title, locale)} — {resolveLocalizedText(identity.primaryRole, locale)}. {resolveLocalizedText(identity.secondaryRole, locale)}.</span>
-        <strong>// Vector Space</strong>
+        <strong>// {portfolioConfig.branding.spaceName}</strong>
       </div>
 
       <nav className="hud-location" aria-live="polite" aria-label={t("location")}>
@@ -77,7 +78,7 @@ export function PortfolioHUD({onLocaleChange, onExplore}: PortfolioHUDProps) {
       <div className="hud-actions">
         <button id="career-explorer-action" className="explore-action" type="button" onClick={onExplore}>{t("explore")}</button>
         <div className="locale-switcher" role="group" aria-label={t("selectLanguage")}>
-          {(["pt", "en"] as const).map((option) => (
+          {portfolioConfig.locales.map((option) => (
             <button
               key={option}
               type="button"

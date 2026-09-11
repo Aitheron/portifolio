@@ -1,9 +1,7 @@
-export const locales = ["pt", "en"] as const;
-export type AppLocale = (typeof locales)[number];
+import {portfolioConfig} from "../../portfolio.config";
 
-export const clusterIds = [
-  "key-projects", "experience-impact", "education-research", "talks-community",
-] as const;
+export const locales = portfolioConfig.locales;
+export type AppLocale = string;
 
 export const nodeKinds = [
   "project",
@@ -21,33 +19,44 @@ export const visualVariants = [
   "human-signal",
 ] as const;
 
-export type ClusterId = (typeof clusterIds)[number];
+export type ClusterId = string;
 export type NodeKind = (typeof nodeKinds)[number];
 export type VisualVariant = (typeof visualVariants)[number];
 export type Vector3Tuple = [number, number, number];
 
-export type LocalizedText = {
-  pt: string;
-  en: string;
-};
+export type LocalizedText = Record<string, string>;
 
 export const relationTypes = ["built-at", "uses", "related-to", "produced", "thesis-of", "impact", "presented-at", "research"] as const;
 export const participationRoles = ["speaker", "workshop-host", "mentor", "panelist", "attendee"] as const;
-export type SemanticRelation = {targetId: string; type: (typeof relationTypes)[number]};
+export type SemanticRelation = {targetId: string; type: (typeof relationTypes)[number]; label?: LocalizedText};
 export type SemanticSatellite = {
   id: string;
   type: "technology" | "concept" | "metric" | "domain";
   label: LocalizedText;
+  showInOrbit?: boolean;
+  showInCase?: boolean;
+  visualWeight?: number;
   importance?: number;
   relationTargetId?: string;
 };
 export type PortfolioImage = {
   src: string;
-  alt: LocalizedText;
+  alt?: LocalizedText;
+  caption?: LocalizedText;
+  role?: "cover" | "interface" | "architecture" | "result" | "research" | "concept" | "event" | "gallery";
   category?: "project" | "conceptual" | "event";
 };
 
+export type ContentBlock =
+  | {type: "text"; title?: LocalizedText; body: LocalizedText}
+  | ({type: "image"; presentation?: {size?: "inline" | "wide" | "full"; align?: "left" | "center" | "right"}} & PortfolioImage)
+  | {type: "gallery"; images: PortfolioImage[]}
+  | {type: "metric"; value: string; label: LocalizedText; description?: LocalizedText}
+  | {type: "link"; label: LocalizedText; href: string};
+
 export type PortfolioNode = {
+  schemaVersion?: number;
+  content?: ContentBlock[];
   id: string;
   slug: string;
   kind: NodeKind;
@@ -55,7 +64,7 @@ export type PortfolioNode = {
   title: LocalizedText;
   summary: LocalizedText;
   description: LocalizedText;
-  image?: PortfolioImage;
+  coverImage?: PortfolioImage;
   gallery?: PortfolioImage[];
   importance?: "flagship" | "primary" | "secondary";
   participationRole?: (typeof participationRoles)[number];
@@ -70,9 +79,8 @@ export type PortfolioNode = {
   myRole?: LocalizedText;
   impact?: LocalizedText;
   relations?: SemanticRelation[];
-  satellites?: SemanticSatellite[];
+  signals?: SemanticSatellite[];
   technologies: string[];
-  tags: string[];
   links?: {
     label: LocalizedText;
     href: string;
@@ -108,7 +116,11 @@ export type CoreIdentity = {
   summary: LocalizedText;
   image?: PortfolioImage;
   position: Vector3Tuple;
-  satellites: SemanticSatellite[];
+  schemaVersion?: number;
+  shortName?: string;
+  intro?: Record<string, LocalizedText>;
+  metadata?: Record<string, LocalizedText>;
+  signals: SemanticSatellite[];
   actions: IdentityAction[];
   visual: PortfolioNode["visual"];
 };
@@ -149,8 +161,8 @@ export function isUniverseStage(stage: ExperienceStage): boolean {
 }
 
 export function resolveLocalizedText(
-  text: LocalizedText,
+  text: LocalizedText | undefined,
   locale: AppLocale,
 ): string {
-  return text[locale];
+  return text?.[locale] ?? text?.[portfolioConfig.defaultLocale] ?? "";
 }

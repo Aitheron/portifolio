@@ -1,93 +1,53 @@
 # Marlon // Vector Space
 
-Portfólio bilíngue de Marlon de Souza apresentado como um grafo espacial de carreira. A V2 evolui o universo da V1 com uma identidade central, quatro regiões de carreira e micro-universos de projetos. O projeto usa Next.js, React, TypeScript, Tailwind CSS, Three.js, React Three Fiber, Drei, next-intl, Zustand e Zod.
+Portfólio espacial com identidade central, quatro regiões de carreira e micro-universos de projetos. Usa Next.js, React, TypeScript, Three.js, React Three Fiber, Drei, next-intl, Zustand e Zod. A arquitetura separa conteúdo JSON do motor visual, preservando a experiência V2.
 
-## Instalação
+## Instalação e verificação
 
-Requer Node.js 20.9 ou mais recente e npm.
+Requer Node.js 20.9+ e npm.
 
 ```bash
 npm install
 npm run dev
-```
-
-Acesse `http://localhost:3000/pt` ou `http://localhost:3000/en`.
-
-## Build de produção
-
-```bash
+# http://localhost:3000/pt ou /en
+npm test
+npm run typecheck
 npm run build
 npm start
 ```
 
+## Personalização
+
+Normalmente, altere apenas `src/content/`, `public/assets/` e `portfolio.config.ts`.
+
+- **Identidade:** edite `src/content/profile.json`: nome, funções, resumo, introdução, metadados, imagem opcional, `signals` e ações. Contatos sem destino ficam desabilitados. Currículos podem usar `href` por idioma; um idioma sem PDF permanece desabilitado, sem baixar outro idioma por engano.
+- **Projeto:** copie `src/content/examples/example-project.json` para `src/content/projects/<id>.json`. Defina `id` e `slug` únicos, `cluster`, textos e evidências. Importe o JSON em **`src/content/registry.ts`** e adicione `{file, data}` à lista. Este é o único registro extra; a ordem da lista preserva o posicionamento determinístico. O exemplo não aparece no portfólio até ser registrado.
+- **Experiência, formação e eventos:** use as pastas `experience/`, `education/` e `talks/`, com `kind` correspondente. Campos de projeto são opcionais. Eventos podem informar `participationRole` (`speaker`, `workshop-host`, `mentor`, `panelist`, `attendee`).
+- **Assets:** coloque arquivos em `public/assets/projects/<id>/` e referencie `/assets/projects/<id>/arquivo.svg`. Os SVGs do exemplo foram criados para este repositório. Arquivos pessoais fora de `public/assets/` continuam ignorados pelo Git.
+- **Capa e galeria:** `coverImage: {src, alt?, caption?, role?}` define uma capa. `gallery` aceita zero ou várias imagens, sem limite de um item. Sem capa, o fallback procedural existente permanece. Referências locais em `/assets/` precisam existir; o servidor/build informa arquivo e campo quando faltam.
+- **Imagem no case:** adicione `{type: "image", src, alt, caption, presentation: {size: "wide", align: "center"}}` em `content`, entre os blocos de texto desejados. `size` aceita `inline`, `wide`, `full`; `align` aceita `left`, `center`, `right`. Não há coordenadas absolutas no conteúdo editorial.
+- **Blocos:** `content` mantém a ordem de `text`, `image`, `gallery`, `metric` e `link`. O exemplo mostra todos. `gallery` usa `images`; `metric` usa `value`, `label` e `description` opcional; `link` aceita HTTPS. O hero, os metadados, **Contexto do projeto** e **Contexto conectado** continuam no shell fixo, antes do conteúdo editorial.
+- **Sinal de órbita/contexto:** registre uma vez em `signals`: `{id, type, label, showInOrbit, showInCase, importance?}`. Tipos: `concept`, `technology`, `domain`, `metric`. As duas visibilidades são `true` por padrão; os limites visuais existentes decidem quantos sinais orbitam. Não duplique esses rótulos em coleções paralelas de tags.
+- **Conexão semântica:** use `relations: [{targetId, type, label?}]`. O mesmo dado alimenta o grafo e os botões de contexto conectado. Tipos: `built-at`, `uses`, `related-to`, `produced`, `thesis-of`, `impact`, `presented-at`, `research`. Referências ausentes, autorrelações e relações idênticas duplicadas são erros.
+- **Clusters:** edite `src/content/clusters.json`; IDs, títulos, cores, padrões e âncoras são dados. Cada entidade possui um único `cluster`; relações não criam cópias espaciais. Preserve espaço suficiente entre regiões ao mudar suas âncoras.
+- **Idiomas:** configure `locales`, `defaultLocale` e, opcionalmente, `localeLabels` em `portfolio.config.ts`. Pode usar `["es"]` ou `["en", "es", "de"]`. Os textos localizados usam `{idioma: "Texto"}` e exigem o idioma padrão. Traduções opcionais ausentes usam o padrão. Edite a interface em `src/content/messages/<idioma>.json`: o arquivo padrão é obrigatório; arquivos ou chaves opcionais ausentes usam esse arquivo. Para trocar o padrão, traduza primeiro os campos de conteúdo e o catálogo correspondente. Não é necessário editar renderizadores ou criar páginas por idioma.
+
+Todo documento principal usa `schemaVersion: 1`. Versões desconhecidas, blocos não suportados, URLs inseguras e objetos localizados malformados falham antes de chegar ao WebGL. Os erros identificam o arquivo e o campo.
+
 ## Arquitetura
 
-- `src/content/nodes`: um arquivo de dados serializáveis por item do portfólio.
-- `src/content/nodes/index.ts`: registro explícito que valida todos os itens com Zod.
-- `src/content/identity.ts`: identidade central, resumo, imagem opcional, sinais semânticos e ações de contato.
-- `src/content/clusters.ts`: posições, aparência e layout determinístico dos clusters.
-- `src/lib/portfolio-graph.ts`: índice derivado das entidades existentes, sem duplicar conteúdo.
-- `src/lib/satellite-layout.ts`: distribuição determinística, relevância e limites dos satélites.
-- `src/lib/scene-config.ts`: limites de navegação e níveis de reconstrução visual.
-- `src/components/three`: renderização genérica do universo, identidade, clusters, nós e micro-universos.
-- `src/components/portfolio`: HUD, exploração HTML acessível, cases e fallback WebGL.
-- `src/messages`: textos globais em português e inglês.
-
-As capas são ativadas somente quando a câmera se aproxima e são reconstruídas por fragmentos reais da textura nos modos `high` e `medium`. O modo `low` usa dissolve. Uma capa procedural baseada no cluster passa pelo mesmo pipeline quando não existe `image` ou quando o carregamento falha.
-
-A câmera combina órbita, zoom orientado ao cursor e deslocamento lateral com bordas elásticas. Aponte e role para revelar o conteúdo; clique diretamente na imagem ou no bloco de título/resumo para abrir o case em HTML, sem uma seleção prévia. O núcleo do projeto e **Explorar carreira** continuam permitindo viajar até ele e explorar seus satélites; **Abrir case** também fica disponível nessa visão. Fechar o case retorna ao projeto; `Escape` e zoom para fora permitem voltar ao cluster e à visão geral. Use `H` ou o controle do HUD para centralizar a visão. No desktop, arraste para orbitar e use `Shift` + arraste ou o botão direito para mover.
-
-**Explorar carreira** oferece acesso por teclado à mesma estrutura, inclusive com WebGL funcionando. No celular, a navegação guiada mantém o universo 3D; os satélites usam menos rótulos e uma órbita compacta, passando por trás da capa nas laterais. As palavras completam uma volta contínua em aproximadamente 32 segundos. A preferência por movimento reduzido mantém os satélites estáticos. A troca PT/EN preserva o contexto selecionado.
-
-## Uma entidade, uma âncora, várias relações
-
-As regiões ficam mais afastadas da identidade central, e os projetos usam ângulos distribuídos uniformemente com variação de profundidade para evitar agrupamentos acidentais.
-
-Os quatro clusters primários são `key-projects`, `experience-impact`, `education-research` e `talks-community`. O campo `cluster` define a única âncora espacial de cada entidade. `relations` conecta essa entidade a outros contextos por ID:
-
-```ts
-cluster: "key-projects",
-relations: [
-  {targetId: "software-engineering", type: "thesis-of"},
-  {targetId: "education-research", type: "research"},
-],
+```text
+src/content/*.json + registry.ts
+                ↓ Zod + validação de referências
+        entidades e grafo tipados
+                ↓
+   universo 3D + shell do case + CaseContentRenderer
 ```
 
-Aitheron existe uma vez, mesmo quando acessado pela formação acadêmica. A experiência profissional referencia os projetos existentes da mesma forma. IDs de relações precisam resolver para uma entidade, cluster ou identidade; o schema rejeita referências ausentes e IDs duplicados.
+O registro explícito mantém a aplicação compatível com seu bundle estático e evita filesystem no cliente. `src/content/identity.ts`, `clusters.ts` e `nodes/index.ts` são adaptadores; publicação normal de conteúdo não exige modificá-los. O filesystem é usado somente no servidor para catálogos de idioma e validação de assets. Configuração controla idiomas, marca do motor e versão; biografia e projetos ficam no conteúdo.
 
-`importance` aceita `flagship`, `primary` e `secondary`. `satellites` contém até sete sinais com `id`, `type`, `label: {pt, en}` e importância opcional. Eles apresentam contexto e não são botões de navegação. Um único renderizador atende todos os projetos, com no máximo um micro-universo de projeto detalhado por vez. Os limites de capas continuam sendo 3/2/1 nos modos high/medium/low.
+As capas continuam sendo reconstruídas por fragmentos nos modos high/medium; low usa dissolve. A câmera preserva órbita, zoom orientado ao cursor e bordas elásticas. Clique na capa/resumo para abrir o case, ou use **Explorar carreira** para navegar por teclado. Fechar retorna ao projeto; `Escape` e zoom para fora retornam ao cluster e à visão geral. `H` centraliza. A troca de idioma preserva o contexto. O modo móvel, movimento reduzido e fallback WebGL permanecem disponíveis.
 
-Eventos usam `participationRole`: `speaker`, `workshop-host`, `mentor`, `panelist` ou `attendee`. Os exemplos de facilitador e ouvinte têm pesos diferentes; a presença em um evento não implica uma palestra.
+Os projetos atuais e suas métricas provisórias foram migrados sem inventar evidências adicionais. O exemplo genérico contém apenas dados ilustrativos e não é registrado. Este repositório prepara a separação futura entre template e instância pessoal; não adiciona CMS externo, banco de dados, autenticação, IA ou um segundo repositório.
 
-## Conteúdo provisório
-
-O núcleo Marlon revela a imagem progressivamente usando o mesmo pipeline de fragmentação das capas. Clique no núcleo/nome ou use **Explorar carreira → Focar em Marlon** para aproximar; o resumo e as quatro ações aparecem perto do núcleo. `Escape`, zoom para fora e centralização retornam à visão geral. Os satélites semânticos permanecem ambientais desde a entrada.
-
-Configure `image: {src, alt: {pt, en}}` em `src/content/identity.ts` para substituir o placeholder procedural por uma foto. Em `actions`, configure `href` com HTTPS para LinkedIn/GitHub, `email: "ENDERECO"` e `subject` opcional para Email (o renderer monta o `mailto:`), ou um caminho interno (PDF/página) ou HTTPS para Currículo. URLs HTTPS abrem em outra aba por padrão, com `noopener noreferrer`; `external: false` permite abrir na mesma aba. Para baixar o currículo diretamente, coloque o PDF em `public/`, defina seu caminho em `href` (por exemplo, `/curriculo.pdf`) e mantenha `download: "Marlon-de-Souza-CV.pdf"`. O satélite informa **Baixar PDF / Download PDF** antes do clique. Para uma página interna ou visualização, remova `download`; URLs externas continuam abrindo para visualização, pois o atributo HTML de download exige a mesma origem. Sem destino válido, a ação mostra **Em breve / Coming soon** e fica desabilitada. Nenhum contato, foto ou currículo fictício é fornecido.
-
-Os cinco nomes de projetos são reais; os textos, sinais e capas desta etapa são provisórios. `provisional` identifica cases ainda em construção. As métricas fornecidas para o protótipo permanecem no contexto do projeto e são identificadas como provisórias no case. Não foram inventados empregadores, instituições, URLs ou resultados adicionais.
-
-O modelo aceita seções opcionais de problema, solução, papel, impacto, ano, tipo, status, empresa, galeria e links HTTPS, incluindo documentos. Seções ausentes ficam ocultas. `image.category` e as imagens da galeria podem ser `project`, `conceptual` ou `event`. Use `confidential` quando aplicável e identifique imagens conceituais; uma capa procedural não é uma captura real do produto.
-
-A V2 permanece estática e determinística. Não implementa busca semântica, embeddings, RAG, APIs de LLM ou ECHO.
-
-## Como adicionar um item ao portfólio
-
-1. Copie um arquivo existente da pasta do cluster correspondente em `src/content/nodes`.
-2. Altere `id`, `slug` e todo o conteúdo localizado.
-3. Escolha uma variante suportada: `data-node`, `genomic-nebula`, `agent-network`, `system-module` ou `human-signal`.
-4. Defina o cluster primário, importância e apenas os campos de case disponíveis. Adicione relações por ID e poucos satélites significativos.
-5. Importe o novo objeto em `src/content/nodes/index.ts` e adicione-o a `registeredNodes`.
-6. Execute `npm test`, `npm run typecheck` e `npm run build` para validar comportamento, tipos, schema e relacionamentos.
-
-O novo item será posicionado e renderizado automaticamente. Use `position: {mode: "manual", value: [x, y, z]}` apenas quando precisar de direção de arte específica.
-
-## Verificação
-
-```bash
-npm test
-npm run typecheck
-npm run build
-```
-
-Os testes usam TypeScript e `node:test`, sem framework adicional. Cobrem o grafo, a validação, as transições de navegação, os satélites e as interações existentes. A verificação no navegador deve incluir a jornada Marlon → Projetos-chave → Aitheron → case → cluster → visão geral, PT/EN, teclado, toque, movimento reduzido e fallback WebGL. Consulte o [plano e registro de execução](docs/plans/v2-career-knowledge-graph.md).
+Os testes cobrem navegação, grafo, sinais, schemas, idiomas configuráveis, galerias e assets. Verifique também identidade → projeto → case → cluster → visão geral, PT/EN, teclado e tamanhos móveis no navegador.

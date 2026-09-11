@@ -1,4 +1,5 @@
 "use client";
+import {identity} from "@/content/identity";
 
 import dynamic from "next/dynamic";
 import {useCallback, useEffect, useState} from "react";
@@ -9,7 +10,7 @@ import {portfolioNodes} from "@/content/nodes";
 import type {AppLocale} from "@/i18n/routing";
 import {detectPerformanceQuality} from "@/lib/performance-quality";
 import type {GraphTarget} from "@/lib/portfolio-graph";
-import {isUniverseStage} from "@/lib/portfolio-types";
+import {resolveLocalizedText, isUniverseStage} from "@/lib/portfolio-types";
 import {useExperienceStore} from "@/store/experience-store";
 
 import {LanguageGateway} from "./LanguageGateway";
@@ -129,15 +130,15 @@ export function VectorSpaceExperience({locale}: VectorSpaceExperienceProps) {
 
       {stage === "intro" && (
         <section className="intro-panel" aria-labelledby="intro-title">
-          <p className="eyebrow">{intro("eyebrow")}</p>
-          <h1 id="intro-title">{intro("name")}</h1>
-          <p className="intro-role">{intro("role")}</p>
-          <p className="intro-statement">{intro("statement")}</p>
+          <p className="eyebrow">{resolveLocalizedText(identity.intro.eyebrow, activeLocale)}</p>
+          <h1 id="intro-title">{resolveLocalizedText(identity.title, activeLocale).toLocaleUpperCase(activeLocale)}</h1>
+          <p className="intro-role">{resolveLocalizedText(identity.intro.role, activeLocale)}</p>
+          <p className="intro-statement">{resolveLocalizedText(identity.intro.statement, activeLocale)}</p>
           <button className="primary-action" type="button" onClick={openLanguageGateway}>
             <span>{intro("enter")}</span>
             <span aria-hidden="true">↗</span>
           </button>
-          <p className="intro-status"><i aria-hidden="true" /> {intro("status")}</p>
+          <p className="intro-status"><i aria-hidden="true" /> {resolveLocalizedText(identity.intro.status, activeLocale)}</p>
         </section>
       )}
 
@@ -147,7 +148,7 @@ export function VectorSpaceExperience({locale}: VectorSpaceExperienceProps) {
 
       {isUniverse && (
         <>
-          <h1 className="sr-only">Marlon // Vector Space</h1>
+          <h1 className="sr-only">{resolveLocalizedText(identity.metadata.title, activeLocale)}</h1>
           <PortfolioHUD onLocaleChange={changeLocale} onExplore={() => setExplorerOpen(true)} />
           {explorerOpen && <SemanticExplorer locale={activeLocale} onClose={() => setExplorerOpen(false)} />}
           {webglStatus === "unavailable" && (

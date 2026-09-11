@@ -1,6 +1,4 @@
-import type {PortfolioNode} from "@/lib/portfolio-types";
-
-export default {
+{
   "id": "aitheron",
   "slug": "aitheron",
   "kind": "project",
@@ -28,63 +26,6 @@ export default {
     "PyTorch",
     "FastAPI"
   ],
-  "tags": [],
-  "satellites": [
-    {
-      "id": "brca",
-      "type": "domain",
-      "label": {
-        "pt": "BRCA1 / BRCA2",
-        "en": "BRCA1 / BRCA2"
-      },
-      "importance": 1
-    },
-    {
-      "id": "pytorch",
-      "type": "technology",
-      "label": {
-        "pt": "PyTorch",
-        "en": "PyTorch"
-      },
-      "importance": 0.95
-    },
-    {
-      "id": "genomic-ai",
-      "type": "domain",
-      "label": {
-        "pt": "IA Genômica",
-        "en": "Genomic AI"
-      },
-      "importance": 0.9
-    },
-    {
-      "id": "research",
-      "type": "concept",
-      "label": {
-        "pt": "Pesquisa",
-        "en": "Research"
-      },
-      "importance": 0.85
-    },
-    {
-      "id": "auroc",
-      "type": "metric",
-      "label": {
-        "pt": "AUROC 0.99+",
-        "en": "AUROC 0.99+"
-      },
-      "importance": 0.8
-    },
-    {
-      "id": "fastapi",
-      "type": "technology",
-      "label": {
-        "pt": "FastAPI",
-        "en": "FastAPI"
-      },
-      "importance": 0.7
-    }
-  ],
   "relations": [
     {
       "targetId": "software-engineering",
@@ -102,5 +43,74 @@ export default {
   },
   "position": {
     "mode": "auto"
-  }
-} satisfies PortfolioNode;
+  },
+  "schemaVersion": 1,
+  "signals": [
+    {
+      "id": "brca",
+      "type": "domain",
+      "label": {
+        "pt": "BRCA1 / BRCA2",
+        "en": "BRCA1 / BRCA2"
+      },
+      "importance": 1,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "pytorch",
+      "type": "technology",
+      "label": {
+        "pt": "PyTorch",
+        "en": "PyTorch"
+      },
+      "importance": 0.95,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "genomic-ai",
+      "type": "domain",
+      "label": {
+        "pt": "IA Genômica",
+        "en": "Genomic AI"
+      },
+      "importance": 0.9,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "research",
+      "type": "concept",
+      "label": {
+        "pt": "Pesquisa",
+        "en": "Research"
+      },
+      "importance": 0.85,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "auroc",
+      "type": "metric",
+      "label": {
+        "pt": "AUROC 0.99+",
+        "en": "AUROC 0.99+"
+      },
+      "importance": 0.8,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "fastapi",
+      "type": "technology",
+      "label": {
+        "pt": "FastAPI",
+        "en": "FastAPI"
+      },
+      "importance": 0.7,
+      "showInOrbit": true,
+      "showInCase": true
+    }
+  ]
+}

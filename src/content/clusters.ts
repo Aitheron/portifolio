@@ -6,20 +6,10 @@ import type {
 } from "@/lib/portfolio-types";
 import {getProjectVisualRadius, projectVisualSafetyMargin} from "../lib/satellite-layout";
 
-export const clusters: readonly ClusterDefinition[] = [
-  {id: "key-projects", title: {pt: "Projetos-chave", en: "Key Projects"},
-    description: {pt: "Projetos que conectam pesquisa, engenharia e IA aplicada.", en: "Projects connecting research, engineering and applied AI."},
-    position: [20, 1, -4], radius: 8.5, color: "#5ad7ff", secondaryColor: "#d9f7ff", pattern: "network"},
-  {id: "experience-impact", title: {pt: "Experiência & Impacto", en: "Experience & Impact"},
-    description: {pt: "Contexto profissional e impacto de sistemas no mundo real.", en: "Professional context and the impact of real-world systems."},
-    position: [0, -14, 2], radius: 6, color: "#75b7c9", secondaryColor: "#d9f1f5", pattern: "topology"},
-  {id: "education-research", title: {pt: "Formação & Pesquisa", en: "Education & Research"},
-    description: {pt: "Engenharia de Software, pesquisa e suas conexões com projetos.", en: "Software Engineering, research and their connections to projects."},
-    position: [-18, 1, -6], radius: 6, color: "#8f8cff", secondaryColor: "#dbd9ff", pattern: "helix"},
-  {id: "talks-community", title: {pt: "Palestras & Comunidade", en: "Talks & Community"},
-    description: {pt: "Conhecimento compartilhado em palestras, encontros e mentoria.", en: "Knowledge shared through talks, gatherings and mentoring."},
-    position: [-1, 14, -6], radius: 6, color: "#ffad66", secondaryColor: "#ffe2bd", pattern: "pulse"},
-];
+import rawClusters from "./clusters.json";
+import {clusterCollectionSchema, parseContent} from "../lib/portfolio-schema";
+
+export const clusters: readonly ClusterDefinition[] = parseContent(clusterCollectionSchema, rawClusters, "src/content/clusters.json").clusters;
 
 export const clusterById = Object.fromEntries(
   clusters.map((cluster) => [cluster.id, cluster]),

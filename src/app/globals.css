@@ -835,3 +835,12 @@ button {
 @media (prefers-reduced-motion: reduce) {
   .identity-summary, .identity-actions, .identity-world-label { transition: none; }
 }
+
+/* Editorial intent stays within the existing case column and spacing scale. */
+.case-text { white-space: pre-line; }
+.case-image { width: 100%; margin-top: 2rem; }
+.case-image--inline { max-width: 24rem; }
+.case-image--wide { max-width: 40rem; }
+.case-image--left { margin-right: auto; }
+.case-image--center { margin-inline: auto; }
+.case-image--right { margin-left: auto; }

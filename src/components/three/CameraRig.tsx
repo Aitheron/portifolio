@@ -1,3 +1,4 @@
+import {locales} from "@/lib/portfolio-types";
 import {useEffect, useMemo, useRef} from "react";
 import {OrbitControls} from "@react-three/drei";
 import {useFrame, useThree} from "@react-three/fiber";
@@ -45,7 +46,7 @@ export function CameraRig() {
     if (stage === "language-selection") {
       position.set(0, 1.5, 23);
     } else if (stage === "entering") {
-      const direction = languageSignal === "pt" ? -1 : 1;
+      const direction = locales.length === 1 ? 0 : -1 + Math.max(0, locales.indexOf(languageSignal ?? locales[0])) * 2 / (locales.length - 1);
       position.set(direction * 5.5, 1.5, 15);
       target.set(direction * 8, 0, 0);
     } else if (stage === "identity-focus") {

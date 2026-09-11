@@ -1,8 +1,9 @@
+import {portfolioConfig} from "../../portfolio.config";
 import type {AppLocale, IdentityAction} from "./portfolio-types";
 
 export function resolveIdentityActionHref(
   action: Pick<IdentityAction, "type" | "href" | "email" | "subject">,
-  locale: AppLocale = "pt",
+  locale: AppLocale = portfolioConfig.defaultLocale,
 ): string | null {
   if (action.type === "email" && action.email !== undefined) {
     const email = action.email.trim();

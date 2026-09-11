@@ -1,6 +1,4 @@
-import type {PortfolioNode} from "@/lib/portfolio-types";
-
-export default {
+{
   "id": "multi-agent-tariff-intelligence",
   "slug": "multi-agent-tariff-intelligence",
   "kind": "project",
@@ -25,63 +23,6 @@ export default {
   "provisional": true,
   "confidential": true,
   "technologies": [],
-  "tags": [],
-  "satellites": [
-    {
-      "id": "agents",
-      "type": "concept",
-      "label": {
-        "pt": "Agentes",
-        "en": "Agents"
-      },
-      "importance": 1.0
-    },
-    {
-      "id": "enterprise-ai",
-      "type": "domain",
-      "label": {
-        "pt": "IA Empresarial",
-        "en": "Enterprise AI"
-      },
-      "importance": 0.9
-    },
-    {
-      "id": "automation",
-      "type": "concept",
-      "label": {
-        "pt": "Automação",
-        "en": "Automation"
-      },
-      "importance": 0.8
-    },
-    {
-      "id": "validation",
-      "type": "concept",
-      "label": {
-        "pt": "Validação",
-        "en": "Validation"
-      },
-      "importance": 0.7
-    },
-    {
-      "id": "llms",
-      "type": "technology",
-      "label": {
-        "pt": "LLMs",
-        "en": "LLMs"
-      },
-      "importance": 0.6
-    },
-    {
-      "id": "efficiency",
-      "type": "metric",
-      "label": {
-        "pt": "+70% de eficiência",
-        "en": "+70% efficiency"
-      },
-      "importance": 0.5
-    }
-  ],
   "relations": [
     {
       "targetId": "professional-experience",
@@ -95,5 +36,74 @@ export default {
   },
   "position": {
     "mode": "auto"
-  }
-} satisfies PortfolioNode;
+  },
+  "schemaVersion": 1,
+  "signals": [
+    {
+      "id": "agents",
+      "type": "concept",
+      "label": {
+        "pt": "Agentes",
+        "en": "Agents"
+      },
+      "importance": 1,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "enterprise-ai",
+      "type": "domain",
+      "label": {
+        "pt": "IA Empresarial",
+        "en": "Enterprise AI"
+      },
+      "importance": 0.9,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "automation",
+      "type": "concept",
+      "label": {
+        "pt": "Automação",
+        "en": "Automation"
+      },
+      "importance": 0.8,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "validation",
+      "type": "concept",
+      "label": {
+        "pt": "Validação",
+        "en": "Validation"
+      },
+      "importance": 0.7,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "llms",
+      "type": "technology",
+      "label": {
+        "pt": "LLMs",
+        "en": "LLMs"
+      },
+      "importance": 0.6,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "efficiency",
+      "type": "metric",
+      "label": {
+        "pt": "+70% de eficiência",
+        "en": "+70% efficiency"
+      },
+      "importance": 0.5,
+      "showInOrbit": true,
+      "showInCase": true
+    }
+  ]
+}

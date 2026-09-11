@@ -11,4 +11,5 @@ dist/
 *.tsbuildinfo
 .DS_Store
 npm-debug.log*
-public/
+public/*
+!public/assets/

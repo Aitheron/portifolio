@@ -1,15 +1,6 @@
 {
-  "Metadata": {
-    "title": "Marlon // Vector Space",
-    "description": "Um portfólio semântico explorável do Engenheiro de IA e Engenheiro de Software Marlon de Souza."
-  },
   "Intro": {
-    "eyebrow": "ESPAÇO VETORIAL PROFISSIONAL / 2026",
-    "name": "MARLON DE SOUZA",
-    "role": "Engenheiro de IA e Engenheiro de Software",
-    "statement": "Transformando dados complexos em sistemas inteligentes para o mundo real.",
-    "enter": "ENTRAR NO ESPAÇO VETORIAL",
-    "status": "Quatro clusters de carreira para explorar"
+    "enter": "ENTRAR NO ESPAÇO VETORIAL"
   },
   "Gateway": {
     "eyebrow": "PORTAL DE IDIOMA",
@@ -91,8 +82,8 @@
   },
   "Identity": {
     "downloadPdf": "Baixar PDF",
-    "focus": "Focar em Marlon",
-    "contactActions": "Contato com Marlon",
+    "focus": "Focar em {name}",
+    "contactActions": "Contato com {name}",
     "unavailable": "Em breve"
   }
 }

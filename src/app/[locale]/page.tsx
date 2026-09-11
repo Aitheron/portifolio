@@ -1,6 +1,9 @@
+import {identity} from "@/content/identity";
+import {resolveLocalizedText} from "@/lib/portfolio-types";
+import {validateContentAssets} from "@/lib/content-assets.server";
 import type {Metadata} from "next";
 import {hasLocale} from "next-intl";
-import {getTranslations, setRequestLocale} from "next-intl/server";
+import {setRequestLocale} from "next-intl/server";
 import {notFound} from "next/navigation";
 
 import {VectorSpaceExperience} from "@/components/portfolio/VectorSpaceExperience";
@@ -15,9 +18,9 @@ export async function generateMetadata({
   params,
 }: HomePageProps): Promise<Metadata> {
   const {locale} = await params;
-  const t = await getTranslations({locale, namespace: "Metadata"});
 
-  return {title: t("title"), description: t("description")};
+
+  return {title: resolveLocalizedText(identity.metadata.title, locale), description: resolveLocalizedText(identity.metadata.description, locale)};
 }
 
 export default async function HomePage({params}: HomePageProps) {
@@ -27,6 +30,7 @@ export default async function HomePage({params}: HomePageProps) {
     notFound();
   }
 
+  validateContentAssets();
   setRequestLocale(locale);
   return <VectorSpaceExperience locale={locale as AppLocale} />;
 }

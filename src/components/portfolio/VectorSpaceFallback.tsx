@@ -37,10 +37,10 @@ export function VectorSpaceFallback({
           <p className="eyebrow">{t("eyebrow")}</p>
           <h2 id={titleId}>{webglUnavailable ? t("title") : t("explore")}</h2>
           <p>{resolveLocalizedText(identity.title, locale)} · {resolveLocalizedText(identity.primaryRole, locale)} · {resolveLocalizedText(identity.secondaryRole, locale)}</p>
-          <button type="button" className="text-action" onClick={() => {focusIdentity(); onNavigate?.();}}>{identityText("focus")}</button>
+          <button type="button" className="text-action" onClick={() => {focusIdentity(); onNavigate?.();}}>{identityText("focus", {name: identity.shortName})}</button>
           {webglUnavailable && stage === "identity-focus" && <>
             <p>{resolveLocalizedText(identity.summary, locale)}</p>
-            <IdentityActions locale={locale} visible labels={{contactActions: identityText("contactActions"), unavailable: identityText("unavailable"), downloadPdf: identityText("downloadPdf")}} />
+            <IdentityActions locale={locale} visible labels={{contactActions: identityText("contactActions", {name: identity.shortName}), unavailable: identityText("unavailable"), downloadPdf: identityText("downloadPdf")}} />
           </>}
           {webglUnavailable && <p>{t("description")}</p>}
         </header>

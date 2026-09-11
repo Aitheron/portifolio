@@ -1,3 +1,4 @@
+import {visibleSignals} from "./semantic-signals";
 import type {ClusterId, PerformanceQuality, PortfolioNode, SemanticSatellite, Vector3Tuple} from "./portfolio-types";
 
 export const projectSatelliteRadius = 5.2;
@@ -5,7 +6,7 @@ export const projectVisualSafetyMargin = 0.4;
 
 export function getProjectVisualRadius(node: PortfolioNode): number {
   // Include the preview/summary envelope, or the orbit plus label clearance.
-  return Math.max(3.4, node.satellites?.length ? projectSatelliteRadius + 0.4 : 0);
+  return Math.max(3.4, visibleSignals(node.signals, "orbit").length ? projectSatelliteRadius + 0.4 : 0);
 }
 
 export type ProjectSatelliteContext = {
@@ -48,7 +49,7 @@ export function getSatelliteBudget(width: number, quality: PerformanceQuality): 
 }
 
 export function selectSatellites(satellites: readonly SemanticSatellite[], limit: number): SemanticSatellite[] {
-  return [...satellites].sort((a, b) => (b.importance ?? 0.5) - (a.importance ?? 0.5) || a.id.localeCompare(b.id)).slice(0, limit);
+  return visibleSignals(satellites, "orbit").sort((a, b) => (b.importance ?? 0.5) - (a.importance ?? 0.5) || a.id.localeCompare(b.id)).slice(0, limit);
 }
 
 export function getSatellitePosition(

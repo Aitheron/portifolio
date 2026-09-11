@@ -110,11 +110,12 @@ export function useProjectCoverTexture(
 
     const requestCover = async () => {
       let nextCover: ProjectCoverTexture | null = null;
-      if (node.image) {
+      const image = "kind" in node ? node.coverImage : node.image;
+      if (image) {
         try {
           nextCover = await claim(
-            `image:${node.image.src}`,
-            () => loadImageTexture(node.image!.src),
+            `image:${image.src}`,
+            () => loadImageTexture(image.src),
           );
         } catch {
           if (!mounted) return;

@@ -1,0 +1,158 @@
+{
+  "id": "marlon",
+  "title": {
+    "pt": "Marlon de Souza",
+    "en": "Marlon de Souza"
+  },
+  "primaryRole": {
+    "pt": "Engenheiro de IA Aplicada",
+    "en": "Applied AI Engineer"
+  },
+  "secondaryRole": {
+    "pt": "Engenheiro de Software",
+    "en": "Software Engineer"
+  },
+  "summary": {
+    "pt": "Desenvolvo sistemas de IA aplicada que transformam processos e dados complexos em soluções práticas e prontas para produção.",
+    "en": "I build applied AI systems that turn complex processes and data into practical, production-ready solutions."
+  },
+  "position": [
+    0,
+    0,
+    0
+  ],
+  "visual": {
+    "variant": "human-signal"
+  },
+  "actions": [
+    {
+      "id": "linkedin",
+      "type": "linkedin",
+      "label": {
+        "pt": "LinkedIn",
+        "en": "LinkedIn"
+      },
+      "external": true,
+      "href": "https://www.linkedin.com/in/marlon-de-souza-software-engineer/"
+    },
+    {
+      "id": "github",
+      "type": "github",
+      "label": {
+        "pt": "GitHub",
+        "en": "GitHub"
+      },
+      "external": true,
+      "href": "https://github.com/Marlon-Souza16/"
+    },
+    {
+      "id": "email",
+      "type": "email",
+      "label": {
+        "pt": "Email",
+        "en": "Email"
+      },
+      "email": "marlondesouzajlle@hotmail.com",
+      "subject": "Contact from Marlon's Portfolio"
+    },
+    {
+      "id": "resume",
+      "type": "resume",
+      "label": {
+        "pt": "Currículo",
+        "en": "Resume"
+      },
+      "download": "Marlon-de-Souza-CV.pdf",
+      "href": {
+        "pt": "/curriculo.pdf",
+        "en": ""
+      }
+    }
+  ],
+  "schemaVersion": 1,
+  "shortName": "Marlon",
+  "signals": [
+    {
+      "id": "applied-ai",
+      "type": "domain",
+      "label": {
+        "pt": "IA Aplicada",
+        "en": "Applied AI"
+      },
+      "importance": 1
+    },
+    {
+      "id": "production-ai",
+      "type": "concept",
+      "label": {
+        "pt": "IA em Produção",
+        "en": "AI in Production"
+      },
+      "importance": 0.95
+    },
+    {
+      "id": "software",
+      "type": "domain",
+      "label": {
+        "pt": "Engenharia de Software",
+        "en": "Software Engineering"
+      },
+      "importance": 0.9
+    },
+    {
+      "id": "machine-learning",
+      "type": "concept",
+      "label": {
+        "pt": "Machine Learning",
+        "en": "Machine Learning"
+      },
+      "importance": 0.8
+    },
+    {
+      "id": "llm-systems",
+      "type": "concept",
+      "label": {
+        "pt": "Sistemas LLM",
+        "en": "LLM Systems"
+      },
+      "importance": 0.7
+    },
+    {
+      "id": "rag-agents",
+      "type": "concept",
+      "label": {
+        "pt": "RAG & Agentes",
+        "en": "RAG & Agents"
+      },
+      "importance": 0.6
+    }
+  ],
+  "intro": {
+    "eyebrow": {
+      "pt": "ESPAÇO VETORIAL PROFISSIONAL / 2026",
+      "en": "PROFESSIONAL VECTOR SPACE / 2026"
+    },
+    "role": {
+      "pt": "Engenheiro de IA e Engenheiro de Software",
+      "en": "AI Engineer & Software Engineer"
+    },
+    "statement": {
+      "pt": "Transformando dados complexos em sistemas inteligentes para o mundo real.",
+      "en": "Turning complex data into intelligent real-world systems."
+    },
+    "status": {
+      "pt": "Quatro clusters de carreira para explorar",
+      "en": "Four career clusters to explore"
+    }
+  },
+  "metadata": {
+    "title": {
+      "pt": "Marlon // Vector Space",
+      "en": "Marlon // Vector Space"
+    },
+    "description": {
+      "pt": "Um portfólio semântico explorável do Engenheiro de IA e Engenheiro de Software Marlon de Souza.",
+      "en": "An explorable semantic portfolio by AI Engineer and Software Engineer Marlon de Souza."
+    }
+  }
+}

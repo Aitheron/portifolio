@@ -1,6 +1,4 @@
-import type {PortfolioNode} from "@/lib/portfolio-types";
-
-export default {
+{
   "id": "enterprise-llm-infrastructure",
   "slug": "enterprise-llm-infrastructure",
   "kind": "project",
@@ -27,63 +25,6 @@ export default {
   "technologies": [
     "LiteLLM"
   ],
-  "tags": [],
-  "satellites": [
-    {
-      "id": "litellm",
-      "type": "technology",
-      "label": {
-        "pt": "LiteLLM",
-        "en": "LiteLLM"
-      },
-      "importance": 1.0
-    },
-    {
-      "id": "routing",
-      "type": "concept",
-      "label": {
-        "pt": "Roteamento",
-        "en": "Routing"
-      },
-      "importance": 0.9
-    },
-    {
-      "id": "multi-provider",
-      "type": "concept",
-      "label": {
-        "pt": "Múltiplos provedores",
-        "en": "Multi-provider"
-      },
-      "importance": 0.8
-    },
-    {
-      "id": "reliability",
-      "type": "concept",
-      "label": {
-        "pt": "Confiabilidade",
-        "en": "Reliability"
-      },
-      "importance": 0.7
-    },
-    {
-      "id": "observability",
-      "type": "concept",
-      "label": {
-        "pt": "Observabilidade",
-        "en": "Observability"
-      },
-      "importance": 0.6
-    },
-    {
-      "id": "production-ai",
-      "type": "domain",
-      "label": {
-        "pt": "IA em Produção",
-        "en": "Production AI"
-      },
-      "importance": 0.5
-    }
-  ],
   "relations": [
     {
       "targetId": "professional-experience",
@@ -97,5 +38,74 @@ export default {
   },
   "position": {
     "mode": "auto"
-  }
-} satisfies PortfolioNode;
+  },
+  "schemaVersion": 1,
+  "signals": [
+    {
+      "id": "litellm",
+      "type": "technology",
+      "label": {
+        "pt": "LiteLLM",
+        "en": "LiteLLM"
+      },
+      "importance": 1,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "routing",
+      "type": "concept",
+      "label": {
+        "pt": "Roteamento",
+        "en": "Routing"
+      },
+      "importance": 0.9,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "multi-provider",
+      "type": "concept",
+      "label": {
+        "pt": "Múltiplos provedores",
+        "en": "Multi-provider"
+      },
+      "importance": 0.8,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "reliability",
+      "type": "concept",
+      "label": {
+        "pt": "Confiabilidade",
+        "en": "Reliability"
+      },
+      "importance": 0.7,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "observability",
+      "type": "concept",
+      "label": {
+        "pt": "Observabilidade",
+        "en": "Observability"
+      },
+      "importance": 0.6,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "production-ai",
+      "type": "domain",
+      "label": {
+        "pt": "IA em Produção",
+        "en": "Production AI"
+      },
+      "importance": 0.5,
+      "showInOrbit": true,
+      "showInCase": true
+    }
+  ]
+}

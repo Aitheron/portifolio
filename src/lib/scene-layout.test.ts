@@ -2,13 +2,16 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {clusters, getNodePosition} from "../content/clusters";
-import aitheron from "../content/nodes/key-projects/aitheron";
-import multiAgent from "../content/nodes/key-projects/multi-agent-tariff-intelligence";
-import pnExtractor from "../content/nodes/key-projects/pn-extractor";
-import llmInfrastructure from "../content/nodes/key-projects/enterprise-llm-infrastructure";
-import docguard from "../content/nodes/key-projects/docguard";
+import aitheronData from "../content/projects/aitheron.json";
+import multiAgentData from "../content/projects/multi-agent-tariff-intelligence.json";
+import pnExtractorData from "../content/projects/pn-extractor.json";
+import llmInfrastructureData from "../content/projects/enterprise-llm-infrastructure.json";
+import docguardData from "../content/projects/docguard.json";
 import {navigationBoundaries} from "./scene-navigation";
 import {getProjectVisualRadius, projectVisualSafetyMargin} from "./satellite-layout";
+
+import {portfolioNodeSchema} from "./portfolio-schema";
+const [aitheron, multiAgent, pnExtractor, llmInfrastructure, docguard] = [aitheronData, multiAgentData, pnExtractorData, llmInfrastructureData, docguardData].map(data => portfolioNodeSchema.parse(data));
 
 test("career regions and project anchors leave room for orbiting context within navigable space", () => {
   for (const cluster of clusters) assert.ok(Math.hypot(...cluster.position) >= 14);

@@ -10,8 +10,9 @@ const clusters: ClusterDefinition[] = ["key-projects", "education-research"].map
   radius: 5, color: "#ffffff", secondaryColor: "#ffffff", pattern: "network",
 }));
 const project = {
+  schemaVersion: 1,
   id: "aitheron", slug: "aitheron", title, summary: title, description: title,
-  kind: "project", cluster: "key-projects", technologies: [], tags: [],
+  kind: "project", cluster: "key-projects", technologies: [],
   visual: {variant: "data-node"}, position: {mode: "auto"},
 };
 
@@ -34,7 +35,7 @@ test("rejects anchors and relations missing from the actual rendered graph", () 
   assert.throws(() => createPortfolioGraph(nodes, [], {id: "marlon", title}), /anchor/);
   assert.throws(() => createPortfolioGraph(nodes, clusters.slice(0, 1), {id: "marlon", title}), /education-research/);
   const satellites = validatePortfolioNodes([{
-    ...project, satellites: [{id: "research", type: "concept", label: title, relationTargetId: "education-research"}],
+    ...project, signals: [{id: "research", type: "concept", label: title, relationTargetId: "education-research"}],
   }]);
   assert.throws(() => createPortfolioGraph(satellites, clusters.slice(0, 1), {id: "marlon", title}), /education-research/);
 });
@@ -42,4 +43,10 @@ test("rejects anchors and relations missing from the actual rendered graph", () 
 test("graph index rejects a node colliding with the identity", () => {
   const nodes = validatePortfolioNodes([project]);
   assert.throws(() => createPortfolioGraph(nodes, [], {id: "aitheron", title}), /Duplicate/);
+});
+
+test("identity signal references must also resolve against the rendered graph", () => {
+  assert.throws(() => createPortfolioGraph([], clusters, {
+    id: "person", title, signals: [{id: "research", type: "concept", label: title, relationTargetId: "missing"}],
+  }), /signals.research.relationTargetId missing/);
 });

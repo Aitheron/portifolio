@@ -1,6 +1,4 @@
-import type {PortfolioNode} from "@/lib/portfolio-types";
-
-export default {
+{
   "id": "pn-extractor",
   "slug": "pn-extractor",
   "kind": "project",
@@ -25,63 +23,6 @@ export default {
   "provisional": true,
   "confidential": true,
   "technologies": [],
-  "tags": [],
-  "satellites": [
-    {
-      "id": "document-ai",
-      "type": "domain",
-      "label": {
-        "pt": "IA para Documentos",
-        "en": "Document AI"
-      },
-      "importance": 1.0
-    },
-    {
-      "id": "extraction",
-      "type": "concept",
-      "label": {
-        "pt": "Extração",
-        "en": "Extraction"
-      },
-      "importance": 0.9
-    },
-    {
-      "id": "validation",
-      "type": "concept",
-      "label": {
-        "pt": "Validação",
-        "en": "Validation"
-      },
-      "importance": 0.8
-    },
-    {
-      "id": "time",
-      "type": "metric",
-      "label": {
-        "pt": "6h → ~15min",
-        "en": "6h → ~15min"
-      },
-      "importance": 0.7
-    },
-    {
-      "id": "accuracy",
-      "type": "metric",
-      "label": {
-        "pt": "~98% de acurácia",
-        "en": "~98% accuracy"
-      },
-      "importance": 0.6
-    },
-    {
-      "id": "automation",
-      "type": "concept",
-      "label": {
-        "pt": "Automação",
-        "en": "Automation"
-      },
-      "importance": 0.5
-    }
-  ],
   "relations": [
     {
       "targetId": "professional-experience",
@@ -95,5 +36,74 @@ export default {
   },
   "position": {
     "mode": "auto"
-  }
-} satisfies PortfolioNode;
+  },
+  "schemaVersion": 1,
+  "signals": [
+    {
+      "id": "document-ai",
+      "type": "domain",
+      "label": {
+        "pt": "IA para Documentos",
+        "en": "Document AI"
+      },
+      "importance": 1,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "extraction",
+      "type": "concept",
+      "label": {
+        "pt": "Extração",
+        "en": "Extraction"
+      },
+      "importance": 0.9,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "validation",
+      "type": "concept",
+      "label": {
+        "pt": "Validação",
+        "en": "Validation"
+      },
+      "importance": 0.8,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "time",
+      "type": "metric",
+      "label": {
+        "pt": "6h → ~15min",
+        "en": "6h → ~15min"
+      },
+      "importance": 0.7,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "accuracy",
+      "type": "metric",
+      "label": {
+        "pt": "~98% de acurácia",
+        "en": "~98% accuracy"
+      },
+      "importance": 0.6,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "automation",
+      "type": "concept",
+      "label": {
+        "pt": "Automação",
+        "en": "Automation"
+      },
+      "importance": 0.5,
+      "showInOrbit": true,
+      "showInCase": true
+    }
+  ]
+}

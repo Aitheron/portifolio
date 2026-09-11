@@ -1,15 +1,6 @@
 {
-  "Metadata": {
-    "title": "Marlon // Vector Space",
-    "description": "An explorable semantic portfolio by AI Engineer and Software Engineer Marlon de Souza."
-  },
   "Intro": {
-    "eyebrow": "PROFESSIONAL VECTOR SPACE / 2026",
-    "name": "MARLON DE SOUZA",
-    "role": "AI Engineer & Software Engineer",
-    "statement": "Turning complex data into intelligent real-world systems.",
-    "enter": "ENTER VECTOR SPACE",
-    "status": "Four career clusters to explore"
+    "enter": "ENTER VECTOR SPACE"
   },
   "Gateway": {
     "eyebrow": "LANGUAGE GATEWAY",
@@ -91,8 +82,8 @@
   },
   "Identity": {
     "downloadPdf": "Download PDF",
-    "focus": "Focus on Marlon",
-    "contactActions": "Contact Marlon",
+    "focus": "Focus on {name}",
+    "contactActions": "Contact {name}",
     "unavailable": "Coming soon"
   }
 }

@@ -190,8 +190,8 @@ export function PortfolioNodeMesh({
         <sphereGeometry args={[0.78, 10, 8]} />
         <meshBasicMaterial colorWrite={false} depthWrite={false} />
       </mesh>
-      {microMounted && node.satellites?.length ? (
-        <MicroUniverse satellites={node.satellites} color={cluster.color} mode={microMode}
+      {microMounted && node.signals?.some(signal => signal.showInOrbit !== false) ? (
+        <MicroUniverse satellites={node.signals} color={cluster.color} mode={microMode}
           onHidden={() => {if (microModeRef.current === "none") setMicroMounted(false);}} />
       ) : null}
       <group ref={coreRef}><NodeCore node={node} color={cluster.color} /></group>

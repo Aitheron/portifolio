@@ -1,3 +1,4 @@
+import {portfolioConfig} from "../../portfolio.config";
 import {create} from "zustand";
 
 import type {AppLocale, ClusterId, ExperienceStage, PerformanceQuality} from "../lib/portfolio-types";
@@ -32,7 +33,7 @@ type ExperienceState = {
 };
 
 export const useExperienceStore = create<ExperienceState>()((set, get) => ({
-  locale: "pt", stage: "intro", resumeStage: "overview",
+  locale: portfolioConfig.defaultLocale, stage: "intro", resumeStage: "overview",
   selectedClusterId: null, selectedNodeId: null, languageSignal: null,
   quality: "medium", reducedMotion: false, focusReady: false, cameraResetRevision: 0,
   setLocale: (locale) => set({locale}),

@@ -64,7 +64,7 @@ export function IdentityNode() {
   return (
     <group position={identity.position}>
       <group ref={composition}>
-        <MicroUniverse satellites={identity.satellites} color="#78d7ff" radius={6.3}
+        <MicroUniverse satellites={identity.signals} color="#78d7ff" radius={6.3}
           emphasis={focused ? 0.2 : prominent ? 0.85 : 0.15} ambient />
         <group ref={core} onClick={(event) => activateWorldItem(event, focusIdentity)}>
           <mesh>
@@ -85,7 +85,7 @@ export function IdentityNode() {
       <Billboard follow>
         <Html center position={[0, reveal.image ? -1.3 : -2.1, 0]} zIndexRange={[22, 0]} style={{pointerEvents: "none"}}>
           <div ref={label} className={`identity-world-label${reveal.image ? " identity-world-label--near" : ""}`}>
-            <button className="identity-focus-trigger" type="button" aria-label={t("focus")}
+            <button className="identity-focus-trigger" type="button" aria-label={t("focus", {name: identity.shortName})}
               aria-expanded={focused} onPointerDown={(event) => event.stopPropagation()}
               onClick={(event) => activateWorldItem(event, focusIdentity)}>
               <strong>{resolveLocalizedText(identity.title, locale)}</strong>
@@ -95,7 +95,7 @@ export function IdentityNode() {
             <p className={`identity-summary${focused ? " is-visible" : ""}`} aria-hidden={!focused}>
               {resolveLocalizedText(identity.summary, locale)}
             </p>
-            <IdentityActions locale={locale} visible={focused} spatial labels={{contactActions: t("contactActions"), unavailable: t("unavailable"), downloadPdf: t("downloadPdf")}} />
+            <IdentityActions locale={locale} visible={focused} spatial labels={{contactActions: t("contactActions", {name: identity.shortName}), unavailable: t("unavailable"), downloadPdf: t("downloadPdf")}} />
           </div>
         </Html>
       </Billboard>

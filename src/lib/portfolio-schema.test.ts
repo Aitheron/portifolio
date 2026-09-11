@@ -5,15 +5,15 @@ import {validatePortfolioNodes} from "./portfolio-schema";
 
 const title = {pt: "Exemplo", en: "Example"};
 const fixture = {
-  id: "example", slug: "example", kind: "project", cluster: "key-projects",
-  title, summary: title, description: title, technologies: [], tags: [],
+  schemaVersion: 1, id: "example", slug: "example", kind: "project", cluster: "key-projects",
+  title, summary: title, description: title, technologies: [],
   visual: {variant: "data-node"}, position: {mode: "auto"},
 };
 
 test("accepts incomplete career content with optional evidence and default arrays", () => {
   const [node] = validatePortfolioNodes([fixture]);
   assert.deepEqual(node.relations, []);
-  assert.deepEqual(node.satellites, []);
+  assert.deepEqual(node.signals, []);
   assert.equal(node.importance, "primary");
 });
 
@@ -31,8 +31,8 @@ test("rejects duplicate identities and unresolved semantic targets", () => {
 
 test("validates local satellite identities and optional relation targets", () => {
   const satellite = {id: "context", type: "concept", label: title};
-  assert.throws(() => validatePortfolioNodes([{...fixture, satellites: [satellite, satellite]}]), /duplicate/);
-  assert.throws(() => validatePortfolioNodes([{...fixture, satellites: [{...satellite, relationTargetId: "missing"}]}]), /missing/);
+  assert.throws(() => validatePortfolioNodes([{...fixture, signals: [satellite, satellite]}]), /duplicate/);
+  assert.throws(() => validatePortfolioNodes([{...fixture, signals: [{...satellite, relationTargetId: "missing"}]}]), /missing/);
 });
 
 test("rejects duplicate typed edges and removed V1 fields and clusters", () => {

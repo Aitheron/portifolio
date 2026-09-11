@@ -65,10 +65,10 @@ export function NodeDetailsPanel({node, locale, onClose, onNavigate}: NodeDetail
         </button>
 
         <div className="node-dialog__visual">
-          {node.image && !imageFailed ? (
+          {node.coverImage && !imageFailed ? (
             <img
-              src={node.image.src}
-              alt={resolveLocalizedText(node.image.alt, locale)}
+              src={node.coverImage.src}
+              alt={resolveLocalizedText(node.coverImage.alt, locale)}
               width={960}
               height={540}
               loading="lazy"
@@ -80,7 +80,7 @@ export function NodeDetailsPanel({node, locale, onClose, onNavigate}: NodeDetail
           )}
         </div>
 
-        {(!node.image || imageFailed || node.image.category === "conceptual" || node.confidential) && <p className="case-visual-caption">{t("conceptual")}</p>}
+        {(!node.coverImage || imageFailed || node.coverImage.category === "conceptual" || node.confidential) && <p className="case-visual-caption">{t("conceptual")}</p>}
         <div className="node-dialog__content">
           <p className="eyebrow">
             {t("cluster")} / {resolveLocalizedText(cluster.title, locale)}
