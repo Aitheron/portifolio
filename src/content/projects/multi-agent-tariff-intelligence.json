@@ -1,0 +1,118 @@
+{
+  "id": "multi-agent-tariff-intelligence",
+  "slug": "multi-agent-tariff-intelligence",
+  "kind": "project",
+  "cluster": "key-projects",
+  "title": {
+    "pt": "Multi-Agent Tariff Intelligence",
+    "en": "Multi-Agent Tariff Intelligence"
+  },
+  "summary": {
+    "pt": "Sistemas multiagentes no contexto de fluxos empresariais.",
+    "en": "Multi-agent systems in the context of enterprise workflows."
+  },
+  "description": {
+    "pt": "Projetei e implementei um pipeline multiagente integrado a APIs.",
+    "en": "Designed and deployed a multi-agent, API-integrated pipeline."
+  },
+  "projectType": {
+    "pt": "Projeto profissional",
+    "en": "Professional project"
+  },
+  "importance": "primary",
+  "provisional": true,
+  "confidential": true,
+  "technologies": [],
+  "relations": [
+    {
+      "targetId": "professional-experience",
+      "type": "related-to"
+    }
+  ],
+  "visual": {
+    "variant": "agent-network",
+    "size": 1.03,
+    "intensity": 1
+  },
+  "position": {
+    "mode": "auto"
+  },
+  "schemaVersion": 1,
+  "signals": [
+    {
+      "id": "agents",
+      "type": "concept",
+      "label": {
+        "pt": "Agentes",
+        "en": "Agents"
+      },
+      "importance": 1,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "enterprise-ai",
+      "type": "domain",
+      "label": {
+        "pt": "IA Empresarial",
+        "en": "Enterprise AI"
+      },
+      "importance": 0.9,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "automation",
+      "type": "concept",
+      "label": {
+        "pt": "Automação",
+        "en": "Automation"
+      },
+      "importance": 0.8,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "validation",
+      "type": "concept",
+      "label": {
+        "pt": "Validação",
+        "en": "Validation"
+      },
+      "importance": 0.7,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "llms",
+      "type": "technology",
+      "label": {
+        "pt": "LLMs",
+        "en": "LLMs"
+      },
+      "importance": 0.6,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "efficiency",
+      "type": "metric",
+      "label": {
+        "pt": "+70% de eficiência",
+        "en": "+70% efficiency"
+      },
+      "importance": 0.5,
+      "showInOrbit": false,
+      "showInCase": false
+    }
+  ],
+  "content": [
+    {
+      "type": "text",
+      "body": {
+        "pt": "Criação de uma pipeline de integração entre APIs e agentes internos, reduzindo SLA e custos operacionais na linha de gestão tarifária.",
+        "en": "Created a full integration pipeline between APIs and internal agents, reducing SLA and operational costs in the tax management line."
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "ai-automation-talks",
+  "slug": "ai-automation-talks",
+  "kind": "talk",
+  "cluster": "talks-community",
+  "title": {
+    "pt": "Palestras sobre IA e Automação",
+    "en": "Talks on AI & Automation"
+  },
+  "summary": {
+    "pt": "Palestras sobre IA e Automação em eventos como GDG Joinville e na Universidade Católica de SC\n\nPalestras internas sobre aplicações práticas de IA e automação de processos",
+    "en": "Delivered talks on AI & Automation (GDG Joinville, Católica University, internal talks)"
+  },
+  "description": {
+    "pt": "Palestras sobre IA e Automação em eventos como GDG Joinville e na Universidade Católica de SC\n\nPalestras internas sobre aplicações práticas de IA e automação de processos",
+    "en": "Delivered talks on AI & Automation (GDG Joinville, Católica University, internal talks)"
+  },
+  "participationRole": "speaker",
+  "technologies": [],
+  "signals": [],
+  "relations": [],
+  "visual": {
+    "variant": "human-signal"
+  },
+  "position": {
+    "mode": "auto"
+  }
+}

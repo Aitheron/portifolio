@@ -8,6 +8,7 @@ import {
 
 import type {AppLocale} from "@/i18n/routing";
 import type {CoreIdentity, PortfolioNode} from "@/lib/portfolio-types";
+import {resolveImageSource} from "@/lib/portfolio-types";
 
 import {createProjectFallbackTexture} from "./createProjectFallbackTexture";
 
@@ -112,10 +113,11 @@ export function useProjectCoverTexture(
       let nextCover: ProjectCoverTexture | null = null;
       const image = "kind" in node ? node.coverImage : node.image;
       if (image) {
+        const src = resolveImageSource(image, locale);
         try {
           nextCover = await claim(
-            `image:${image.src}`,
-            () => loadImageTexture(image.src),
+            `image:${src}`,
+            () => loadImageTexture(src),
           );
         } catch {
           if (!mounted) return;

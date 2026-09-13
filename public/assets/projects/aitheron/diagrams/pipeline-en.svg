@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1060" viewBox="0 0 760 1060" role="img" aria-labelledby="title"><title id="title">Aitheron analysis pipeline</title><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#526779"/></marker></defs><rect width="100%" height="100%" fill="#fff"/>
+<text x="380" y="42" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" fill="#17334b">Aitheron · Analysis pipeline</text>
+<rect x="85" y="70" width="590" height="70" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="380.0" y="112.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Start</text>
+<path d="M380 140 V165" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="85" y="168" width="590" height="70" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="380.0" y="210.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Patient FASTA input</text>
+<path d="M380 238 V263" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="85" y="266" width="590" height="70" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="380.0" y="295.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Retrieve BRCA1 / BRCA2</text>
+<text x="380.0" y="322.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">reference sequence via API</text>
+<path d="M380 336 V361" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="85" y="364" width="590" height="70" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="380.0" y="393.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Detect BRCA1 / BRCA2 variants</text>
+<text x="380.0" y="420.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">in the received FASTA</text>
+<path d="M380 434 V459" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="85" y="462" width="590" height="70" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="380.0" y="504.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Annotate variants with Ensembl VEP</text>
+<path d="M380 532 V557" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="85" y="560" width="590" height="70" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="380.0" y="602.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Generate tabular features</text>
+<path d="M380 630 V655" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="85" y="658" width="590" height="70" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="380.0" y="687.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Multitask MLP with</text>
+<text x="380.0" y="714.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">CORAL ordinal classification</text>
+<path d="M380 728 V753" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="85" y="756" width="590" height="70" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="380.0" y="798.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Prediction post-processing</text>
+<path d="M380 826 V851" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="85" y="854" width="590" height="70" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="380.0" y="896.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">User output</text>
+<path d="M380 924 V949" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="85" y="952" width="590" height="70" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="380.0" y="994.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">End</text>
+</svg>

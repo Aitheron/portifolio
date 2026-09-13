@@ -1,0 +1,41 @@
+{
+  "id": "software-engineering",
+  "slug": "software-engineering",
+  "kind": "education",
+  "cluster": "education-research",
+  "importance": "primary",
+  "provisional": true,
+  "title": {
+    "pt": "Engenharia de Software",
+    "en": "Software Engineering"
+  },
+  "summary": {
+    "pt": "Católica de Santa Catarina",
+    "en": "Católica de Santa Catarina"
+  },
+  "description": {
+    "pt": "Bacharel em Engenharia de Software",
+    "en": "B.Sc. in Software Engineering"
+  },
+  "technologies": [],
+  "visual": {
+    "variant": "genomic-nebula",
+    "size": 1,
+    "intensity": 0.9
+  },
+  "position": {
+    "mode": "auto"
+  },
+  "relations": [
+    {
+      "targetId": "aitheron",
+      "type": "produced"
+    }
+  ],
+  "schemaVersion": 1,
+  "signals": [],
+  "status": {
+    "pt": "em progresso (expected 2025)",
+    "en": "in progress (expected 2025)"
+  }
+}

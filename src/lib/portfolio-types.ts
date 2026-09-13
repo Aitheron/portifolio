@@ -41,6 +41,7 @@ export type SemanticSatellite = {
 };
 export type PortfolioImage = {
   src: string;
+  srcByLocale?: Record<string, string>;
   alt?: LocalizedText;
   caption?: LocalizedText;
   role?: "cover" | "interface" | "architecture" | "result" | "research" | "concept" | "event" | "gallery";
@@ -165,4 +166,16 @@ export function resolveLocalizedText(
   locale: AppLocale,
 ): string {
   return text?.[locale] ?? text?.[portfolioConfig.defaultLocale] ?? "";
+}
+
+export function resolveImageSource(image: PortfolioImage, locale: AppLocale): string {
+  return image.srcByLocale?.[locale] ?? image.src;
+}
+
+/** Keep the media collection without repeating images already placed in the case. */
+export function remainingGalleryImages(node: PortfolioNode): PortfolioImage[] {
+  const placed = new Set(node.content?.flatMap(block =>
+    block.type === "image" ? [block.src] : block.type === "gallery" ? block.images.map(image => image.src) : [],
+  ));
+  return node.gallery?.filter(image => !placed.has(image.src)) ?? [];
 }

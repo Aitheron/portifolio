@@ -1,0 +1,438 @@
+{
+  "id": "aitheron",
+  "slug": "aitheron",
+  "kind": "project",
+  "cluster": "key-projects",
+  "title": {
+    "pt": "Aitheron",
+    "en": "Aitheron"
+  },
+  "summary": {
+    "pt": "Pipeline de IA para classificação ordinal da patogenicidade de variantes em BRCA1 e BRCA2, da anotação molecular à predição e visualização estrutural.",
+    "en": "An AI pipeline for ordinal pathogenicity classification of BRCA1 and BRCA2 variants, from molecular annotation to prediction and structural visualization."
+  },
+  "description": {
+    "pt": "Projeto desenvolvido como TCC de Engenharia de Software, combinando dados públicos, anotação molecular e aprendizado de máquina para priorizar variantes em BRCA1 e BRCA2. O sistema utiliza uma MLP multitarefa com classificação ordinal CORAL, produzindo a classe prevista, a probabilidade de patogenicidade e uma medida de confiança por variante.",
+    "en": "Developed as a Software Engineering thesis, Aitheron combines public data, molecular annotation and machine learning to prioritize BRCA1 and BRCA2 variants. A multitask MLP with CORAL ordinal classification returns a predicted class, a pathogenicity probability and a confidence measure for each variant."
+  },
+  "coverImage": {
+    "src": "/assets/projects/aitheron/cover/aitheron-cover.png",
+    "alt": {
+      "pt": "Interface do Aitheron com visualização 3D da proteína, posições de mutação destacadas e painel de classificação e detalhes da variante à direita.",
+      "en": "Aitheron interface with a 3D protein visualization, highlighted mutation positions, and a variant classification and details panel on the right."
+    },
+    "caption": {
+      "pt": "Visualização do Aitheron combinando o contexto estrutural da proteína com a classificação e os detalhes da variante analisada.",
+      "en": "Aitheron visualization combining the protein's structural context with the classification and details of the analyzed variant."
+    },
+    "role": "cover",
+    "category": "project"
+  },
+  "projectType": {
+    "pt": "Projeto de TCC / Pesquisa aplicada em IA",
+    "en": "Software Engineering thesis / Applied AI research"
+  },
+  "importance": "flagship",
+  "provisional": false,
+  "confidential": false,
+  "technologies": [
+    "Python",
+    "PyTorch",
+    "FastAPI",
+    "Streamlit",
+    "Pandas",
+    "NumPy",
+    "Matplotlib",
+    "CORAL",
+    "ClinVar",
+    "Ensembl VEP",
+    "UniProt",
+    "AlphaFold"
+  ],
+  "relations": [
+    {
+      "targetId": "software-engineering",
+      "type": "thesis-of"
+    },
+    {
+      "targetId": "education-research",
+      "type": "research"
+    }
+  ],
+  "visual": {
+    "variant": "genomic-nebula",
+    "size": 1.12,
+    "intensity": 1
+  },
+  "position": {
+    "mode": "auto"
+  },
+  "schemaVersion": 1,
+  "signals": [
+    {
+      "id": "brca",
+      "type": "domain",
+      "label": {
+        "pt": "BRCA1 / BRCA2",
+        "en": "BRCA1 / BRCA2"
+      },
+      "importance": 1.0,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "genomic-ai",
+      "type": "domain",
+      "label": {
+        "pt": "IA Genômica",
+        "en": "Genomic AI"
+      },
+      "importance": 0.95,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "pytorch",
+      "type": "technology",
+      "label": {
+        "pt": "PyTorch",
+        "en": "PyTorch"
+      },
+      "importance": 0.9,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "coral",
+      "type": "concept",
+      "label": {
+        "pt": "CORAL",
+        "en": "CORAL"
+      },
+      "importance": 0.85,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "alphafold",
+      "type": "technology",
+      "label": {
+        "pt": "AlphaFold",
+        "en": "AlphaFold"
+      },
+      "importance": 0.8,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "fastapi",
+      "type": "technology",
+      "label": {
+        "pt": "FastAPI",
+        "en": "FastAPI"
+      },
+      "importance": 0.75,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "auroc",
+      "type": "metric",
+      "label": {
+        "pt": "AUROC 0.9942 / 0.9958",
+        "en": "AUROC 0.9942 / 0.9958"
+      },
+      "importance": 0.97,
+      "showInOrbit": true,
+      "showInCase": true
+    }
+  ],
+  "year": "2025",
+  "myRole": {
+    "pt": "Concepção e desenvolvimento do projeto de TCC, abrangendo o pipeline de dados, modelagem de IA, avaliação do modelo, backend, interface e integração das fontes utilizadas para enriquecimento e visualização das variantes.",
+    "en": "Designed and developed the thesis project, covering the data pipeline, AI modeling, model evaluation, backend, interface, and source integrations for variant enrichment and visualization."
+  },
+  "gallery": [
+    {
+      "src": "/assets/projects/aitheron/cover/aitheron-cover.png",
+      "alt": {
+        "pt": "Interface do Aitheron com visualização 3D da proteína, posições de mutação destacadas e painel de classificação e detalhes da variante à direita.",
+        "en": "Aitheron interface with a 3D protein visualization, highlighted mutation positions, and a variant classification and details panel on the right."
+      },
+      "caption": {
+        "pt": "Visualização do Aitheron combinando o contexto estrutural da proteína com a classificação e os detalhes da variante analisada.",
+        "en": "Aitheron visualization combining the protein's structural context with the classification and details of the analyzed variant."
+      },
+      "role": "interface",
+      "category": "project"
+    },
+    {
+      "src": "/assets/projects/aitheron/diagrams/pipeline-pt.png",
+      "alt": {
+        "pt": "Pipeline de análise: entrada FASTA, referência, detecção e anotação de variantes, atributos tabulares, MLP multitarefa com CORAL e saída para o usuário.",
+        "en": "Analysis pipeline: FASTA input, reference retrieval, variant detection and annotation, tabular features, multitask MLP with CORAL, and user output."
+      },
+      "caption": {
+        "pt": "Pipeline de análise: entrada FASTA, referência, detecção e anotação de variantes, atributos tabulares, MLP multitarefa com CORAL e saída para o usuário.",
+        "en": "Analysis pipeline: FASTA input, reference retrieval, variant detection and annotation, tabular features, multitask MLP with CORAL, and user output."
+      },
+      "role": "research",
+      "category": "project",
+      "srcByLocale": {
+        "en": "/assets/projects/aitheron/diagrams/pipeline-en.svg"
+      }
+    },
+    {
+      "src": "/assets/projects/aitheron/results/confusion-matrices-pt.png",
+      "alt": {
+        "pt": "Matrizes de confusão da avaliação patogênico vs. não patogênico para BRCA1 e BRCA2. BRCA1: TN 909, FP 189, FN 22, TP 2136. BRCA2: TN 1382, FP 54, FN 14, TP 2555.",
+        "en": "Confusion matrices for the pathogenic vs. non-pathogenic evaluation of BRCA1 and BRCA2. BRCA1: TN 909, FP 189, FN 22, TP 2136. BRCA2: TN 1382, FP 54, FN 14, TP 2555."
+      },
+      "caption": {
+        "pt": "Matrizes de confusão da avaliação patogênico vs. não patogênico para BRCA1 e BRCA2. BRCA1: TN 909, FP 189, FN 22, TP 2136. BRCA2: TN 1382, FP 54, FN 14, TP 2555.",
+        "en": "Confusion matrices for the pathogenic vs. non-pathogenic evaluation of BRCA1 and BRCA2. BRCA1: TN 909, FP 189, FN 22, TP 2136. BRCA2: TN 1382, FP 54, FN 14, TP 2555."
+      },
+      "role": "result",
+      "category": "project",
+      "srcByLocale": {
+        "en": "/assets/projects/aitheron/results/confusion-matrices-en.svg"
+      }
+    },
+    {
+      "src": "/assets/projects/aitheron/diagrams/architecture-pt.png",
+      "alt": {
+        "pt": "Arquitetura do Aitheron: Streamlit, FastAPI, serviços de predição e datasets, aprendizado de máquina, ETL e fontes externas.",
+        "en": "Aitheron architecture: Streamlit, FastAPI, prediction and dataset services, machine learning, ETL, and external sources."
+      },
+      "caption": {
+        "pt": "Arquitetura do Aitheron: Streamlit, FastAPI, serviços de predição e datasets, aprendizado de máquina, ETL e fontes externas.",
+        "en": "Aitheron architecture: Streamlit, FastAPI, prediction and dataset services, machine learning, ETL, and external sources."
+      },
+      "role": "architecture",
+      "category": "project",
+      "srcByLocale": {
+        "en": "/assets/projects/aitheron/diagrams/architecture-en.svg"
+      }
+    }
+  ],
+  "content": [
+    {
+      "type": "text",
+      "title": {
+        "pt": "O problema",
+        "en": "The problem"
+      },
+      "body": {
+        "pt": "A interpretação da patogenicidade de variantes em BRCA1 e BRCA2 envolve diferentes níveis de evidência e inclui casos classificados como variantes de significado incerto (VUS). O Aitheron foi desenvolvido para investigar como um pipeline computacional poderia transformar anotações moleculares e atributos das variantes em uma classificação ordenada, mantendo atenção especial à sensibilidade para variantes patogênicas.",
+        "en": "Interpreting the pathogenicity of BRCA1 and BRCA2 variants involves different levels of evidence, including variants of uncertain significance (VUS). Aitheron investigates how a computational pipeline can turn molecular annotations and variant features into an ordered classification, with particular attention to sensitivity for pathogenic variants."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "A solução",
+        "en": "The solution"
+      },
+      "body": {
+        "pt": "O Aitheron implementa um fluxo ponta a ponta que parte de uma sequência FASTA, identifica variantes em relação à referência, enriquece essas variantes com anotações moleculares e transforma os dados resultantes em atributos tabulares. Esses atributos alimentam uma rede neural multitarefa responsável pela classificação ordinal de variantes em BRCA1 e BRCA2.\n\nPara cada variante, o sistema fornece a classe prevista, a probabilidade de pertencimento à classe patogênica e uma medida de confiança, além de oferecer contexto estrutural por meio de modelos de proteínas.",
+        "en": "Aitheron implements an end-to-end workflow that starts with a FASTA sequence, detects variants against a reference, enriches them with molecular annotations, and converts the resulting data into tabular features. These features feed a multitask neural network that performs ordinal classification of BRCA1 and BRCA2 variants.\n\nFor each variant, the system returns the predicted class, the probability of belonging to the pathogenic class, and a confidence measure, alongside structural context from protein models."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Pipeline de análise",
+        "en": "Analysis pipeline"
+      },
+      "body": {
+        "pt": "A sequência recebida é comparada à referência de BRCA1/BRCA2 recuperada via API. Após a detecção, o Ensembl VEP anota as variantes; os atributos tabulares alimentam a MLP multitarefa com CORAL. O pós-processamento organiza as predições para apresentação ao usuário.",
+        "en": "The input sequence is compared against a BRCA1/BRCA2 reference retrieved through an API. Ensembl VEP annotates detected variants; the resulting tabular features feed the multitask MLP with CORAL. Post-processing prepares the predictions for presentation to the user."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/projects/aitheron/diagrams/pipeline-pt.png",
+      "alt": {
+        "pt": "Pipeline de análise: entrada FASTA, referência, detecção e anotação de variantes, atributos tabulares, MLP multitarefa com CORAL e saída para o usuário.",
+        "en": "Analysis pipeline: FASTA input, reference retrieval, variant detection and annotation, tabular features, multitask MLP with CORAL, and user output."
+      },
+      "caption": {
+        "pt": "Pipeline de análise: entrada FASTA, referência, detecção e anotação de variantes, atributos tabulares, MLP multitarefa com CORAL e saída para o usuário.",
+        "en": "Analysis pipeline: FASTA input, reference retrieval, variant detection and annotation, tabular features, multitask MLP with CORAL, and user output."
+      },
+      "role": "research",
+      "category": "project",
+      "srcByLocale": {
+        "en": "/assets/projects/aitheron/diagrams/pipeline-en.svg"
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Modelo de Inteligência Artificial",
+        "en": "AI model"
+      },
+      "body": {
+        "pt": "O classificador é uma MLP multitarefa com representação compartilhada e duas cabeças independentes, uma para BRCA1 e outra para BRCA2. A rede utiliza duas camadas ocultas de 256 e 128 unidades, dropout de 0,2 e a abordagem CORAL para representar explicitamente a ordem entre quatro classes de patogenicidade:\n\nBenigno → Possivelmente Benigno → VUS → Patogênico.\n\nA abordagem multitarefa permite compartilhar representações entre os dois genes enquanto mantém saídas específicas para cada um.",
+        "en": "The classifier is a multitask MLP with a shared representation and two independent heads, one for BRCA1 and one for BRCA2. It uses hidden layers of 256 and 128 units, a dropout rate of 0.2, and CORAL to explicitly model the order of four pathogenicity classes:\n\nBenign → Likely benign → VUS → Pathogenic.\n\nMultitask learning shares representations across the two genes while retaining gene-specific outputs."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Treinamento e avaliação",
+        "en": "Training and evaluation"
+      },
+      "body": {
+        "pt": "A avaliação utiliza validação cruzada estratificada em 10 folds, cabeças específicas por gene, classificação ordinal CORAL, tratamento do desbalanceamento de classes e calibração de limiares por gene. A avaliação binária de patogênico vs. não patogênico utiliza os limiares 0.07836 para BRCA1 e 0.15000 para BRCA2.",
+        "en": "Evaluation uses stratified 10-fold cross-validation, gene-specific heads, CORAL ordinal classification, class imbalance handling, and gene-specific threshold calibration. Binary pathogenic vs. non-pathogenic evaluation uses thresholds of 0.07836 for BRCA1 and 0.15000 for BRCA2."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Resultados",
+        "en": "Results"
+      },
+      "body": {
+        "pt": "No conjunto avaliado, o modelo apresentou elevada capacidade discriminativa para ambos os genes. A estratégia de avaliação priorizou a sensibilidade para variantes patogênicas, resultando em 22 falsos negativos para BRCA1 e 14 para BRCA2.\n\nOs resultados representam o desempenho computacional no conjunto avaliado e não constituem validação clínica prospectiva.",
+        "en": "On the evaluated dataset, the model showed strong discrimination for both genes. Evaluation prioritized sensitivity to pathogenic variants, yielding 22 false negatives for BRCA1 and 14 for BRCA2.\n\nThese results describe computational performance on the evaluated dataset and do not constitute prospective clinical validation."
+      }
+    },
+    {
+      "type": "metric",
+      "value": "0.9942",
+      "label": {
+        "pt": "BRCA1 AUROC",
+        "en": "BRCA1 AUROC"
+      }
+    },
+    {
+      "type": "metric",
+      "value": "0.9898",
+      "label": {
+        "pt": "BRCA1 Recall",
+        "en": "BRCA1 Recall"
+      }
+    },
+    {
+      "type": "metric",
+      "value": "0.9958",
+      "label": {
+        "pt": "BRCA2 AUROC",
+        "en": "BRCA2 AUROC"
+      }
+    },
+    {
+      "type": "metric",
+      "value": "0.9946",
+      "label": {
+        "pt": "BRCA2 Recall",
+        "en": "BRCA2 Recall"
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/projects/aitheron/results/confusion-matrices-pt.png",
+      "alt": {
+        "pt": "Matrizes de confusão da avaliação patogênico vs. não patogênico para BRCA1 e BRCA2. BRCA1: TN 909, FP 189, FN 22, TP 2136. BRCA2: TN 1382, FP 54, FN 14, TP 2555.",
+        "en": "Confusion matrices for the pathogenic vs. non-pathogenic evaluation of BRCA1 and BRCA2. BRCA1: TN 909, FP 189, FN 22, TP 2136. BRCA2: TN 1382, FP 54, FN 14, TP 2555."
+      },
+      "caption": {
+        "pt": "Matrizes de confusão da avaliação patogênico vs. não patogênico para BRCA1 e BRCA2. BRCA1: TN 909, FP 189, FN 22, TP 2136. BRCA2: TN 1382, FP 54, FN 14, TP 2555.",
+        "en": "Confusion matrices for the pathogenic vs. non-pathogenic evaluation of BRCA1 and BRCA2. BRCA1: TN 909, FP 189, FN 22, TP 2136. BRCA2: TN 1382, FP 54, FN 14, TP 2555."
+      },
+      "role": "result",
+      "category": "project",
+      "srcByLocale": {
+        "en": "/assets/projects/aitheron/results/confusion-matrices-en.svg"
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Métricas complementares — BRCA1",
+        "en": "Additional metrics — BRCA1"
+      },
+      "body": {
+        "pt": "AUPRC: 0.9971\nPrecisão: 0.9187\nF1: 0.9529\nAcurácia balanceada: 0.9088\nMCC: 0.8555\nAcurácia: 0.9352",
+        "en": "AUPRC: 0.9971\nPrecision: 0.9187\nF1: 0.9529\nBalanced Accuracy: 0.9088\nMCC: 0.8555\nAccuracy: 0.9352"
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Métricas complementares — BRCA2",
+        "en": "Additional metrics — BRCA2"
+      },
+      "body": {
+        "pt": "AUPRC: 0.9975\nPrecisão: 0.9793\nF1: 0.9869\nAcurácia balanceada: 0.9785\nMCC: 0.9631\nAcurácia: 0.9830",
+        "en": "AUPRC: 0.9975\nPrecision: 0.9793\nF1: 0.9869\nBalanced Accuracy: 0.9785\nMCC: 0.9631\nAccuracy: 0.9830"
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Da predição à visualização",
+        "en": "From prediction to visualization"
+      },
+      "body": {
+        "pt": "Além da classificação, o Aitheron apresenta as informações associadas à variante e integra contexto estrutural para inspeção da posição mutada em modelos de proteínas. A visualização complementa a saída do modelo com informações de anotação e estrutura, sem substituir a tarefa principal de classificação de patogenicidade.",
+        "en": "Beyond classification, Aitheron displays variant information and integrates structural context to inspect the mutated position in protein models. This visualization complements model outputs with annotation and structural information while keeping pathogenicity classification as the core task."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/projects/aitheron/cover/aitheron-cover.png",
+      "alt": {
+        "pt": "Interface do Aitheron com visualização 3D da proteína, posições de mutação destacadas e painel de classificação e detalhes da variante à direita.",
+        "en": "Aitheron interface with a 3D protein visualization, highlighted mutation positions, and a variant classification and details panel on the right."
+      },
+      "caption": {
+        "pt": "Visualização do Aitheron combinando o contexto estrutural da proteína com a classificação e os detalhes da variante analisada.",
+        "en": "Aitheron visualization combining the protein's structural context with the classification and details of the analyzed variant."
+      },
+      "role": "interface",
+      "category": "project"
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Arquitetura do sistema",
+        "en": "System architecture"
+      },
+      "body": {
+        "pt": "A interface Streamlit se comunica via REST com o backend FastAPI. Os serviços de predição e datasets integram o aprendizado de máquina e o ETL. O pipeline utiliza dados públicos do NCBI/ClinVar, anotações do Ensembl VEP, informações de proteínas do UniProt e modelos estruturais do AlphaFold Protein Structure Database.",
+        "en": "The Streamlit interface communicates with the FastAPI backend over REST. Prediction and dataset services integrate machine learning and ETL. The pipeline uses public NCBI/ClinVar data, Ensembl VEP annotations, UniProt protein information, and structural models from the AlphaFold Protein Structure Database."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/projects/aitheron/diagrams/architecture-pt.png",
+      "alt": {
+        "pt": "Arquitetura do Aitheron: Streamlit, FastAPI, serviços de predição e datasets, aprendizado de máquina, ETL e fontes externas.",
+        "en": "Aitheron architecture: Streamlit, FastAPI, prediction and dataset services, machine learning, ETL, and external sources."
+      },
+      "caption": {
+        "pt": "Arquitetura do Aitheron: Streamlit, FastAPI, serviços de predição e datasets, aprendizado de máquina, ETL e fontes externas.",
+        "en": "Aitheron architecture: Streamlit, FastAPI, prediction and dataset services, machine learning, ETL, and external sources."
+      },
+      "role": "architecture",
+      "category": "project",
+      "srcByLocale": {
+        "en": "/assets/projects/aitheron/diagrams/architecture-en.svg"
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Escopo e limitações",
+        "en": "Scope and limitations"
+      },
+      "body": {
+        "pt": "O estudo foi desenvolvido com dados públicos e utilizou um FASTA sintético, construído a partir da sequência de referência com mutações in silico, para os testes ponta a ponta. Os resultados caracterizam o desempenho computacional do método no conjunto avaliado e sua aplicação em triagem acadêmica; o projeto não realizou validação clínica prospectiva.",
+        "en": "The study used public data and a synthetic FASTA built from a reference sequence with in silico mutations for end-to-end testing. The results characterize the method’s computational performance on the evaluated dataset and its use for academic variant triage; the project did not undergo prospective clinical validation."
+      }
+    }
+  ]
+}

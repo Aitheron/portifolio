@@ -5,7 +5,7 @@ import {useTranslations} from "next-intl";
 
 import {clusterById} from "@/content/clusters";
 import type {AppLocale} from "@/i18n/routing";
-import {resolveLocalizedText} from "@/lib/portfolio-types";
+import {resolveImageSource, resolveLocalizedText} from "@/lib/portfolio-types";
 import type {PortfolioNode} from "@/lib/portfolio-types";
 
 import type {GraphTarget} from "@/lib/portfolio-graph";
@@ -67,7 +67,7 @@ export function NodeDetailsPanel({node, locale, onClose, onNavigate}: NodeDetail
         <div className="node-dialog__visual">
           {node.coverImage && !imageFailed ? (
             <img
-              src={node.coverImage.src}
+              src={resolveImageSource(node.coverImage, locale)}
               alt={resolveLocalizedText(node.coverImage.alt, locale)}
               width={960}
               height={540}

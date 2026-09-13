@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="1060" viewBox="0 0 1040 1060" role="img" aria-labelledby="title"><title id="title">Aitheron system architecture</title><defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#526779"/></marker></defs><rect width="100%" height="100%" fill="#fff"/>
+<text x="520" y="38" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" fill="#17334b">Aitheron · System architecture</text>
+<rect x="30" y="190" width="980" height="620" rx="14" fill="#f8fbfe" stroke="#7992a6" stroke-dasharray="7 5"/>
+<text x="130" y="785" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" fill="#17334b">Aitheron</text>
+<rect x="395" y="65" width="250" height="75" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="520.0" y="109.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">User</text>
+<path d="M520 140 V218" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="558" y="179" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#17334b">HTTPS</text>
+<rect x="345" y="220" width="350" height="85" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="520.0" y="256.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Web UI</text>
+<text x="520.0" y="283.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Streamlit</text>
+<path d="M520 305 V368" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="552" y="343" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#17334b">REST</text>
+<rect x="345" y="370" width="350" height="80" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="520.0" y="417.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">FastAPI backend</text>
+<path d="M345 410 H225 V508" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M695 410 H810 V508" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="75" y="510" width="300" height="80" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="225.0" y="544.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Prediction service</text>
+<text x="225.0" y="571.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">PyTorch · Python</text>
+<rect x="660" y="510" width="300" height="80" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="810.0" y="544.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Dataset service</text>
+<text x="810.0" y="571.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Python</text>
+<path d="M225 590 V678" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="75" y="680" width="300" height="85" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="225.0" y="716.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Machine learning</text>
+<text x="225.0" y="743.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">PyTorch · Python</text>
+<path d="M375 550 H475 V720 H598" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M810 590 V640 H750 V678" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="600" y="680" width="300" height="85" rx="10" fill="#eaf4fb" stroke="#497597"/>
+<text x="750.0" y="716.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">ETL</text>
+<text x="750.0" y="743.5" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Python</text>
+<path d="M750 765 V850 H145 V903" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M750 850 H395 V903" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M750 850 H645 V903" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M750 850 H895 V903" fill="none" stroke="#526779" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="35" y="905" width="220" height="100" rx="10" fill="#f0edf7" stroke="#497597"/>
+<text x="145.0" y="949.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">NCBI</text>
+<text x="145.0" y="976.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Public database</text>
+<rect x="285" y="905" width="220" height="100" rx="10" fill="#f0edf7" stroke="#497597"/>
+<text x="395.0" y="949.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Ensembl VEP API</text>
+<text x="395.0" y="976.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Variant annotation</text>
+<rect x="535" y="905" width="220" height="100" rx="10" fill="#f0edf7" stroke="#497597"/>
+<text x="645.0" y="949.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">UniProt REST API</text>
+<text x="645.0" y="976.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Protein database</text>
+<rect x="785" y="905" width="220" height="100" rx="10" fill="#f0edf7" stroke="#497597"/>
+<text x="895.0" y="949.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">AlphaFold DB</text>
+<text x="895.0" y="976.0" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" fill="#17334b">Protein structures</text>
+</svg>

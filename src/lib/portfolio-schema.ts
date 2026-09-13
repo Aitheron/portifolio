@@ -33,7 +33,9 @@ export function createContentSchemas(config: {locales: readonly string[]; defaul
     if (!value[config.defaultLocale]) ctx.addIssue({code: "custom", path: [config.defaultLocale], message: "Required default-locale translation"});
   });
   const image = z.object({
-    src: z.union([localPathSchema, secureUrlSchema]), alt: localizedText.optional(), caption: localizedText.optional(),
+    src: z.union([localPathSchema, secureUrlSchema]),
+    srcByLocale: z.record(z.string().min(1), z.union([localPathSchema, secureUrlSchema])).optional(),
+    alt: localizedText.optional(), caption: localizedText.optional(),
     role: z.enum(["cover", "interface", "architecture", "result", "research", "concept", "event", "gallery"]).optional(),
     category: z.enum(["project", "conceptual", "event"]).optional(),
   }).strict();

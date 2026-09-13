@@ -1,0 +1,104 @@
+{
+  "id": "docguard",
+  "slug": "docguard",
+  "kind": "project",
+  "cluster": "key-projects",
+  "title": {
+    "pt": "DocGuard",
+    "en": "DocGuard"
+  },
+  "summary": {
+    "pt": "Protótipo de segurança de IA e sanitização de documentos.",
+    "en": "AI security and document sanitization prototype."
+  },
+  "description": {
+    "pt": "Descrição provisória. O case detalhado e suas evidências serão adicionados em uma próxima etapa.",
+    "en": "Provisional description. The detailed case and its evidence will be added in a later content pass."
+  },
+  "projectType": {
+    "pt": "Protótipo",
+    "en": "Prototype"
+  },
+  "importance": "secondary",
+  "provisional": true,
+  "confidential": false,
+  "technologies": [],
+  "relations": [],
+  "visual": {
+    "variant": "data-node",
+    "size": 0.82,
+    "intensity": 1
+  },
+  "position": {
+    "mode": "auto"
+  },
+  "schemaVersion": 1,
+  "signals": [
+    {
+      "id": "pii",
+      "type": "domain",
+      "label": {
+        "pt": "PII",
+        "en": "PII"
+      },
+      "importance": 1,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "sanitization",
+      "type": "concept",
+      "label": {
+        "pt": "Sanitização",
+        "en": "Sanitization"
+      },
+      "importance": 0.9,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "privacy",
+      "type": "concept",
+      "label": {
+        "pt": "Privacidade",
+        "en": "Privacy"
+      },
+      "importance": 0.8,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "safe-ai",
+      "type": "concept",
+      "label": {
+        "pt": "IA Segura",
+        "en": "Safe AI"
+      },
+      "importance": 0.7,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "ner",
+      "type": "technology",
+      "label": {
+        "pt": "NER",
+        "en": "NER"
+      },
+      "importance": 0.6,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "security",
+      "type": "domain",
+      "label": {
+        "pt": "Segurança",
+        "en": "Security"
+      },
+      "importance": 0.5,
+      "showInOrbit": true,
+      "showInCase": true
+    }
+  ]
+}
