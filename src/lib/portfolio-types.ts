@@ -48,12 +48,20 @@ export type PortfolioImage = {
   category?: "project" | "conceptual" | "event";
 };
 
+export type ProjectDocument = {type: "document"; label: LocalizedText; href: string | LocalizedText};
+export type ProjectLink = ProjectDocument | {
+  type: "website" | "github" | "article" | "video";
+  label: LocalizedText;
+  href: string;
+};
+
 export type ContentBlock =
   | {type: "text"; title?: LocalizedText; body: LocalizedText}
   | ({type: "image"; presentation?: {size?: "inline" | "wide" | "full"; align?: "left" | "center" | "right"}} & PortfolioImage)
   | {type: "gallery"; images: PortfolioImage[]}
   | {type: "metric"; value: string; label: LocalizedText; description?: LocalizedText}
-  | {type: "link"; label: LocalizedText; href: string};
+  | {type: "link"; label: LocalizedText; href: string}
+  | ProjectDocument;
 
 export type PortfolioNode = {
   schemaVersion?: number;
@@ -82,11 +90,7 @@ export type PortfolioNode = {
   relations?: SemanticRelation[];
   signals?: SemanticSatellite[];
   technologies: string[];
-  links?: {
-    label: LocalizedText;
-    href: string;
-    type: "website" | "github" | "article" | "video" | "document";
-  }[];
+  links?: ProjectLink[];
   visual: {
     variant: VisualVariant;
     size?: number;

@@ -41,8 +41,8 @@ test("all current files and the teaching example validate, with an optional cove
   const identity = profileSchema.parse(profile);
   clusterCollectionSchema.parse(clusters);
   const nodes = validatePortfolioNodes(contentEntries.map(e => e.data));
-  assert.deepEqual(nodes.map(node => node.id), ["aitheron", "multi-agent-tariff-intelligence", "pn-extractor", "enterprise-llm-infrastructure", "docguard", "professional-experience", "software-engineering", "ai-automation-talks", "internal-genai-workshops"]);
-  assert.deepEqual(nodes.map(node => node.kind), ["project", "project", "project", "project", "project", "experience", "education", "talk", "talk"]);
+  assert.deepEqual(nodes.map(node => node.id), ["aitheron", "multi-agent-tariff-intelligence", "pn-extractor", "enterprise-llm-infrastructure", "docguard", "professional-experience", "software-engineering", "ai-automation-talks", "internal-genai-workshops", "parkify"]);
+  assert.deepEqual(nodes.map(node => node.kind), ["project", "project", "project", "project", "project", "experience", "education", "talk", "talk", "project"]);
   assert.deepEqual(nodes[0].relations, [{targetId: "software-engineering", type: "thesis-of"}, {targetId: "education-research", type: "research"}]);
   assert.deepEqual(nodes[5].relations?.map(relation => relation.targetId), nodes.slice(1, 4).map(node => node.id));
   assert.equal(nodes[6].relations?.[0].targetId, "aitheron");
@@ -124,6 +124,19 @@ test("local assets are checked at build/server time with source and field inform
     validateLocalAssets({coverImage: {src: "/assets/ok.svg"}}, "test.json", root);
     assert.throws(() => validateLocalAssets({gallery: [{src: "/assets/missing.svg"}]}, "test.json", root), /test.json: root.gallery.0.src.*missing/);
     assert.throws(() => validateLocalAssets("/assets/../../outside.svg", "test.json", root), /outside/);
+  } finally {rmSync(root, {recursive: true, force: true});}
+});
+
+test("documents validate every localized public file, including paths outside assets", () => {
+  const root = mkdtempSync(path.join(tmpdir(), "portfolio-documents-"));
+  try {
+    writeFileSync(path.join(root, "manual.pdf"), "document fixture");
+    validateLocalAssets({links: [{type: "document", href: {pt: "/manual.pdf", en: "https://example.com/manual.pdf"}}]}, "project.json", root);
+    for (const field of ["links", "content"]) {
+      assert.throws(() => validateLocalAssets({[field]: [{type: "document", href: {pt: "/manual.pdf", en: "/missing.pdf"}}]}, "project.json", root), /project.json: root\.(links|content)\.0\.href\.en.*missing/);
+      assert.throws(() => validateLocalAssets({[field]: [{type: "document", href: "/../outside.pdf"}]}, "project.json", root), /outside/);
+      assert.throws(() => validateLocalAssets({[field]: [{type: "document", href: "/"}]}, "project.json", root), /outside|file/);
+    }
   } finally {rmSync(root, {recursive: true, force: true});}
 });
 

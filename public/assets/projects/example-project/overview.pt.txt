@@ -1,0 +1,6 @@
+Projeto de exemplo
+
+Este arquivo demonstra o download de um documento em português.
+Substitua-o por um documento real do seu projeto e atualize o campo links no JSON.
+
+Este conteúdo é ilustrativo e não representa resultados reais.

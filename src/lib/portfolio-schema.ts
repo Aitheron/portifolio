@@ -52,6 +52,11 @@ export function createContentSchemas(config: {locales: readonly string[]; defaul
       ids.add(value.id);
     });
   });
+  const documentDestination = z.union([localPathSchema, secureUrlSchema]);
+  const document = z.object({
+    type: z.literal("document"), label: localizedText,
+    href: z.union([documentDestination, z.record(z.string().min(1), documentDestination)]),
+  }).strict();
   const block = z.discriminatedUnion("type", [
     z.object({type: z.literal("text"), title: localizedText.optional(), body: localizedText}).strict(),
     image.extend({type: z.literal("image"), presentation: z.object({
@@ -60,6 +65,7 @@ export function createContentSchemas(config: {locales: readonly string[]; defaul
     z.object({type: z.literal("gallery"), images: z.array(image).min(1)}).strict(),
     z.object({type: z.literal("metric"), value: z.string().min(1), label: localizedText, description: localizedText.optional()}).strict(),
     z.object({type: z.literal("link"), label: localizedText, href: secureUrlSchema}).strict(),
+    document,
   ]);
   const node = z.object({
     schemaVersion: z.literal(1), id: idSchema, slug: idSchema, kind: z.enum(nodeKinds), cluster: idSchema,
@@ -72,7 +78,10 @@ export function createContentSchemas(config: {locales: readonly string[]; defaul
     myRole: localizedText.optional(), impact: localizedText.optional(),
     relations: z.array(z.object({targetId: idSchema, type: z.enum(relationTypes), label: localizedText.optional()}).strict()).default([]),
     signals: signals.default([]), technologies: z.array(z.string().trim().min(1)).default([]),
-    links: z.array(z.object({label: localizedText, href: secureUrlSchema, type: z.enum(["website", "github", "article", "video", "document"])}).strict()).optional(),
+    links: z.array(z.discriminatedUnion("type", [
+      z.object({label: localizedText, href: secureUrlSchema, type: z.enum(["website", "github", "article", "video"])}).strict(),
+      document,
+    ])).optional(),
     visual: visualSchema,
     position: z.discriminatedUnion("mode", [z.object({mode: z.literal("auto")}).strict(), z.object({mode: z.literal("manual"), value: vectorSchema}).strict()]),
   }).strict();
