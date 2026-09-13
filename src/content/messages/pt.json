@@ -39,6 +39,8 @@
     "technologies": "Tecnologias",
     "tags": "Sinais",
     "links": "Referências",
+    "documents": "Documentos",
+    "downloadDocument": "Baixar {label}",
     "openLink": "Abrir {label} em uma nova aba",
     "provisional": "Case em construção. As evidências detalhadas serão adicionadas em uma próxima etapa.",
     "provisionalMetrics": "Estes são sinais provisórios deste projeto, fornecidos para o protótipo; os resultados e suas evidências serão documentados no case completo.",

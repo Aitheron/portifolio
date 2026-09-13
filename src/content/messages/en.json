@@ -39,6 +39,8 @@
     "technologies": "Technologies",
     "tags": "Signals",
     "links": "References",
+    "documents": "Documents",
+    "downloadDocument": "Download {label}",
     "openLink": "Open {label} in a new tab",
     "provisional": "Case in progress. Detailed evidence will be added in a later content pass.",
     "provisionalMetrics": "These are provisional, project-specific signals supplied for this prototype; the supporting results will be documented in the full case.",

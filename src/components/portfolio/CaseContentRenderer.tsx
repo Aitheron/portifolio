@@ -1,6 +1,8 @@
 import {resolveLocalizedText} from "@/lib/portfolio-types";
 import type {AppLocale, PortfolioNode} from "@/lib/portfolio-types";
 import {CaseMediaImage} from "./CaseMediaImage";
+import {CaseLink} from "./CaseLink";
+import {resolveProjectLinkHref} from "@/lib/project-links";
 
 /** The fixed hero/context shell stays outside this ordered editorial flow. */
 export function CaseContentRenderer({node, locale}: {node: PortfolioNode; locale: AppLocale}) {
@@ -21,9 +23,10 @@ export function CaseContentRenderer({node, locale}: {node: PortfolioNode; locale
         <strong className="node-summary">{block.value}</strong>
         {block.description && <p className="node-description">{resolveLocalizedText(block.description, locale)}</p>}
       </section>;
-      case "link": return <div className="node-links" key={index}>
-        <a href={block.href} target="_blank" rel="noopener noreferrer">{resolveLocalizedText(block.label, locale)} <span aria-hidden="true">↗</span></a>
-      </div>;
+      case "link":
+      case "document": return resolveProjectLinkHref(block, locale) ? <div className="node-links" key={index}>
+        <CaseLink link={block} locale={locale} />
+      </div> : null;
     }
   });
 }

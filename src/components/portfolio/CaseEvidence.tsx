@@ -6,6 +6,8 @@ import {resolveLocalizedText} from "@/lib/portfolio-types";
 import type {AppLocale, PortfolioNode} from "@/lib/portfolio-types";
 import {CaseMediaImage} from "./CaseMediaImage";
 import {CaseContentRenderer} from "./CaseContentRenderer";
+import {CaseLink} from "./CaseLink";
+import {resolveProjectLinkHref} from "@/lib/project-links";
 import {visibleSignals} from "@/lib/semantic-signals";
 
 export function CaseEvidence({node, locale, onNavigate}: {
@@ -19,6 +21,8 @@ export function CaseEvidence({node, locale, onNavigate}: {
   ].filter(Boolean);
   const sections = (["problem", "solution", "myRole", "impact"] as const).filter((key) => node[key]);
   const signals = visibleSignals(node.signals, "case");
+  const links = (node.links ?? []).filter(link => link.type !== "document");
+  const documents = (node.links ?? []).filter(link => link.type === "document" && resolveProjectLinkHref(link, locale));
   const related = (node.relations ?? []).flatMap((relation) => {
     const target = portfolioGraph.get(relation.targetId);
     return target ? [{relation, target}] : [];
@@ -35,6 +39,19 @@ export function CaseEvidence({node, locale, onNavigate}: {
         <h3>{t("context")}</h3><ul>{signals.map((signal) => <li key={signal.id}>{resolveLocalizedText(signal.label, locale)}</li>)}</ul>
         {node.provisional && signals.some(({type}) => type === "metric") && <p className="case-note">{t("provisionalMetrics")}</p>}
       </section>}
+      {sections.map((key) => <section className="node-taxonomy" key={key}>
+        <h3>{t(key)}</h3><p className="node-description">{resolveLocalizedText(node[key]!, locale)}</p>
+      </section>)}
+      <CaseContentRenderer node={node} locale={locale} />
+      {!!node.gallery?.length && <section className="node-taxonomy case-gallery">
+        <h3>{t("gallery")}</h3>{node.gallery.map((image, index) => <CaseMediaImage key={`${image.src}-${index}`} image={image} node={node} locale={locale} />)}
+      </section>}
+      {links.length > 0 && <section className="node-links">
+        <h3>{t("links")}</h3>{links.map((link, index) => <CaseLink key={index} link={link} locale={locale} />)}
+      </section>}
+      {documents.length > 0 && <section className="node-links">
+        <h3>{t("documents")}</h3>{documents.map((link, index) => <CaseLink key={index} link={link} locale={locale} />)}
+      </section>}
       {related.length > 0 && <section className="node-taxonomy">
         <h3>{t("related")}</h3>
         <ul className="case-relations">{related.map(({relation, target}) => <li key={`${relation.type}:${target.id}`}>
@@ -43,18 +60,6 @@ export function CaseEvidence({node, locale, onNavigate}: {
             {resolveLocalizedText(target.title, locale)} <span aria-hidden="true">↗</span>
           </button>
         </li>)}</ul>
-      </section>}
-      {sections.map((key) => <section className="node-taxonomy" key={key}>
-        <h3>{t(key)}</h3><p className="node-description">{resolveLocalizedText(node[key]!, locale)}</p>
-      </section>)}
-      <CaseContentRenderer node={node} locale={locale} />
-      {!!node.gallery?.length && <section className="node-taxonomy case-gallery">
-        <h3>{t("gallery")}</h3>{node.gallery.map((image, index) => <CaseMediaImage key={`${image.src}-${index}`} image={image} node={node} locale={locale} />)}
-      </section>}
-      {!!node.links?.length && <section className="node-links">
-        <h3>{t("links")}</h3>{node.links.map((link) => <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" aria-label={t("openLink", {label: resolveLocalizedText(link.label, locale)})}>
-          {resolveLocalizedText(link.label, locale)} <span aria-hidden="true">↗</span>
-        </a>)}
       </section>}
     </>
   );

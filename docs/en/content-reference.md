@@ -99,7 +99,7 @@ Every registered entry follows the same schema, regardless of its folder. See th
 | `relations` | Array of directed connections; defaults to `[]` |
 | `technologies` | Array of nonempty strings; defaults to `[]`. Existing technology metadata is distinct from typed semantic signals. |
 | `problem`, `solution`, `myRole`, `impact` | Optional localized legacy case sections; displayed before `content` |
-| `links` | Array of objects with localized `label`, HTTPS `href` and `type`: `website`, `github`, `article`, `video` or `document` |
+| `links` | Array with localized `label` and `type`: `website`, `github`, `article`, `video` or `document`. Regular links require HTTPS `href`; documents also accept local files and localized destinations (see below). |
 
 Creating another `kind` requires changes to types, validation and rendering. For normal customization, use the existing kinds. Nodes are loaded only when imported and added to [registry.ts](../../src/content/registry.ts).
 
@@ -117,7 +117,7 @@ Media objects are shared by profile images, covers, galleries and image blocks.
 
 Local URLs start with one `/`, contain no spaces, query strings, fragments or backslashes, and cannot traverse directories with `..`. Prefer `/assets/...`, mapped to `public/assets/...`.
 
-The server validates referenced `/assets/` files for existence and containment inside `public/`. It does not preflight remote URLs or every other local URL prefix. HTTPS availability, cross-origin permissions and browser texture decoding are runtime concerns.
+The server validates referenced `/assets/` files for existence and containment inside `public/`. Documents (`type: "document"`) validate all local paths, including those outside `/assets/`, in every supplied language; each destination must be a file inside `public/`. Other types do not validate every local prefix. Remote URLs are not preflighted. HTTPS availability, cross-origin permissions and browser texture decoding are runtime concerns.
 
 An omitted cover uses a procedural fallback. A missing referenced `/assets/` file fails validation. A remote cover that fails to load can use the runtime fallback. `role` and `category` describe media; they do not select scene coordinates.
 
@@ -191,9 +191,28 @@ A gallery block needs at least one image. Use this block to place a gallery at a
 
 Both `label` and HTTPS `href` are required. This block does not accept the `type: "website"` metadata used by top-level `links`; here `type` is always `"link"`.
 
+### Local and localized documents
+
+Use `type: "document"` in `links` for the default position, or inside `content` to choose the document’s position in the narrative:
+
+```json
+{
+  "type": "document",
+  "label": {"pt": "Resumo do projeto", "en": "Project overview"},
+  "href": {
+    "pt": "/assets/projects/example-project/overview.pt.txt",
+    "en": "/assets/projects/example-project/overview.en.txt"
+  }
+}
+```
+
+These example files live in `public/assets/projects/example-project/`. Public paths start with `/`, without the `public` prefix. Documents may be PDFs, text files or other files; extensions are not restricted. Each destination accepts a local path or HTTPS. Use a string for `href` when the same file serves all languages. To offer only an English version, supply only `en`; when the current language has no destination, the document is omitted, with no language fallback or empty section.
+
+Local files are offered as downloads; HTTPS documents open in a new tab. Do not list the same item in both `content` and `links` unless you want it displayed twice. `content` preserves block order, including `link` and `document`: to create “How to access the project”, place a text block with that title followed by the link wherever needed.
+
 ### Case display order
 
-The case shell shows the title, summary, description and available cover. Its evidence area then shows available metadata, provisional note, technologies, signals and related context; legacy `problem`/`solution`/`myRole`/`impact` sections; ordered `content`; top-level `gallery`; and top-level `links`. Optional absent sections are omitted. Avoid repeating the same story in legacy fields and text blocks.
+The case shell shows the title, summary, description and available cover. Its evidence area then shows available metadata, provisional note, technologies and signals; legacy `problem`/`solution`/`myRole`/`impact` sections; ordered `content`; and top-level `gallery`. Next come regular entries from `links`, documents from `links`, and finally **Connected context** (`relations`). Entry order is preserved within each group. Links and documents placed in `content` stay in their specified positions. Optional absent sections are omitted. Avoid repeating the same story in legacy fields and text blocks.
 
 ## Semantic signals
 

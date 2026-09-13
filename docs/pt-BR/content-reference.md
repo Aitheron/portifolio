@@ -99,7 +99,7 @@ Todo item registrado segue o mesmo schema, independentemente da pasta. Veja o [e
 | `relations` | Array de conexões direcionadas; padrão `[]` |
 | `technologies` | Array de strings não vazias; padrão `[]`. Esses metadados de tecnologias são distintos dos sinais semânticos tipados. |
 | `problem`, `solution`, `myRole`, `impact` | Seções legadas opcionais e traduzidas; exibidas antes de `content` |
-| `links` | Array de objetos com `label` traduzido, `href` HTTPS e `type`: `website`, `github`, `article`, `video` ou `document` |
+| `links` | Array com `label` traduzido e `type`: `website`, `github`, `article`, `video` ou `document`. Links comuns exigem `href` HTTPS; documentos também aceitam arquivos locais e destinos por idioma (veja abaixo). |
 
 Criar outro `kind` exige mudanças nos tipos, na validação e na renderização. Para personalização comum, use os tipos existentes. Os nós só são carregados quando importados e adicionados a [registry.ts](../../src/content/registry.ts).
 
@@ -117,7 +117,7 @@ Objetos de mídia são compartilhados entre imagens de perfil, capas, galerias e
 
 URLs locais começam com uma única `/`, não contêm espaços, query strings, fragmentos ou barras invertidas e não podem subir diretórios com `..`. Prefira `/assets/...`, que corresponde a `public/assets/...`.
 
-O servidor valida a existência dos arquivos referenciados em `/assets/` e verifica se permanecem dentro de `public/`. Ele não verifica previamente URLs remotas nem todos os outros prefixos locais. Disponibilidade HTTPS, permissões entre origens e decodificação de texturas dependem da execução no navegador.
+O servidor valida a existência dos arquivos referenciados em `/assets/` e verifica se permanecem dentro de `public/`. Documentos (`type: "document"`) têm todos os caminhos locais verificados, inclusive fora de `/assets/`, em cada idioma cadastrado; o destino precisa ser um arquivo dentro de `public/`. Outros tipos não têm todos os prefixos locais verificados. URLs remotas não são verificadas previamente. Disponibilidade HTTPS, permissões entre origens e decodificação de texturas dependem da execução no navegador.
 
 Uma capa omitida usa o visual procedural. Um arquivo referenciado em `/assets/` que não existe falha na validação. Uma capa remota que não carrega pode usar o fallback em execução. `role` e `category` descrevem a mídia; não escolhem coordenadas da cena.
 
@@ -191,9 +191,28 @@ Um bloco de galeria exige ao menos uma imagem. Use-o para posicionar a galeria e
 
 `label` e `href` HTTPS são obrigatórios. Esse bloco não aceita o metadado `type: "website"` de `links` no nível do nó; aqui `type` é sempre `"link"`.
 
+### Documentos locais e por idioma
+
+Use `type: "document"` em `links` para a posição padrão, ou dentro de `content` para escolher a posição do documento na narrativa:
+
+```json
+{
+  "type": "document",
+  "label": {"pt": "Resumo do projeto", "en": "Project overview"},
+  "href": {
+    "pt": "/assets/projects/example-project/overview.pt.txt",
+    "en": "/assets/projects/example-project/overview.en.txt"
+  }
+}
+```
+
+Os arquivos desse exemplo ficam em `public/assets/projects/example-project/`. O caminho público começa com `/`, sem o prefixo `public`. Documentos podem ser PDFs, textos ou outros arquivos; não há restrição por extensão. Cada destino aceita um caminho local ou HTTPS. Use uma string em `href` se o mesmo arquivo atender a todos os idiomas. Para disponibilizar só em inglês, informe apenas `en`; se faltar o destino do idioma atual, o documento é omitido, sem fallback para outra língua e sem seção vazia.
+
+Arquivos locais são oferecidos para download; documentos HTTPS abrem em outra aba. Não cadastre o mesmo item em `content` e `links` a menos que queira exibi-lo duas vezes. `content` preserva a ordem dos blocos, inclusive `link` e `document`: para criar “Como acessar o projeto”, coloque um bloco de texto com esse título seguido do link na posição desejada.
+
 ### Ordem de exibição do case
 
-O case mostra título, resumo, descrição e capa disponível. Sua área de evidências exibe, quando presentes: metadados, aviso provisório, tecnologias, sinais e contexto relacionado; seções legadas `problem`/`solution`/`myRole`/`impact`; `content` na ordem definida; `gallery` do nó; e `links` do nó. Seções opcionais ausentes são omitidas. Evite repetir a mesma história em campos legados e blocos de texto.
+O case mostra título, resumo, descrição e capa disponível. Sua área de evidências exibe, quando presentes: metadados, aviso provisório, tecnologias e sinais; seções legadas `problem`/`solution`/`myRole`/`impact`; `content` na ordem definida; e `gallery` do nó. Depois vêm os links comuns de `links`, os documentos de `links` e, por último, o **Contexto conectado** (`relations`). A ordem de cadastro é preservada dentro de cada grupo. Links e documentos posicionados em `content` permanecem onde foram colocados. Seções opcionais ausentes são omitidas. Evite repetir a mesma história em campos legados e blocos de texto.
 
 ## Sinais semânticos
 
