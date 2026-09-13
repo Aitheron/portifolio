@@ -153,5 +153,26 @@
   "status": {
     "pt": "Exemplo ilustrativo",
     "en": "Illustrative example"
-  }
+  },
+  "links": [
+    {
+      "type": "document",
+      "label": {
+        "pt": "Resumo do projeto (exemplo)",
+        "en": "Project overview (example)"
+      },
+      "href": {
+        "pt": "/assets/projects/example-project/overview.pt.txt",
+        "en": "/assets/projects/example-project/overview.en.txt"
+      }
+    },
+    {
+      "type": "website",
+      "label": {
+        "pt": "Acessar o projeto (exemplo)",
+        "en": "Open project (example)"
+      },
+      "href": "https://example.com/project"
+    }
+  ]
 }

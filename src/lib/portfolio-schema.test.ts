@@ -47,3 +47,24 @@ test("rejects unsafe links, missing translations and unsupported participation r
   assert.throws(() => validatePortfolioNodes([{...fixture, title: {en: "Example"}}]), /pt/);
   assert.throws(() => validatePortfolioNodes([{...fixture, participationRole: "organizer"}]), /participationRole/);
 });
+
+test("documents accept shared or localized public files and HTTPS destinations in links and content", () => {
+  for (const href of ["/manual.pdf", "https://example.com/manual.pdf", {pt: "/manual.pdf", en: "/manual-en.pdf"}, {en: "https://example.com/manual.pdf"}]) {
+    const document = {type: "document", label: title, href};
+    const [node] = validatePortfolioNodes([{...fixture, links: [document], content: [document]}]);
+    assert.deepEqual(node.links?.[0].href, href);
+    assert.deepEqual(node.content?.[0], document);
+  }
+});
+
+test("documents reject unsafe destinations in every language without relaxing website links", () => {
+  for (const href of ["http://example.com/file.pdf", "javascript:alert(1)", "//example.com/file.pdf", "/../file.pdf", "/%2e%2e/file.pdf", "/bad\\path.pdf", "https://user:password@example.com/file.pdf"]) {
+    for (const destination of [href, {pt: "/valid.pdf", en: href}]) {
+      const document = {type: "document", label: title, href: destination};
+      assert.throws(() => validatePortfolioNodes([{...fixture, links: [document]}]));
+      assert.throws(() => validatePortfolioNodes([{...fixture, content: [document]}]));
+    }
+  }
+  assert.throws(() => validatePortfolioNodes([{...fixture, links: [{type: "website", label: title, href: "/manual.pdf"}]}]));
+  assert.throws(() => validatePortfolioNodes([{...fixture, content: [{type: "link", label: title, href: "/manual.pdf"}]}]));
+});

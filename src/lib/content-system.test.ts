@@ -76,6 +76,19 @@ test("local assets are checked at build/server time with source and field inform
   } finally {rmSync(root, {recursive: true, force: true});}
 });
 
+test("documents validate every localized public file, including paths outside assets", () => {
+  const root = mkdtempSync(path.join(tmpdir(), "portfolio-documents-"));
+  try {
+    writeFileSync(path.join(root, "manual.pdf"), "document fixture");
+    validateLocalAssets({links: [{type: "document", href: {pt: "/manual.pdf", en: "https://example.com/manual.pdf"}}]}, "project.json", root);
+    for (const field of ["links", "content"]) {
+      assert.throws(() => validateLocalAssets({[field]: [{type: "document", href: {pt: "/manual.pdf", en: "/missing.pdf"}}]}, "project.json", root), /project.json: root\.(links|content)\.0\.href\.en.*missing/);
+      assert.throws(() => validateLocalAssets({[field]: [{type: "document", href: "/../outside.pdf"}]}, "project.json", root), /outside/);
+      assert.throws(() => validateLocalAssets({[field]: [{type: "document", href: "/"}]}, "project.json", root), /outside|file/);
+    }
+  } finally {rmSync(root, {recursive: true, force: true});}
+});
+
 
 test("interface catalogs fall back by missing file or key and reject malformed values", async () => {
   const root = mkdtempSync(path.join(tmpdir(), "portfolio-messages-"));
