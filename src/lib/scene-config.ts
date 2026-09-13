@@ -18,17 +18,18 @@ export const navigationConfig = {
   arrivalDistance: 0.045,
   targetArrivalDistance: 0.035,
   nodeCompositionOffset: 3.25,
+  nodeFocusOffset: [0, 0.75, 10.5],
   polarRange: [Math.PI * 0.2, Math.PI * 0.8] as const,
   overview: {
-    cameraOffset: [0, 4, 34],
+    cameraOffset: [0, 4, 46],
     minDistance: 4.25,
-    maxDistance: 46,
+    maxDistance: 60,
     panSpeed: 0.52,
     rotateSpeed: 0.48,
     zoomSpeed: 0.78,
   },
   cluster: {
-    cameraOffset: [0, 2.5, 10.5],
+    cameraOffset: [0, 2.5, 20.5],
     minDistance: 4.25,
     maxDistance: 46,
     panSpeed: 0.46,
@@ -38,7 +39,7 @@ export const navigationConfig = {
   node: {
     cameraOffset: [0.5, 1.25, 7.25],
     minDistance: 4.5,
-    maxDistance: 12,
+    maxDistance: 30,
     panSpeed: 0.36,
     rotateSpeed: 0.34,
     zoomSpeed: 0.48,
@@ -50,6 +51,7 @@ export const navigationConfig = {
   arrivalDistance: number;
   targetArrivalDistance: number;
   nodeCompositionOffset: number;
+  nodeFocusOffset: Vector3Tuple;
   polarRange: readonly [number, number];
   worldBoundary: {
     camera: {
@@ -113,7 +115,7 @@ export const imageFormationConfig = {
 };
 
 export function getNavigationContext(stage: ExperienceStage): NavigationContext {
-  if (stage === "node-details") return "node";
+  if (stage === "node-details" || stage === "node-focus" || stage === "identity-focus") return "node";
   if (stage === "cluster-focus") return "cluster";
   return "overview";
 }

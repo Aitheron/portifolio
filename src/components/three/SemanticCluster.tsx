@@ -15,7 +15,7 @@ type SemanticClusterProps = {
   locale: AppLocale;
 };
 
-function ClusterPattern({cluster}: {cluster: ClusterDefinition}) {
+function ClusterPattern({cluster, emphasis}: {cluster: ClusterDefinition; emphasis: number}) {
   const color = cluster.color;
 
   if (cluster.pattern === "helix") {
@@ -24,23 +24,23 @@ function ClusterPattern({cluster}: {cluster: ClusterDefinition}) {
       return [Math.sin(index * 0.72) * 0.85, y, Math.cos(index * 0.72) * 0.32] as [number, number, number];
     });
     const strandB = strandA.map(([x, y, z]) => [-x, y, -z] as [number, number, number]);
-    return <><Line points={strandA} color={color} transparent opacity={0.45} lineWidth={0.7} /><Line points={strandB} color={color} transparent opacity={0.3} lineWidth={0.7} /></>;
+    return <><Line points={strandA} color={color} transparent opacity={0.45 * emphasis} lineWidth={0.7} /><Line points={strandB} color={color} transparent opacity={0.3 * emphasis} lineWidth={0.7} /></>;
   }
 
   if (cluster.pattern === "topology") {
-    return <>{[-1, 0, 1].map((x, index) => <mesh key={x} position={[x * 0.9, (index - 1) * 0.45, index % 2 ? -0.3 : 0.3]}><boxGeometry args={[0.8, 0.48, 0.38]} /><meshBasicMaterial color={color} wireframe transparent opacity={0.44} /></mesh>)}</>;
+    return <>{[-1, 0, 1].map((x, index) => <mesh key={x} position={[x * 0.9, (index - 1) * 0.45, index % 2 ? -0.3 : 0.3]}><boxGeometry args={[0.8, 0.48, 0.38]} /><meshBasicMaterial color={color} wireframe transparent opacity={0.44 * emphasis} /></mesh>)}</>;
   }
 
   if (cluster.pattern === "pulse") {
-    return <>{[1, 1.55, 2.1].map((radius) => <mesh key={radius} rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[radius, 0.012, 4, 48]} /><meshBasicMaterial color={color} transparent opacity={0.28} /></mesh>)}</>;
+    return <>{[1, 1.55, 2.1].map((radius) => <mesh key={radius} rotation={[Math.PI / 2, 0, 0]}><torusGeometry args={[radius, 0.012, 4, 48]} /><meshBasicMaterial color={color} transparent opacity={0.28 * emphasis} /></mesh>)}</>;
   }
 
   if (cluster.pattern === "streams") {
-    return <>{[-1.2, -0.4, 0.4, 1.2].map((y, index) => <Line key={y} points={[[-2.2, y, index * 0.12], [0, y * 0.35, 0], [2.2, y * 0.15, -index * 0.1]]} color={color} transparent opacity={0.3 + index * 0.04} lineWidth={0.6} />)}</>;
+    return <>{[-1.2, -0.4, 0.4, 1.2].map((y, index) => <Line key={y} points={[[-2.2, y, index * 0.12], [0, y * 0.35, 0], [2.2, y * 0.15, -index * 0.1]]} color={color} transparent opacity={(0.3 + index * 0.04) * emphasis} lineWidth={0.6} />)}</>;
   }
 
   const networkPoints: [number, number, number][] = [[0, 0, 0], [-1.8, 0.7, 0.3], [1.5, 1.1, -0.4], [-1.1, -1.4, -0.2], [1.7, -1.1, 0.35]];
-  return <>{networkPoints.slice(1).map((point) => <Line key={point.join(":")} points={[networkPoints[0], point]} color={color} transparent opacity={0.38} lineWidth={0.7} />)}</>;
+  return <>{networkPoints.slice(1).map((point) => <Line key={point.join(":")} points={[networkPoints[0], point]} color={color} transparent opacity={0.38 * emphasis} lineWidth={0.7} />)}</>;
 }
 
 export function SemanticCluster({cluster, locale}: SemanticClusterProps) {
@@ -49,7 +49,9 @@ export function SemanticCluster({cluster, locale}: SemanticClusterProps) {
   const reducedMotion = useExperienceStore((state) => state.reducedMotion);
   const selectedClusterId = useExperienceStore((state) => state.selectedClusterId);
   const focusCluster = useExperienceStore((state) => state.focusCluster);
+  const selectedNodeId = useExperienceStore((state) => state.selectedNodeId);
   const isSelected = selectedClusterId === cluster.id;
+  const emphasis = selectedNodeId ? 0.25 : selectedClusterId && !isSelected ? 0.45 : 1;
   const title = resolveLocalizedText(cluster.title, locale);
   const positions = useMemo(() => {
     const count = qualitySettings[quality].clusterParticles;
@@ -76,18 +78,18 @@ export function SemanticCluster({cluster, locale}: SemanticClusterProps) {
     <group
       ref={groupRef}
       position={cluster.position}
-      onClick={(event) => {event.stopPropagation(); focusCluster(cluster.id);}}
+      onClick={(event) => activateWorldItem(event, () => focusCluster(cluster.id))}
     >
       <points>
         <bufferGeometry><primitive attach="attributes-position" object={positions} /></bufferGeometry>
-        <pointsMaterial color={cluster.color} size={0.055} transparent opacity={isSelected ? 0.86 : 0.52} depthWrite={false} />
+        <pointsMaterial color={cluster.color} size={0.055} transparent opacity={(isSelected ? 0.86 : 0.52) * emphasis} depthWrite={false} />
       </points>
       <mesh>
         <icosahedronGeometry args={[0.62, 1]} />
-        <meshBasicMaterial color={cluster.secondaryColor} wireframe transparent opacity={isSelected ? 0.62 : 0.3} />
+        <meshBasicMaterial color={cluster.secondaryColor} wireframe transparent opacity={(isSelected ? 0.62 : 0.3) * emphasis} />
       </mesh>
-      <ClusterPattern cluster={cluster} />
-      <Html center position={[0, 2.65, 0]} distanceFactor={13} zIndexRange={[10, 0]}>
+      <ClusterPattern cluster={cluster} emphasis={emphasis} />
+      {!selectedNodeId && <Html center position={[0, 2.65, 0]} zIndexRange={[10, 0]}>
         <button
           className={`cluster-world-label${isSelected ? " is-selected" : ""}`}
           type="button"
@@ -99,7 +101,7 @@ export function SemanticCluster({cluster, locale}: SemanticClusterProps) {
         >
           <span>{title}</span>
         </button>
-      </Html>
+      </Html>}
     </group>
   );
 }

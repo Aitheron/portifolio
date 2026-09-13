@@ -1,0 +1,89 @@
+{
+  "Intro": {
+    "enter": "ENTRAR NO ESPAÇO VETORIAL"
+  },
+  "Gateway": {
+    "eyebrow": "PORTAL DE IDIOMA",
+    "title": "Escolha um sinal",
+    "description": "O idioma muda a interface, nunca o universo.",
+    "portuguese": "Português",
+    "english": "English",
+    "choosePortuguese": "Continuar em português brasileiro",
+    "chooseEnglish": "Continuar em inglês",
+    "acquired": "SINAL DE IDIOMA IDENTIFICADO",
+    "entering": "ENTRANDO NO ESPAÇO VETORIAL..."
+  },
+  "HUD": {
+    "overview": "Visão geral",
+    "returnOverview": "Voltar à visão geral",
+    "centerView": "Centralizar visão",
+    "location": "Localização no espaço vetorial",
+    "navigationHint": "Clique na capa ou resumo para abrir · Role para explorar · H para centralizar",
+    "previousCluster": "Cluster anterior",
+    "nextCluster": "Próximo cluster",
+    "reducedMotion": "Reduzir movimento",
+    "quality": "Qualidade: {quality}",
+    "qualityHigh": "alta",
+    "qualityMedium": "média",
+    "qualityLow": "baixa",
+    "selectLanguage": "Mudar idioma",
+    "openCase": "Abrir case",
+    "backCluster": "Voltar ao cluster",
+    "approaching": "Aproximando do projeto…",
+    "explore": "Explorar carreira",
+    "closeExplorer": "Fechar exploração de carreira"
+  },
+  "Details": {
+    "close": "Fechar detalhes do projeto",
+    "cluster": "Cluster semântico",
+    "technologies": "Tecnologias",
+    "tags": "Sinais",
+    "links": "Referências",
+    "openLink": "Abrir {label} em uma nova aba",
+    "provisional": "Case em construção. As evidências detalhadas serão adicionadas em uma próxima etapa.",
+    "provisionalMetrics": "Estes são sinais provisórios deste projeto, fornecidos para o protótipo; os resultados e suas evidências serão documentados no case completo.",
+    "conceptual": "Visualização conceitual · não é uma captura do produto",
+    "context": "Contexto do projeto",
+    "related": "Contexto conectado",
+    "gallery": "Evidências visuais",
+    "problem": "Problema",
+    "solution": "Solução",
+    "myRole": "Meu papel",
+    "impact": "Impacto",
+    "roles": {
+      "speaker": "Palestrante",
+      "workshop-host": "Facilitador de workshop",
+      "mentor": "Mentor",
+      "panelist": "Painelista",
+      "attendee": "Participante"
+    },
+    "relations": {
+      "built-at": "Desenvolvido em",
+      "uses": "Utiliza",
+      "related-to": "Relacionado a",
+      "produced": "Produziu",
+      "thesis-of": "Trabalho de conclusão em",
+      "impact": "Impacto em",
+      "presented-at": "Apresentado em",
+      "research": "Contexto de pesquisa"
+    }
+  },
+  "Fallback": {
+    "eyebrow": "MAPA VETORIAL ACESSÍVEL",
+    "title": "O mapa semântico continua disponível",
+    "description": "O WebGL não está disponível neste dispositivo. Navegue pelos mesmos clusters e itens do portfólio abaixo.",
+    "openNode": "Inspecionar {title}",
+    "explore": "Explore as conexões da carreira",
+    "empty": "Esta região está pronta para o próximo capítulo."
+  },
+  "Canvas": {
+    "label": "Espaço vetorial profissional interativo",
+    "loading": "Mapeando o espaço vetorial..."
+  },
+  "Identity": {
+    "downloadPdf": "Baixar PDF",
+    "focus": "Focar em {name}",
+    "contactActions": "Contato com {name}",
+    "unavailable": "Em breve"
+  }
+}

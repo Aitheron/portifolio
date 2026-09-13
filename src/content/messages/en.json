@@ -1,0 +1,89 @@
+{
+  "Intro": {
+    "enter": "ENTER VECTOR SPACE"
+  },
+  "Gateway": {
+    "eyebrow": "LANGUAGE GATEWAY",
+    "title": "Choose a signal",
+    "description": "Language changes the interface, never the universe.",
+    "portuguese": "Português",
+    "english": "English",
+    "choosePortuguese": "Continue in Brazilian Portuguese",
+    "chooseEnglish": "Continue in English",
+    "acquired": "LANGUAGE SIGNAL ACQUIRED",
+    "entering": "ENTERING VECTOR SPACE..."
+  },
+  "HUD": {
+    "overview": "Overview",
+    "returnOverview": "Return to overview",
+    "centerView": "Center view",
+    "location": "Location in vector space",
+    "navigationHint": "Click a cover or summary to open · Scroll to explore · H to center",
+    "previousCluster": "Previous cluster",
+    "nextCluster": "Next cluster",
+    "reducedMotion": "Reduce motion",
+    "quality": "Quality: {quality}",
+    "qualityHigh": "high",
+    "qualityMedium": "medium",
+    "qualityLow": "low",
+    "selectLanguage": "Change language",
+    "openCase": "Open case",
+    "backCluster": "Back to cluster",
+    "approaching": "Approaching project…",
+    "explore": "Explore career",
+    "closeExplorer": "Close career explorer"
+  },
+  "Details": {
+    "close": "Close project details",
+    "cluster": "Semantic cluster",
+    "technologies": "Technologies",
+    "tags": "Signals",
+    "links": "References",
+    "openLink": "Open {label} in a new tab",
+    "provisional": "Case in progress. Detailed evidence will be added in a later content pass.",
+    "provisionalMetrics": "These are provisional, project-specific signals supplied for this prototype; the supporting results will be documented in the full case.",
+    "conceptual": "Conceptual visualization · not a product screenshot",
+    "context": "Project context",
+    "related": "Connected context",
+    "gallery": "Visual evidence",
+    "problem": "Problem",
+    "solution": "Solution",
+    "myRole": "My role",
+    "impact": "Impact",
+    "roles": {
+      "speaker": "Speaker",
+      "workshop-host": "Workshop host",
+      "mentor": "Mentor",
+      "panelist": "Panelist",
+      "attendee": "Attendee"
+    },
+    "relations": {
+      "built-at": "Built at",
+      "uses": "Uses",
+      "related-to": "Related to",
+      "produced": "Produced",
+      "thesis-of": "Thesis in",
+      "impact": "Impact in",
+      "presented-at": "Presented at",
+      "research": "Research context"
+    }
+  },
+  "Fallback": {
+    "eyebrow": "ACCESSIBLE VECTOR MAP",
+    "title": "The semantic map remains available",
+    "description": "WebGL is unavailable on this device. Navigate the same clusters and portfolio nodes below.",
+    "openNode": "Inspect {title}",
+    "explore": "Explore the career graph",
+    "empty": "This region is ready for the next chapter."
+  },
+  "Canvas": {
+    "label": "Interactive professional vector space",
+    "loading": "Mapping vector space..."
+  },
+  "Identity": {
+    "downloadPdf": "Download PDF",
+    "focus": "Focus on {name}",
+    "contactActions": "Contact {name}",
+    "unavailable": "Coming soon"
+  }
+}

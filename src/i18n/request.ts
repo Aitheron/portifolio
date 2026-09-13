@@ -1,3 +1,4 @@
+import {loadMessages} from "./messages";
 import {hasLocale} from "next-intl";
 import {getRequestConfig} from "next-intl/server";
 import * as rootParams from "next/root-params";
@@ -16,6 +17,6 @@ export default getRequestConfig(async ({locale}) => {
 
   return {
     locale: resolvedLocale,
-    messages: (await import(`../messages/${resolvedLocale}.json`)).default,
+    messages: await loadMessages(resolvedLocale),
   };
 });

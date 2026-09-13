@@ -8,14 +8,14 @@
     "noEmit": false,
     "outDir": ".test-dist",
     "plugins": [],
-    "rootDir": "src",
+    "rootDir": ".",
     "target": "ES2020",
-    "types": ["node"]
+    "types": [
+      "node"
+    ]
   },
   "include": [
-    "src/lib/scene-navigation.ts",
-    "src/lib/scene-navigation.test.ts",
-    "src/lib/world-interaction.ts",
-    "src/lib/world-interaction.test.ts"
+    "src/lib/*.test.ts",
+    "src/store/*.test.ts"
   ]
 }

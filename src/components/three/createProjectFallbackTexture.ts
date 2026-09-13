@@ -3,11 +3,11 @@ import {CanvasTexture, Color, SRGBColorSpace, Vector2} from "three";
 import {clusterById} from "@/content/clusters";
 import type {AppLocale} from "@/i18n/routing";
 import {resolveLocalizedText} from "@/lib/portfolio-types";
-import type {PortfolioNode} from "@/lib/portfolio-types";
+import type {CoreIdentity, PortfolioNode} from "@/lib/portfolio-types";
 
 function drawPattern(
   context: CanvasRenderingContext2D,
-  node: PortfolioNode,
+  node: PortfolioNode | CoreIdentity,
   accent: string,
 ) {
   context.strokeStyle = accent;
@@ -80,7 +80,7 @@ function alphaColor(value: string, alpha: number) {
 }
 
 export async function createProjectFallbackTexture(
-  node: PortfolioNode,
+  node: PortfolioNode | CoreIdentity,
   locale: AppLocale,
 ) {
   const canvas = document.createElement("canvas");
@@ -89,7 +89,9 @@ export async function createProjectFallbackTexture(
   const context = canvas.getContext("2d");
   if (!context) throw new Error("Unable to create procedural project cover");
 
-  const cluster = clusterById[node.cluster];
+  const cluster = "cluster" in node ? clusterById[node.cluster] : {
+    color: "#78d7ff", title: node.primaryRole,
+  };
   const gradient = context.createRadialGradient(620, 210, 15, 620, 210, 520);
   gradient.addColorStop(0, alphaColor(cluster.color, 0.28));
   gradient.addColorStop(0.55, "#071722");

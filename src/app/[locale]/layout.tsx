@@ -1,3 +1,4 @@
+import {localeLabel} from "../../../portfolio.config";
 import {hasLocale, NextIntlClientProvider} from "next-intl";
 import {getMessages, setRequestLocale} from "next-intl/server";
 import {notFound} from "next/navigation";
@@ -30,7 +31,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale === "en" ? "en" : "pt-BR"}>
+    <html lang={localeLabel(locale).languageTag ?? locale}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}

@@ -1,6 +1,7 @@
 {
-  "name": "marlon-vector-space",
+  "name": "vector-space-portfolio",
   "version": "1.0.0",
+  "license": "MIT",
   "private": true,
   "engines": {
     "node": ">=20.9.0"
@@ -9,7 +10,7 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
-    "test": "tsc -p tsconfig.navigation-test.json && node .test-dist/lib/scene-navigation.test.js && node .test-dist/lib/world-interaction.test.js",
+    "test": "rm -rf .test-dist && tsc -p tsconfig.navigation-test.json && for suite in .test-dist/src/lib/*.test.js .test-dist/src/store/*.test.js; do node \"$suite\" || exit; done",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

@@ -1,0 +1,122 @@
+{
+  "id": "profile",
+  "title": {
+    "pt": "Seu Nome",
+    "en": "Your Name"
+  },
+  "primaryRole": {
+    "pt": "Sua especialidade",
+    "en": "Your specialty"
+  },
+  "secondaryRole": {
+    "pt": "Sua área de atuação",
+    "en": "Your field"
+  },
+  "summary": {
+    "pt": "Apresente quem você é, os problemas que resolve e o tipo de trabalho que deseja compartilhar.",
+    "en": "Introduce yourself, the problems you solve, and the work you want to share."
+  },
+  "position": [
+    0,
+    0,
+    0
+  ],
+  "visual": {
+    "variant": "human-signal"
+  },
+  "actions": [
+    {
+      "id": "linkedin",
+      "type": "linkedin",
+      "label": {
+        "pt": "LinkedIn",
+        "en": "LinkedIn"
+      },
+      "external": true
+    },
+    {
+      "id": "github",
+      "type": "github",
+      "label": {
+        "pt": "GitHub",
+        "en": "GitHub"
+      },
+      "external": true
+    },
+    {
+      "id": "email",
+      "type": "email",
+      "label": {
+        "pt": "Email",
+        "en": "Email"
+      }
+    },
+    {
+      "id": "resume",
+      "type": "resume",
+      "label": {
+        "pt": "Currículo",
+        "en": "Resume"
+      }
+    }
+  ],
+  "schemaVersion": 1,
+  "shortName": "Portfolio",
+  "signals": [
+    {
+      "id": "craft",
+      "type": "concept",
+      "label": {
+        "pt": "Criação",
+        "en": "Craft"
+      },
+      "importance": 1
+    },
+    {
+      "id": "collaboration",
+      "type": "concept",
+      "label": {
+        "pt": "Colaboração",
+        "en": "Collaboration"
+      },
+      "importance": 0.9
+    },
+    {
+      "id": "learning",
+      "type": "concept",
+      "label": {
+        "pt": "Aprendizado",
+        "en": "Learning"
+      },
+      "importance": 0.8
+    }
+  ],
+  "intro": {
+    "eyebrow": {
+      "pt": "PORTFÓLIO INTERATIVO",
+      "en": "INTERACTIVE PORTFOLIO"
+    },
+    "role": {
+      "pt": "Sua especialidade e área de atuação",
+      "en": "Your specialty and field"
+    },
+    "statement": {
+      "pt": "Um espaço para apresentar seus projetos, experiências e ideias.",
+      "en": "A space to share your projects, experience, and ideas."
+    },
+    "status": {
+      "pt": "Um projeto de exemplo e uma experiência para explorar",
+      "en": "One example project and one experience to explore"
+    }
+  },
+  "metadata": {
+    "title": {
+      "pt": "Seu Nome // Vector Space",
+      "en": "Your Name // Vector Space"
+    },
+    "description": {
+      "pt": "Um template de portfólio interativo com projetos, experiências e conexões.",
+      "en": "An interactive portfolio template with projects, experience, and connections."
+    }
+  }
+}

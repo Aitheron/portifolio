@@ -1,4 +1,5 @@
 "use client";
+import {identity} from "@/content/identity";
 
 import dynamic from "next/dynamic";
 import {useCallback, useEffect, useState} from "react";
@@ -8,12 +9,15 @@ import {useTranslations} from "next-intl";
 import {portfolioNodes} from "@/content/nodes";
 import type {AppLocale} from "@/i18n/routing";
 import {detectPerformanceQuality} from "@/lib/performance-quality";
+import type {GraphTarget} from "@/lib/portfolio-graph";
+import {resolveLocalizedText, isUniverseStage} from "@/lib/portfolio-types";
 import {useExperienceStore} from "@/store/experience-store";
 
 import {LanguageGateway} from "./LanguageGateway";
 import {NodeDetailsPanel} from "./NodeDetailsPanel";
 import {PortfolioHUD} from "./PortfolioHUD";
 import {VectorSpaceFallback} from "./VectorSpaceFallback";
+import {SemanticExplorer} from "./SemanticExplorer";
 
 type VectorSpaceExperienceProps = {
   locale: AppLocale;
@@ -29,6 +33,7 @@ export function VectorSpaceExperience({locale}: VectorSpaceExperienceProps) {
   const intro = useTranslations("Intro");
   const canvas = useTranslations("Canvas");
   const [webglStatus, setWebglStatus] = useState<"checking" | "available" | "unavailable">("checking");
+  const [explorerOpen, setExplorerOpen] = useState(false);
   const stage = useExperienceStore((state) => state.stage);
   const selectedNodeId = useExperienceStore((state) => state.selectedNodeId);
   const languageSignal = useExperienceStore((state) => state.languageSignal);
@@ -38,18 +43,24 @@ export function VectorSpaceExperience({locale}: VectorSpaceExperienceProps) {
   const openLanguageGateway = useExperienceStore((state) => state.openLanguageGateway);
   const beginEntering = useExperienceStore((state) => state.beginEntering);
   const completeEntering = useExperienceStore((state) => state.completeEntering);
-  const closeNode = useExperienceStore((state) => state.closeNode);
+  const closeCase = useExperienceStore((state) => state.closeCase);
   const navigateBack = useExperienceStore((state) => state.navigateBack);
   const returnToOverview = useExperienceStore((state) => state.returnToOverview);
   const setReducedMotion = useExperienceStore((state) => state.setReducedMotion);
   const setQuality = useExperienceStore((state) => state.setQuality);
   const selectedNode = portfolioNodes.find((node) => node.id === selectedNodeId) ?? null;
   const isNavigating = stage === "language-selection" || stage === "entering";
-  const isUniverse = stage === "overview" || stage === "cluster-focus" || stage === "node-details";
+  const isUniverse = isUniverseStage(stage);
 
   useEffect(() => {
     setLocale(locale);
   }, [locale, setLocale]);
+
+  useEffect(() => {
+    if (webglStatus === "unavailable" && selectedNodeId) {
+      useExperienceStore.getState().completeNodeFocus(selectedNodeId);
+    }
+  }, [webglStatus, selectedNodeId]);
 
   useEffect(() => {
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -74,7 +85,10 @@ export function VectorSpaceExperience({locale}: VectorSpaceExperienceProps) {
         target.isContentEditable || ["INPUT", "TEXTAREA", "SELECT"].includes(target.tagName)
       );
       if (isEditing || event.repeat || event.altKey || event.ctrlKey || event.metaKey) return;
+      if (document.querySelector("dialog[open]")) return;
+      const currentStage = useExperienceStore.getState().stage;
       if (event.key === "Escape") navigateBack();
+      if (!isUniverseStage(currentStage)) return;
       if (event.key.toLowerCase() === "h") returnToOverview();
     };
     window.addEventListener("keydown", handleKeyDown);
@@ -96,6 +110,13 @@ export function VectorSpaceExperience({locale}: VectorSpaceExperienceProps) {
     }, duration);
   }, [beginEntering, completeEntering, locale, reducedMotion, router, setLocale]);
 
+  const navigateToTarget = (target: GraphTarget) => {
+    const state = useExperienceStore.getState();
+    if (target.kind === "identity") state.focusIdentity();
+    else if (target.kind === "cluster" && target.cluster) state.focusCluster(target.cluster);
+    else if (target.cluster) state.focusNode(target.id, target.cluster, webglStatus === "unavailable");
+  };
+
   return (
     <main className="experience-shell" data-stage={stage}>
       <div className="ambient-vectors" aria-hidden="true">
@@ -109,15 +130,15 @@ export function VectorSpaceExperience({locale}: VectorSpaceExperienceProps) {
 
       {stage === "intro" && (
         <section className="intro-panel" aria-labelledby="intro-title">
-          <p className="eyebrow">{intro("eyebrow")}</p>
-          <h1 id="intro-title">{intro("name")}</h1>
-          <p className="intro-role">{intro("role")}</p>
-          <p className="intro-statement">{intro("statement")}</p>
+          <p className="eyebrow">{resolveLocalizedText(identity.intro.eyebrow, activeLocale)}</p>
+          <h1 id="intro-title">{resolveLocalizedText(identity.title, activeLocale).toLocaleUpperCase(activeLocale)}</h1>
+          <p className="intro-role">{resolveLocalizedText(identity.intro.role, activeLocale)}</p>
+          <p className="intro-statement">{resolveLocalizedText(identity.intro.statement, activeLocale)}</p>
           <button className="primary-action" type="button" onClick={openLanguageGateway}>
             <span>{intro("enter")}</span>
             <span aria-hidden="true">↗</span>
           </button>
-          <p className="intro-status"><i aria-hidden="true" /> {intro("status")}</p>
+          <p className="intro-status"><i aria-hidden="true" /> {resolveLocalizedText(identity.intro.status, activeLocale)}</p>
         </section>
       )}
 
@@ -127,8 +148,9 @@ export function VectorSpaceExperience({locale}: VectorSpaceExperienceProps) {
 
       {isUniverse && (
         <>
-          <h1 className="sr-only">Marlon // Vector Space</h1>
-          <PortfolioHUD onLocaleChange={changeLocale} />
+          <h1 className="sr-only">{resolveLocalizedText(identity.metadata.title, activeLocale)}</h1>
+          <PortfolioHUD onLocaleChange={changeLocale} onExplore={() => setExplorerOpen(true)} />
+          {explorerOpen && <SemanticExplorer locale={activeLocale} onClose={() => setExplorerOpen(false)} />}
           {webglStatus === "unavailable" && (
             <VectorSpaceFallback locale={activeLocale} webglUnavailable />
           )}
@@ -136,7 +158,7 @@ export function VectorSpaceExperience({locale}: VectorSpaceExperienceProps) {
       )}
 
       {selectedNode && stage === "node-details" && (
-        <NodeDetailsPanel node={selectedNode} locale={activeLocale} onClose={closeNode} />
+        <NodeDetailsPanel node={selectedNode} locale={activeLocale} onClose={closeCase} onNavigate={navigateToTarget} />
       )}
     </main>
   );

@@ -1,6 +1,8 @@
+import {portfolioConfig} from "../../../portfolio.config";
 import {useTranslations} from "next-intl";
 
 import {clusterById, clusters} from "@/content/clusters";
+import {identity} from "@/content/identity";
 import {portfolioNodes} from "@/content/nodes";
 import type {AppLocale} from "@/i18n/routing";
 import {resolveLocalizedText} from "@/lib/portfolio-types";
@@ -8,10 +10,15 @@ import {useExperienceStore} from "@/store/experience-store";
 
 type PortfolioHUDProps = {
   onLocaleChange: (locale: AppLocale) => void;
+  onExplore: () => void;
 };
 
-export function PortfolioHUD({onLocaleChange}: PortfolioHUDProps) {
+export function PortfolioHUD({onLocaleChange, onExplore}: PortfolioHUDProps) {
   const t = useTranslations("HUD");
+  const stage = useExperienceStore((state) => state.stage);
+  const focusReady = useExperienceStore((state) => state.focusReady);
+  const openCase = useExperienceStore((state) => state.openCase);
+  const navigateBack = useExperienceStore((state) => state.navigateBack);
   const locale = useExperienceStore((state) => state.locale);
   const selectedClusterId = useExperienceStore((state) => state.selectedClusterId);
   const selectedNodeId = useExperienceStore((state) => state.selectedNodeId);
@@ -25,14 +32,14 @@ export function PortfolioHUD({onLocaleChange}: PortfolioHUDProps) {
     : -1;
   const currentLabel = selectedClusterId
     ? resolveLocalizedText(clusterById[selectedClusterId].title, locale)
-    : t("overview");
+    : stage === "identity-focus" ? resolveLocalizedText(identity.title, locale) : t("overview");
   const selectedNode = selectedNodeId
     ? portfolioNodes.find((node) => node.id === selectedNodeId)
     : undefined;
   const selectedNodeLabel = selectedNode
     ? resolveLocalizedText(selectedNode.title, locale)
     : null;
-  const locationParts = ["Vector Space", currentLabel, selectedNodeLabel]
+  const locationParts = [portfolioConfig.branding.spaceName, currentLabel, selectedNodeLabel]
     .filter((part): part is string => part !== null);
   const qualityLabel = {
     high: t("qualityHigh"),
@@ -50,8 +57,9 @@ export function PortfolioHUD({onLocaleChange}: PortfolioHUDProps) {
   return (
     <header className="portfolio-hud">
       <div className="hud-brand">
-        <span>Marlon</span>
-        <strong>// Vector Space</strong>
+        <span>{identity.shortName}</span>
+        <span className="sr-only">{resolveLocalizedText(identity.title, locale)} — {resolveLocalizedText(identity.primaryRole, locale)}. {resolveLocalizedText(identity.secondaryRole, locale)}.</span>
+        <strong>// {portfolioConfig.branding.spaceName}</strong>
       </div>
 
       <nav className="hud-location" aria-live="polite" aria-label={t("location")}>
@@ -68,8 +76,9 @@ export function PortfolioHUD({onLocaleChange}: PortfolioHUDProps) {
       </nav>
 
       <div className="hud-actions">
+        <button id="career-explorer-action" className="explore-action" type="button" onClick={onExplore}>{t("explore")}</button>
         <div className="locale-switcher" role="group" aria-label={t("selectLanguage")}>
-          {(["pt", "en"] as const).map((option) => (
+          {portfolioConfig.locales.map((option) => (
             <button
               key={option}
               type="button"
@@ -90,6 +99,15 @@ export function PortfolioHUD({onLocaleChange}: PortfolioHUDProps) {
           {t("reducedMotion")}
         </button>
       </div>
+
+      {stage === "node-focus" && selectedNode && (
+        <div className="project-focus-actions">
+          <button type="button" className="text-action" onClick={navigateBack}>{t("backCluster")}</button>
+          <button id="open-case-action" type="button" className="primary-action" disabled={!focusReady} onClick={openCase}>
+            {focusReady ? t("openCase") : t("approaching")} <span aria-hidden="true">↗</span>
+          </button>
+        </div>
+      )}
 
       <div className="hud-bottom">
         <span className="navigation-hint">{t("navigationHint")}</span>

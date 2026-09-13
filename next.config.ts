@@ -17,6 +17,8 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   transpilePackages: ["three"],
+  // Dynamic locale catalogs must accompany traced server deployments.
+  outputFileTracingIncludes: {"/*": ["./src/content/messages/*.json"]},
   async headers() {
     return [{source: "/(.*)", headers: securityHeaders}];
   },

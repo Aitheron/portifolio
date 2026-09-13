@@ -1,24 +1,27 @@
 import {useRef, useState} from "react";
 import type {RefObject} from "react";
 import {Billboard, Html, Line, useCursor} from "@react-three/drei";
-import {useFrame} from "@react-three/fiber";
+import {useFrame, useThree} from "@react-three/fiber";
 import {Group, MathUtils} from "three";
 
 import {clusterById} from "@/content/clusters";
 import {nodeRevealDistance, getRevealState} from "@/lib/performance-quality";
 import {resolveLocalizedText} from "@/lib/portfolio-types";
 import type {NodeRevealState, PortfolioNode, Vector3Tuple} from "@/lib/portfolio-types";
+import type {ProjectSatelliteContext} from "@/lib/satellite-layout";
 import {
   activateWorldItem,
   worldInteractionPriority,
 } from "@/lib/world-interaction";
 import {useExperienceStore} from "@/store/experience-store";
 
+import {MicroUniverse} from "./MicroUniverse";
 import {FragmentedProjectCover} from "./FragmentedProjectCover";
 import {useProjectCoverTexture} from "./useProjectCoverTexture";
 
 type PortfolioNodeMeshProps = {
   activePreviewIdsRef: RefObject<ReadonlySet<string>>;
+  microUniverseRef: RefObject<ProjectSatelliteContext>;
   node: PortfolioNode;
   position: Vector3Tuple;
 };
@@ -121,10 +124,14 @@ function NodePreview({
 
 export function PortfolioNodeMesh({
   activePreviewIdsRef,
+  microUniverseRef,
   node,
   position,
 }: PortfolioNodeMeshProps) {
   const groupRef = useRef<Group>(null);
+  const microModeRef = useRef<ProjectSatelliteContext["mode"]>("none");
+  const [microMode, setMicroMode] = useState<ProjectSatelliteContext["mode"]>("none");
+  const [microMounted, setMicroMounted] = useState(false);
   const coreRef = useRef<Group>(null);
   const distanceRef = useRef(Infinity);
   const revealRef = useRef<NodeRevealState>("signal");
@@ -135,12 +142,16 @@ export function PortfolioNodeMesh({
   const locale = useExperienceStore((state) => state.locale);
   const reducedMotion = useExperienceStore((state) => state.reducedMotion);
   const selectedNodeId = useExperienceStore((state) => state.selectedNodeId);
-  const selectNode = useExperienceStore((state) => state.selectNode);
+  const selectedClusterId = useExperienceStore((state) => state.selectedClusterId);
+  const viewport = useThree((state) => state.size);
+  const focusNode = useExperienceStore((state) => state.focusNode);
+  const openNodeCase = useExperienceStore((state) => state.openNodeCase);
   const selected = selectedNodeId === node.id;
   const cluster = clusterById[node.cluster];
   const title = resolveLocalizedText(node.title, locale);
   const summary = resolveLocalizedText(node.summary, locale);
-  const showsIdentity = reveal !== "signal";
+  const relevant = !selectedNodeId || selected;
+  const showsIdentity = reveal !== "signal" && relevant;
   const showsPreview = reveal === "preview" || reveal === "selected";
   useCursor(hovered);
 
@@ -155,27 +166,41 @@ export function PortfolioNodeMesh({
       formationActiveRef.current = nextFormationActive;
       setFormationActive(nextFormationActive);
     }
+    const nextMicroMode = microUniverseRef.current.nodeId === node.id ? microUniverseRef.current.mode : "none";
+    if (nextMicroMode !== microModeRef.current) {
+      microModeRef.current = nextMicroMode;
+      setMicroMode(nextMicroMode);
+      if (nextMicroMode !== "none") setMicroMounted(true);
+    }
     const farScale = distanceRef.current > nodeRevealDistance.signal ? 0.68 : 1;
-    const targetScale = (selected ? 1.12 : hovered ? 1.06 : 1) * farScale;
+    const orbitFit = viewport.width < 720 ? 1.05 : 0.64;
+    const compactScale = selected ? Math.min(1, viewport.width / viewport.height * orbitFit) : 1;
+    const relevanceScale = selectedNodeId && !selected ? 0.55 : selectedClusterId && selectedClusterId !== node.cluster ? 0.75 : 1;
+    const targetScale = (selected ? 1.12 : hovered ? 1.06 : 1) * farScale * compactScale * relevanceScale;
     group.scale.setScalar(MathUtils.damp(group.scale.x, targetScale, 7, delta));
     if (coreRef.current && !reducedMotion) coreRef.current.rotation.y += delta * 0.42;
   });
 
-  const activate = () => selectNode(node.id, node.cluster);
+  const activate = () => focusNode(node.id, node.cluster);
+  const openDetails = () => openNodeCase(node.id, node.cluster);
 
   return (
-    <group ref={groupRef} position={position} onClick={(event) => {event.stopPropagation(); activate();}} onPointerEnter={() => setHovered(true)} onPointerLeave={() => setHovered(false)}>
+    <group ref={groupRef} position={position} onClick={(event) => activateWorldItem(event, activate)} onPointerEnter={() => setHovered(true)} onPointerLeave={() => setHovered(false)}>
       <mesh>
         <sphereGeometry args={[0.78, 10, 8]} />
         <meshBasicMaterial colorWrite={false} depthWrite={false} />
       </mesh>
+      {microMounted && node.signals?.some(signal => signal.showInOrbit !== false) ? (
+        <MicroUniverse satellites={node.signals} color={cluster.color} mode={microMode}
+          onHidden={() => {if (microModeRef.current === "none") setMicroMounted(false);}} />
+      ) : null}
       <group ref={coreRef}><NodeCore node={node} color={cluster.color} /></group>
       {showsIdentity && formationActive && (
         <NodePreview
           node={node}
           color={cluster.color}
           distanceRef={distanceRef}
-          onActivate={activate}
+          onActivate={openDetails}
         />
       )}
       {showsIdentity && !formationActive && (
@@ -188,8 +213,9 @@ export function PortfolioNodeMesh({
           <button
             className={`node-world-label node-world-label--${reveal}`}
             type="button"
+            aria-haspopup="dialog"
             onPointerDown={(event) => event.stopPropagation()}
-            onClick={(event) => activateWorldItem(event, activate)}
+            onClick={(event) => activateWorldItem(event, openDetails)}
           >
             <strong>{title}</strong>
             {showsPreview && <span className="node-world-label__summary">{summary}</span>}

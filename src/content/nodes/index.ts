@@ -1,22 +1,12 @@
-import intelligentDocumentAutomation from "./applied-ai/intelligent-document-automation";
-import genomicVariantClassifier from "./genomic-intelligence/genomic-variant-classifier";
-import aiWorkshop from "./human-signal/ai-workshop";
-import multiAgentRetrieval from "./rag-agents/multi-agent-retrieval";
-import scalableAiApi from "./systems-engineering/scalable-ai-api";
-
-import {getNodePosition} from "@/content/clusters";
+import {identity} from "@/content/identity";
+import {createPortfolioGraph} from "@/lib/portfolio-graph";
+import {clusters, getNodePosition} from "@/content/clusters";
 import {validatePortfolioNodes} from "@/lib/portfolio-schema";
 import type {Vector3Tuple} from "@/lib/portfolio-types";
 
-const registeredNodes = [
-  intelligentDocumentAutomation,
-  genomicVariantClassifier,
-  multiAgentRetrieval,
-  scalableAiApi,
-  aiWorkshop,
-] as const;
+import {contentEntries} from "../registry";
 
-export const portfolioNodes = validatePortfolioNodes(registeredNodes);
+export const portfolioNodes = validatePortfolioNodes(contentEntries.map(({data}) => data), {files: contentEntries.map(({file}) => file)});
 
 export const portfolioNodePositions = Object.fromEntries(
   portfolioNodes.map((node) => {
@@ -25,3 +15,5 @@ export const portfolioNodePositions = Object.fromEntries(
     return [node.id, getNodePosition(node, index, clusterNodes.length)];
   }),
 ) as Record<string, Vector3Tuple>;
+
+export const portfolioGraph = createPortfolioGraph(portfolioNodes, clusters, identity);
