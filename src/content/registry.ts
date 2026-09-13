@@ -7,6 +7,7 @@ import professionalExperience from "./experience/professional-experience.json";
 import softwareEngineering from "./education/software-engineering.json";
 import internalGenaiWorkshops from "./talks/internal-genai-workshops.json";
 import aiAutomationTalks from "./talks/ai-automation-talks.json";
+import parkify from "./education/parkify.json"; 
 
 // Add each content file once. This order controls automatic scene placement.
 export const contentEntries = [
@@ -19,4 +20,5 @@ export const contentEntries = [
   {file: "src/content/education/software-engineering.json", data: softwareEngineering},
   {file: "src/content/talks/ai-automation-talks.json", data: aiAutomationTalks},
   {file: "src/content/talks/internal-genai-workshops.json", data: internalGenaiWorkshops},
+  { file: "src/content/education/parkify.json", data: parkify },
 ];

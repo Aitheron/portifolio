@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "id": "parkify",
+  "slug": "parkify",
+  "kind": "project",
+  "cluster": "education-research",
+  "importance": "secondary",
+
+  "title": {
+    "pt": "Parkify",
+    "en": "Parkify"
+  },
+
+  "summary": {
+    "pt": "Sistema acadêmico para monitoramento e previsão de disponibilidade de vagas, integrando IA, hardware e dados em tempo real.",
+    "en": "Academic system for monitoring and predicting parking availability by combining AI, hardware, and real-time data."
+  },
+
+  "description": {
+    "pt": "Projeto acadêmico colaborativo desenvolvido durante a graduação em Engenharia de Software. O Parkify integrou sensores, coleta de dados em tempo real, comunicação entre dispositivos, inteligência artificial e uma interface para monitorar e prever a disponibilidade de vagas.",
+    "en": "Collaborative academic project developed during the Software Engineering degree. Parkify combined sensors, real-time data collection, device communication, artificial intelligence, and an interface for monitoring and predicting parking availability."
+  },
+
+  "projectType": {
+    "pt": "Projeto acadêmico colaborativo",
+    "en": "Collaborative Academic Project"
+  },
+
+  "status": {
+    "pt": "Concluído",
+    "en": "Completed"
+  },
+
+  "company": "Católica de Santa Catarina",
+
+  "coverImage": {
+    "src": "/assets/education/parkify/parkify_cover.jpg",
+    "alt": {
+      "pt": "Interface do Parkify exibindo informações de disponibilidade e tempo de espera das vagas.",
+      "en": "Parkify interface displaying parking availability and waiting-time information."
+    },
+    "role": "cover",
+    "category": "project"
+  },
+
+  "signals": [
+    {
+      "id": "smart-parking",
+      "type": "domain",
+      "label": {
+        "pt": "Estacionamento Inteligente",
+        "en": "Smart Parking"
+      },
+      "showInOrbit": true,
+      "showInCase": true,
+      "importance": 1
+    },
+    {
+      "id": "neural-network",
+      "type": "concept",
+      "label": {
+        "pt": "Rede Neural",
+        "en": "Neural Network"
+      },
+      "showInOrbit": true,
+      "showInCase": true,
+      "importance": 0.9
+    },
+    {
+      "id": "real-time-data",
+      "type": "concept",
+      "label": {
+        "pt": "Dados em Tempo Real",
+        "en": "Real-time Data"
+      },
+      "showInOrbit": true,
+      "showInCase": true,
+      "importance": 0.8
+    },
+    {
+      "id": "esp32",
+      "type": "technology",
+      "label": {
+        "pt": "ESP32",
+        "en": "ESP32"
+      },
+      "showInOrbit": true,
+      "showInCase": true,
+      "importance": 0.7
+    },
+    {
+      "id": "arduino",
+      "type": "technology",
+      "label": {
+        "pt": "Arduino",
+        "en": "Arduino"
+      },
+      "showInOrbit": true,
+      "showInCase": true,
+      "importance": 0.7
+    },
+    {
+      "id": "sensors",
+      "type": "technology",
+      "label": {
+        "pt": "Sensores",
+        "en": "Sensors"
+      },
+      "showInOrbit": false,
+      "showInCase": true,
+      "importance": 0.5
+    }
+  ],
+
+  "relations": [
+    {
+      "targetId": "software-engineering",
+      "type": "related-to",
+      "label": {
+        "pt": "Projeto acadêmico",
+        "en": "Academic Project"
+      }
+    }
+  ],
+
+  "technologies": [
+    "Neural Networks",
+    "Arduino",
+    "ESP32",
+    "HC-SR04",
+    "Sensors",
+    "Real-time Data"
+  ],
+
+  "content": [
+    {
+      "type": "text",
+      "title": {
+        "pt": "O desafio",
+        "en": "The challenge"
+      },
+      "body": {
+        "pt": "O Parkify foi desenvolvido para explorar como dados de ocupação poderiam ser utilizados não apenas para informar quais vagas estavam disponíveis naquele momento, mas também para prever sua disponibilidade futura.",
+        "en": "Parkify explored how occupancy data could be used not only to indicate which parking spaces were currently available, but also to predict their future availability."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/education/parkify/parkify_example.jpg",
+      "alt": {
+        "pt": "Tempo de espera para vaga",
+        "en": "Waiting time for a vacancy"
+      },
+      "caption": {
+        "pt": "Camada física utilizada para coleta de dados das vagas.",
+        "en": "Physical layer used to collect parking-space data."
+      },
+      "role": "architecture",
+      "category": "project",
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Do sensor à previsão",
+        "en": "From sensors to prediction"
+      },
+      "body": {
+        "pt": "O ecossistema combinou sensores HC-SR04 e sensores de luminosidade com comunicação entre Arduino, ESP32 e banco de dados. Sobre os dados coletados, uma camada de inteligência artificial foi utilizada para prever a disponibilidade das vagas, enquanto a aplicação de visualização apresentava as informações ao usuário.",
+        "en": "The system combined HC-SR04 and light sensors with communication between Arduino, ESP32, and the database. An AI layer used the collected data to predict parking availability, while the visualization application presented the information to users."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/education/parkify/parkify_predict.jpg",
+      "alt": {
+        "pt": "Interface de teste da previsão de disponibilidade de vagas.",
+        "en": "Parking availability prediction test interface."
+      },
+      "caption": {
+        "pt": "Visualização utilizada durante o desenvolvimento e testes da camada de previsão.",
+        "en": "Visualization used during development and testing of the prediction layer."
+      },
+      "role": "result",
+      "category": "project",
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Arquitetura do projeto",
+        "en": "Project architecture"
+      },
+      "body": {
+        "pt": "O projeto foi dividido em diferentes componentes, incluindo Parkify-AI para a camada de inteligência artificial, Parkify-Sense para sensoriamento e coleta, Parkify-View para visualização e componentes adicionais responsáveis pelo processamento e integração do ecossistema.",
+        "en": "The project was divided into multiple components, including Parkify-AI for artificial intelligence, Parkify-Sense for sensing and data collection, Parkify-View for visualization, and additional components responsible for processing and system integration."
+      }
+    }
+  ],
+
+  "gallery": [],
+
+  "links": [],
+
+  "visual": {
+    "variant": "system-module",
+    "size": 0.9,
+    "intensity": 0.9
+  },
+
+  "position": {
+    "mode": "auto"
+  }
+}

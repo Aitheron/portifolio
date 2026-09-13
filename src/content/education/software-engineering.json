@@ -1,41 +1,120 @@
 {
+  "schemaVersion": 1,
   "id": "software-engineering",
   "slug": "software-engineering",
   "kind": "education",
   "cluster": "education-research",
   "importance": "primary",
-  "provisional": true,
+
   "title": {
     "pt": "Engenharia de Software",
     "en": "Software Engineering"
   },
+
   "summary": {
-    "pt": "Católica de Santa Catarina",
-    "en": "Católica de Santa Catarina"
+    "pt": "Graduação em Engenharia de Software pela Católica de Santa Catarina.",
+    "en": "Software Engineering degree at Católica de Santa Catarina."
   },
+
   "description": {
-    "pt": "Bacharel em Engenharia de Software",
-    "en": "B.Sc. in Software Engineering"
+    "pt": "Formação concluída em 2025, conectando engenharia de software, inteligência artificial e pesquisa aplicada. Durante a graduação, desenvolvi projetos acadêmicos como o Parkify e o Aitheron, este último como Trabalho de Conclusão de Curso.",
+    "en": "Degree completed in 2025, connecting software engineering, artificial intelligence, and applied research. During the program, I developed academic projects including Parkify and Aitheron, with Aitheron serving as my final thesis project."
   },
-  "technologies": [],
-  "visual": {
-    "variant": "genomic-nebula",
-    "size": 1,
-    "intensity": 0.9
+
+  "coverImage": {
+    "src": "/assets/education/college/college_cover.jpeg",
+    "alt": {
+      "pt": "Uma foto minha apresentando o tcc",
+      "en": "A photo of me presenting my thesis."
+    },
+    "role": "cover"
   },
-  "position": {
-    "mode": "auto"
-  },
+
+  "year": "2022–2025",
+  "company": "Católica de Santa Catarina",
+
+  "signals": [
+    {
+      "id": "software-engineering",
+      "type": "domain",
+      "label": {
+        "pt": "Engenharia de Software",
+        "en": "Software Engineering"
+      },
+      "showInOrbit": true,
+      "showInCase": true,
+      "importance": 1
+    },
+    {
+      "id": "applied-ai",
+      "type": "concept",
+      "label": {
+        "pt": "IA Aplicada",
+        "en": "Applied AI"
+      },
+      "showInOrbit": true,
+      "showInCase": true,
+      "importance": 0.8
+    },
+    {
+      "id": "applied-research",
+      "type": "concept",
+      "label": {
+        "pt": "Pesquisa Aplicada",
+        "en": "Applied Research"
+      },
+      "showInOrbit": true,
+      "showInCase": true,
+      "importance": 0.7
+    }
+  ],
+
   "relations": [
     {
       "targetId": "aitheron",
-      "type": "produced"
+      "type": "research",
+      "label": {
+        "pt": "Trabalho de Conclusão de Curso",
+        "en": "Final Thesis Project"
+      }
+    },
+    {
+      "targetId": "parkify",
+      "type": "related-to",
+      "label": {
+        "pt": "Projeto acadêmico",
+        "en": "Academic Project"
+      }
     }
   ],
-  "schemaVersion": 1,
-  "signals": [],
-  "status": {
-    "pt": "em progresso (expected 2025)",
-    "en": "in progress (expected 2025)"
+
+  "technologies": [],
+
+  "content": [
+    {
+      "type": "text",
+      "title": {
+        "pt": "Formação",
+        "en": "Education"
+      },
+      "body": {
+        "pt": "Graduação em Engenharia de Software realizada entre 2022 e 2025 na Católica de Santa Catarina, com participação em projetos acadêmicos envolvendo desenvolvimento de software, inteligência artificial, sistemas integrados e pesquisa aplicada.",
+        "en": "Software Engineering degree completed between 2022 and 2025 at Católica de Santa Catarina, including academic projects involving software development, artificial intelligence, integrated systems, and applied research."
+      }
+    }
+  ],
+
+  "gallery": [],
+
+  "links": [],
+
+  "visual": {
+    "variant": "data-node",
+    "size": 1.05,
+    "intensity": 1
+  },
+
+  "position": {
+    "mode": "auto"
   }
 }
