@@ -1,0 +1,193 @@
+{
+  "schemaVersion": 1,
+  "id": "gdg-joinville-pn-talk",
+  "slug": "gdg-joinville-pn-talk",
+  "kind": "talk",
+  "cluster": "talks-community",
+  "title": {
+    "pt": "GDG Joinville — Build with AI",
+    "en": "GDG Joinville — Build with AI"
+  },
+  "summary": {
+    "pt": "Palestra sobre automação com IA aplicada à extração de Part Numbers, abordando similaridade semântica, similaridade de cosseno e uso de LLMs.",
+    "en": "Talk on AI-driven automation for Part Number extraction, covering semantic similarity, cosine similarity, and the use of LLMs."
+  },
+  "description": {
+    "pt": "Palestra no GDG Joinville — Build with AI, apresentada ao lado de Glauco Scheffel em 04 de Maio de 2024. A sessão compartilhou o raciocínio técnico por trás de uma solução de automação para Part Numbers, com similaridade semântica, similaridade de cosseno e uso de IA e LLMs em fluxos empresariais.",
+    "en": "Speaker session at GDG Joinville — Build with AI, delivered alongside Glauco Scheffel on May 4, 2024. The session shared the technical reasoning behind a Part Number automation solution, covering semantic similarity, cosine similarity, and the use of AI and LLMs in enterprise workflows."
+  },
+  "participationRole": "speaker",
+  "year": "2024",
+  "coverImage": {
+    "src": "/assets/talks/gdg-joinville/cover.png",
+    "alt": {
+      "pt": "Registro da palestra — GDG Joinville — Build with AI.",
+      "en": "Event photo — GDG Joinville — Build with AI."
+    },
+    "role": "cover",
+    "category": "event"
+  },
+  "technologies": [],
+  "signals": [
+    {
+      "id": "part-numbers",
+      "type": "domain",
+      "label": {
+        "pt": "Part Numbers",
+        "en": "Part Numbers"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "applied-ai",
+      "type": "domain",
+      "label": {
+        "pt": "IA Aplicada",
+        "en": "Applied AI"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "semantic-similarity",
+      "type": "concept",
+      "label": {
+        "pt": "Similaridade Semântica",
+        "en": "Semantic Similarity"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "cosine-similarity",
+      "type": "concept",
+      "label": {
+        "pt": "Similaridade de Cosseno",
+        "en": "Cosine Similarity"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "automation",
+      "type": "concept",
+      "label": {
+        "pt": "Automação",
+        "en": "Automation"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "llms",
+      "type": "technology",
+      "label": {
+        "pt": "LLMs",
+        "en": "LLMs"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "semantic-vectors",
+      "type": "concept",
+      "label": {
+        "pt": "Vetores Semânticos",
+        "en": "Semantic Vectors"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    }
+  ],
+  "relations": [
+    {
+      "targetId": "catolica-pn-talk",
+      "type": "related-to",
+      "label": {
+        "pt": "Mesmo tema",
+        "en": "Same topic"
+      }
+    }
+  ],
+  "content": [
+    {
+      "type": "text",
+      "title": {
+        "pt": "A apresentação",
+        "en": "The presentation"
+      },
+      "body": {
+        "pt": "No Build with AI do GDG Joinville, participei como palestrante ao lado de Glauco Scheffel. Apresentamos à comunidade a aplicação de IA à extração de Part Numbers como contexto para discutir automação na prática.",
+        "en": "At GDG Joinville’s Build with AI, I spoke alongside Glauco Scheffel. We shared the application of AI to Part Number extraction with the community as a context for discussing practical automation."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Foco técnico",
+        "en": "Technical focus"
+      },
+      "body": {
+        "pt": "A extração e automação de Part Numbers serviram de contexto para explorar similaridade semântica, similaridade de cosseno e representação vetorial (embeddings). A palestra abordou o raciocínio por trás dessas comparações e o uso de LLMs na automação de fluxos empresariais.",
+        "en": "Part Number extraction and automation provided the context for exploring semantic similarity, cosine similarity, and vector representations (embeddings). The talk covered the reasoning behind these comparisons and the use of LLMs to automate enterprise workflows."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/talks/gdg-joinville/1.png",
+      "alt": {
+        "pt": "Palestrante com microfone diante de um slide sobre codificação no GDG Joinville.",
+        "en": "Speaker holding a microphone in front of a slide about coding at GDG Joinville."
+      },
+      "role": "event",
+      "category": "event",
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/talks/gdg-joinville/2.png",
+      "alt": {
+        "pt": "Palestrante ao lado do banner Build with AI no GDG Joinville.",
+        "en": "Speaker beside the Build with AI banner at GDG Joinville."
+      },
+      "role": "event",
+      "category": "event",
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/talks/gdg-joinville/3.png",
+      "alt": {
+        "pt": "Apresentação de similaridade de cosseno no GDG Joinville.",
+        "en": "Presentation of cosine similarity at GDG Joinville."
+      },
+      "role": "event",
+      "category": "event",
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    },
+    {
+      "type": "link",
+      "label": {
+        "pt": "Post no LinkedIn",
+        "en": "LinkedIn Post"
+      },
+      "href": "https://lnkd.in/p/dbYntidS"
+    }
+  ],
+  "visual": {
+    "variant": "human-signal"
+  },
+  "position": {
+    "mode": "auto"
+  }
+}

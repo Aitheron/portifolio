@@ -27,7 +27,7 @@
   ],
   "relations": [
     {
-      "targetId": "professional-experience",
+      "targetId": "becomex",
       "type": "related-to"
     }
   ],

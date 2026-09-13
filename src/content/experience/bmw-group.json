@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "id": "bmw-group",
+  "slug": "bmw-group",
+  "kind": "experience",
+  "cluster": "experience-impact",
+  "importance": "secondary",
+  "title": {
+    "pt": "BMW Group",
+    "en": "BMW Group"
+  },
+  "company": "BMW Group",
+  "year": "2022 — 2023",
+  "myRole": {
+    "pt": "Experiência industrial multidisciplinar",
+    "en": "Multidisciplinary Industrial Experience"
+  },
+  "summary": {
+    "pt": "Experiência profissional em ambiente industrial, com atuação em melhoria contínua, qualidade, montagem e apoio a processos técnicos.",
+    "en": "Professional experience in an industrial environment, involving continuous improvement, quality, assembly, and support for technical processes."
+  },
+  "description": {
+    "pt": "Atuei em diferentes áreas da planta, contribuindo com melhorias práticas de processos, rotinas de manufatura, atividades de qualidade e apoio técnico à operação. Essa vivência fortaleceu minha capacidade de resolver problemas e meu pensamento orientado a processos.",
+    "en": "I worked across different areas of the plant, contributing to practical process improvements, manufacturing routines, quality activities, and technical support for operations. This experience strengthened my problem-solving skills and process-oriented thinking."
+  },
+  "coverImage": {
+    "src": "/assets/experience/bmw/cover.jpg",
+    "alt": {
+      "pt": "Marlon ao lado de um BMW vermelho, com a frente do carro em destaque.",
+      "en": "Marlon beside a red BMW, with the front of the car in view."
+    },
+    "role": "cover"
+  },
+  "signals": [
+    {
+      "id": "continuous-improvement",
+      "type": "concept",
+      "label": {
+        "pt": "Melhoria Contínua",
+        "en": "Continuous Improvement"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "quality",
+      "type": "concept",
+      "label": {
+        "pt": "Qualidade",
+        "en": "Quality"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "manufacturing",
+      "type": "domain",
+      "label": {
+        "pt": "Manufatura",
+        "en": "Manufacturing"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "processes",
+      "type": "concept",
+      "label": {
+        "pt": "Processos",
+        "en": "Processes"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "industrial-operations",
+      "type": "domain",
+      "label": {
+        "pt": "Operação Industrial",
+        "en": "Industrial Operations"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "maintenance",
+      "type": "domain",
+      "label": {
+        "pt": "Manutenção",
+        "en": "Maintenance"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    }
+  ],
+  "relations": [],
+  "content": [
+    {
+      "type": "text",
+      "title": {
+        "pt": "Contexto e período",
+        "en": "Context and period"
+      },
+      "body": {
+        "pt": "Jan 2022 → Abr 2023. Experiência industrial multidisciplinar, com aprendizado prático em ambiente de produção.",
+        "en": "Jan 2022 → Apr 2023. Multidisciplinary industrial experience, with hands-on learning in a production environment."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Áreas de contribuição",
+        "en": "Areas of contribution"
+      },
+      "body": {
+        "pt": "Melhoria contínua, qualidade, montagem e apoio a processos técnicos e rotinas de manutenção. O contato com diferentes áreas da operação trouxe uma visão prática sobre padrões de qualidade, organização do trabalho e melhoria dos processos.",
+        "en": "Continuous improvement, quality, assembly, and support for technical processes and maintenance routines. Exposure to different operational areas provided a practical understanding of quality standards, work organization, and process improvement."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/experience/bmw/bmw_1.jpg",
+      "alt": {
+        "pt": "Marlon ao lado de um BMW vermelho, com a traseira do carro em destaque.",
+        "en": "Marlon beside a red BMW, with the rear of the car in view."
+      },
+      "role": "gallery",
+      "presentation": {
+        "size": "inline",
+        "align": "center"
+      }
+    }
+  ],
+  "visual": {
+    "variant": "system-module",
+    "size": 0.9,
+    "intensity": 0.85
+  },
+  "position": {
+    "mode": "auto"
+  }
+}

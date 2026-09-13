@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "id": "catolica-pn-talk",
+  "slug": "catolica-pn-talk",
+  "kind": "talk",
+  "cluster": "talks-community",
+  "title": {
+    "pt": "Católica de Santa Catarina — Palestra sobre IA aplicada",
+    "en": "Católica de Santa Catarina — Applied AI Talk"
+  },
+  "summary": {
+    "pt": "Palestra sobre aplicação de IA à automação de Part Numbers, abordando similaridade semântica, similaridade de cosseno e decisões técnicas por trás da solução.",
+    "en": "Talk on applying AI to Part Number automation, covering semantic similarity, cosine similarity, and the technical decisions behind the solution."
+  },
+  "description": {
+    "pt": "Palestra realizada na Católica de Santa Catarina em 2025, ao lado de Carlos Augusto Xavier Lourenco Junior. A apresentação compartilhou conhecimentos e experiências práticas com IA aplicada à automação de Part Numbers, técnicas de comparação semântica e abordagens baseadas em LLMs.",
+    "en": "Talk delivered at Católica de Santa Catarina in 2025 alongside Carlos Augusto Xavier Lourenco Junior. The presentation shared knowledge and practical experience with AI applied to Part Number automation, semantic comparison techniques, and LLM-based approaches."
+  },
+  "participationRole": "speaker",
+  "year": "2025",
+  "coverImage": {
+    "src": "/assets/talks/catolica/cover.png",
+    "alt": {
+      "pt": "Registro da palestra — Católica de Santa Catarina — Palestra sobre IA aplicada.",
+      "en": "Event photo — Católica de Santa Catarina — Applied AI Talk."
+    },
+    "role": "cover",
+    "category": "event"
+  },
+  "technologies": [],
+  "signals": [
+    {
+      "id": "part-numbers",
+      "type": "domain",
+      "label": {
+        "pt": "Part Numbers",
+        "en": "Part Numbers"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "applied-ai",
+      "type": "domain",
+      "label": {
+        "pt": "IA Aplicada",
+        "en": "Applied AI"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "semantic-similarity",
+      "type": "concept",
+      "label": {
+        "pt": "Similaridade Semântica",
+        "en": "Semantic Similarity"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "cosine-similarity",
+      "type": "concept",
+      "label": {
+        "pt": "Similaridade de Cosseno",
+        "en": "Cosine Similarity"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "automation",
+      "type": "concept",
+      "label": {
+        "pt": "Automação",
+        "en": "Automation"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "llms",
+      "type": "technology",
+      "label": {
+        "pt": "LLMs",
+        "en": "LLMs"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "semantic-vectors",
+      "type": "concept",
+      "label": {
+        "pt": "Vetores Semânticos",
+        "en": "Semantic Vectors"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    }
+  ],
+  "relations": [
+    {
+      "targetId": "gdg-joinville-pn-talk",
+      "type": "related-to",
+      "label": {
+        "pt": "Mesmo tema",
+        "en": "Same topic"
+      }
+    }
+  ],
+  "content": [
+    {
+      "type": "text",
+      "title": {
+        "pt": "A apresentação",
+        "en": "The presentation"
+      },
+      "body": {
+        "pt": "Participei como palestrante na Católica de Santa Catarina ao lado de Carlos Augusto Xavier Lourenco Junior. Compartilhamos o mesmo tema técnico apresentado no GDG Joinville, trazendo a experiência prática com IA e automação de Part Numbers para o contexto acadêmico.",
+        "en": "I spoke at Católica de Santa Catarina alongside Carlos Augusto Xavier Lourenco Junior. We shared the same technical topic presented at GDG Joinville, bringing practical experience with AI and Part Number automation to an academic setting."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Foco técnico",
+        "en": "Technical focus"
+      },
+      "body": {
+        "pt": "A extração e automação de Part Numbers serviram de contexto para explorar similaridade semântica, similaridade de cosseno e representação vetorial (embeddings). A palestra abordou o raciocínio por trás dessas comparações e o uso de LLMs na automação de fluxos empresariais.",
+        "en": "Part Number extraction and automation provided the context for exploring semantic similarity, cosine similarity, and vector representations (embeddings). The talk covered the reasoning behind these comparisons and the use of LLMs to automate enterprise workflows."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/talks/catolica/2.png",
+      "alt": {
+        "pt": "Palestrante apresenta um estudo de caso em sala na Católica de Santa Catarina.",
+        "en": "Speaker presenting a case in a classroom at Católica de Santa Catarina."
+      },
+      "role": "event",
+      "category": "event",
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/talks/catolica/group.png",
+      "alt": {
+        "pt": "Foto em grupo dos participantes do encontro na Católica de Santa Catarina.",
+        "en": "Group photo of participants at the Católica de Santa Catarina event."
+      },
+      "role": "event",
+      "category": "event",
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    },
+    {
+      "type": "link",
+      "label": {
+        "pt": "Post no LinkedIn",
+        "en": "LinkedIn Post"
+      },
+      "href": "https://lnkd.in/p/d3hyTydb"
+    }
+  ],
+  "visual": {
+    "variant": "human-signal"
+  },
+  "position": {
+    "mode": "auto"
+  }
+}

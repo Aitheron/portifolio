@@ -41,12 +41,12 @@ test("all current files and the teaching example validate, with an optional cove
   const identity = profileSchema.parse(profile);
   clusterCollectionSchema.parse(clusters);
   const nodes = validatePortfolioNodes(contentEntries.map(e => e.data));
-  assert.deepEqual(nodes.map(node => node.id), ["aitheron", "multi-agent-tariff-intelligence", "pn-extractor", "enterprise-llm-infrastructure", "docguard", "professional-experience", "software-engineering", "ai-automation-talks", "internal-genai-workshops", "parkify"]);
-  assert.deepEqual(nodes.map(node => node.kind), ["project", "project", "project", "project", "project", "experience", "education", "talk", "talk", "project"]);
+  assert.deepEqual(nodes.map(node => node.id), ["aitheron", "multi-agent-tariff-intelligence", "pn-extractor", "enterprise-llm-infrastructure", "docguard", "becomex", "software-engineering", "ai-automation-talks", "internal-genai-workshops", "parkify", "gdg-joinville-pn-talk", "catolica-pn-talk", "bmw-group"]);
+  assert.deepEqual(nodes.map(node => node.kind), ["project", "project", "project", "project", "project", "experience", "education", "talk", "talk", "project", "talk", "talk", "experience"]);
   assert.deepEqual(nodes[0].relations, [{targetId: "software-engineering", type: "thesis-of"}, {targetId: "education-research", type: "research"}]);
-  assert.deepEqual(nodes[5].relations?.map(relation => relation.targetId), nodes.slice(1, 4).map(node => node.id));
+  assert.deepEqual(nodes[5].relations?.map(relation => relation.targetId), ["pn-extractor", "multi-agent-tariff-intelligence", "docguard", "enterprise-llm-infrastructure"]);
   assert.equal(nodes[6].relations?.[0].targetId, "aitheron");
-  assert.deepEqual(nodes.filter(node => node.cluster === "talks-community").map(node => node.participationRole), ["speaker", "workshop-host"]);
+  assert.deepEqual(nodes.filter(node => node.cluster === "talks-community").map(node => node.participationRole), ["speaker", "workshop-host", "speaker", "speaker"]);
   assert.equal(nodes[0].provisional, false);
   assert.equal(nodes[0].signals?.length, 7);
   assert.equal(nodes[0].coverImage?.src, "/assets/projects/aitheron/cover/aitheron-cover.png");

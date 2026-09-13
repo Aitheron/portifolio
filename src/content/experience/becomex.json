@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "id": "becomex",
+  "slug": "becomex",
+  "kind": "experience",
+  "cluster": "experience-impact",
+  "importance": "flagship",
+  "title": {
+    "pt": "Becomex",
+    "en": "Becomex"
+  },
+  "company": "Becomex",
+  "year": "2023",
+  "status": {
+    "pt": "Atual",
+    "en": "Present"
+  },
+  "myRole": {
+    "pt": "AI Developer",
+    "en": "AI Developer"
+  },
+  "summary": {
+    "pt": "Atuação no desenvolvimento ponta a ponta de soluções de IA aplicada, automação inteligente e integração de modelos, APIs e sistemas corporativos.",
+    "en": "Working on the end-to-end development of applied AI solutions, intelligent automation, and the integration of models, APIs, and enterprise systems."
+  },
+  "description": {
+    "pt": "Na Becomex, evoluí de uma atuação inicial de estágio, voltada à automação e a protótipos de IA, para AI Developer no time de IA. Desenvolvo soluções ponta a ponta com LLMs, RAG, sistemas multiagentes, machine learning e APIs, conectando modelos, dados e sistemas corporativos. Em colaboração com engenheiros, cientistas de dados e áreas de negócio, participo de decisões técnicas que equilibram qualidade, custo, latência e confiabilidade na evolução da IA em produção.",
+    "en": "At Becomex, I progressed from an initial internship-style role focused on automation and AI prototypes to AI Developer within the AI team. I develop end-to-end solutions with LLMs, RAG, multi-agent systems, machine learning, and APIs, connecting models, data, and enterprise systems. Working with engineers, data scientists, and business teams, I contribute to technical decisions that balance quality, cost, latency, and reliability as production AI systems evolve."
+  },
+  "coverImage": {
+    "src": "/assets/experience/becomex/cover.jpg",
+    "alt": {
+      "pt": "Retrato de Marlon vestindo a camiseta da Becomex.",
+      "en": "Portrait of Marlon wearing a Becomex shirt."
+    },
+    "role": "cover"
+  },
+  "signals": [
+    {
+      "id": "applied-ai",
+      "type": "domain",
+      "label": {
+        "pt": "IA Aplicada",
+        "en": "Applied AI"
+      },
+      "importance": 1.0,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "llm-systems",
+      "type": "concept",
+      "label": {
+        "pt": "Sistemas com LLMs",
+        "en": "LLM Systems"
+      },
+      "importance": 0.95,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "rag-agents",
+      "type": "concept",
+      "label": {
+        "pt": "RAG e Agentes",
+        "en": "RAG & Agents"
+      },
+      "importance": 0.9,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "intelligent-automation",
+      "type": "concept",
+      "label": {
+        "pt": "Automação Inteligente",
+        "en": "Intelligent Automation"
+      },
+      "importance": 0.85,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "apis",
+      "type": "technology",
+      "label": {
+        "pt": "APIs",
+        "en": "APIs"
+      },
+      "importance": 0.8,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "production-ai",
+      "type": "domain",
+      "label": {
+        "pt": "IA em Produção",
+        "en": "AI in Production"
+      },
+      "importance": 0.75,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "processing-time",
+      "type": "metric",
+      "label": {
+        "pt": "6h → ~15min",
+        "en": "6h → ~15min"
+      },
+      "importance": 0.7,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "accuracy",
+      "type": "metric",
+      "label": {
+        "pt": "~98% de acurácia",
+        "en": "~98% accuracy"
+      },
+      "importance": 0.65,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "efficiency",
+      "type": "metric",
+      "label": {
+        "pt": "+70% de eficiência",
+        "en": "+70% efficiency"
+      },
+      "importance": 0.6,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "availability",
+      "type": "metric",
+      "label": {
+        "pt": "SLA 99,5%",
+        "en": "SLA 99.5%"
+      },
+      "importance": 0.55,
+      "showInOrbit": true,
+      "showInCase": true
+    }
+  ],
+  "relations": [
+    {
+      "targetId": "pn-extractor",
+      "type": "produced"
+    },
+    {
+      "targetId": "multi-agent-tariff-intelligence",
+      "type": "produced"
+    },
+    {
+      "targetId": "docguard",
+      "type": "produced"
+    },
+    {
+      "targetId": "enterprise-llm-infrastructure",
+      "type": "produced"
+    }
+  ],
+  "content": [
+    {
+      "type": "text",
+      "title": {
+        "pt": "Trajetória e período",
+        "en": "Career progression and period"
+      },
+      "body": {
+        "pt": "Out 2023 → Atual. Comecei com automações e apoio a soluções de IA em uma atuação de estágio. A evolução para AI Developer ampliou minha responsabilidade técnica, da prototipação à integração e evolução de sistemas em produção.",
+        "en": "Oct 2023 → Present. I started with automation and support for AI solutions in an internship-style role. Progressing to AI Developer expanded my technical ownership, from prototyping to integrating and evolving production systems."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Responsabilidades",
+        "en": "Responsibilities"
+      },
+      "body": {
+        "pt": "Desenvolvimento de aplicações de IA, pipelines RAG e fluxos multiagentes; integração de modelos e APIs com dados e sistemas corporativos; e automação de processos. Trabalho junto a equipes técnicas e de negócio para traduzir necessidades em soluções e avaliar compromissos de qualidade, custo, latência e confiabilidade.",
+        "en": "Developing AI applications, RAG pipelines, and multi-agent workflows; integrating models and APIs with enterprise data and systems; and automating processes. I work with technical and business teams to translate needs into solutions and evaluate quality, cost, latency, and reliability trade-offs."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Entregas e impacto",
+        "en": "Delivery and impact"
+      },
+      "body": {
+        "pt": "Entre as principais entregas, o Extrator de Part Number reduziu análises de cerca de 6 horas para 15 minutos, com aproximadamente 98% de acurácia. Já em Gestão Tarifária (GT), uma pipeline multiagente aumentou a eficiência operacional em mais de 70% e elevou o SLA de 77–81% para 99,5%. Minha atuação também inclui o desenvolvimento do DocGuard, voltado à proteção e sanitização de informações antes do consumo por sistemas de IA.",
+        "en": "Deliveries include PN Extractor, reducing processing time from 6h to around 15min with approximately 98% accuracy; the multi-agent tariff intelligence pipeline, with a 70% efficiency increase; DocGuard; and LLM access infrastructure covering gateway, routing, and reliability concerns. These projects connect experimentation, enterprise integration, and the ongoing evolution of production AI."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/experience/becomex/becomex_summit.jpg",
+      "alt": {
+        "pt": "Marlon no Google I/O Extended em Joinville, ao lado do painel com a marca Becomex.",
+        "en": "Marlon at Google I/O Extended in Joinville, beside the event backdrop featuring Becomex."
+      },
+      "caption": {
+        "pt": "Registro de participação no Google I/O Extended, como parte da vivência profissional na Becomex.",
+        "en": "Attending Google I/O Extended as part of the professional experience at Becomex."
+      },
+      "role": "event",
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    }
+  ],
+  "visual": {
+    "variant": "system-module",
+    "size": 1.2,
+    "intensity": 1.15
+  },
+  "position": {
+    "mode": "auto"
+  }
+}
