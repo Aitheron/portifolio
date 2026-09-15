@@ -2,7 +2,6 @@
 
 import {useEffect, useMemo, useRef} from "react";
 import type {RefObject} from "react";
-import {AdaptiveDpr} from "@react-three/drei";
 import {
   Canvas,
   events as createPointerEvents,
@@ -180,7 +179,6 @@ function Scene({onUnavailable}: UniverseCanvasProps) {
   const microUniverseRef = useRef<ProjectSatelliteContext>({nodeId: null, mode: "none"});
   const stage = useExperienceStore((state) => state.stage);
   const locale = useExperienceStore((state) => state.locale);
-  const quality = useExperienceStore((state) => state.quality);
   const showGateway = stage === "language-selection" || stage === "entering";
   const showUniverse = isUniverseStage(stage);
   return (
@@ -200,7 +198,6 @@ function Scene({onUnavailable}: UniverseCanvasProps) {
       </>}
       {stage === "entering" && <QueryProbe />}
       <CameraRig />
-      <AdaptiveDpr pixelated={quality === "low"} />
       <ContextLossListener onUnavailable={onUnavailable} />
     </>
   );
