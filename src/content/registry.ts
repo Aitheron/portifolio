@@ -2,6 +2,7 @@ import aitheron from "./projects/aitheron.json";
 import multiAgent from "./projects/multi-agent-tariff-intelligence.json";
 import pnExtractor from "./projects/pn-extractor.json";
 import docguard from "./projects/docguard.json";
+import universePortfolio from "./projects/universe-portfolio.json";
 import becomex from "./experience/becomex.json";
 import bmwGroup from "./experience/bmw-group.json";
 import softwareEngineering from "./education/software-engineering.json";
@@ -24,4 +25,5 @@ export const contentEntries = [
   {file: "src/content/talks/catolica-pn-talk.json", data: catolicaPnTalk},
   {file: "src/content/experience/bmw-group.json", data: bmwGroup},
   {file: "src/content/talks/tdc-summit-ia-sao-paulo.json", data: tdcSummitIaSaoPaulo},
+  {file: "src/content/projects/universe-portfolio.json", data: universePortfolio},
 ];

@@ -8,22 +8,27 @@
     "en": "DocGuard"
   },
   "summary": {
-    "pt": "Protótipo de segurança de IA e sanitização de documentos.",
-    "en": "AI security and document sanitization prototype."
+    "pt": "Camada de proteção para documentos e textos antes do consumo por sistemas de IA, combinando triagem orientada por políticas, sanitização de dados sensíveis e pós-validação.",
+    "en": "Protection layer for documents and texts before AI consumption, combining policy-driven triage, sensitive-data sanitization, and post-validation."
   },
   "description": {
-    "pt": "Descrição provisória. O case detalhado e suas evidências serão adicionados em uma próxima etapa.",
-    "en": "Provisional description. The detailed case and its evidence will be added in a later content pass."
+    "pt": "Pesquisei, desenhei e implementei o DocGuard na Becomex para proteger documentos e textos antes do consumo por IA. A solução combina triagem por perfil e política, sanitização com Microsoft Presidio e OpenAI Privacy Filter e pós-validação. Conduzi os testes e a quantização do modelo contextual para 4 bits, reduzindo o consumo de recursos e, em testes com o mesmo documento, o tempo de cerca de 3 minutos para menos de 20 segundos.",
+    "en": "At Becomex, I researched, designed and implemented DocGuard to protect documents and texts before AI consumption. The solution combines profile- and policy-driven triage, sanitization with Microsoft Presidio and OpenAI Privacy Filter, and post-validation. I led testing and quantized the contextual model to 4 bits, reducing resource use and, in tests with the same document, processing time from around 3 minutes to under 20 seconds."
   },
   "projectType": {
-    "pt": "Protótipo",
-    "en": "Prototype"
+    "pt": "Projeto corporativo",
+    "en": "Corporate project"
   },
-  "importance": "secondary",
-  "provisional": true,
-  "confidential": false,
+  "importance": "primary",
+  "provisional": false,
+  "confidential": true,
   "technologies": [],
-  "relations": [],
+  "relations": [
+    {
+      "targetId": "becomex",
+      "type": "built-at"
+    }
+  ],
   "visual": {
     "variant": "data-node",
     "size": 0.82,
@@ -35,70 +40,225 @@
   "schemaVersion": 1,
   "signals": [
     {
-      "id": "pii",
-      "type": "domain",
+      "id": "sanitization",
+      "type": "concept",
       "label": {
-        "pt": "PII",
-        "en": "PII"
+        "pt": "Sanitização de documentos",
+        "en": "Document sanitization"
       },
       "importance": 1,
       "showInOrbit": true,
       "showInCase": true
     },
     {
-      "id": "sanitization",
-      "type": "concept",
+      "id": "privacy",
+      "type": "domain",
       "label": {
-        "pt": "Sanitização",
-        "en": "Sanitization"
+        "pt": "Privacidade de dados",
+        "en": "Data privacy"
       },
       "importance": 0.9,
       "showInOrbit": true,
       "showInCase": true
     },
     {
-      "id": "privacy",
+      "id": "policy-triage",
       "type": "concept",
       "label": {
-        "pt": "Privacidade",
-        "en": "Privacy"
+        "pt": "Triagem por política",
+        "en": "Policy-driven triage"
       },
-      "importance": 0.8,
+      "importance": 0.9,
       "showInOrbit": true,
       "showInCase": true
     },
     {
-      "id": "safe-ai",
-      "type": "concept",
-      "label": {
-        "pt": "IA Segura",
-        "en": "Safe AI"
-      },
-      "importance": 0.7,
-      "showInOrbit": true,
-      "showInCase": true
-    },
-    {
-      "id": "ner",
+      "id": "presidio",
       "type": "technology",
       "label": {
-        "pt": "NER",
-        "en": "NER"
+        "pt": "Microsoft Presidio",
+        "en": "Microsoft Presidio"
       },
-      "importance": 0.6,
+      "importance": 0.8,
+      "showInOrbit": false,
+      "showInCase": true
+    },
+    {
+      "id": "privacy-filter",
+      "type": "technology",
+      "label": {
+        "pt": "OpenAI Privacy Filter",
+        "en": "OpenAI Privacy Filter"
+      },
+      "importance": 0.85,
+      "showInOrbit": false,
+      "showInCase": true
+    },
+    {
+      "id": "quantization",
+      "type": "concept",
+      "label": {
+        "pt": "Quantização de 4 bits",
+        "en": "4-bit quantization"
+      },
+      "importance": 0.95,
       "showInOrbit": true,
       "showInCase": true
     },
     {
-      "id": "security",
-      "type": "domain",
+      "id": "post-validation",
+      "type": "concept",
       "label": {
-        "pt": "Segurança",
-        "en": "Security"
+        "pt": "Pós-validação",
+        "en": "Post-validation"
       },
-      "importance": 0.5,
+      "importance": 0.8,
+      "showInOrbit": false,
+      "showInCase": true
+    },
+    {
+      "id": "processing-time",
+      "type": "metric",
+      "label": {
+        "pt": "~3min → <20s",
+        "en": "~3min → <20s"
+      },
+      "importance": 1,
       "showInOrbit": true,
       "showInCase": true
+    }
+  ],
+  "company": "Becomex",
+  "myRole": {
+    "pt": "Pesquisei, desenhei e implementei o DocGuard, conduzindo a direção técnica desde a definição da abordagem e arquitetura até os testes, otimização e quantização do modelo utilizado na sanitização.",
+    "en": "I researched, designed and implemented DocGuard, leading its technical direction from the approach and architecture through testing, optimization and quantization of the model used for sanitization."
+  },
+  "coverImage": {
+    "src": "/assets/projects/docguard/cover/docguard-cover.svg",
+    "srcByLocale": {
+      "en": "/assets/projects/docguard/cover/docguard-cover-en.svg"
+    },
+    "alt": {
+      "pt": "Ilustração conceitual de documentos passando por um filtro de triagem, proteção com redação de dados sensíveis e validação antes do consumo por IA.",
+      "en": "Conceptual illustration of documents passing through a triage filter, sensitive-data redaction and validation before AI consumption."
+    },
+    "caption": {
+      "pt": "Representação conceitual; sem documentos reais ou telas internas.",
+      "en": "Conceptual representation; no real documents or internal screenshots."
+    },
+    "role": "cover",
+    "category": "conceptual"
+  },
+  "content": [
+    {
+      "type": "text",
+      "title": {
+        "pt": "O problema",
+        "en": "The problem"
+      },
+      "body": {
+        "pt": "Antes de enviar documentos ou textos a um sistema de IA, é preciso decidir se o conteúdo é compatível com o contexto de destino e quais informações sensíveis precisam ser removidas ou mascaradas. O DocGuard reúne essas duas decisões em uma camada de proteção anterior ao consumo por IA.",
+        "en": "Before sending documents or texts to an AI system, content must be assessed for compatibility with its destination context, and sensitive information must be identified for removal or masking. DocGuard brings these two decisions into a protection layer before AI consumption."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Triagem, sanitização e pós-validação",
+        "en": "Triage, sanitization and post-validation"
+      },
+      "body": {
+        "pt": "Na entrada, um perfil de triagem e sanitização orienta a avaliação do documento. Políticas definem a compatibilidade do conteúdo com o destino ou caso de uso: documentos incompatíveis podem ser bloqueados na triagem. O conteúdo aprovado segue para remoção ou mascaramento de informações sensíveis e, depois, para pós-validação antes de avançar ao consumo por IA.",
+        "en": "At intake, a triage and sanitization profile guides document assessment. Policies define content compatibility with the destination or use case: incompatible documents can be blocked during triage. Approved content proceeds to sensitive-information removal or masking, followed by post-validation before moving on to AI consumption."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/projects/docguard/diagrams/docguard-flow.svg",
+      "srcByLocale": {
+        "en": "/assets/projects/docguard/diagrams/docguard-flow-en.svg"
+      },
+      "alt": {
+        "pt": "Fluxo conceitual: entrada, triagem por política com ramificação de bloqueio, sanitização com Presidio e Privacy Filter, pós-validação e consumo por IA.",
+        "en": "Conceptual flow: input, policy-driven triage with a blocked branch, sanitization with Presidio and Privacy Filter, post-validation and AI consumption."
+      },
+      "caption": {
+        "pt": "Fluxo conceitual de proteção. As políticas e regras internas não são representadas.",
+        "en": "Conceptual protection flow. Internal policies and rules are not represented."
+      },
+      "role": "architecture",
+      "category": "conceptual",
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Dois mecanismos complementares",
+        "en": "Two complementary mechanisms"
+      },
+      "body": {
+        "pt": "A sanitização combina Microsoft Presidio, com uma camada baseada em regras e reconhecedores, e OpenAI Privacy Filter, um modelo contextual especializado em detecção de informações sensíveis. A combinação reúne padrões reconhecíveis e compreensão contextual para orientar a remoção ou o mascaramento de dados em documentos e textos. A pós-validação verifica a saída sanitizada antes de seu encaminhamento.",
+        "en": "Sanitization combines Microsoft Presidio, providing a rules- and recognizer-based layer, with OpenAI Privacy Filter, a contextual model specialized in sensitive-information detection. Together, recognizable patterns and contextual understanding guide data removal or masking in documents and texts. Post-validation checks sanitized output before it is passed onward."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Quantização para uso prático",
+        "en": "Quantization for practical use"
+      },
+      "body": {
+        "pt": "A etapa contextual tinha um custo de execução significativo. Para viabilizar o uso do modelo com menor custo computacional, apliquei quantização para 4 bits, reduzindo o consumo de recursos e os requisitos de hardware. Em testes com o mesmo documento, o tempo de processamento caiu de cerca de 3 minutos para menos de 20 segundos. Essa medição descreve o cenário testado, não um desempenho garantido para qualquer documento ou ambiente.",
+        "en": "The contextual stage had a significant runtime cost. To make the model practical with a lower computational cost, I applied 4-bit quantization, reducing resource consumption and hardware requirements. In tests with the same document, processing time dropped from around 3 minutes to under 20 seconds. This measurement describes the tested scenario, rather than guaranteed performance for every document or environment."
+      }
+    },
+    {
+      "type": "metric",
+      "value": "~3min → <20s",
+      "label": {
+        "pt": "Processamento em testes",
+        "en": "Processing in tests"
+      },
+      "description": {
+        "pt": "Mesmo documento, antes e depois da quantização do modelo contextual para 4 bits.",
+        "en": "Same document, before and after quantizing the contextual model to 4 bits."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Valor de engenharia",
+        "en": "Engineering value"
+      },
+      "body": {
+        "pt": "O DocGuard aproxima governança de IA, privacidade e segurança da implementação: decide o que pode avançar, sanitiza o conteúdo permitido e verifica a saída. A otimização do modelo contextual torna essa proteção mais viável em termos de recursos e tempo de processamento. O case demonstra IA aplicada além de prompts, com decisões de política, mecanismos complementares e otimização medida.",
+        "en": "DocGuard turns AI governance, privacy and security into an implemented workflow: deciding what can proceed, sanitizing permitted content and checking output. Optimizing the contextual model makes that protection more practical in resource use and processing time. The case demonstrates applied AI beyond prompts, with policy decisions, complementary mechanisms and measured optimization."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Minha atuação",
+        "en": "My role"
+      },
+      "body": {
+        "pt": "Pesquisei, desenhei e implementei o DocGuard, conduzindo a direção técnica desde a definição da abordagem e arquitetura até os testes, otimização e quantização do modelo utilizado na sanitização.",
+        "en": "I researched, designed and implemented DocGuard, leading its technical direction from the approach and architecture through testing, optimization and quantization of the model used for sanitization."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Síntese pública",
+        "en": "Public overview"
+      },
+      "body": {
+        "pt": "Os visuais deste case são exclusivamente conceituais. A apresentação preserva documentos, dados de clientes, políticas operacionais, endpoints e fluxos internos da empresa.",
+        "en": "All visuals in this case are conceptual. The presentation keeps company documents, customer data, operational policies, endpoints and internal workflows private."
+      }
     }
   ]
 }

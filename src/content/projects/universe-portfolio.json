@@ -1,0 +1,397 @@
+{
+  "schemaVersion": 1,
+  "id": "universe-portfolio",
+  "slug": "universe-portfolio",
+  "kind": "project",
+  "cluster": "key-projects",
+  "importance": "primary",
+  "title": {
+    "pt": "Universe Portfolio",
+    "en": "Universe Portfolio"
+  },
+  "summary": {
+    "pt": "Portfólio interativo 3D que representa uma trajetória profissional como um universo navegável, conectando projetos, experiências, formação e comunidade por meio de uma arquitetura orientada por conteúdo e relações.",
+    "en": "Interactive 3D portfolio that represents a professional journey as a navigable universe, connecting projects, experience, education and community through a content- and relation-driven architecture."
+  },
+  "description": {
+    "pt": "Como representar uma carreira não linear sem recorrer a um portfólio tradicional dividido em seções? O Universe Portfolio responde com uma interface espacial inspirada em um universo e na ideia de espaço vetorial: uma identidade central, clusters semânticos e exploração por zoom, foco, transições e revelação progressiva. Next.js, TypeScript, React e renderização 3D trabalham sobre entidades estruturadas, registro e validação de conteúdo. A experiência combina PT/EN, comportamento responsivo e uma separação entre conteúdo pessoal e engine que sustenta sua reutilização.",
+    "en": "How do you represent a non-linear career without falling back on a traditional section-based portfolio? Universe Portfolio answers with a spatial interface inspired by a universe and the idea of vector space: a central identity, semantic clusters and exploration through zoom, focus, transitions and progressive reveal. Next.js, TypeScript, React and 3D rendering work on top of structured entities, a registry and content validation. The experience combines PT/EN, responsive behavior and a separation between personal content and engine that supports reuse."
+  },
+  "projectType": {
+    "pt": "Projeto pessoal",
+    "en": "Personal project"
+  },
+  "status": {
+    "pt": "Em evolução",
+    "en": "Evolving"
+  },
+  "provisional": false,
+  "confidential": false,
+  "technologies": [
+    "Next.js",
+    "TypeScript",
+    "React",
+    "React Three Fiber",
+    "Three.js",
+    "Zod",
+    "next-intl",
+    "Zustand"
+  ],
+  "myRole": {
+    "pt": "Concebi, projetei e implementei o Universe Portfolio, definindo a arquitetura de conteúdo, a experiência de navegação 3D, os comportamentos de foco e transição e a base para reutilização como template. Sou responsável pelo design, pelas decisões de engenharia e pela iteração do produto.",
+    "en": "I conceived, designed and implemented Universe Portfolio, defining its content architecture, 3D navigation experience, focus and transition behavior, and foundation for reuse as a template. I own the design, engineering decisions and product iteration."
+  },
+  "relations": [
+    {
+      "targetId": "marlon",
+      "type": "related-to",
+      "label": {
+        "pt": "Trajetória representada",
+        "en": "Journey represented"
+      }
+    }
+  ],
+  "visual": {
+    "variant": "system-module",
+    "size": 1,
+    "intensity": 0.9
+  },
+  "position": {
+    "mode": "auto"
+  },
+  "coverImage": {
+    "src": "/assets/projects/universe-portfolio/cover/overview-pt.png",
+    "srcByLocale": {
+      "en": "/assets/projects/universe-portfolio/cover/overview-en.png"
+    },
+    "alt": {
+      "pt": "Visão geral real do portfólio: identidade central e quatro clusters em um universo 3D.",
+      "en": "Actual portfolio overview: central identity and four clusters in a 3D universe."
+    },
+    "caption": {
+      "pt": "Captura real da experiência em desktop.",
+      "en": "Actual capture of the desktop experience."
+    },
+    "role": "cover",
+    "category": "project"
+  },
+  "gallery": [
+    {
+      "src": "/assets/projects/universe-portfolio/gallery/projects-pt.png",
+      "srcByLocale": {
+        "en": "/assets/projects/universe-portfolio/gallery/projects-en.png"
+      },
+      "alt": {
+        "pt": "Cluster de projetos em foco no universo 3D.",
+        "en": "Projects cluster in focus in the 3D universe."
+      },
+      "caption": {
+        "pt": "A aproximação revela os projetos e sua hierarquia espacial.",
+        "en": "Moving closer reveals projects and their spatial hierarchy."
+      },
+      "role": "interface",
+      "category": "project"
+    },
+    {
+      "src": "/assets/projects/universe-portfolio/gallery/case-pt.png",
+      "srcByLocale": {
+        "en": "/assets/projects/universe-portfolio/gallery/case-en.png"
+      },
+      "alt": {
+        "pt": "Case Aitheron aberto no shell de detalhes do portfólio.",
+        "en": "Aitheron case open in the portfolio detail shell."
+      },
+      "caption": {
+        "pt": "O mesmo fluxo de exploração leva a um case com evidências e conteúdo estruturado.",
+        "en": "The same exploration flow leads to a case with evidence and structured content."
+      },
+      "role": "interface",
+      "category": "project"
+    },
+    {
+      "src": "/assets/projects/universe-portfolio/gallery/mobile-pt.png",
+      "srcByLocale": {
+        "en": "/assets/projects/universe-portfolio/gallery/mobile-en.png"
+      },
+      "alt": {
+        "pt": "Visão geral do universo em viewport mobile de 390 pixels.",
+        "en": "Universe overview in a 390-pixel mobile viewport."
+      },
+      "caption": {
+        "pt": "Captura em Chromium com viewport e interação por toque emulados.",
+        "en": "Chromium capture with an emulated mobile viewport and touch input."
+      },
+      "role": "interface",
+      "category": "project"
+    }
+  ],
+  "signals": [
+    {
+      "id": "spatial-ux",
+      "type": "concept",
+      "label": {
+        "pt": "UX espacial",
+        "en": "Spatial UX"
+      },
+      "importance": 1,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "content-architecture",
+      "type": "concept",
+      "label": {
+        "pt": "Arquitetura de conteúdo",
+        "en": "Content architecture"
+      },
+      "importance": 0.95,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "relation-driven",
+      "type": "concept",
+      "label": {
+        "pt": "Design orientado por relações",
+        "en": "Relation-driven design"
+      },
+      "importance": 0.9,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "interactive-3d",
+      "type": "domain",
+      "label": {
+        "pt": "Experiência 3D interativa",
+        "en": "Interactive 3D experience"
+      },
+      "importance": 0.9,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "react-three-fiber",
+      "type": "technology",
+      "label": {
+        "pt": "React Three Fiber",
+        "en": "React Three Fiber"
+      },
+      "importance": 0.85,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "internationalization",
+      "type": "concept",
+      "label": {
+        "pt": "Internacionalização",
+        "en": "Internationalization"
+      },
+      "importance": 0.8,
+      "showInOrbit": false,
+      "showInCase": true
+    },
+    {
+      "id": "reusable-template",
+      "type": "concept",
+      "label": {
+        "pt": "Template reutilizável",
+        "en": "Reusable template"
+      },
+      "importance": 0.8,
+      "showInOrbit": false,
+      "showInCase": true
+    },
+    {
+      "id": "open-source",
+      "type": "concept",
+      "label": {
+        "pt": "Código sob licença MIT",
+        "en": "MIT-licensed code"
+      },
+      "importance": 0.75,
+      "showInOrbit": false,
+      "showInCase": true
+    }
+  ],
+  "content": [
+    {
+      "type": "text",
+      "title": {
+        "pt": "O problema",
+        "en": "The problem"
+      },
+      "body": {
+        "pt": "Uma trajetória profissional para ser explorada, não apenas rolada. Projetos, experiências, formação e comunidade influenciam uns aos outros, mas um portfólio organizado em seções isoladas tende a esconder essas conexões. O desafio de produto era tornar essa carreira não linear compreensível sem reduzi-la a uma sequência de páginas ou a uma linha do tempo.",
+        "en": "A professional journey to be explored, not just scrolled. Projects, experience, education and community influence one another, but a portfolio organized into isolated sections tends to hide those connections. The product challenge was to make this non-linear career understandable without reducing it to a sequence of pages or a timeline."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "A ideia: uma trajetória como universo",
+        "en": "The idea: a journey as a universe"
+      },
+      "body": {
+        "pt": "A metáfora espacial dá forma às relações. O visitante parte de uma identidade central e se aproxima de clusters de projetos, experiência, formação e comunidade. A organização semântica indica contexto; relações explícitas conectam entidades quando existe um vínculo real.",
+        "en": "The spatial metaphor gives relationships a visible form. Visitors start from a central identity and approach clusters of projects, experience, education and community. Semantic organization provides context; explicit relations connect entities where a real connection exists."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Como a experiência funciona",
+        "en": "How the experience works"
+      },
+      "body": {
+        "pt": "Visão geral, cluster, nó em foco e case são estados distintos. Zoom e foco aproximam o visitante de um projeto; a transição estabiliza antes da abertura dos detalhes. Rótulos, imagens e sinais em órbita aparecem progressivamente conforme a proximidade e a seleção. Um explorador semântico oferece outro caminho para o mesmo grafo. O case preserva uma leitura editorial com contexto, papel, evidências e relações navegáveis.",
+        "en": "Overview, cluster, focused node and case are distinct states. Zoom and focus bring visitors closer to a project; the transition settles before details can open. Labels, images and orbiting signals appear progressively according to proximity and selection. A semantic explorer offers another route into the same graph. The case preserves an editorial reading experience with context, ownership, evidence and navigable relationships."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/projects/universe-portfolio/diagrams/navigation-pt.svg",
+      "srcByLocale": {
+        "en": "/assets/projects/universe-portfolio/diagrams/navigation-en.svg"
+      },
+      "alt": {
+        "pt": "Fluxo de exploração: identidade, cluster, nó em foco e case detalhado, com retorno ao contexto.",
+        "en": "Exploration flow: identity, cluster, focused node and detailed case, with a return to context."
+      },
+      "caption": {
+        "pt": "Estados da experiência e revelação progressiva do conteúdo.",
+        "en": "Experience states and progressive content reveal."
+      },
+      "role": "architecture",
+      "category": "project",
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/projects/universe-portfolio/gallery/projects-pt.png",
+      "srcByLocale": {
+        "en": "/assets/projects/universe-portfolio/gallery/projects-en.png"
+      },
+      "alt": {
+        "pt": "Cluster de projetos em foco no universo 3D.",
+        "en": "Projects cluster in focus in the 3D universe."
+      },
+      "caption": {
+        "pt": "A aproximação revela os projetos e sua hierarquia espacial.",
+        "en": "Moving closer reveals projects and their spatial hierarchy."
+      },
+      "role": "interface",
+      "category": "project",
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Arquitetura: conteúdo e engine",
+        "en": "Architecture: content and engine"
+      },
+      "body": {
+        "pt": "As entidades vivem em arquivos JSON com IDs, textos localizados, sinais, relações e mídia. O registro explícito alimenta a validação Zod, que verifica schema, unicidade e destinos das relações. A validação de assets locais roda no servidor e no build. A partir dessas entidades, o sistema monta o grafo, calcula posições e fornece os dados para a cena e o shell de cases. Projetos, experiências, formação e atividades de comunidade compartilham esse contrato. A estrutura do conteúdo orienta a renderização; adicionar um case não exige criar uma página dedicada.",
+        "en": "Entities live in JSON files with IDs, localized text, signals, relationships and media. The explicit registry feeds Zod validation, which checks the schema, uniqueness and relationship targets. Local asset validation runs on the server and during builds. From those entities, the system builds the graph, calculates positions and supplies data to the scene and case shell. Projects, experience, education and community activities share this contract. Content structure drives rendering; adding a case does not require a dedicated page."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/projects/universe-portfolio/diagrams/architecture-pt.svg",
+      "srcByLocale": {
+        "en": "/assets/projects/universe-portfolio/diagrams/architecture-en.svg"
+      },
+      "alt": {
+        "pt": "JSON e registro passam por validação; entidades e grafo alimentam a cena 3D e o shell de cases em PT/EN. Assets são verificados no servidor e build.",
+        "en": "JSON and registry pass through validation; entities and graph feed the 3D scene and case shell in PT/EN. Assets are checked on the server and during builds."
+      },
+      "caption": {
+        "pt": "Separação entre conteúdo, validação e experiência; a mesma base alimenta cena e leitura.",
+        "en": "Separation of content, validation and experience; the same data supports both scene and reading."
+      },
+      "role": "architecture",
+      "category": "project",
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "UX, renderização e dispositivos",
+        "en": "UX, rendering and devices"
+      },
+      "body": {
+        "pt": "React Three Fiber e Three.js materializam a hierarquia entre identidade, clusters e projetos. O estado de navegação fica separado da renderização, com Zustand coordenando seleção, foco e abertura de cases. A revelação de capas fragmentadas, os sinais em órbita e a informação ambiente ajudam a distinguir escala e contexto. Perfis de qualidade ajustam densidade de partículas e resolução; movimento reduzido, controles por toque e navegação mobile consideram diferentes dispositivos. Quando WebGL não está disponível, o mapa semântico mantém o conteúdo acessível.",
+        "en": "React Three Fiber and Three.js render the hierarchy between identity, clusters and projects. Navigation state is separate from rendering, with Zustand coordinating selection, focus and case opening. Fragmented cover reveal, orbiting signals and ambient information help distinguish scale and context. Quality profiles adjust particle density and resolution; reduced motion, touch controls and mobile navigation account for different devices. When WebGL is unavailable, the semantic map keeps the content accessible."
+      }
+    },
+    {
+      "type": "gallery",
+      "images": [
+        {
+          "src": "/assets/projects/universe-portfolio/gallery/case-pt.png",
+          "srcByLocale": {
+            "en": "/assets/projects/universe-portfolio/gallery/case-en.png"
+          },
+          "alt": {
+            "pt": "Case Aitheron aberto no shell de detalhes do portfólio.",
+            "en": "Aitheron case open in the portfolio detail shell."
+          },
+          "caption": {
+            "pt": "O mesmo fluxo de exploração leva a um case com evidências e conteúdo estruturado.",
+            "en": "The same exploration flow leads to a case with evidence and structured content."
+          },
+          "role": "interface",
+          "category": "project"
+        },
+        {
+          "src": "/assets/projects/universe-portfolio/gallery/mobile-pt.png",
+          "srcByLocale": {
+            "en": "/assets/projects/universe-portfolio/gallery/mobile-en.png"
+          },
+          "alt": {
+            "pt": "Visão geral do universo em viewport mobile de 390 pixels.",
+            "en": "Universe overview in a 390-pixel mobile viewport."
+          },
+          "caption": {
+            "pt": "Captura em Chromium com viewport e interação por toque emulados.",
+            "en": "Chromium capture with an emulated mobile viewport and touch input."
+          },
+          "role": "interface",
+          "category": "project"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Localização como parte do modelo",
+        "en": "Localization as part of the model"
+      },
+      "body": {
+        "pt": "PT e EN fazem parte dos dados, incluindo títulos, narrativa, sinais, textos alternativos e legendas. next-intl fornece as mensagens da interface; a resolução de conteúdo usa o idioma ativo e fallback configurado. A mídia também admite versões por locale. Isso permite manter o mesmo case e a mesma navegação com conteúdo adequado a cada público.",
+        "en": "PT and EN are part of the data, including titles, narrative, signals, alternative text and captions. next-intl supplies interface messages; content resolution uses the active language and configured fallback. Media also supports locale-specific versions. This keeps the same case and navigation while adapting content to each audience."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Reutilização e evolução",
+        "en": "Reuse and evolution"
+      },
+      "body": {
+        "pt": "O sistema foi concebido com mentalidade de template reutilizável: engine, configuração e conteúdo pessoal têm responsabilidades separadas. O repositório já inclui licença MIT para o código e documentação de personalização em português e inglês. Outra trajetória pode ocupar o mesmo motor ao substituir perfil, clusters, entidades e assets e validar o novo conjunto. O produto segue em evolução, com potencial de ampliar sua adoção como template open source; isso não pressupõe uma distribuição pública já consolidada.",
+        "en": "The system was designed with a reusable template mindset: engine, configuration and personal content have separate responsibilities. The repository already includes an MIT license for the code and customization documentation in Portuguese and English. Another journey can use the same engine by replacing the profile, clusters, entities and assets and validating the new dataset. The product continues to evolve, with potential for broader adoption as an open-source template; this does not imply an established public distribution."
+      }
+    }
+  ]
+}

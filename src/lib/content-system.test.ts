@@ -41,8 +41,8 @@ test("all current files and the teaching example validate, with an optional cove
   const identity = profileSchema.parse(profile);
   clusterCollectionSchema.parse(clusters);
   const nodes = validatePortfolioNodes(contentEntries.map(e => e.data));
-  assert.deepEqual(nodes.map(node => node.id), ["docguard", "multi-agent-tariff-intelligence", "pn-extractor", "aitheron", "becomex", "software-engineering", "parkify", "gdg-joinville-pn-talk", "catolica-pn-talk", "bmw-group", "tdc-summit-ia-sao-paulo"]);
-  assert.deepEqual(nodes.map(node => node.kind), ["project", "project", "project", "project", "experience", "education", "project", "talk", "talk", "experience", "talk"]);
+  assert.deepEqual(nodes.map(node => node.id), ["docguard", "multi-agent-tariff-intelligence", "pn-extractor", "aitheron", "becomex", "software-engineering", "parkify", "gdg-joinville-pn-talk", "catolica-pn-talk", "bmw-group", "tdc-summit-ia-sao-paulo", "universe-portfolio"]);
+  assert.deepEqual(nodes.map(node => node.kind), ["project", "project", "project", "project", "experience", "education", "project", "talk", "talk", "experience", "talk", "project"]);
   assert.deepEqual(nodes[3].relations, [{targetId: "software-engineering", type: "thesis-of"}, {targetId: "education-research", type: "research"}]);
   assert.deepEqual(nodes[4].relations?.map(relation => relation.targetId), ["pn-extractor", "multi-agent-tariff-intelligence", "docguard"]);
   assert.equal(nodes[5].relations?.[0].targetId, "aitheron");
@@ -63,7 +63,13 @@ test("all current files and the teaching example validate, with an optional cove
   for (const surface of ["orbit", "case"] as const) {
     assert.deepEqual(visibleSignals(nodes[2].signals, surface).filter(signal => signal.type === "metric").map(signal => signal.id), ["time", "accuracy"]);
   }
-  for (const node of nodes.slice(0, 2)) {
+  assert.equal(nodes[0].provisional, false);
+  assert.equal(nodes[0].importance, "primary");
+  assert.deepEqual(nodes[0].relations, [{targetId: "becomex", type: "built-at"}]);
+  for (const surface of ["orbit", "case"] as const) {
+    assert.deepEqual(visibleSignals(nodes[0].signals, surface).filter(signal => signal.type === "metric").map(signal => signal.id), ["processing-time"]);
+  }
+  for (const node of nodes.slice(1, 2)) {
     assert.equal(node.signals?.length, 6);
     assert.equal(node.provisional, true);
     for (const surface of ["orbit", "case"] as const) {
