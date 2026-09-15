@@ -613,6 +613,10 @@ button {
 
 .fallback-node:hover { border-color: var(--line-strong); }
 
+.fallback-node__cover { display: block; text-align: left; }
+.fallback-node__cover img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.fallback-node__cover strong { display: block; padding: 0.75rem; color: var(--text); font-size: 0.76rem; }
+
 .procedural-cover {
   --cover-accent: var(--signal);
   position: relative;
