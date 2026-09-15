@@ -71,9 +71,12 @@ test("all current files and the teaching example validate, with an optional cove
   }
   for (const node of nodes.slice(1, 2)) {
     assert.equal(node.signals?.length, 6);
-    assert.equal(node.provisional, true);
+    assert.equal(node.provisional, false);
+    assert.equal(node.importance, "flagship");
+    assert.deepEqual(node.title, {pt: "Gestão Tarifária com IA Multiagente", en: "Multi-Agent AI for Tariff Management"});
+    assert.deepEqual(node.relations, [{targetId: "becomex", type: "built-at"}]);
     for (const surface of ["orbit", "case"] as const) {
-      assert.ok(visibleSignals(node.signals ?? [], surface).every(signal => signal.type !== "metric"));
+      assert.deepEqual(visibleSignals(node.signals ?? [], surface).filter(signal => signal.type === "metric").map(signal => signal.id), ["efficiency", "sla"]);
     }
   }
   assert.equal(profile.title.pt, "Marlon de Souza");
