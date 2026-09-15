@@ -41,24 +41,29 @@ test("all current files and the teaching example validate, with an optional cove
   const identity = profileSchema.parse(profile);
   clusterCollectionSchema.parse(clusters);
   const nodes = validatePortfolioNodes(contentEntries.map(e => e.data));
-  assert.deepEqual(nodes.map(node => node.id), ["aitheron", "multi-agent-tariff-intelligence", "pn-extractor", "enterprise-llm-infrastructure", "docguard", "becomex", "software-engineering", "ai-automation-talks", "internal-genai-workshops", "parkify", "gdg-joinville-pn-talk", "catolica-pn-talk", "bmw-group"]);
-  assert.deepEqual(nodes.map(node => node.kind), ["project", "project", "project", "project", "project", "experience", "education", "talk", "talk", "project", "talk", "talk", "experience"]);
-  assert.deepEqual(nodes[0].relations, [{targetId: "software-engineering", type: "thesis-of"}, {targetId: "education-research", type: "research"}]);
-  assert.deepEqual(nodes[5].relations?.map(relation => relation.targetId), ["pn-extractor", "multi-agent-tariff-intelligence", "docguard", "enterprise-llm-infrastructure"]);
-  assert.equal(nodes[6].relations?.[0].targetId, "aitheron");
-  assert.deepEqual(nodes.filter(node => node.cluster === "talks-community").map(node => node.participationRole), ["speaker", "workshop-host", "speaker", "speaker"]);
-  assert.equal(nodes[0].provisional, false);
-  assert.equal(nodes[0].signals?.length, 7);
-  assert.equal(nodes[0].coverImage?.src, "/assets/projects/aitheron/cover/aitheron-cover.png");
-  assert.equal(nodes[0].gallery?.length, 4);
+  assert.deepEqual(nodes.map(node => node.id), ["docguard", "multi-agent-tariff-intelligence", "pn-extractor", "aitheron", "becomex", "software-engineering", "parkify", "gdg-joinville-pn-talk", "catolica-pn-talk", "bmw-group", "tdc-summit-ia-sao-paulo"]);
+  assert.deepEqual(nodes.map(node => node.kind), ["project", "project", "project", "project", "experience", "education", "project", "talk", "talk", "experience", "talk"]);
+  assert.deepEqual(nodes[3].relations, [{targetId: "software-engineering", type: "thesis-of"}, {targetId: "education-research", type: "research"}]);
+  assert.deepEqual(nodes[4].relations?.map(relation => relation.targetId), ["pn-extractor", "multi-agent-tariff-intelligence", "docguard"]);
+  assert.equal(nodes[5].relations?.[0].targetId, "aitheron");
+  assert.deepEqual(nodes.filter(node => node.cluster === "talks-community").map(node => node.participationRole), ["speaker", "speaker", "attendee"]);
+  assert.equal(nodes[3].provisional, false);
+  assert.equal(nodes[3].signals?.length, 7);
+  assert.equal(nodes[3].coverImage?.src, "/assets/projects/aitheron/cover/aitheron-cover.png");
+  assert.equal(nodes[3].gallery?.length, 4);
   for (const width of [390, 1440]) {
-    assert.ok(selectSatellites(nodes[0].signals ?? [], getSatelliteBudget(width, "high")).some(signal => signal.id === "auroc"));
+    assert.ok(selectSatellites(nodes[3].signals ?? [], getSatelliteBudget(width, "high")).some(signal => signal.id === "auroc"));
   }
-  assert.deepEqual(nodes[0].content?.filter(block => block.type === "metric").map(block => block.value), ["0.9942", "0.9898", "0.9958", "0.9946"]);
+  assert.deepEqual(nodes[3].content?.filter(block => block.type === "metric").map(block => block.value), ["0.9942", "0.9898", "0.9958", "0.9946"]);
   for (const surface of ["orbit", "case"] as const) {
-    assert.ok(visibleSignals(nodes[0].signals, surface).some(signal => signal.type === "metric"));
+    assert.ok(visibleSignals(nodes[3].signals, surface).some(signal => signal.type === "metric"));
   }
-  for (const node of nodes.slice(1, 5)) {
+  assert.equal(nodes[2].provisional, false);
+  assert.equal(nodes[2].importance, "flagship");
+  for (const surface of ["orbit", "case"] as const) {
+    assert.deepEqual(visibleSignals(nodes[2].signals, surface).filter(signal => signal.type === "metric").map(signal => signal.id), ["time", "accuracy"]);
+  }
+  for (const node of nodes.slice(0, 2)) {
     assert.equal(node.signals?.length, 6);
     assert.equal(node.provisional, true);
     for (const surface of ["orbit", "case"] as const) {

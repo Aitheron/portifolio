@@ -159,10 +159,6 @@
     {
       "targetId": "docguard",
       "type": "produced"
-    },
-    {
-      "targetId": "enterprise-llm-infrastructure",
-      "type": "produced"
     }
   ],
   "content": [
@@ -195,7 +191,7 @@
         "en": "Delivery and impact"
       },
       "body": {
-        "pt": "Entre as principais entregas, o Extrator de Part Number reduziu análises de cerca de 6 horas para 15 minutos, com aproximadamente 98% de acurácia. Já em Gestão Tarifária (GT), uma pipeline multiagente aumentou a eficiência operacional em mais de 70% e elevou o SLA de 77–81% para 99,5%. Minha atuação também inclui o desenvolvimento do DocGuard, voltado à proteção e sanitização de informações antes do consumo por sistemas de IA.",
+        "pt": "Entre as principais entregas, o Extrator de Partnumbers reduziu análises de cerca de 6 horas para 15 minutos, com aproximadamente 98% de acurácia. Já em Gestão Tarifária (GT), uma pipeline multiagente aumentou a eficiência operacional em mais de 70% e elevou o SLA de 77–81% para 99,5%. Minha atuação também inclui o desenvolvimento do DocGuard, voltado à proteção e sanitização de informações antes do consumo por sistemas de IA.",
         "en": "Deliveries include PN Extractor, reducing processing time from 6h to around 15min with approximately 98% accuracy; the multi-agent tariff intelligence pipeline, with a 70% efficiency increase; DocGuard; and LLM access infrastructure covering gateway, routing, and reliability concerns. These projects connect experimentation, enterprise integration, and the ongoing evolution of production AI."
       }
     },

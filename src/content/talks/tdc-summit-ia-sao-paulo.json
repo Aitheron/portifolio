@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "id": "tdc-summit-ia-sao-paulo",
+  "slug": "tdc-summit-ia-sao-paulo",
+  "kind": "talk",
+  "cluster": "talks-community",
+  "title": {
+    "pt": "TDC Summit IA — São Paulo",
+    "en": "TDC AI Summit — São Paulo"
+  },
+  "summary": {
+    "pt": "Participação no TDC Summit IA, em São Paulo, acompanhando discussões sobre Inteligência Artificial, Enterprise Software e a relação entre tecnologia, produto e geração de valor.",
+    "en": "Attendance at TDC AI Summit in São Paulo, following discussions on Artificial Intelligence, Enterprise Software, and the relationship between technology, product, and value creation."
+  },
+  "description": {
+    "pt": "Como participante do TDC Summit IA, acompanhei a evolução das discussões sobre tecnologia e IA no mercado, com destaque para a relevância crescente de Enterprise Software. O evento reforçou que construir software exige entender o problema, o contexto de negócio e o valor gerado: IA precisa estar conectada a uma dor real e a um fluxo de uso claro. Essas reflexões aproximaram as discussões do mercado das soluções com que trabalho profissionalmente.",
+    "en": "As an attendee at TDC AI Summit, I followed how market discussions around technology and AI are evolving, particularly the growing relevance of Enterprise Software. The event reinforced that building software requires understanding the problem, the business context, and the value created: AI needs to address a real pain point within a clear user workflow. These reflections connected broader market discussions with the solutions I work on professionally."
+  },
+  "participationRole": "attendee",
+  "importance": "secondary",
+  "technologies": [],
+  "signals": [
+    {
+      "id": "artificial-intelligence",
+      "type": "domain",
+      "label": {
+        "pt": "Inteligência Artificial",
+        "en": "Artificial Intelligence"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "enterprise-software",
+      "type": "domain",
+      "label": {
+        "pt": "Enterprise Software",
+        "en": "Enterprise Software"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "software-engineering",
+      "type": "domain",
+      "label": {
+        "pt": "Engenharia de Software",
+        "en": "Software Engineering"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "product-thinking",
+      "type": "concept",
+      "label": {
+        "pt": "Pensamento de Produto",
+        "en": "Product Thinking"
+      },
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "community",
+      "type": "domain",
+      "label": {
+        "pt": "Comunidade",
+        "en": "Community"
+      },
+      "showInOrbit": false,
+      "showInCase": true
+    }
+  ],
+  "relations": [],
+  "content": [
+    {
+      "type": "text",
+      "title": {
+        "pt": "Um olhar para o mercado",
+        "en": "A perspective on the market"
+      },
+      "body": {
+        "pt": "Participei do TDC Summit IA, em São Paulo, como ouvinte. Acompanhar as discussões sobre IA, startups e produto foi uma oportunidade de observar como o mercado está pensando tecnologia e de ampliar meu contato com o ecossistema de desenvolvimento.",
+        "en": "I attended TDC AI Summit in São Paulo as an audience member. Following discussions about AI, startups, and product was an opportunity to observe how the market is thinking about technology and broaden my exposure to the developer ecosystem."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/talks/tdc-sao-paulo/1.png",
+      "alt": {
+        "pt": "Apresentação no TDC Summit IA sobre mudanças nas expectativas de crescimento do mercado.",
+        "en": "Presentation at TDC AI Summit about changing market expectations for growth."
+      },
+      "role": "event",
+      "category": "event",
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Software, contexto e valor",
+        "en": "Software, context, and value"
+      },
+      "body": {
+        "pt": "A relevância crescente de Enterprise Software foi um dos pontos que mais me chamou a atenção. Para quem trabalha com engenharia de software e IA aplicada, construir tecnologia por si só não basta: é preciso entender o problema real, o contexto de negócio e como a solução se encaixa no trabalho das pessoas para gerar valor.",
+        "en": "The growing relevance of Enterprise Software stood out to me. For someone working in software engineering and applied AI, building technology alone is not enough: we need to understand the real problem, the business context, and how a solution fits into people's work to create value."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/talks/tdc-sao-paulo/2.png",
+      "alt": {
+        "pt": "Apresentação no TDC Summit IA sobre a expansão de Enterprise Software.",
+        "en": "Presentation at TDC AI Summit about the growth of Enterprise Software."
+      },
+      "role": "event",
+      "category": "event",
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "IA conectada à prática",
+        "en": "Connecting AI to practice"
+      },
+      "body": {
+        "pt": "IA sozinha não sustenta um produto. Ela precisa responder a uma dor real, atender às necessidades dos usuários e fazer parte de um fluxo de uso claro, com valor de negócio mensurável. Saí do evento conectando essas discussões às soluções de software e IA com que trabalho, reforçando a importância de pensar tecnologia a partir de seu uso e impacto.",
+        "en": "AI alone does not sustain a product. It needs to address a real pain point, meet user needs, and fit into a clear workflow with measurable business value. I left the event connecting these discussions to the software and AI solutions I work on, reinforcing the importance of thinking about technology through its use and impact."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/talks/tdc-sao-paulo/3-sanitized.png",
+      "alt": {
+        "pt": "Credencial de Marlon no TDC Summit IA, com QR code e número de inscrição ocultos.",
+        "en": "Marlon’s TDC AI Summit badge, with the QR code and registration number concealed."
+      },
+      "role": "event",
+      "category": "event",
+      "presentation": {
+        "size": "inline",
+        "align": "center"
+      }
+    },
+    {
+      "type": "link",
+      "label": {
+        "pt": "Post no LinkedIn",
+        "en": "LinkedIn Post"
+      },
+      "href": "https://www.linkedin.com/posts/marlon-de-souza-software-engineer_tdc-thedevconf-engenhariadesoftware-activity-7453586852080459776-RGrX?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADdJee0B4dd8JgJ7FKgojWaq1m1OPbySQNk"
+    }
+  ],
+  "visual": {
+    "variant": "human-signal",
+    "size": 0.85
+  },
+  "position": {
+    "mode": "auto"
+  },
+  "coverImage": {
+    "src": "/assets/talks/tdc-sao-paulo/cover.png",
+    "alt": {
+      "pt": "Tela de boas-vindas do TDC Summit IA, em São Paulo.",
+      "en": "Welcome screen at TDC AI Summit in São Paulo."
+    },
+    "role": "cover",
+    "category": "event"
+  }
+}

@@ -4,29 +4,37 @@
   "kind": "project",
   "cluster": "key-projects",
   "title": {
-    "pt": "PN Extractor",
-    "en": "PN Extractor"
+    "pt": "Extrator de Partnumbers",
+    "en": "Part Number Extractor"
   },
   "summary": {
-    "pt": "Da extração de documentos à validação de dados estruturados.",
-    "en": "From document extraction to validated structured data."
+    "pt": "Solução de IA para extração automatizada de Part Numbers em descrições textuais não padronizadas e em alto volume.",
+    "en": "AI-based solution for extracting Part Numbers from non-standardized textual descriptions at scale."
   },
   "description": {
-    "pt": "Descrição provisória. O case detalhado e suas evidências serão adicionados em uma próxima etapa.",
-    "en": "Provisional description. The detailed case and its evidence will be added in a later content pass."
+    "pt": "Desenvolvi na Becomex uma solução de IA e automação que combina recuperação semântica, composição de contexto, inferência com LLM e pós-validação. A solução reduziu o tempo de análise de cerca de 6 horas para aproximadamente 15 minutos, com aproximadamente 98% de acurácia.",
+    "en": "At Becomex, I developed an AI automation solution combining semantic retrieval, context assembly, LLM inference and post-validation. The solution reduced analysis time from about 6 hours to around 15 minutes, with approximately 98% accuracy."
   },
   "projectType": {
-    "pt": "Projeto profissional",
-    "en": "Professional project"
+    "pt": "Projeto corporativo",
+    "en": "Corporate project"
   },
-  "importance": "primary",
-  "provisional": true,
+  "importance": "flagship",
+  "provisional": false,
   "confidential": true,
   "technologies": [],
   "relations": [
     {
       "targetId": "becomex",
-      "type": "related-to"
+      "type": "built-at"
+    },
+    {
+      "targetId": "gdg-joinville-pn-talk",
+      "type": "presented-at"
+    },
+    {
+      "targetId": "catolica-pn-talk",
+      "type": "presented-at"
     }
   ],
   "visual": {
@@ -40,59 +48,70 @@
   "schemaVersion": 1,
   "signals": [
     {
-      "id": "document-ai",
+      "id": "part-numbers",
       "type": "domain",
       "label": {
-        "pt": "IA para Documentos",
-        "en": "Document AI"
+        "pt": "Part Numbers",
+        "en": "Part Numbers"
       },
       "importance": 1,
       "showInOrbit": true,
       "showInCase": true
     },
     {
-      "id": "extraction",
+      "id": "document-ai",
+      "type": "domain",
+      "label": {
+        "pt": "IA para Documentos",
+        "en": "Document AI"
+      },
+      "importance": 0.8,
+      "showInOrbit": false,
+      "showInCase": true
+    },
+    {
+      "id": "semantic-similarity",
       "type": "concept",
       "label": {
-        "pt": "Extração",
-        "en": "Extraction"
+        "pt": "Similaridade Semântica",
+        "en": "Semantic Similarity"
       },
       "importance": 0.9,
       "showInOrbit": true,
       "showInCase": true
     },
     {
-      "id": "validation",
+      "id": "cosine-similarity",
       "type": "concept",
       "label": {
-        "pt": "Validação",
-        "en": "Validation"
+        "pt": "Similaridade de Cosseno",
+        "en": "Cosine Similarity"
       },
       "importance": 0.8,
+      "showInOrbit": false,
+      "showInCase": true
+    },
+    {
+      "id": "vector-search",
+      "type": "concept",
+      "label": {
+        "pt": "Busca Vetorial",
+        "en": "Vector Search"
+      },
+      "importance": 0.85,
       "showInOrbit": true,
       "showInCase": true
     },
     {
-      "id": "time",
-      "type": "metric",
+      "id": "llms",
+      "type": "technology",
       "label": {
-        "pt": "6h → ~15min",
-        "en": "6h → ~15min"
+        "pt": "LLMs",
+        "en": "LLMs"
       },
-      "importance": 0.7,
-      "showInOrbit": false,
-      "showInCase": false
-    },
-    {
-      "id": "accuracy",
-      "type": "metric",
-      "label": {
-        "pt": "~98% de acurácia",
-        "en": "~98% accuracy"
-      },
-      "importance": 0.6,
-      "showInOrbit": false,
-      "showInCase": false
+      "importance": 0.85,
+      "showInOrbit": true,
+      "showInCase": true
     },
     {
       "id": "automation",
@@ -101,9 +120,187 @@
         "pt": "Automação",
         "en": "Automation"
       },
-      "importance": 0.5,
+      "importance": 0.8,
+      "showInOrbit": false,
+      "showInCase": true
+    },
+    {
+      "id": "batch-processing",
+      "type": "concept",
+      "label": {
+        "pt": "Processamento em Lotes",
+        "en": "Batch Processing"
+      },
+      "importance": 0.8,
+      "showInOrbit": false,
+      "showInCase": true
+    },
+    {
+      "id": "time",
+      "type": "metric",
+      "label": {
+        "pt": "6h → 15min",
+        "en": "6h → 15min"
+      },
+      "importance": 1,
       "showInOrbit": true,
       "showInCase": true
+    },
+    {
+      "id": "accuracy",
+      "type": "metric",
+      "label": {
+        "pt": "~98% de acurácia",
+        "en": "~98% accuracy"
+      },
+      "importance": 0.98,
+      "showInOrbit": true,
+      "showInCase": true
+    }
+  ],
+  "company": "Becomex",
+  "myRole": {
+    "pt": "Fui responsável pela solução, da definição da abordagem à implementação do pipeline: recuperação semântica, composição de contexto, inferência com LLM, validação e processamento em escala.",
+    "en": "I owned the solution from defining the approach to implementing the pipeline: semantic retrieval, context assembly, LLM inference, validation and processing at scale."
+  },
+  "coverImage": {
+    "src": "/assets/projects/pn-extractor/cover/pn-extractor-cover.svg",
+    "srcByLocale": {
+      "en": "/assets/projects/pn-extractor/cover/pn-extractor-cover-en.svg"
+    },
+    "alt": {
+      "pt": "Ilustração conceitual: descrições sintéticas de planilha passam por busca vetorial, contexto com LLM e validação até a saída estruturada de Part Numbers.",
+      "en": "Conceptual illustration: synthetic spreadsheet descriptions pass through vector search, LLM context and validation to structured Part Number output."
+    },
+    "caption": {
+      "pt": "Representação conceitual com tokens fictícios; sem dados ou telas corporativas.",
+      "en": "Conceptual representation using fictional tokens; no corporate data or screenshots."
+    },
+    "role": "cover",
+    "category": "conceptual"
+  },
+  "content": [
+    {
+      "type": "text",
+      "title": {
+        "pt": "O problema",
+        "en": "The problem"
+      },
+      "body": {
+        "pt": "As planilhas recebidas podiam ter 10 ou 20 mil linhas, mas também chegar a 100 mil, 200 mil ou 300 mil. Cada linha trazia uma descrição textual sem padrão confiável: o Part Number podia estar no início, no meio ou no fim, misturado a modelos, desenhos e outros códigos candidatos. A extração manual, apoiada em fórmulas de Excel e esforço operacional, era lenta, frágil e difícil de escalar.",
+        "en": "Incoming spreadsheets could contain 10 or 20 thousand rows, but also reach 100,000, 200,000 or 300,000. Each row contained an unstructured description: the Part Number could appear at the beginning, middle or end, mixed with models, drawings and other candidate codes. Manual extraction using Excel formulas and operational effort was slow, fragile and difficult to scale."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Da descrição ao resultado estruturado",
+        "en": "From description to structured result"
+      },
+      "body": {
+        "pt": "A solução recebe as linhas da planilha, normaliza e limpa as descrições e gera suas representações vetoriais (embeddings). A recuperação de exemplos relevantes orienta a composição do contexto e do prompt para extração com LLM. Depois da inferência, uma camada de pós-validação verifica os resultados antes da entrega estruturada.",
+        "en": "The solution receives spreadsheet rows, normalizes and cleans descriptions, and generates vector representations (embeddings). Retrieval of relevant examples guides context and prompt assembly for LLM extraction. After inference, a post-validation layer checks results before structured delivery."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Memória semântica e similaridade de cosseno",
+        "en": "Semantic memory and cosine similarity"
+      },
+      "body": {
+        "pt": "O histórico de codificações funciona como memória semântica em uma base vetorial com centenas de milhares de representações, na ordem de 300 mil vetores. A busca recupera exemplos semanticamente próximos, avaliados por similaridade de cosseno. Exemplos que superam o limiar definido compõem o contexto. Quando o contexto recuperado não é suficientemente forte, um fallback o complementa com exemplos fixos e curados que representam diferentes padrões de descrição e posições do Part Number.",
+        "en": "Historical codifications serve as semantic memory in a vector base with hundreds of thousands of representations, on the order of 300,000 vectors. Search retrieves semantically similar examples, evaluated using cosine similarity. Examples above the defined threshold become context. When retrieved context is not sufficiently strong, a fallback complements it with fixed, curated examples representing different description patterns and Part Number positions."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Pipeline assíncrono por estágios",
+        "en": "Asynchronous staged pipeline"
+      },
+      "body": {
+        "pt": "O processamento funciona como uma linha de produção, com diferentes etapas acontecendo simultaneamente. Enquanto novas descrições são normalizadas, itens anteriores já geram embeddings, recuperam contexto semântico ou seguem para inferência com LLM e pós-validação. Cada item respeita a sequência necessária, sem que toda a planilha precise concluir uma etapa para iniciar a próxima. Essa arquitetura favorece o processamento em alto volume e reduz a ociosidade entre etapas.",
+        "en": "Processing works like a production line, with different stages running simultaneously. While new descriptions are being normalized, earlier items already generate embeddings, retrieve semantic context or proceed to LLM inference and post-validation. Each item follows the required sequence, without the entire spreadsheet having to complete one stage before the next begins. This architecture supports high-volume processing and reduces idle time between stages."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/projects/pn-extractor/diagrams/pipeline-v2.svg",
+      "srcByLocale": {
+        "en": "/assets/projects/pn-extractor/diagrams/pipeline-v2-en.svg"
+      },
+      "alt": {
+        "pt": "Diagrama conceitual do pipeline assíncrono: limpeza, embeddings, recuperação por cosseno, prompt, LLM, pós-validação e saída. Uma grade temporal mostra lotes A, B e C avançando com etapas sobrepostas.",
+        "en": "Conceptual asynchronous pipeline diagram: cleaning, embeddings, cosine retrieval, prompt, LLM, post-validation and output. A timeline shows batches A, B and C advancing with overlapping stages."
+      },
+      "caption": {
+        "pt": "Lotes ilustrativos em estágios simultâneos. O eixo temporal não representa durações medidas nem a topologia interna.",
+        "en": "Illustrative batches in simultaneous stages. The timeline does not represent measured durations or internal topology."
+      },
+      "role": "architecture",
+      "category": "conceptual",
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Pós-validação antes da entrega",
+        "en": "Post-validation before delivery"
+      },
+      "body": {
+        "pt": "A saída do LLM passa por uma camada adicional de validação de consistência antes de ser finalizada. Essa etapa integra a extração ao processamento operacional com uma verificação posterior à inferência; as regras internas de validação não são expostas neste case.",
+        "en": "LLM output goes through an additional consistency validation layer before being finalized. This stage connects extraction to operational processing with a check after inference; internal validation rules are not disclosed in this case."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Impacto operacional",
+        "en": "Operational impact"
+      },
+      "body": {
+        "pt": "A solução reduziu o tempo de análise de cerca de 6 horas para aproximadamente 15 minutos, com aproximadamente 98% de acurácia. Esses resultados representam o impacto da solução no trabalho operacional de extração de Part Numbers.",
+        "en": "The solution reduced analysis time from about 6 hours to around 15 minutes, with approximately 98% accuracy. These results represent the solution’s impact on operational Part Number extraction."
+      }
+    },
+    {
+      "type": "metric",
+      "value": "6h → 15min",
+      "label": {
+        "pt": "Tempo de análise",
+        "en": "Analysis time"
+      },
+      "description": {
+        "pt": "De cerca de 6 horas para aproximadamente 15 minutos.",
+        "en": "From about 6 hours to around 15 minutes."
+      }
+    },
+    {
+      "type": "metric",
+      "value": "~98%",
+      "label": {
+        "pt": "Acurácia",
+        "en": "Accuracy"
+      },
+      "description": {
+        "pt": "Aproximadamente 98% de acurácia na extração.",
+        "en": "Approximately 98% extraction accuracy."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Representação conceitual e confidencialidade",
+        "en": "Conceptual representation and confidentiality"
+      },
+      "body": {
+        "pt": "Este case apresenta uma síntese pública da solução corporativa. Todos os visuais são conceituais e usam apenas elementos fictícios. Não são exibidos documentos, planilhas, Part Numbers reais, clientes, prompts internos ou capturas de sistemas e fluxos proprietários.",
+        "en": "This case presents a public summary of the corporate solution. All visuals are conceptual and use fictional elements only. No documents, spreadsheets, real Part Numbers, customers, internal prompts or screenshots of proprietary systems and workflows are shown."
+      }
     }
   ]
 }
