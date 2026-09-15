@@ -1,0 +1,15 @@
+node_modules
+.next
+.test-dist
+.git
+.agents
+.codex
+.env*
+!.env.example
+*.log
+*.tsbuildinfo
+coverage
+docs
+README*.md
+Dockerfile*
+.dockerignore
