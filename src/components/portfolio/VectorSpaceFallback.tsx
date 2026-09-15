@@ -1,11 +1,11 @@
 import {useTranslations} from "next-intl";
-import {useId} from "react";
+import {useId, useState} from "react";
 
 import {clusters} from "@/content/clusters";
 import {identity} from "@/content/identity";
 import {portfolioNodes} from "@/content/nodes";
 import type {AppLocale} from "@/i18n/routing";
-import {resolveLocalizedText} from "@/lib/portfolio-types";
+import {resolveLocalizedText, type PortfolioNode} from "@/lib/portfolio-types";
 import {useExperienceStore} from "@/store/experience-store";
 
 import {ProceduralCover} from "./ProceduralCover";
@@ -16,6 +16,30 @@ type VectorSpaceFallbackProps = {
   webglUnavailable?: boolean;
   onNavigate?: () => void;
 };
+
+function ExplorerCover({node, locale}: {node: PortfolioNode; locale: AppLocale}) {
+  const [failedSource, setFailedSource] = useState<string | null>(null);
+  const cover = node.coverImage;
+
+  if (!cover || failedSource === cover.src) {
+    return <ProceduralCover node={node} locale={locale} compact />;
+  }
+
+  return (
+    <span className="fallback-node__cover">
+      <img
+        src={cover.src}
+        alt={resolveLocalizedText(cover.alt, locale)}
+        width={960}
+        height={540}
+        loading="lazy"
+        decoding="async"
+        onError={() => setFailedSource(cover.src)}
+      />
+      <strong>{resolveLocalizedText(node.title, locale)}</strong>
+    </span>
+  );
+}
 
 export function VectorSpaceFallback({
   locale,
@@ -85,7 +109,7 @@ export function VectorSpaceFallback({
                       onClick={() => {focusNode(node.id, node.cluster, webglUnavailable); onNavigate?.();}}
                       aria-label={t("openNode", {title})}
                     >
-                      <ProceduralCover node={node} locale={locale} compact />
+                      <ExplorerCover node={node} locale={locale} />
                       <span className="fallback-node__summary">{resolveLocalizedText(node.summary, locale)}</span>
                     </button>
                   );
