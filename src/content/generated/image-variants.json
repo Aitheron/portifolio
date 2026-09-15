@@ -1,0 +1,629 @@
+{
+  "/assets/education/college/college_cover.jpeg": {
+    "source": {
+      "width": 1200,
+      "height": 1600,
+      "bytes": 97475
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/9257f20d6771c54b-thumb.webp",
+      "width": 720,
+      "height": 960,
+      "bytes": 34560
+    },
+    "full": {
+      "src": "/assets/optimized/9257f20d6771c54b-cover.webp",
+      "width": 1200,
+      "height": 1600,
+      "bytes": 66978
+    }
+  },
+  "/assets/education/parkify/parkify_cover.jpg": {
+    "source": {
+      "width": 480,
+      "height": 640,
+      "bytes": 68847
+    },
+    "thumbnail": {
+      "src": "/assets/education/parkify/parkify_cover.jpg",
+      "width": 480,
+      "height": 640,
+      "bytes": 68847
+    },
+    "full": {
+      "src": "/assets/education/parkify/parkify_cover.jpg",
+      "width": 480,
+      "height": 640,
+      "bytes": 68847
+    }
+  },
+  "/assets/education/parkify/parkify_example.jpg": {
+    "source": {
+      "width": 800,
+      "height": 1066,
+      "bytes": 138025
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/6e28073dd5015149-thumb.webp",
+      "width": 720,
+      "height": 960,
+      "bytes": 108828
+    },
+    "full": {
+      "src": "/assets/optimized/6e28073dd5015149-cover.webp",
+      "width": 800,
+      "height": 1066,
+      "bytes": 128200
+    }
+  },
+  "/assets/education/parkify/parkify_predict.jpg": {
+    "source": {
+      "width": 800,
+      "height": 1066,
+      "bytes": 138947
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/a3c7032c16263f7b-thumb.webp",
+      "width": 720,
+      "height": 960,
+      "bytes": 107252
+    },
+    "full": {
+      "src": "/assets/optimized/a3c7032c16263f7b-cover.webp",
+      "width": 800,
+      "height": 1066,
+      "bytes": 128480
+    }
+  },
+  "/assets/experience/becomex/becomex_summit.jpg": {
+    "source": {
+      "width": 1215,
+      "height": 911,
+      "bytes": 238642
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/a978c895463ec4e3-thumb.webp",
+      "width": 960,
+      "height": 720,
+      "bytes": 97616
+    },
+    "full": {
+      "src": "/assets/optimized/a978c895463ec4e3-cover.webp",
+      "width": 1215,
+      "height": 911,
+      "bytes": 153740
+    }
+  },
+  "/assets/experience/becomex/cover.jpg": {
+    "source": {
+      "width": 683,
+      "height": 911,
+      "bytes": 45714
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/9acab30f6fd2a0a6-cover.webp",
+      "width": 683,
+      "height": 911,
+      "bytes": 20934
+    },
+    "full": {
+      "src": "/assets/optimized/9acab30f6fd2a0a6-cover.webp",
+      "width": 683,
+      "height": 911,
+      "bytes": 20934
+    }
+  },
+  "/assets/experience/bmw/bmw_1.jpg": {
+    "source": {
+      "width": 683,
+      "height": 911,
+      "bytes": 85803
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/599514fa8e1de580-cover.webp",
+      "width": 683,
+      "height": 911,
+      "bytes": 52372
+    },
+    "full": {
+      "src": "/assets/optimized/599514fa8e1de580-cover.webp",
+      "width": 683,
+      "height": 911,
+      "bytes": 52372
+    }
+  },
+  "/assets/experience/bmw/cover.jpg": {
+    "source": {
+      "width": 683,
+      "height": 717,
+      "bytes": 85061
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/e016bc6a2baf044d-cover.webp",
+      "width": 683,
+      "height": 717,
+      "bytes": 43926
+    },
+    "full": {
+      "src": "/assets/optimized/e016bc6a2baf044d-cover.webp",
+      "width": 683,
+      "height": 717,
+      "bytes": 43926
+    }
+  },
+  "/assets/identity/perfil.jpg": {
+    "source": {
+      "width": 400,
+      "height": 299,
+      "bytes": 25110
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/95f2cec6eb92ef70-cover.webp",
+      "width": 400,
+      "height": 299,
+      "bytes": 12670
+    },
+    "full": {
+      "src": "/assets/optimized/95f2cec6eb92ef70-cover.webp",
+      "width": 400,
+      "height": 299,
+      "bytes": 12670
+    }
+  },
+  "/assets/projects/aitheron/cover/aitheron-cover.png": {
+    "source": {
+      "width": 1903,
+      "height": 905,
+      "bytes": 640488
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/1c70ef8b189bf3c2-thumb.webp",
+      "width": 960,
+      "height": 457,
+      "bytes": 49914
+    },
+    "full": {
+      "src": "/assets/optimized/1c70ef8b189bf3c2-cover.webp",
+      "width": 1903,
+      "height": 905,
+      "bytes": 125646
+    }
+  },
+  "/assets/projects/aitheron/diagrams/architecture-pt.png": {
+    "source": {
+      "width": 1248,
+      "height": 1476,
+      "bytes": 155757
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/e32c6a9a46970d03-thumb.webp",
+      "width": 812,
+      "height": 960,
+      "bytes": 28768
+    },
+    "full": {
+      "src": "/assets/optimized/e32c6a9a46970d03-cover.webp",
+      "width": 1248,
+      "height": 1476,
+      "bytes": 46836
+    }
+  },
+  "/assets/projects/aitheron/diagrams/pipeline-pt.png": {
+    "source": {
+      "width": 1397,
+      "height": 872,
+      "bytes": 130854
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/1196a9f986603d70-thumb.webp",
+      "width": 960,
+      "height": 599,
+      "bytes": 26624
+    },
+    "full": {
+      "src": "/assets/optimized/1196a9f986603d70-cover.webp",
+      "width": 1397,
+      "height": 872,
+      "bytes": 42546
+    }
+  },
+  "/assets/projects/aitheron/results/confusion-matrices-pt.png": {
+    "source": {
+      "width": 3496,
+      "height": 1581,
+      "bytes": 76277
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/b34c3806dae2f246-thumb.webp",
+      "width": 960,
+      "height": 434,
+      "bytes": 9364
+    },
+    "full": {
+      "src": "/assets/optimized/b34c3806dae2f246-cover.webp",
+      "width": 1920,
+      "height": 868,
+      "bytes": 20102
+    }
+  },
+  "/assets/projects/multi-agent-tariff-intelligence/cover/cover.png": {
+    "source": {
+      "width": 1536,
+      "height": 1024,
+      "bytes": 1626657
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/fe3f624d3076bc24-thumb.webp",
+      "width": 960,
+      "height": 640,
+      "bytes": 42000
+    },
+    "full": {
+      "src": "/assets/optimized/fe3f624d3076bc24-cover.webp",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 80110
+    }
+  },
+  "/assets/projects/universe-portfolio/cover/overview-en.png": {
+    "source": {
+      "width": 1600,
+      "height": 900,
+      "bytes": 69148
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/2e41f8eb698ed6c8-thumb.webp",
+      "width": 960,
+      "height": 540,
+      "bytes": 10590
+    },
+    "full": {
+      "src": "/assets/optimized/2e41f8eb698ed6c8-cover.webp",
+      "width": 1600,
+      "height": 900,
+      "bytes": 23786
+    }
+  },
+  "/assets/projects/universe-portfolio/cover/overview-pt.png": {
+    "source": {
+      "width": 1600,
+      "height": 900,
+      "bytes": 72748
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/1b989875dd2ce036-thumb.webp",
+      "width": 960,
+      "height": 540,
+      "bytes": 11446
+    },
+    "full": {
+      "src": "/assets/optimized/1b989875dd2ce036-cover.webp",
+      "width": 1600,
+      "height": 900,
+      "bytes": 25372
+    }
+  },
+  "/assets/projects/universe-portfolio/gallery/case-en.png": {
+    "source": {
+      "width": 1600,
+      "height": 900,
+      "bytes": 423891
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/ee10486dc22e79d4-thumb.webp",
+      "width": 960,
+      "height": 540,
+      "bytes": 41714
+    },
+    "full": {
+      "src": "/assets/optimized/ee10486dc22e79d4-cover.webp",
+      "width": 1600,
+      "height": 900,
+      "bytes": 80078
+    }
+  },
+  "/assets/projects/universe-portfolio/gallery/case-pt.png": {
+    "source": {
+      "width": 1600,
+      "height": 900,
+      "bytes": 412060
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/21627a302f805bd3-thumb.webp",
+      "width": 960,
+      "height": 540,
+      "bytes": 42110
+    },
+    "full": {
+      "src": "/assets/optimized/21627a302f805bd3-cover.webp",
+      "width": 1600,
+      "height": 900,
+      "bytes": 81272
+    }
+  },
+  "/assets/projects/universe-portfolio/gallery/mobile-en.png": {
+    "source": {
+      "width": 780,
+      "height": 1688,
+      "bytes": 96331
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/c192bb8bc27eb776-thumb.webp",
+      "width": 444,
+      "height": 960,
+      "bytes": 13608
+    },
+    "full": {
+      "src": "/assets/optimized/c192bb8bc27eb776-cover.webp",
+      "width": 780,
+      "height": 1688,
+      "bytes": 26782
+    }
+  },
+  "/assets/projects/universe-portfolio/gallery/mobile-pt.png": {
+    "source": {
+      "width": 780,
+      "height": 1688,
+      "bytes": 100307
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/7e275d1611a6d694-thumb.webp",
+      "width": 444,
+      "height": 960,
+      "bytes": 14862
+    },
+    "full": {
+      "src": "/assets/optimized/7e275d1611a6d694-cover.webp",
+      "width": 780,
+      "height": 1688,
+      "bytes": 29934
+    }
+  },
+  "/assets/projects/universe-portfolio/gallery/projects-en.png": {
+    "source": {
+      "width": 1600,
+      "height": 900,
+      "bytes": 117311
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/3f8a74563867cb64-thumb.webp",
+      "width": 960,
+      "height": 540,
+      "bytes": 18678
+    },
+    "full": {
+      "src": "/assets/optimized/3f8a74563867cb64-cover.webp",
+      "width": 1600,
+      "height": 900,
+      "bytes": 37628
+    }
+  },
+  "/assets/projects/universe-portfolio/gallery/projects-pt.png": {
+    "source": {
+      "width": 1600,
+      "height": 900,
+      "bytes": 117811
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/a9f9c62a4d3cfd48-thumb.webp",
+      "width": 960,
+      "height": 540,
+      "bytes": 19196
+    },
+    "full": {
+      "src": "/assets/optimized/a9f9c62a4d3cfd48-cover.webp",
+      "width": 1600,
+      "height": 900,
+      "bytes": 38720
+    }
+  },
+  "/assets/talks/catolica/2.png": {
+    "source": {
+      "width": 1280,
+      "height": 960,
+      "bytes": 1411982
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/d0beecd5fdaf9f17-thumb.webp",
+      "width": 960,
+      "height": 720,
+      "bytes": 54092
+    },
+    "full": {
+      "src": "/assets/optimized/d0beecd5fdaf9f17-cover.webp",
+      "width": 1280,
+      "height": 960,
+      "bytes": 81342
+    }
+  },
+  "/assets/talks/catolica/cover.png": {
+    "source": {
+      "width": 1280,
+      "height": 960,
+      "bytes": 1376937
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/94c3ecb6fb3fcd95-thumb.webp",
+      "width": 960,
+      "height": 720,
+      "bytes": 53294
+    },
+    "full": {
+      "src": "/assets/optimized/94c3ecb6fb3fcd95-cover.webp",
+      "width": 1280,
+      "height": 960,
+      "bytes": 79566
+    }
+  },
+  "/assets/talks/catolica/group.png": {
+    "source": {
+      "width": 1280,
+      "height": 720,
+      "bytes": 1408504
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/199fa5ee0fa5be87-thumb.webp",
+      "width": 960,
+      "height": 540,
+      "bytes": 74280
+    },
+    "full": {
+      "src": "/assets/optimized/199fa5ee0fa5be87-cover.webp",
+      "width": 1280,
+      "height": 720,
+      "bytes": 119762
+    }
+  },
+  "/assets/talks/gdg-joinville/1.png": {
+    "source": {
+      "width": 480,
+      "height": 638,
+      "bytes": 271543
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/570f63f2d204dd4a-cover.webp",
+      "width": 480,
+      "height": 638,
+      "bytes": 17210
+    },
+    "full": {
+      "src": "/assets/optimized/570f63f2d204dd4a-cover.webp",
+      "width": 480,
+      "height": 638,
+      "bytes": 17210
+    }
+  },
+  "/assets/talks/gdg-joinville/2.png": {
+    "source": {
+      "width": 800,
+      "height": 1073,
+      "bytes": 871726
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/61fdb1168a432de9-thumb.webp",
+      "width": 716,
+      "height": 960,
+      "bytes": 52724
+    },
+    "full": {
+      "src": "/assets/optimized/61fdb1168a432de9-cover.webp",
+      "width": 800,
+      "height": 1073,
+      "bytes": 61698
+    }
+  },
+  "/assets/talks/gdg-joinville/3.png": {
+    "source": {
+      "width": 800,
+      "height": 1066,
+      "bytes": 920444
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/53bb15c1679442a8-thumb.webp",
+      "width": 720,
+      "height": 960,
+      "bytes": 49826
+    },
+    "full": {
+      "src": "/assets/optimized/53bb15c1679442a8-cover.webp",
+      "width": 800,
+      "height": 1066,
+      "bytes": 60044
+    }
+  },
+  "/assets/talks/gdg-joinville/cover.png": {
+    "source": {
+      "width": 800,
+      "height": 800,
+      "bytes": 419063
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/74e98e0c501266a0-cover.webp",
+      "width": 800,
+      "height": 800,
+      "bytes": 28568
+    },
+    "full": {
+      "src": "/assets/optimized/74e98e0c501266a0-cover.webp",
+      "width": 800,
+      "height": 800,
+      "bytes": 28568
+    }
+  },
+  "/assets/talks/tdc-sao-paulo/1.png": {
+    "source": {
+      "width": 1536,
+      "height": 915,
+      "bytes": 1605516
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/faf83642cebf036b-thumb.webp",
+      "width": 960,
+      "height": 572,
+      "bytes": 73202
+    },
+    "full": {
+      "src": "/assets/optimized/faf83642cebf036b-cover.webp",
+      "width": 1536,
+      "height": 915,
+      "bytes": 147484
+    }
+  },
+  "/assets/talks/tdc-sao-paulo/2.png": {
+    "source": {
+      "width": 1200,
+      "height": 1329,
+      "bytes": 1536041
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/4ffdb2c3ddd5e437-thumb.webp",
+      "width": 867,
+      "height": 960,
+      "bytes": 67964
+    },
+    "full": {
+      "src": "/assets/optimized/4ffdb2c3ddd5e437-cover.webp",
+      "width": 1200,
+      "height": 1329,
+      "bytes": 106568
+    }
+  },
+  "/assets/talks/tdc-sao-paulo/3-sanitized.png": {
+    "source": {
+      "width": 1019,
+      "height": 1543,
+      "bytes": 1206299
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/55fec54bdd3a5308-thumb.webp",
+      "width": 634,
+      "height": 960,
+      "bytes": 26480
+    },
+    "full": {
+      "src": "/assets/optimized/55fec54bdd3a5308-cover.webp",
+      "width": 1019,
+      "height": 1543,
+      "bytes": 44086
+    }
+  },
+  "/assets/talks/tdc-sao-paulo/cover.png": {
+    "source": {
+      "width": 1600,
+      "height": 889,
+      "bytes": 1519972
+    },
+    "thumbnail": {
+      "src": "/assets/optimized/2bb7c29f5d101ccc-thumb.webp",
+      "width": 960,
+      "height": 533,
+      "bytes": 65212
+    },
+    "full": {
+      "src": "/assets/optimized/2bb7c29f5d101ccc-cover.webp",
+      "width": 1600,
+      "height": 889,
+      "bytes": 127360
+    }
+  }
+}
