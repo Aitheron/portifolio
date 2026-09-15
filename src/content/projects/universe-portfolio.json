@@ -1,5 +1,15 @@
 {
   "schemaVersion": 1,
+  "links": [
+    {
+      "type": "github",
+      "label": {
+        "pt": "Construa seu próprio universo",
+        "en": "Build your own universe"
+      },
+      "href": "https://github.com/Marlon-Souza16/universe-portfolio-template"
+    }
+  ],
   "id": "universe-portfolio",
   "slug": "universe-portfolio",
   "kind": "project",

@@ -4,29 +4,29 @@
   "kind": "project",
   "cluster": "key-projects",
   "title": {
-    "pt": "Multi-Agent Tariff Intelligence",
-    "en": "Multi-Agent Tariff Intelligence"
+    "pt": "Gestão Tarifária com IA Multiagente",
+    "en": "Multi-Agent AI for Tariff Management"
   },
   "summary": {
-    "pt": "Sistemas multiagentes no contexto de fluxos empresariais.",
-    "en": "Multi-agent systems in the context of enterprise workflows."
+    "pt": "Pipeline de IA multiagente aplicada à Gestão Tarifária (GT), automatizando etapas de enriquecimento e análise de produtos e contribuindo para mais de 70% de ganho de eficiência e SLA de aproximadamente 99,5%.",
+    "en": "Multi-agent AI pipeline applied to Tariff Management, automating product enrichment and analysis stages and contributing to over 70% efficiency gains and approximately 99.5% SLA."
   },
   "description": {
-    "pt": "Projetei e implementei um pipeline multiagente integrado a APIs.",
-    "en": "Designed and deployed a multi-agent, API-integrated pipeline."
+    "pt": "A operação de Gestão Tarifária (GT) recebia informações de produtos incompletas, inconsistentes ou insuficientes para análise fiscal e técnica. A capacidade operacional havia se tornado um limitador para absorver novos volumes. Etapas especializadas de IA apoiaram o enriquecimento dessas informações; o fluxo inicial com n8n evoluiu para APIs dedicadas, que desenvolvi para operacionalizar o processamento em maior volume. A solução aumentou a eficiência operacional em mais de 70% e ajudou a elevar o SLA de aproximadamente 77–81% para cerca de 99,5% no segundo mês após a implementação.",
+    "en": "The Tariff Management operation received product information that could be incomplete, inconsistent or insufficient for fiscal and technical analysis. Operational capacity had become a bottleneck for handling additional volume. Specialized AI stages supported information enrichment; the initial n8n workflow evolved toward dedicated APIs, which I developed to operationalize higher-volume processing. The solution increased operational efficiency by more than 70% and helped improve SLA from approximately 77–81% to around 99.5% by the second month after implementation."
   },
   "projectType": {
-    "pt": "Projeto profissional",
-    "en": "Professional project"
+    "pt": "Projeto corporativo",
+    "en": "Corporate project"
   },
-  "importance": "primary",
-  "provisional": true,
+  "importance": "flagship",
+  "provisional": false,
   "confidential": true,
   "technologies": [],
   "relations": [
     {
       "targetId": "becomex",
-      "type": "related-to"
+      "type": "built-at"
     }
   ],
   "visual": {
@@ -43,19 +43,30 @@
       "id": "agents",
       "type": "concept",
       "label": {
-        "pt": "Agentes",
-        "en": "Agents"
+        "pt": "Sistemas Multiagentes",
+        "en": "Multi-Agent Systems"
       },
       "importance": 1,
       "showInOrbit": true,
       "showInCase": true
     },
     {
-      "id": "enterprise-ai",
+      "id": "applied-ai",
       "type": "domain",
       "label": {
-        "pt": "IA Empresarial",
-        "en": "Enterprise AI"
+        "pt": "IA Aplicada",
+        "en": "Applied AI"
+      },
+      "importance": 0.9,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "apis",
+      "type": "technology",
+      "label": {
+        "pt": "APIs",
+        "en": "APIs"
       },
       "importance": 0.9,
       "showInOrbit": true,
@@ -65,33 +76,11 @@
       "id": "automation",
       "type": "concept",
       "label": {
-        "pt": "Automação",
-        "en": "Automation"
+        "pt": "Automação Inteligente",
+        "en": "Intelligent Automation"
       },
       "importance": 0.8,
-      "showInOrbit": true,
-      "showInCase": true
-    },
-    {
-      "id": "validation",
-      "type": "concept",
-      "label": {
-        "pt": "Validação",
-        "en": "Validation"
-      },
-      "importance": 0.7,
-      "showInOrbit": true,
-      "showInCase": true
-    },
-    {
-      "id": "llms",
-      "type": "technology",
-      "label": {
-        "pt": "LLMs",
-        "en": "LLMs"
-      },
-      "importance": 0.6,
-      "showInOrbit": true,
+      "showInOrbit": false,
       "showInCase": true
     },
     {
@@ -101,18 +90,129 @@
         "pt": "+70% de eficiência",
         "en": "+70% efficiency"
       },
-      "importance": 0.5,
-      "showInOrbit": false,
-      "showInCase": false
+      "importance": 1,
+      "showInOrbit": true,
+      "showInCase": true
+    },
+    {
+      "id": "sla",
+      "type": "metric",
+      "label": {
+        "pt": "SLA ~99,5%",
+        "en": "SLA ~99.5%"
+      },
+      "importance": 1,
+      "showInOrbit": true,
+      "showInCase": true
     }
   ],
   "content": [
     {
       "type": "text",
+      "title": {
+        "pt": "O desafio de escala",
+        "en": "The scaling challenge"
+      },
       "body": {
-        "pt": "Criação de uma pipeline de integração entre APIs e agentes internos, reduzindo SLA e custos operacionais na linha de gestão tarifária.",
-        "en": "Created a full integration pipeline between APIs and internal agents, reducing SLA and operational costs in the tax management line."
+        "pt": "A capacidade operacional do processo de Gestão Tarifária (GT), no comércio exterior, havia se tornado um limitador para absorver novos volumes e escalar a operação. Informações incompletas ou inconsistentes exigiam esclarecimento e organização antes da análise. O desafio era ampliar a capacidade sem aumentar proporcionalmente o trabalho manual.",
+        "en": "Operational capacity in the foreign-trade Tariff Management process had become a bottleneck for handling additional volume and scaling the operation. Incomplete or inconsistent information required clarification and organization before analysis. The challenge was to increase capacity without a proportional increase in manual workload."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Etapas especializadas de IA",
+        "en": "Specialized AI stages"
+      },
+      "body": {
+        "pt": "O pipeline multiagente combina etapas complementares de análise com LLMs. A triagem identifica lacunas e apoia a geração de perguntas de esclarecimento. As informações disponíveis são organizadas em descrições estruturadas, adaptadas ao contexto e ao padrão esperado. Outras etapas sugerem candidatos de NCM (Nomenclatura Comum do Mercosul), avaliam esses candidatos com um juiz de IA e identificam atributos relevantes. A saída de cada etapa apoia a seguinte, estruturando o resultado para continuidade operacional e revisão humana.",
+        "en": "The multi-agent pipeline combines complementary LLM-based analysis stages. Screening identifies information gaps and supports clarification questions. Available information is organized into structured descriptions adapted to the expected context and pattern. Other stages suggest NCM (Mercosur Common Nomenclature) candidates, assess them through an AI judge and identify relevant attributes. Each stage’s output supports the next, structuring results for operational continuation and human review."
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Do fluxo inicial às APIs dedicadas",
+        "en": "From the initial workflow to dedicated APIs"
+      },
+      "body": {
+        "pt": "O n8n foi valioso para experimentação e construção do fluxo inicial, mas essa implementação passou a limitar o volume de processamento esperado. O núcleo de processamento evoluiu para APIs dedicadas, com processamento assíncrono e orientado a lotes. Essa evolução permitiu um modelo mais escalável e integrado à operação, preservando a especialização das etapas de IA.",
+        "en": "n8n was valuable for experimentation and construction of the initial workflow, but that implementation became a bottleneck for the expected processing volume. Core processing evolved toward dedicated APIs with asynchronous, batch-oriented processing. This evolution supported a more scalable model integrated with operations while preserving specialization across AI stages."
+      }
+    },
+    {
+      "type": "image",
+      "src": "/assets/projects/multi-agent-tariff-intelligence/diagrams/multi-agent-flow.svg",
+      "srcByLocale": {
+        "en": "/assets/projects/multi-agent-tariff-intelligence/diagrams/multi-agent-flow-en.svg"
+      },
+      "alt": {
+        "pt": "Fluxo conceitual: informações do produto, triagem, esclarecimento se necessário, descrição estruturada, candidatos de classificação fiscal, validação por IA, atributos e resultado estruturado com revisão humana.",
+        "en": "Conceptual flow: product information, screening, clarification if needed, structured description, fiscal classification candidates, AI validation, attributes and structured result with human review."
+      },
+      "caption": {
+        "pt": "Fluxo público simplificado e conceitual. Não reproduz o fluxo interno da empresa.",
+        "en": "Simplified public conceptual flow. It does not reproduce the company’s internal workflow."
+      },
+      "role": "architecture",
+      "category": "conceptual",
+      "presentation": {
+        "size": "wide",
+        "align": "center"
+      }
+    },
+    {
+      "type": "text",
+      "title": {
+        "pt": "Impacto operacional",
+        "en": "Operational impact"
+      },
+      "body": {
+        "pt": "A solução aumentou a eficiência operacional em mais de 70% e contribuiu para elevar o SLA do processo de aproximadamente 77–81% para cerca de 99,5%, patamar alcançado no segundo mês após a implementação. Os ganhos ampliaram a capacidade de absorver volume e deram maior previsibilidade à operação de Gestão Tarifária (GT).",
+        "en": "The solution increased operational efficiency by more than 70% and helped improve process SLA from approximately 77–81% to around 99.5%, reached by the second month after implementation. These gains expanded capacity to handle volume and improved operational predictability in Tariff Management."
+      }
+    },
+    {
+      "type": "metric",
+      "value": "+70%",
+      "label": {
+        "pt": "Eficiência operacional",
+        "en": "Operational efficiency"
+      },
+      "description": {
+        "pt": "Ganho superior a 70% na eficiência operacional.",
+        "en": "More than 70% improvement in operational efficiency."
+      }
+    },
+    {
+      "type": "metric",
+      "value": "~77–81% → ~99.5%",
+      "label": {
+        "pt": "SLA do processo",
+        "en": "Process SLA"
+      },
+      "description": {
+        "pt": "Cerca de 99,5% no segundo mês após a implementação.",
+        "en": "Around 99.5% by the second month after implementation."
       }
     }
-  ]
+  ],
+  "company": "Becomex",
+  "myRole": {
+    "pt": "Atuei em partes do fluxo inicial em n8n e fui responsável pelo desenvolvimento de toda a camada de APIs de IA do projeto, traduzindo os conceitos do fluxo em serviços dedicados para maior volume e integração com o processo operacional. Essa responsabilidade se refere à implementação das APIs, dentro do projeto de Gestão Tarifária (GT).",
+    "en": "I worked on parts of the initial n8n workflow and owned development of the project’s complete AI API layer, translating workflow concepts into dedicated services designed for higher volume and operational integration. This responsibility covers the API implementation within the broader Tariff Management project."
+  },
+  "coverImage": {
+    "src": "/assets/projects/multi-agent-tariff-intelligence/cover/cover.png",
+    "alt": {
+      "pt": "Ilustração conceitual de informações de produtos passando por nós especializados de IA até resultados enriquecidos e revisão humana.",
+      "en": "Conceptual illustration of product information passing through specialized AI nodes to enriched results and human review."
+    },
+    "caption": {
+      "pt": "Representação conceitual; sem dados ou telas corporativas.",
+      "en": "Conceptual representation; no corporate data or screenshots."
+    },
+    "role": "cover",
+    "category": "conceptual"
+  }
 }
